@@ -3,6 +3,7 @@ Download all thedataset from a Thredd server to analyze the metadata
 """
 import pickle
 import os
+import time
 
 # ---- 3rd party libraries -------------------------------------------------------
 import threddsclient
@@ -52,14 +53,41 @@ print(str(len(all_ncs)) + " metadata entries recovered from the server.")
 
 # Récupérer tous les metdata des fichiers individuels
 print(" Downloading each metadata to store locally.")
+all_md_files = os.path.join(datadir, "all_md_files.pickle")
+all_md = dict()
 
-i = 0
-# for ds in threddsclient.crawl(root, max_depth):
-#     i += 1
-    # print(ds.name)
-    # f = netCDF4.Dataset("https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/" + ds.url_path)
-    # print(f)
-    # print("*** VARIABLES ***")
-    # print(f.variables)
+if os.path.exists(all_md_files):
+    # Charger la liste
+    with open(all_md_files, 'rb') as f:
+        all_md = pickle.load(f)
 
-print(str(i) + " datasets discovered")
+# Télécharger tous les fichiers de méta
+if not len(all_md) == len(all_ncs):
+    cpt_new = 0
+    for x in all_ncs:
+        if x not in all_md:
+            try:
+                ds = netCDF4.Dataset(
+                    "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/" + x)
+                print(len(ds.variables))
+                time.sleep(.1)
+                cpt_new += 1
+                new_ds = vars(ds)
+                new_ds["variables"] = dict()
+                for v in ds.variables:
+                    new_ds["variables"][v] = vars(ds.variables[v])
+                all_md[x] = new_ds
+                ds.close()
+            except Exception as ex:
+                print("Cannot load : " + x)
+                print(ex)
+                if ex.errno is not -37:
+                    all_md[x] = "##Cannot load## : " + str(ex)
+                else:
+                    time.sleep(5)
+
+            # Save each N file
+            if cpt_new % 5 == 0:
+                with open(all_md_files, 'wb') as f:
+                    print("Checkpoint... (" + str(len(all_md)) + ")")
+                    pickle.dump(all_md, f)
