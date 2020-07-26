@@ -1,0 +1,31 @@
+{
+  "climat": {
+    "en": [
+      "Looking to dowload the full BCCAQv2 dataset of maximum daily temperatures.",
+      "Seeking information on sea-level in NWT as it relates to at-risk plant species, specifically the Hairy Braya.",
+      "Looking to download daily precipitation data for regions, or multiple locations at once. Studying the impacts that climate change will have on daily precipitation as it pertains to industrial operations.",
+      "Seeking daily, monthly, and annual rainfall data for Victoria and Nanaimo, BC. Interested in better understanding the relationship between rainfall and his water supply, a well.",
+      "CBC reported from Thunder Bay seeking temperature projections for Thunder Bay and northwestern Ontario. Wants to know how the temperature is expected to change in the coming years and how that will impact their weather"
+    ],
+    "fr": [
+      "Cherche les données pour plusieurs indicateurs climatiques, moyennés sur 30 ans pour 1981-2010, 2011-2040, et 2041-2070 pour les scénarios RCP4.5, RCP8.5. Veut les données pour des différentes échelles spatiales selon les découpages sociosanitaires du Québec.",
+      "Est-ce possible d'obtenir la vitesse du vent maximale, la direction et le moment de l'enregistrement pour Vallée-Jonction, Beauce, Qc dans la vallée en date du 2, 3 et 4 février 2019?",
+      "J'aimerais savoir s'il est possible d'avoir les données climatiques des municipalité du Québec utilisées par le code national du bâtiment 1990.",
+      "Données pour juin pour la température dans la région de Gatineau",
+      "Zone de rusticité, date de gel (dernier gel au printemps et 1er gel en automne), Historique météorologique sur 10-30 ans",
+      "Serait-t-il possible d'avoir accès aux données  annuelles du nombre de jour <-15 et <-25 pour  chacune des tuiles pour l'ensemble du Québec.",
+      "Est-ce possible d'effectuer des téléchargements par 'batch' ? Dans mon cas, j'aimerais obtenir certaines variables pour l'ensemble du Québec, mais je ne trouve pas le moyen d'effectuer cela de façon optimale."
+    ]
+  },
+  "eo": {
+    "en": [
+      "Sentinel 1 SLC montreal from april to september",
+      "Sentinel 1 mode IW with relative orbit equals to 33 over Ottawa from april to september 2020",
+      "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%",
+      "Sentinel-1 in mode IW covering (45.5017° N, 73.5673° W) in descending pass",
+      "Last 25 Sentinel-1 images sorted in descending order over Montreal",
+      "Last 25 Sentinel-1 images with polarization VV sorted in descending order over Montreal"
+    ],
+    "fr": []
+  }
+}
