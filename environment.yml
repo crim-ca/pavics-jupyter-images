@@ -1,0 +1,11 @@
+name: daccs-nlp
+
+dependencies:
+- netCDF4==1.5.3
+- jupyterlab
+- nb_conda
+- nb_conda_kernels
+- pip
+- pip:
+  - threddsclient==0.4.2
+  - birdhouse-birdy
