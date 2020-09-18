@@ -1,0 +1,11 @@
+{
+"PEPS_url": "https://peps.cnes.fr/resto/api/collections/",
+"PEPS_collections": ["S1", "S2", "S2ST", "S3"],
+"PEPS_formats": ["json", "atom"],
+"COP_url": "https://scihub.copernicus.eu/dhus/search?q=",
+"COP_user": "",
+"COP_pwd": "",
+"PAVICS_url": "https://pavics.ouranos.ca/twitcher/ows/proxy/catalog/wps"
+}
+
+
