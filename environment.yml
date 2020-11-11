@@ -9,3 +9,5 @@ dependencies:
 - pip:
   - threddsclient==0.4.2
   - birdhouse-birdy
+  - intake-stac
+  - sat-search
