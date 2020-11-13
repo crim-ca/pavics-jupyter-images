@@ -11,3 +11,4 @@ dependencies:
   - birdhouse-birdy
   - intake-stac
   - sat-search
+  - ipywidgets

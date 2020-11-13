@@ -11,7 +11,7 @@ stac_catalogs = {
     'earth_aws':  "https://earth-search.aws.element84.com/v0"
 }
 data_sources = {
-    'All': stac_catalogs.keys(),
+    'All': ['landsat8', 'google_engine', 'pangeo_cmip6', 'nasa_cmr', 'earth_aws'],
     'Climate': ['pangeo_cmip6'],
     'EO': ['landsat8', 'google_engine', 'nasa_cmr', 'earth_aws']
 }
@@ -22,8 +22,6 @@ catalog_URL = stac_catalogs['earth_aws']
 def inspect_catalog(catalog_URL):
     # open catalog
     catalog = open_stac_catalog(catalog_URL)
-
-
 
 def query_nlp(query_text):
     """
@@ -51,7 +49,11 @@ def handle_query(query_text, data_source='All'):
     print("Received query: ", query_text)
     params = query_nlp(query_text)
     for ds in data_sources[data_source]:
-        search_query(params, ds)
+        # TODO! remove this condition for full version.
+        #  This is demo query on earth_aws. Ignore the rest for now.
+        if ds == 'earth_aws':
+            print("Querying data source: %s (%s)" % (ds, stac_catalogs[ds]))
+            search_query(params, stac_catalogs[ds])
     return
 
 
