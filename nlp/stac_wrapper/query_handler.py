@@ -21,6 +21,47 @@ data_sources['All'] = data_sources['Climate'] + data_sources['EO']
 # set the default catalog
 catalog_URL = stac_catalogs['earth_aws']
 
+# notebook interaction methods
+def select_ds():
+    select = widgets.Select(
+        options=['catalog', 'domain'],
+        value='catalog',  # Default
+        rows=2,
+        layout={'width': 'max-content'},
+        description='Select:',
+        disabled=False
+    )
+    return select
+
+def select_c(svalue):
+    ds = None
+    if svalue == 'catalog':
+        ds = widgets.Dropdown(
+            options=['landsat8', 'google_engine', 'nasa_cmr', 'earth_aws', 'pangeo_cmip6'],
+            value='earth_aws',
+            description='Select catalog:',
+            style={'description_width': 'initial'}
+        )
+    elif svalue == 'domain':
+        ds = widgets.Dropdown(
+            options=['All', 'EO', 'Climate'],
+            description='Select domain:',
+            style={'description_width': 'initial'}
+        )
+    return ds
+
+def query_in():
+    text = widgets.Textarea(
+        value='',
+        placeholder='Write your query here!',
+        description='Input query:',
+        disabled=False,
+        rows=2,
+        layout={'height': '90%', 'width': '100%'}
+    )
+    return text
+
+# functionality methods
 def inspect_catalog(catalog_URL):
     # open catalog
     catalog = open_stac_catalog(catalog_URL)
