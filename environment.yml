@@ -10,5 +10,6 @@ dependencies:
   - threddsclient==0.4.2
   - birdhouse-birdy
   - intake-stac
+  - intake-esm
   - sat-search
   - ipywidgets
