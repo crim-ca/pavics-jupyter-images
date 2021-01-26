@@ -1,15 +1,16 @@
 name: daccs-nlp
 
 dependencies:
-- netCDF4==1.5.3
-- jupyterlab
-- nb_conda
-- nb_conda_kernels
-- pip
+- netCDF4==1.5.5.1
+- jupyterlab==2.2.6
+- nb_conda==2.2.1
+- nb_conda_kernels==2.3.1
+- ipykernel==5.3.4
+- pip==20.3.3
 - pip:
   - threddsclient==0.4.2
-  - birdhouse-birdy
-  - intake-stac
-  - intake-esm
-  - sat-search
-  - ipywidgets
+  - birdhouse-birdy==0.7.0
+  - intake-stac==0.3.0
+  - intake-esm==2021.1.15
+  - sat-search==0.3.0
+  - ipywidgets==7.6.3
