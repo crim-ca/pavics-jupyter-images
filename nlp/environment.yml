@@ -1,0 +1,10 @@
+name: birdy
+channels:
+  - conda-forge
+  - defaults
+# dependencies:
+  # add any new dependencies here
+dependencies:
+  - nltk
+  - pip:
+    - textblob
