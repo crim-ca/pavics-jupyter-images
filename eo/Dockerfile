@@ -1,7 +1,6 @@
-FROM birdhouse/pavics-jupyter-base:0.0.2
+FROM birdhouse/pavics-jupyter-base:0.1.0
 
-# must update as root, because of an error with pip
-# (remove if base-base is changed, and we're not the user jenkins anymore
+# must update as root, because of a permission error with pip
 USER root
 
 COPY environment.yml /environment.yml

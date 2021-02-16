@@ -4,7 +4,3 @@ channels:
   - defaults
 # dependencies:
   # add any new dependencies here
-dependencies:
-  - nltk
-  - pip:
-    - textblob
