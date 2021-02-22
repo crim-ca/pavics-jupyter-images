@@ -2,5 +2,5 @@ name: birdy
 channels:
   - conda-forge
   - defaults
+# add any new dependencies here
 # dependencies:
-  # add any new dependencies here
