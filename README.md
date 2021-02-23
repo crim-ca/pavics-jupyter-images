@@ -3,5 +3,10 @@
 This repo contains the different Dockerfiles used to create the images available in JupyterHub for DACCS.
 These images will be available as image choices when starting a new instance of JupyterLab from the JupyterHub interface.
 
-All Dockerfiles (eo, nlp, etc.) are derived from the 'base' image found on the repo bird-house/pavics-jupyter-base.
+All Dockerfiles (eo, nlp, etc.) are derived from the 'base' image found on the repo
+[bird-house/pavics-jupyter-base](https://github.com/bird-house/pavics-jupyter-base).
 Any packages required only for a specific image can be added to its corresponding environment.yml file.
+
+The Docker image builds can be found on Docker Hub : 
+* [eo](https://hub.docker.com/repository/docker/pavics/crim-jupyter-eo)
+* [nlp](https://hub.docker.com/repository/docker/pavics/crim-jupyter-nlp)
