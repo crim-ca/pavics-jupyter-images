@@ -11,6 +11,3 @@ RUN umask 0000 && conda env update -f /environment.yml
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
-
-# start notebook in conda environment to have working jupyter extensions
-CMD ["conda", "run", "-n", "birdy", "/usr/local/bin/start-notebook.sh"]
