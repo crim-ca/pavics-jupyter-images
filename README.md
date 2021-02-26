@@ -7,6 +7,9 @@ All Dockerfiles (eo, nlp, etc.) are derived from the 'base' image found on the r
 [bird-house/pavics-jupyter-base](https://github.com/bird-house/pavics-jupyter-base).
 Any packages required only for a specific image can be added to its corresponding environment.yml file.
 
+These images were first initialized with the packages listed on this
+[Confluence page](https://www.crim.ca/confluence/pages/viewpage.action?pageId=58625163).
+
 The Docker image builds can be found on Docker Hub : 
 * [eo](https://hub.docker.com/repository/docker/pavics/crim-jupyter-eo)
 * [nlp](https://hub.docker.com/repository/docker/pavics/crim-jupyter-nlp)
