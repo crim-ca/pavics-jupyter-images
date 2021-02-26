@@ -2,5 +2,8 @@ name: birdy
 channels:
   - conda-forge
   - defaults
-# add any new dependencies here
-# dependencies:
+dependencies:
+  - intake-esm
+  - intake-stac
+  - sat-search
+  - threddsclient
