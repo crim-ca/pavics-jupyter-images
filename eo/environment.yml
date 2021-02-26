@@ -2,5 +2,34 @@ name: birdy
 channels:
   - conda-forge
   - defaults
-# add any new dependencies here
-# dependencies:
+dependencies:
+  - affine
+  - gdal
+  - geojson
+  - pyproj
+  - shapely
+
+  # TODO: These next packages could possibly be added to a more generic 'vision' image, from which 'eo' would be built
+  - h5py
+  - googledrivedownloader
+  - opencv
+  - pillow>=7.1
+
+  # TODO: These next packages could possibly be added to a more specific 'ML' image, built from the 'eo' image
+  - cython
+  - ddt
+  - gitdb
+  - gitpython
+  - hdf5plugin
+  - kornia
+  - lz4
+  - pyyaml
+  - scikit-learn
+  - six
+  - tensorboardX
+  - tqdm
+  - pip:
+    - opencv-python
+    - orion
+    - torch
+    - torchvision>=0.6

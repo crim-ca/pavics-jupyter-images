@@ -9,5 +9,11 @@ COPY environment.yml /environment.yml
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
 RUN umask 0000 && conda env update -f /environment.yml
 
+# fix logged warning from GDAL sub-package when accessing Sentinel data via SAFE.ZIP
+#   only problematic here when using the 'root' conda env
+#   normal user installation with conda activation configures everything correctly
+# (https://github.com/conda-forge/gdal-feedstock/issues/83#issue-162911573)
+ENV CPL_ZIP_ENCODING=UTF-8
+
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
