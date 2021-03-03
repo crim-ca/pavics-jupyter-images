@@ -17,7 +17,7 @@
           "operation": "10 km around",
           "matchingType": "overlapping",
           "name": "Ottawa",
-          "value": { //GeoJson
+          "value": {
               "type": "Polygon",
               "coordinates": [[[-75.9748033435,45.186596578],
                       [-75.3581956775,45.186596578],
@@ -32,8 +32,8 @@
           "tempex_type": "range",
           "target": "dataDate",
           "value":{
-            "start": "2018-04-01T00:00:00Z",
-            "end": "2018-09-30T00:00:00Z"}
+            "start": "2020-04-01T00:00:00Z",
+            "end": "2020-09-30T00:00:00Z"}
         },
         {
           "text": "cloud cover lower than 10%",
@@ -157,7 +157,7 @@
         {
           "text": "mode IW",
           "type": "property",
-          "name": "mode",
+          "name": "sensor operational mode",
           "value": "IW",
           "value_type": "string",
           "operation": "eq"
@@ -305,7 +305,7 @@
           "operation": "eq"
         },
         {
-          "text": "in ScenarioMIP",
+          "text": "ScenarioMIP",
           "type": "property",
           "name": "target_mip",
           "value": "ScenarioMIP",
@@ -323,7 +323,7 @@
           "name": ['nbp', 'fgco2']
         },
         {
-          "text": "in ScenarioMIP",
+          "text": "ScenarioMIP",
           "type": "property",
           "name": "activity_id",
           "value": "ScenarioMIP",
@@ -339,14 +339,6 @@
           "text": "describing the area of the grids and the fraction of land and ocean",
           "type": "target_var",
           "name": ['areacello', 'areacella', "sftlf", "sftof"]
-        },
-        {
-          "text": "fixed fields",
-          "type": "property",
-          "name": "",
-          "value": "",
-          "value_type": "string",
-          "operation": "eq"
         }
       ]
     }
