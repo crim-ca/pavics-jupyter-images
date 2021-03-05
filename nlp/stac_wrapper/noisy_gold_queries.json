@@ -1,10 +1,11 @@
 {
-  "golden_queries": [
+  "noisy_queries": [
     {
       "query": "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%",
       "annotations": [
         {
           "text": "Sentinel-2",
+          "position": [0, 10],
           "type": "property",
           "name": "platform",
           "value": ["S-2","sentinel-2"],
@@ -13,8 +14,8 @@
         },
         {
           "text": "over Ottawa",
+          "position": [11, 22],
           "type": "location",
-          "operation": "10 km around",
           "matchingType": "overlapping",
           "name": "Ottawa",
           "value": {
@@ -28,6 +29,7 @@
         },
         {
           "text": "september 2020",
+          "position": [37, 51],
           "type": "tempex",
           "tempex_type": "range",
           "target": "dataDate",
@@ -37,6 +39,7 @@
         },
         {
           "text": "cloud cover lower than 10%",
+          "position": [57, 83],
           "type": "property",
           "name": "cloud cover",
           "value": 10,
@@ -50,6 +53,7 @@
       "annotations": [
         {
           "text": "Sentinel 1",
+          "position": [0, 10],
           "type": "property",
           "name": "platform",
           "value": ["S-1","sentinel-1"],
@@ -58,6 +62,7 @@
         },
         {
           "text": "IW with relative orbit",
+          "position": [16, 38],
           "type": "property",
           "name": "relative orbit",
           "value": "IW",
@@ -66,8 +71,8 @@
         },
         {
           "text": "over Ottawa",
+          "position": [52, 63],
           "type": "location",
-          "operation": "10 km around",
           "matchingType": "overlapping",
           "name": "Ottawa",
           "value": {
@@ -81,6 +86,7 @@
         },
         {
           "text": "from april to september 2020",
+          "position": [64, 92],
           "type": "tempex",
           "tempex_type": "range",
           "target": "dataDate",
@@ -95,6 +101,7 @@
       "annotations": [
         {
           "text": "Sentinel",
+          "postion": [0, 10],
           "type": "property",
           "name": "platform",
           "value": [],
@@ -103,6 +110,7 @@
         },
         {
           "text": "SLC",
+          "position": [11,14],
           "type": "property",
           "name": "sensor operational mode",
           "value": "SLC",
@@ -111,8 +119,8 @@
         },
         {
           "text": "montreal",
+          "position": [15, 23],
           "type": "location",
-          "operation": "10 km around",
           "matchingType": "overlapping",
           "name": "Montreal",
           "value": {
@@ -126,6 +134,7 @@
         },
         {
           "text": "from april to september",
+          "position": [24, 47],
           "type": "tempex",
           "tempex_type": "range",
           "target": "dataDate",
@@ -140,6 +149,7 @@
       "annotations": [
         {
           "text": "Sentinel 1",
+          "position": [0, 10],
           "type": "property",
           "name": "platform",
           "value": ["S-1","sentinel-1"],
@@ -148,6 +158,7 @@
         },
         {
           "text": "mode IW",
+          "property": [14, 21],
           "type": "property",
           "name": "sensor operational mode",
           "value": "IW",
@@ -155,9 +166,9 @@
           "operation": "eq"
         },
         {
-          "text": "covering (45.5017° N, 73.5673° W)",
+          "text": "(45.5017° N, 73.5673° W)",
+          "position": [31, 55],
           "type": "location",
-          "operation": "10 km around",
           "matchingType": "overlapping",
           "name": "Boulevard Robert-Bourassa, Montreal",
           "value": {
@@ -167,6 +178,7 @@
         },
         {
           "text": "descending",
+          "position": [59, 69],
           "type": "property",
           "name": "sort",
           "value": "descending",
@@ -180,6 +192,7 @@
       "annotations": [
         {
           "text": "Last 25",
+          "position": [0,7],
           "type": "property",
           "name": "limit",
           "value": 25,
@@ -188,6 +201,7 @@
         },
         {
           "text": "Sentinel-1",
+          "position": [8, 18],
           "type": "property",
           "name": "platform",
           "value": ["S-1","sentinel-1"],
@@ -196,6 +210,7 @@
         },
 		{
           "text": "images sorted",
+          "position": [19, 32],
           "type": "property",
           "name": "sort",
           "value": "",
@@ -204,6 +219,7 @@
         },
         {
           "text": "descending order",
+          "position": [36, 52],
           "type": "property",
           "name": "sort",
           "value": "descending",
@@ -212,12 +228,14 @@
         },
         {
           "text": "over Montreal",
+          "position": [53, 69],
           "type": "location",
           "matchingType": "intersect",
           "name": "Montreal",
           "value": {
-              "type": "Point",
-              "coordinates": [-73.5986290076,45.5003834809]
+            "type": "Point",
+            "coordinates": [-73.5986290076,45.5003834809]
+          }
         }
       ]
     },
@@ -226,6 +244,7 @@
       "annotations": [
         {
           "text": "Sentinel-1",
+          "position": [8,18],
           "type": "property",
           "name": "platform",
           "value": ["S-1","sentinel-1"],
@@ -234,6 +253,7 @@
         },
         {
           "text": "polarization",
+          "position": [31, 43],
           "type": "property",
           "name": "polarization",
           "value": "",
@@ -242,6 +262,7 @@
         },
         {
           "text": "sorted",
+          "position": [47, 53],
           "type": "property",
           "name": "sort",
           "value": "",
@@ -250,6 +271,7 @@
         },
 		{
           "text": "descending",
+          "position": [57, 67],
           "type": "property",
           "name": "",
           "value": "",
@@ -258,8 +280,8 @@
         },
         {
           "text": "over Montreal",
+          "position": [74, 87],
           "type": "location",
-          "operation": "10 km around",
           "matchingType": "overlapping",
           "name": "Montreal",
           "value": {
@@ -279,11 +301,13 @@
       "annotations": [
         {
           "text": "CO2 concentrations",
+          "position": [10, 29],
           "type": "target_var",
           "name": ["carbon_dioxide_in_air"]
         },
         {
           "text": "CMIP6 models",
+          "position": [48, 60],
           "type": "property",
           "name": "mip_era",
           "value": "CMIP6",
@@ -292,6 +316,7 @@
         },
         {
           "text": "in ScenarioMIP",
+          "position": [61, 79],
           "type": "property",
           "name": "activity_id",
           "value": "ScenarioMIP",
@@ -305,16 +330,19 @@
       "annotations": [
         {
           "text": "carbon fluxes",
+          "position": [11, 24],
           "type": "target_var",
           "name": ["fgco2"]
         },
 		{
           "text": "the atmosphere and the ocean",
+          "position": [33, 61],
           "type": "target_var",
           "name": []
         },
         {
           "text": "ScenarioMIP",
+          "position": [65, 76],
           "type": "property",
           "name": "activity_id",
           "value": "ScenarioMIP",
@@ -328,11 +356,13 @@
       "annotations": [
         {
           "text": "area of the grids",
+          "position": [50, 67],
           "type": "target_var",
           "name": ["sftlf", "sftof"]
         },
 		{
           "text": "land and ocean",
+          "position": [88, 102],
           "type": "target_var",
           "name": ["areacello", "areacella"]
         }
