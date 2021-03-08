@@ -12,6 +12,17 @@ Fixes:
 ------
 - ...
 
+0.1.0 (2021-02-22)
+===================
+
+Changes:
+--------
+- Updated basic Dockerfile and added basic environment.yml
+
+Fixes:
+------
+- na
+
 0.0.2 (2020-12-09)
 ===================
 

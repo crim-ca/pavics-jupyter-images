@@ -1,0 +1,36 @@
+name: birdy
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - affine
+  - gdal
+  - geojson
+  - pyproj
+  - shapely
+
+  # TODO: These next packages could possibly be added to a more generic 'vision' image, from which 'eo' would be built
+  - h5py
+  - googledrivedownloader
+  - opencv
+  - pillow>=7.1
+
+  # TODO: These next packages could possibly be added to a more specific 'ML' image, built from the 'eo' image
+  - cython
+  - ddt
+  - gitdb
+  - gitpython
+  - hdf5plugin
+  - lz4
+  - pyyaml
+  - scikit-learn
+  - six
+  - tensorboardX
+  - tqdm
+  - pip:
+    # Install kornia from pypi, versions from conda are older and create conflicting errors with latest python version
+    - kornia
+    - opencv-python
+    - orion
+    - torch
+    - torchvision>=0.6
