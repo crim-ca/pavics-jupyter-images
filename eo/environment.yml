@@ -21,7 +21,6 @@ dependencies:
   - gitdb
   - gitpython
   - hdf5plugin
-  - kornia
   - lz4
   - pyyaml
   - scikit-learn
@@ -29,6 +28,8 @@ dependencies:
   - tensorboardX
   - tqdm
   - pip:
+    # Install kornia from pypi, versions from conda are older and create conflicting errors with latest python version
+    - kornia
     - opencv-python
     - orion
     - torch
