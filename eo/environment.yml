@@ -6,7 +6,10 @@ dependencies:
   - affine
   - gdal
   - geojson
+  - intake-stac
   - pyproj
+  - rasterio
+  - sat-search
   - shapely
 
   # TODO: These next packages could possibly be added to a more generic 'vision' image, from which 'eo' would be built

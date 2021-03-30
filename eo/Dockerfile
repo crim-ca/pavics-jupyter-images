@@ -17,3 +17,7 @@ ENV CPL_ZIP_ENCODING=UTF-8
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
+
+# Add a copy of the eo notebooks to the docker image
+# All tutorial-notebooks are set with jenkins as owner, so they can be manipulated by jenkins in the docker entrypoint
+COPY --chown=jenkins notebooks/ /notebook_dir/tutorial-notebooks

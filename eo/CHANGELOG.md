@@ -12,6 +12,18 @@ Fixes:
 ------
 - ...
 
+0.2.0 (2021-03-30)
+===================
+
+Changes:
+--------
+- Custom notebooks specific to the environment can now be added to the docker image
+- New packages added to environment (rasterio, intake-stac, sat-search)
+
+Fixes:
+------
+- na
+
 0.1.0 (2021-02-22)
 ===================
 

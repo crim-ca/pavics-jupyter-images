@@ -13,3 +13,6 @@ These images were first initialized with the packages listed on this
 The Docker image builds can be found on Docker Hub : 
 * [eo](https://hub.docker.com/repository/docker/pavics/crim-jupyter-eo)
 * [nlp](https://hub.docker.com/repository/docker/pavics/crim-jupyter-nlp)
+
+Each Docker image will include a copy of its associated notebooks found on this repo.
+The image specific notebooks will be found together with the notebooks already included with the 'base' image.
