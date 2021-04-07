@@ -1,6 +1,8 @@
 import pprint
 import copy
+import json
 
+annot_types = [ "property", "location", "tempex", "target"]
 # results collection JSON structure templates
 data_measure_template = {"total_annotation": 0,
                          "total_annotation_per_type": {
@@ -187,6 +189,11 @@ def eval_attr(gold, test):
     gold_spans = [gspan['position'] for gspan in gold['annotations']]
     gold_types = [gspan['type'] for gspan in gold['annotations']]
     gold_ann = [gspan for gspan in gold['annotations']]
+    # count of annotations per types
+    nr_prop = len([x for x in test['annotations'] if x['type'] == "property"])
+    nr_loc = len([x for x in test['annotations'] if x['type'] == "location"])
+    nr_temp = len([x for x in test['annotations'] if x['type'] == "tempex"])
+    nr_targ = len([x for x in test['annotations'] if x['type'] == "target"])
 
     for ann in test['annotations']:
         # count how many attributes in test
@@ -195,37 +202,63 @@ def eval_attr(gold, test):
         test_type = ann['type']
         attribute_measures[test_type]['count'] += len(ann)
         test_span = ann['position']
+        # exact span match
         if test_span in gold_spans:
-            idx = gold_spans.index(test_span)
-            # total_span_type_match
-            # nr of attributes where matching span+type
-            if test_type == gold_types[idx]:
-                attribute_measures[test_type]['total_span_type_match'] += len(ann)
+            gidx = gold_spans.index(test_span)
             # per_annotation_span_perfect_match
             # % of annotation having all attribute matched when span is same
-            attribute_measures[test_type]['per_annotation_span_perfect_match'] = \
-                (1.0 * len(set(ann.keys()).intersection(gold_ann[idx].keys()))) / len(ann)
-    # per_annotation_overlapping_span_perfect_match
-    # % of annotation having all attribute matched, for overlapping span
+            if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
+                attribute_measures[test_type]['per_annotation_span_perfect_match'] += 1
         else:
             for gspan in gold_spans:
+                # overlapping span
                 if range(max(gspan[0], test_span[0]), min(gspan[-1], test_span[-1])):
                     gidx = gold_spans.index(gspan)
-                    attribute_measures[test_type]['per_annotation_overlapping_span_perfect_match'] = \
+                    # total_span_type_match
+                    # nr of attributes where matching span+type
+                    # the same as in the measures overlapping_span:type_match
+                    # but as a count instead of %
+                    # exact type match
+                    if test_type == gold_types[gidx]:
+                        attribute_measures[test_type]['total_span_type_match'] += 1
+                    # per_annotation_overlapping_span_perfect_match
+                    # % of annotation having all attribute matched, for overlapping span
+                    if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
+                        attribute_measures[test_type]['per_annotation_overlapping_span_perfect_match'] += 1
+                    # per_annotation_attribute_match
+                    # % of matching attribute name / total number of attribute in an annotation
+                    # compared to overlapping spans
+                    attribute_measures[test_type]['per_annotation_attribute_match']['min'] = \
                         (1.0 * len(set(ann.keys()).intersection(gold_ann[gidx].keys()))) / len(ann)
-    # per_annotation_attribute_match
-    # % of matching attribute name / total number of attribute in an annotation
-    # compared to what? gidx = ?
-    attribute_measures[test_type]['per_annotation_attribute_match'] = \
-        (1.0 * len(set(ann.keys()).intersection(gold_ann[gidx].keys()))) / len(ann)
 
-    print("Attribute measures: ")
-    pprint.pprint(attribute_measures)
+    # count of annotations of all attributes matched for exact span / nr of annots of that type
+    attribute_measures['property']['per_annotation_span_perfect_match'] = (1 * attribute_measures['property'][
+        'per_annotation_span_perfect_match']) / nr_prop if nr_prop else 0
+    attribute_measures['location']['per_annotation_span_perfect_match'] = (1 * attribute_measures['location'][
+        'per_annotation_span_perfect_match']) / nr_loc if nr_loc else 0
+    attribute_measures['tempex']['per_annotation_span_perfect_match'] = (1 * attribute_measures['tempex'][
+        'per_annotation_span_perfect_match']) / nr_temp if nr_temp else 0
+    attribute_measures['target']['per_annotation_span_perfect_match'] = (1 * attribute_measures['target'][
+        'per_annotation_span_perfect_match']) / nr_targ if nr_targ else 0
+
+    #per_annotation_overlapping_span_perfect_match
+    attribute_measures['property']['per_annotation_overlapping_span_perfect_match'] = (1 * attribute_measures['property'][
+        'per_annotation_overlapping_span_perfect_match']) / nr_prop if nr_prop else 0
+    attribute_measures['location']['per_annotation_overlapping_span_perfect_match'] = (1 * attribute_measures['location'][
+        'per_annotation_overlapping_span_perfect_match']) / nr_loc if nr_loc else 0
+    attribute_measures['tempex']['per_annotation_overlapping_span_perfect_match'] = (1 * attribute_measures['tempex'][
+        'per_annotation_overlapping_span_perfect_match']) / nr_temp if nr_temp else 0
+    attribute_measures['target']['per_annotation_overlapping_span_perfect_match'] = (1 * attribute_measures['target'][
+        'per_annotation_overlapping_span_perfect_match']) / nr_targ if nr_targ else 0
+
+    # print("Attribute measures: ")
+    # pprint.pprint(attribute_measures)
     return attribute_measures
 
 def eval_val(gold, test):
     # create measures dictionary
     value_measures = {
+        "global": copy.deepcopy(val_measure_template),
         "type": copy.deepcopy(val_measure_template),
         "name": copy.deepcopy(val_measure_template),
         "bbox": copy.deepcopy(val_measure_template),
@@ -241,9 +274,21 @@ def eval_val(gold, test):
     value_measures['numeric']['value_offset'] = {"avg": 0.0, "min": 0, "max": 0}
     value_measures['target']['matching_element'] = {"avg": 0.0, "min": 0, "max": 0}
 
-
-    # print("Value measures: ")
-    # pprint.pprint(value_measures)
+    gold_spans = [gspan['position'] for gspan in gold['annotations']]
+    gold_types = [gspan['type'] for gspan in gold['annotations']]
+    gold_ann = [gspan for gspan in gold['annotations']]
+    for ann in test['annotations']:
+        test_type = ann['type']
+        test_span = ann['position']
+        for gspan in gold_spans:
+            # overlapping span
+            if range(max(gspan[0], test_span[0]), min(gspan[-1], test_span[-1])):
+                gidx = gold_spans.index(gspan)
+                # all attributes match
+                if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
+                    value_measures['global']['total_matching_attributes'] += 1
+    print("Value measures: ")
+    pprint.pprint(value_measures)
     return value_measures
 
 """
@@ -395,7 +440,7 @@ eval_query(test_q, gold_q)
 """
 
 def avg_min_max(data_list):
-    return 1.0 * sum(data_list)/len(data_list), min(data_list), max(data_list)
+    return {'avg': (1.0 * sum(data_list)/len(data_list)), 'min': min(data_list), 'max': max(data_list)}
 
 def calc_global_span_scores(span_dicts):
 
@@ -407,191 +452,74 @@ def calc_global_span_scores(span_dicts):
         "target": copy.deepcopy(span_measure_template)
     }
 
-    count_prop, count_loc, count_temp, count_targ = 0, 0, 0, 0
-    begin_prop, begin_loc, begin_temp, begin_targ = 0, 0, 0, 0
-    begin_prop_m, begin_loc_m, begin_temp_m, begin_targ_m = 0, 0, 0, 0
-    exact_prop, exact_loc, exact_temp, exact_targ = 0, 0, 0, 0
-    exact_prop_t, exact_loc_t, exact_temp_t, exact_targ_t = 0, 0, 0, 0
-    overlap_prop, overlap_loc, overlap_temp, overlap_targ = [], [], [], []
-    overlap_prop_t, overlap_loc_t, overlap_temp_t, overlap_targ_t = [], [], [], []
-    end_prop, end_loc, end_temp, end_targ = 0, 0, 0, 0
-    end_prop_m, end_loc_m, end_temp_m, end_targ_m = 0, 0, 0, 0
-    split_t_prop, split_t_loc, split_t_temp, split_t_targ = 0, 0, 0, 0
-    split_t_prop_m, split_t_loc_m, split_t_temp_m, split_t_targ_m = 0, 0, 0, 0
-    split_g_prop, split_g_loc, split_g_temp, split_g_targ = 0, 0, 0, 0
-    split_g_prop_m, split_g_loc_m, split_g_temp_m, split_g_targ_m = 0, 0, 0, 0
+    count = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    begin = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    begin_m = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    exact = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    exact_t = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    overlap = {'property': [], 'location': [], 'tempex': [], 'target': []}
+    overlap_t = {'property': [], 'location': [], 'tempex': [], 'target': []}
+    end = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    end_m = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    split_t = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    split_t_m = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    split_g = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
+    split_g_m = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
     # count global measures
     for span_dict in span_dicts:
-        # total span counts per type
-        count_prop += span_dict['property']['count']
-        count_loc += span_dict['location']['count']
-        count_temp += span_dict['tempex']['count']
-        count_targ += span_dict['target']['count']
-        # add up first
-        begin_prop += span_dict['property']['perfect_begin']['no_match']
-        begin_prop_m += span_dict['property']['perfect_begin']['type_match']
-        begin_loc += span_dict['location']['perfect_begin']['no_match']
-        begin_loc_m += span_dict['location']['perfect_begin']['type_match']
-        begin_temp += span_dict['tempex']['perfect_begin']['no_match']
-        begin_temp_m += span_dict['tempex']['perfect_begin']['type_match']
-        begin_targ += span_dict['target']['perfect_begin']['no_match']
-        begin_targ_m += span_dict['target']['perfect_begin']['type_match']
+        for key in annot_types:
+            # total span counts per type
+            count[key] += span_dict[key]['count']
+            # add up first
+            begin[key] += span_dict[key]['perfect_begin']['no_match']
+            begin_m[key] += span_dict[key]['perfect_begin']['type_match']
+            end[key] += span_dict[key]['perfect_end']['no_match']
+            end_m[key] += span_dict[key]['perfect_end']['type_match']
+            exact[key] += span_dict[key]['perfect_match']['no_match']
+            exact_t[key] += span_dict[key]['perfect_match']['type_match']
+            overlap[key].append(span_dict[key]['overlapping_span']['no_match']['min'])
+            overlap_t[key].append(span_dict[key]['overlapping_span']['type_match']['min'])
+            split_g[key] += span_dict[key]['split_gold_span']['no_match']
+            split_g_m[key] += span_dict[key]['split_gold_span']['type_match']
+            split_t[key] += span_dict[key]['split_test_span']['no_match']
+            split_t_m[key] += span_dict[key]['split_test_span']['type_match']
 
-        end_prop += span_dict['property']['perfect_end']['no_match']
-        end_prop_m += span_dict['property']['perfect_end']['type_match']
-        end_loc += span_dict['location']['perfect_end']['no_match']
-        end_loc_m += span_dict['location']['perfect_end']['type_match']
-        end_temp += span_dict['tempex']['perfect_end']['no_match']
-        end_temp_m += span_dict['tempex']['perfect_end']['type_match']
-        end_targ += span_dict['target']['perfect_end']['no_match']
-        end_targ_m += span_dict['target']['perfect_end']['type_match']
+    global_count = 0
+    for key in annot_types:
+        global_count += count[key]
+        span_measures[key]['count'] = count[key]
+        span_measures[key]['overlapping_span']['no_match'] = avg_min_max(overlap[key])
+        span_measures[key]['overlapping_span']['type_match'] = avg_min_max(overlap_t[key])
+        span_measures[key]['perfect_begin']['no_match'] = (1.0 * begin[key]) / count[key]
+        span_measures[key]['perfect_begin']['type_match'] = (1.0 * begin_m[key]) / count[key]
+        span_measures[key]['perfect_end']['no_match'] = (1.0 * end[key]) / count[key]
+        span_measures[key]['perfect_end']['type_match'] = (1.0 * end_m[key]) / count[key]
+        span_measures[key]['perfect_match']['type_match'] = (1.0 * exact_t[key]) / count[key]
+        span_measures[key]['perfect_match']['no_match'] = (1.0 * exact[key]) / count[key]
+        span_measures[key]['split_gold_span']['no_match'] = (1.0 * split_g[key]) / count[key]
+        span_measures[key]['split_gold_span']['type_match'] = (1.0 * split_g_m[key]) / count[key]
+        span_measures[key]['split_test_span']['no_match'] = (1.0 * split_t[key]) / count[key]
+        span_measures[key]['split_test_span']['type_match'] = (1.0 * split_t_m[key]) / count[key]
 
-        exact_prop += span_dict['property']['perfect_match']['no_match']
-        exact_prop_t += span_dict['property']['perfect_match']['type_match']
-        exact_loc += span_dict['location']['perfect_match']['no_match']
-        exact_loc_t += span_dict['location']['perfect_match']['type_match']
-        exact_temp += span_dict['tempex']['perfect_match']['no_match']
-        exact_temp_t += span_dict['tempex']['perfect_match']['type_match']
-        exact_targ += span_dict['target']['perfect_match']['no_match']
-        exact_targ_t += span_dict['target']['perfect_match']['type_match']
-
-        overlap_prop.append(span_dict['property']['overlapping_span']['no_match']['min'])
-        overlap_prop_t.append(span_dict['property']['overlapping_span']['type_match']['min'])
-        overlap_loc.append(span_dict['location']['overlapping_span']['no_match']['min'])
-        overlap_loc_t.append(span_dict['location']['overlapping_span']['type_match']['min'])
-        overlap_temp.append(span_dict['tempex']['overlapping_span']['no_match']['min'])
-        overlap_temp_t.append(span_dict['tempex']['overlapping_span']['type_match']['min'])
-        overlap_targ.append(span_dict['target']['overlapping_span']['no_match']['min'])
-        overlap_targ_t.append(span_dict['target']['overlapping_span']['type_match']['min'])
-
-        split_g_prop += span_dict['property']['split_gold_span']['no_match']
-        split_g_prop_m += span_dict['property']['split_gold_span']['type_match']
-        split_g_loc += span_dict['location']['split_gold_span']['no_match']
-        split_g_loc_m += span_dict['location']['split_gold_span']['type_match']
-        split_g_temp += span_dict['tempex']['split_gold_span']['no_match']
-        split_g_temp_m += span_dict['tempex']['split_gold_span']['type_match']
-        split_g_targ += span_dict['target']['split_gold_span']['no_match']
-        split_g_targ_m += span_dict['target']['split_gold_span']['type_match']
-
-        split_t_prop += span_dict['property']['split_test_span']['no_match']
-        split_t_prop_m += span_dict['property']['split_test_span']['type_match']
-        split_t_loc += span_dict['location']['split_test_span']['no_match']
-        split_t_loc_m += span_dict['location']['split_test_span']['type_match']
-        split_t_temp += span_dict['tempex']['split_test_span']['no_match']
-        split_t_temp_m += span_dict['tempex']['split_test_span']['type_match']
-        split_t_targ += span_dict['target']['split_test_span']['no_match']
-        split_t_targ_m += span_dict['target']['split_test_span']['type_match']
-
-
-    global_count = count_prop + count_loc + count_temp + count_targ
     span_measures['global']['count'] = global_count
-    span_measures['property']['count'] = count_prop
-    span_measures['location']['count'] = count_loc
-    span_measures['tempex']['count'] = count_temp
-    span_measures['target']['count'] = count_targ
 
     # calculate percentage of test
-    avg, min, max = avg_min_max(overlap_prop + overlap_loc + overlap_temp + overlap_targ)
-    span_measures['global']['overlapping_span']['no_match']['avg'] = avg
-    span_measures['global']['overlapping_span']['no_match']['min'] = min
-    span_measures['global']['overlapping_span']['no_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_prop_t + overlap_loc_t + overlap_temp_t + overlap_targ_t)
-    span_measures['global']['overlapping_span']['type_match']['avg'] = avg
-    span_measures['global']['overlapping_span']['type_match']['min'] = min
-    span_measures['global']['overlapping_span']['type_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_prop)
-    span_measures['property']['overlapping_span']['no_match']['avg'] = avg
-    span_measures['property']['overlapping_span']['no_match']['min'] = min
-    span_measures['property']['overlapping_span']['no_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_prop_t)
-    span_measures['property']['overlapping_span']['type_match']['avg'] = avg
-    span_measures['property']['overlapping_span']['type_match']['min'] = min
-    span_measures['property']['overlapping_span']['type_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_loc)
-    span_measures['location']['overlapping_span']['no_match']['avg'] = avg
-    span_measures['location']['overlapping_span']['no_match']['min'] = min
-    span_measures['location']['overlapping_span']['no_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_loc_t)
-    span_measures['location']['overlapping_span']['type_match']['avg'] = avg
-    span_measures['location']['overlapping_span']['type_match']['min'] = min
-    span_measures['location']['overlapping_span']['type_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_temp)
-    span_measures['tempex']['overlapping_span']['no_match']['avg'] = avg
-    span_measures['tempex']['overlapping_span']['no_match']['min'] = min
-    span_measures['tempex']['overlapping_span']['no_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_temp_t)
-    span_measures['tempex']['overlapping_span']['type_match']['avg'] = avg
-    span_measures['tempex']['overlapping_span']['type_match']['min'] = min
-    span_measures['tempex']['overlapping_span']['type_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_targ)
-    span_measures['target']['overlapping_span']['no_match']['avg'] = avg
-    span_measures['target']['overlapping_span']['no_match']['min'] = min
-    span_measures['target']['overlapping_span']['no_match']['max'] = max
-    avg, min, max = avg_min_max(overlap_targ_t)
-    span_measures['target']['overlapping_span']['type_match']['avg'] = avg
-    span_measures['target']['overlapping_span']['type_match']['min'] = min
-    span_measures['target']['overlapping_span']['type_match']['max'] = max
+    span_measures['global']['overlapping_span']['no_match'] = avg_min_max(sum(overlap.values(), []))
+    span_measures['global']['overlapping_span']['type_match'] = avg_min_max(sum(overlap_t.values(), []))
 
-    span_measures['global']['perfect_begin']['no_match'] = (1.0 * (begin_prop + begin_loc + begin_temp + begin_targ)) / global_count
-    span_measures['global']['perfect_begin']['type_match'] = (1.0 * (begin_prop_m + begin_loc_m + begin_temp_m + begin_targ_m)) / global_count
-    span_measures['property']['perfect_begin']['no_match'] = (1.0 * begin_prop) / count_prop
-    span_measures['property']['perfect_begin']['type_match'] = (1.0 * begin_prop_m) / count_prop
-    span_measures['location']['perfect_begin']['no_match'] = (1.0 * begin_loc) / count_loc
-    span_measures['location']['perfect_begin']['type_match'] = (1.0 * begin_loc_m) / count_loc
-    span_measures['tempex']['perfect_begin']['no_match'] = (1.0 * begin_temp) / count_temp
-    span_measures['tempex']['perfect_begin']['type_match'] = (1.0 * begin_temp_m) / count_temp
-    span_measures['target']['perfect_begin']['no_match'] = (1.0 * begin_targ) / count_targ
-    span_measures['target']['perfect_begin']['type_match'] = (1.0 * begin_targ_m) / count_targ
+    span_measures['global']['perfect_begin']['no_match'] = (1.0 * sum(begin.values())) / global_count
+    span_measures['global']['perfect_begin']['type_match'] = (1.0 * sum(begin_m.values())) / global_count
 
-    span_measures['global']['perfect_end']['no_match'] = (1.0 * (
-                end_prop + end_loc + end_temp + end_targ)) / global_count
-    span_measures['global']['perfect_end']['type_match'] = (1.0 * (
-                end_prop_m + end_loc_m + end_temp_m + end_targ_m)) / global_count
-    span_measures['property']['perfect_end']['no_match'] = (1.0 * end_prop) / count_prop
-    span_measures['property']['perfect_end']['type_match'] = (1.0 * end_prop_m) / count_prop
-    span_measures['location']['perfect_end']['no_match'] = (1.0 * end_loc) / count_loc
-    span_measures['location']['perfect_end']['type_match'] = (1.0 * end_loc_m) / count_loc
-    span_measures['tempex']['perfect_end']['no_match'] = (1.0 * end_temp) / count_temp
-    span_measures['tempex']['perfect_end']['type_match'] = (1.0 * end_temp_m) / count_temp
-    span_measures['target']['perfect_end']['no_match'] = (1.0 * end_targ) / count_targ
-    span_measures['target']['perfect_end']['type_match'] = (1.0 * end_targ_m) / count_targ
+    span_measures['global']['perfect_end']['no_match'] = (1.0 * sum(end.values())) / global_count
+    span_measures['global']['perfect_end']['type_match'] = (1.0 * sum(end_m.values())) / global_count
 
-    span_measures['property']['perfect_match']['type_match'] = (1.0 * exact_prop_t) / count_prop
-    span_measures['property']['perfect_match']['no_match'] = (1.0 * exact_prop) / count_prop
-    span_measures['location']['perfect_match']['no_match'] = (1.0 * exact_loc) / count_loc
-    span_measures['location']['perfect_match']['type_match'] = (1.0 * exact_loc_t) / count_loc
-    span_measures['tempex']['perfect_match']['no_match'] = (1.0 * exact_temp) / count_temp
-    span_measures['tempex']['perfect_match']['type_match'] = (1.0 * exact_temp_t) / count_temp
-    span_measures['target']['perfect_match']['no_match'] = (1.0 * exact_targ) / count_targ
-    span_measures['target']['perfect_match']['type_match'] = (1.0 * exact_targ_t) / count_targ
+    span_measures['global']['split_gold_span']['no_match'] = (1.0 * sum(split_g.values())) / global_count
+    span_measures['global']['split_gold_span']['type_match'] = (1.0 * sum(split_g_m.values())) / global_count
 
-    span_measures['global']['split_gold_span']['no_match'] = (1.0 * (
-                split_g_prop + split_g_loc + split_g_temp + split_g_targ)) / global_count
-    span_measures['global']['split_gold_span']['type_match'] = (1.0 * (
-                split_g_prop_m + split_g_loc_m + split_g_temp_m + split_g_targ_m)) / global_count
-    span_measures['property']['split_gold_span']['no_match'] = (1.0 * split_g_prop) / count_prop
-    span_measures['property']['split_gold_span']['type_match'] = (1.0 * split_g_prop_m) / count_prop
-    span_measures['location']['split_gold_span']['no_match'] = (1.0 * split_g_loc) / count_loc
-    span_measures['location']['split_gold_span']['type_match'] = (1.0 * split_g_loc_m) / count_loc
-    span_measures['tempex']['split_gold_span']['no_match'] = (1.0 * split_g_temp) / count_temp
-    span_measures['tempex']['split_gold_span']['type_match'] = (1.0 * split_g_temp_m) / count_temp
-    span_measures['target']['split_gold_span']['no_match'] = (1.0 * split_g_targ) / count_targ
-    span_measures['target']['split_gold_span']['type_match'] = (1.0 * split_g_targ_m) / count_targ
+    span_measures['global']['split_test_span']['no_match'] = (1.0 * sum(split_t.values())) / global_count
+    span_measures['global']['split_test_span']['type_match'] = (1.0 * sum(split_t_m.values())) / global_count
 
-    span_measures['global']['split_test_span']['no_match'] = (1.0 * (
-            split_t_prop + split_t_loc + split_t_temp + split_t_targ)) / global_count
-    span_measures['global']['split_test_span']['type_match'] = (1.0 * (
-            split_t_prop_m + split_t_loc_m + split_t_temp_m + split_t_targ_m)) / global_count
-    span_measures['property']['split_test_span']['no_match'] = (1.0 * split_t_prop) / count_prop
-    span_measures['property']['split_test_span']['type_match'] = (1.0 * split_t_prop_m) / count_prop
-    span_measures['location']['split_test_span']['no_match'] = (1.0 * split_t_loc) / count_loc
-    span_measures['location']['split_test_span']['type_match'] = (1.0 * split_t_loc_m) / count_loc
-    span_measures['tempex']['split_test_span']['no_match'] = (1.0 * split_t_temp) / count_temp
-    span_measures['tempex']['split_test_span']['type_match'] = (1.0 * split_t_temp_m) / count_temp
-    span_measures['target']['split_test_span']['no_match'] = (1.0 * split_t_targ) / count_targ
-    span_measures['target']['split_test_span']['type_match'] = (1.0 * split_t_targ_m) / count_targ
     return span_measures
-
 
 def calc_global_data_scores(data_dicts):
     #a list of data dicts
@@ -637,14 +565,8 @@ def calc_global_data_scores(data_dicts):
     data_scores['test_data']['total_annotation_per_type']['tempex'] = test_total_temp
     data_scores['test_data']['total_annotation_per_type']['location'] = test_total_loc
     data_scores['test_data']['total_annotation_per_type']['target'] = test_total_targ
-    avg, min, max = avg_min_max(gold_annot_counts)
-    data_scores['gold_data']['annotation_per_query']['avg'] = avg
-    data_scores['gold_data']['annotation_per_query']['min'] = min
-    data_scores['gold_data']['annotation_per_query']['max'] = max
-    avg, min, max = avg_min_max(test_annot_counts)
-    data_scores['test_data']['annotation_per_query']['avg'] = avg
-    data_scores['test_data']['annotation_per_query']['min'] = min
-    data_scores['test_data']['annotation_per_query']['max'] = max
+    data_scores['gold_data']['annotation_per_query'] = avg_min_max(gold_annot_counts)
+    data_scores['test_data']['annotation_per_query'] = avg_min_max(test_annot_counts)
     return data_scores
 
 def calc_global_attr_scores(attr_dicts):
@@ -656,8 +578,55 @@ def calc_global_attr_scores(attr_dicts):
         "tempex": copy.deepcopy(attr_measure_template),
         "target": copy.deepcopy(attr_measure_template)
     }
+    per_annot_match = {'property': [], 'location': [], 'tempex': [], 'target': []}
+
+    for attr_dict in attr_dicts:
+        for key in attr_dict.keys(): # annotation type
+            attr_scores[key]["count"] += attr_dict[key]['count']
+            attr_scores[key]["total_span_type_match"] += attr_dict[key]["total_span_type_match"]
+            attr_scores[key]["per_annotation_span_perfect_match"] += attr_dict[key]["per_annotation_span_perfect_match"]
+            attr_scores[key]["per_annotation_overlapping_span_perfect_match"] += attr_dict[key]["per_annotation_overlapping_span_perfect_match"]
+            per_annot_match[key].append(attr_dict[key]["per_annotation_attribute_match"]['min'])
+
+
+    # global values
+    for key in annot_types:
+        attr_scores['global']["count"] += attr_scores[key]["count"]
+        attr_scores['global']["total_span_type_match"] += attr_scores[key]["total_span_type_match"]
+        attr_scores['global']["per_annotation_span_perfect_match"] += attr_scores[key]["per_annotation_span_perfect_match"]
+        attr_scores['global']["per_annotation_overlapping_span_perfect_match"] += attr_scores[key]["per_annotation_overlapping_span_perfect_match"]
+        attr_scores[key]["per_annotation_attribute_match"] = avg_min_max(per_annot_match[key])
+        attr_scores[key]["per_annotation_span_perfect_match"] = (1.0 * attr_scores[key]["per_annotation_span_perfect_match"]) / len(attr_dicts)
+        attr_scores[key]["per_annotation_overlapping_span_perfect_match"] = (1.0 * attr_scores[key][
+            "per_annotation_overlapping_span_perfect_match"]) / len(attr_dicts)
+
+    # add all per type values into a flat list
+    per_annot_matches = []
+    for l in per_annot_match.values():
+        per_annot_matches += l
+    attr_scores['global']["per_annotation_attribute_match"] = avg_min_max(per_annot_matches)
     return attr_scores
 
+def calc_global_val_scores(val_dicts):
+
+    val_scores = {
+        "type": copy.deepcopy(val_measure_template),
+        "name": copy.deepcopy(val_measure_template),
+        "bbox": copy.deepcopy(val_measure_template),
+        "tempex": copy.deepcopy(val_measure_template),
+        "numeric": copy.deepcopy(val_measure_template),
+        "target": copy.deepcopy(val_measure_template)
+    }
+    templ = {'property': [], 'location': [], 'tempex': [], 'target': []}
+
+    # for val_dict in val_dicts:
+    #     for key in val_dict.keys(): # annotation type
+    #
+    #
+    # # global values
+    # for key in annot_types:
+
+     return val_scores
 
 def global_stats(gold_path, test_path, out_path):
 
@@ -723,6 +692,9 @@ def global_stats(gold_path, test_path, out_path):
     stats['attribute_measures'] = calc_global_attr_scores(global_attr)
     print("GLOBAL attribute measures: ")
     pprint.pprint(stats['attribute_measures'])
+    stats['value_measures'] = calc_global_val_scores(global_value)
+    print("GLOBAL value measures: ")
+    pprint.pprint(stats['value_measures'])
 
     # write results to out path
     with open(out_path, "w") as outf:
