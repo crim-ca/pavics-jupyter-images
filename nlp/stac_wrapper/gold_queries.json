@@ -226,7 +226,7 @@
           "position": [22, 55],
           "type": "location",
           "matchingType": "overlapping",
-          "name": "Boulevard Robert-Bourassa, Montreal",
+          "name": "45.5017° N, 73.5673° W",
           "value": {
               "type": "Point",
               "coordinates": [-73.567300, 45.501700]
