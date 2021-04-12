@@ -1,0 +1,14 @@
+# Config file containing the list of notebooks to download for a specific image.
+#
+# Used in the download script from birdhouse-deploy.
+#
+
+- repo_url: https://github.com/crim-ca/pavics-jupyter-images
+  branch: custom-tutorial-notebooks
+  source_path: eo/notebooks
+  dest_dir: ${JUPYTERHUB_USER_DATA_DIR}/tutorial-notebooks/eo
+
+- repo_url: https://github.com/crim-ca/pavics-jupyter-images
+  branch: custom-tutorial-notebooks
+  source_path: eo/notebooks
+  dest_dir: ${JUPYTERHUB_USER_DATA_DIR}/tutorial-notebooks/eo2
