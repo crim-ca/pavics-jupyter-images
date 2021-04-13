@@ -1,2 +1,0 @@
-threddsclient==0.4.2
-netCDF4==1.5.3
