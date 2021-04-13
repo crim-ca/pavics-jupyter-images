@@ -1,6 +1,9 @@
 import pprint
 import copy
 import json
+import datetime
+from shapely.geometry import box, Polygon
+from Levenshtein import distance
 
 annot_types = [ "property", "location", "tempex", "target"]
 # results collection JSON structure templates
@@ -36,8 +39,7 @@ attr_measure_template = {
         }}
 val_measure_template = {
         "total_matching_attributes": 0,
-        "ratio_matching_attributes": 0.0,
-        "perfect_value_match": 0.0,}
+        "perfect_value_match": 0.0}
 
 def eval_query(gold, test):
     return eval_data(gold, test), eval_span(gold, test), \
@@ -97,8 +99,8 @@ def eval_span(gold, test):
     test_types = [ann['type'] for ann in test['annotations']]
     test_spans = [ann['position'] for ann in test['annotations']]
 
-    print(gold_spans)
-    print(test_spans)
+    # print(gold_spans)
+    # print(test_spans)
     gold_begins = list(zip(*gold_spans))[0]
     gold_ends = list(zip(*gold_spans))[1]
     #TODO! if gold_spans is only length 1, the result has an empty item in the list?
@@ -255,6 +257,46 @@ def eval_attr(gold, test):
     # pprint.pprint(attribute_measures)
     return attribute_measures
 
+def levenshtein(str1, str2):
+    return distance(str1, str2)
+
+def intersect_union(bbox1, bbox2):
+    # polygons require min 3 coordinate tuples
+    if len(bbox1['coordinates']) > 2 and len(bbox2['coordinates']) > 2:
+        poly1 = Polygon(bbox1['coordinates'])
+        poly2 = Polygon(bbox2['coordinates'])
+        polygon_intersection = poly1.intersection(poly2).area
+        polygon_union = poly1.union(poly2).area
+        iou = polygon_intersection / polygon_union
+        return iou
+    # how to calculate for points?
+    if bbox1['type']=="Point" and bbox2['type']=="Point":
+        if bbox1['coordinates']==bbox2['coordinates']:
+            return 1
+    return 0
+
+def duration_overlap(dur1, dur2):
+    format = '%Y-%m-%dT%H:%M:%SZ'
+    # datarange
+    if len(dur1) == 2 and len(dur2) == 2:
+        r1_start = datetime.datetime.strptime(dur1['start'], format)
+        r1_end = datetime.datetime.strptime(dur1['end'], format)
+        r2_start = datetime.datetime.strptime(dur2['start'], format)
+        r2_end = datetime.datetime.strptime(dur2['end'], format)
+        overlap = min(r1_end - r2_start, r2_end - r1_start).days + 1
+        return overlap
+    # datetime
+    if dur1 == dur2:
+        return 1
+    return 0
+
+def isnumeric(str_value):
+    try:
+        float(str_value)
+        return True
+    except:
+        return False
+
 def eval_val(gold, test):
     # create measures dictionary
     value_measures = {
@@ -267,7 +309,7 @@ def eval_val(gold, test):
         "target": copy.deepcopy(val_measure_template)
     }
     # add special keys
-    value_measures['type']["perfect_type_match"] = 0.0
+    value_measures['global']["ratio_matching_attributes"] = 0.0
     value_measures['name']["levenstein"] = {"avg": 0.0, "min": 0, "max": 0}
     value_measures['bbox']["intersect_over_union"] = {"avg": 0.0, "min": 0, "max": 0}
     value_measures['tempex']["duration_overlap"] = {"avg": 0.0, "min": 0, "max": 0}
@@ -280,6 +322,17 @@ def eval_val(gold, test):
     for ann in test['annotations']:
         test_type = ann['type']
         test_span = ann['position']
+        # how many location/tempex attributes we have
+        if test_type == 'location':
+            value_measures['bbox']['total_matching_attributes'] += 1
+        if test_type == 'tempex':
+            value_measures['tempex']['total_matching_attributes'] += 1
+        if test_type == 'target':
+            value_measures['target']['total_matching_attributes'] += 1
+        if 'name' in ann.keys():
+            value_measures['name']['total_matching_attributes'] += 1
+        if 'value' in ann.keys() and isnumeric(ann['value']):
+            value_measures['numeric']['total_matching_attributes'] += 1
         for gspan in gold_spans:
             # overlapping span
             if range(max(gspan[0], test_span[0]), min(gspan[-1], test_span[-1])):
@@ -287,8 +340,63 @@ def eval_val(gold, test):
                 # all attributes match
                 if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
                     value_measures['global']['total_matching_attributes'] += 1
-    print("Value measures: ")
-    pprint.pprint(value_measures)
+                #  for matching attribute type
+                if gold_types[gidx] == test_type:
+                    value_measures['type']['perfect_value_match'] += 1
+                    if test_type == 'location':
+                        if ann['value'] == gold_ann[gidx]['value']:
+                            value_measures['bbox']['perfect_value_match'] += 1
+                        value_measures['bbox']["intersect_over_union"]['min'] = intersect_union(ann['value'],
+                                                                                                gold_ann[gidx]['value'])
+                    if test_type == 'tempex':
+                        if ann['value'] == gold_ann[gidx]['value']:
+                            value_measures['tempex']['perfect_value_match'] += 1
+                        value_measures['tempex']["duration_overlap"]['min'] = duration_overlap(ann['value'],
+                                                                                               gold_ann[gidx]['value'])
+                    if test_type == 'target':
+                        if ann['name'] == gold_ann[gidx]['name']:
+                            value_measures['target']['perfect_value_match'] += 1
+                        value_measures['target']['matching_element']['min'] = len(set(ann['name']).
+                                                                                  intersection(gold_ann[gidx]['name']))
+                    if test_type != 'tempex':
+                        if gold_ann[gidx]['name'] == ann['name']:
+                            value_measures['name']['perfect_value_match'] += 1
+                        if test_type != 'target': #TODO implement Levenshtein for target list of var names
+                            value_measures['name']["levenstein"]['min'] = levenshtein(ann['name'].lower(),
+                                                                                  gold_ann[gidx]['name'].lower())
+                    if 'value' in gold_ann[gidx].keys() and isnumeric(gold_ann[gidx]['value']) \
+                            and isnumeric(ann['value']):
+                        if gold_ann[gidx]['value'] == ann['value']:
+                            value_measures['numeric']['perfect_value_match'] += 1
+                        value_measures['numeric']['value_offset']['min'] = abs(float(ann['value']) -
+                                                                               float(gold_ann[gidx]['value']))
+
+    value_measures['type']['total_matching_attributes'] = len(ann) # there are as many type attribute counts, as many annotations
+    value_measures['type']['perfect_value_match'] = (1.0 * value_measures['type']['perfect_value_match'])\
+                                                    / len(ann)
+    value_measures['name']['perfect_value_match'] = (1.0 * value_measures['name']['perfect_value_match'])\
+                                                    / len(ann)
+    if value_measures['bbox']['total_matching_attributes']:
+        value_measures['bbox']['perfect_value_match'] = (1.0 * value_measures['bbox']['perfect_value_match'])\
+                                                    / value_measures['bbox']['total_matching_attributes']
+    if value_measures['tempex']['total_matching_attributes']:
+        value_measures['tempex']['perfect_value_match'] = (1.0 * value_measures['tempex']['perfect_value_match']) \
+                                                    / value_measures['tempex']['total_matching_attributes']
+    if value_measures['numeric']['total_matching_attributes']:
+        value_measures['numeric']['perfect_value_match'] = (1.0 * value_measures['numeric']['perfect_value_match']) \
+                                                      / value_measures['numeric']['total_matching_attributes']
+    if value_measures['target']['total_matching_attributes']:
+        value_measures['target']['perfect_value_match'] = (1.0 * value_measures['target']['perfect_value_match']) \
+                                                    / value_measures['target']['total_matching_attributes']
+    if value_measures['global']['total_matching_attributes']:
+        value_measures['global']['perfect_value_match'] = (1.0 * value_measures['global']['perfect_value_match'])\
+                                                       / value_measures['global']['total_matching_attributes']
+
+    value_measures['global']['ratio_matching_attributes'] = (1.0 *
+                                                             value_measures['global']['total_matching_attributes']) \
+                                                            / len(test['annotations'])
+    # print("Value measures: ")
+    # pprint.pprint(value_measures)
     return value_measures
 
 """
@@ -610,6 +718,7 @@ def calc_global_attr_scores(attr_dicts):
 def calc_global_val_scores(val_dicts):
 
     val_scores = {
+        "global": copy.deepcopy(val_measure_template),
         "type": copy.deepcopy(val_measure_template),
         "name": copy.deepcopy(val_measure_template),
         "bbox": copy.deepcopy(val_measure_template),
@@ -617,16 +726,32 @@ def calc_global_val_scores(val_dicts):
         "numeric": copy.deepcopy(val_measure_template),
         "target": copy.deepcopy(val_measure_template)
     }
-    templ = {'property': [], 'location': [], 'tempex': [], 'target': []}
+    templ = {"global": [], "type": [], "name": [], "bbox": [], "tempex": [], "numeric": [], "target": []}
+    val_scores['global']["ratio_matching_attributes"] = 0.0
 
-    # for val_dict in val_dicts:
-    #     for key in val_dict.keys(): # annotation type
-    #
-    #
-    # # global values
-    # for key in annot_types:
+    for val_dict in val_dicts:
+        for key in val_dict.keys(): # annotation type
+            val_scores[key]['total_matching_attributes'] += val_dict[key]['total_matching_attributes']
+            val_scores[key]['perfect_value_match'] += val_dict[key]['perfect_value_match']
+        val_scores['global']["ratio_matching_attributes"] += val_dict['global']["ratio_matching_attributes"]
+        templ['name'].append(val_dict['name']["levenstein"]['min'])
+        templ['bbox'].append(val_dict['bbox']["intersect_over_union"]['min'])
+        templ['tempex'].append(val_dict['tempex']["duration_overlap"]['min'])
+        templ['numeric'].append(val_dict['numeric']['value_offset']['min'])
+        templ['target'].append(val_dict['target']['matching_element']['min'])
 
-     return val_scores
+    # global values
+    for key in templ.keys():
+        val_scores[key]['perfect_value_match'] = val_scores[key]['perfect_value_match'] / len(val_dicts)
+
+    val_scores['global']["ratio_matching_attributes"] = val_scores['global']["ratio_matching_attributes"] / len(val_dicts)
+    val_scores['name']["levenstein"] = avg_min_max(templ['name'])
+    val_scores['bbox']["intersect_over_union"] = avg_min_max(templ['bbox'])
+    val_scores['tempex']["duration_overlap"] = avg_min_max(templ['tempex'])
+    val_scores['numeric']['value_offset'] = avg_min_max(templ['numeric'])
+    val_scores['target']['matching_element'] = avg_min_max(templ['target'])
+
+    return val_scores
 
 def global_stats(gold_path, test_path, out_path):
 

@@ -159,13 +159,10 @@
       },
       "type": {
         "total_matching_attributes": 0,
-        "ratio_matching_attributes": 0.0,
-        "perfect_value_match": 0.0,
-        "perfect_type_match": 0.0
+        "perfect_value_match": 0.0
       },
       "name": {
         "total_matching_attributes": 0,
-        "ratio_matching_attributes": 0.0,
         "perfect_value_match": 0.0,
         "levenstein": {
           "avg": 0.0,
@@ -175,7 +172,6 @@
       },
       "bbox": {
         "total_matching_attributes": 0,
-        "ratio_matching_attributes": 0.0,
         "perfect_value_match": 0.0,
         "intersect_over_union": {
           "avg": 0.0,
@@ -185,7 +181,6 @@
       },
       "tempex": {
         "total_matching_attributes": 0,
-        "ratio_matching_attributes": 0.0,
         "perfect_value_match": 0.0,
         "duration_overlap": {
           "avg": 0.0,
@@ -195,7 +190,6 @@
       },
       "numeric": {
         "total_matching_attributes": 0,
-        "ratio_matching_attributes": 0.0,
         "perfect_value_match": 0.0,
         "value_offset": {
           "avg": 0.0,
@@ -205,7 +199,6 @@
       },
       "target": {
         "total_matching_attributes": 0,
-        "ratio_matching_attributes": 0.0,
         "perfect_value_match": 0.0,
         "matching_element": {
           "avg": 0.0,
