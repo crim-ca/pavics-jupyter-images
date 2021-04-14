@@ -2,7 +2,7 @@ import pprint
 import copy
 import json
 import datetime
-from shapely.geometry import box, Polygon
+from shapely.geometry import Polygon
 from Levenshtein import distance
 
 annot_types = [ "property", "location", "tempex", "target"]
