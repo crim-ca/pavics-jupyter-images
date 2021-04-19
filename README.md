@@ -14,5 +14,10 @@ The Docker image builds can be found on Docker Hub :
 * [eo](https://hub.docker.com/repository/docker/pavics/crim-jupyter-eo)
 * [nlp](https://hub.docker.com/repository/docker/pavics/crim-jupyter-nlp)
 
-Each Docker image will include a copy of its associated notebooks found on this repo.
-The image specific notebooks will be found together with the notebooks already included with the 'base' image.
+The notebooks associated to each specific image are found on this repo, on their corresponding notebook subfolder. 
+
+Also, a yaml configuration file can be found for each image, containing a list of parameters used 
+by the [deploy-data-specific-image script](https://github.com/bird-house/birdhouse-deploy/blob/master/birdhouse/deployment/deploy-data-specific-image)
+on the [birdhouse-deploy repo](https://github.com/bird-house/birdhouse-deploy). 
+This script is used to download and update the image's associated notebooks that should be available on 
+the JupyterLab environment for DACCS.
