@@ -15,7 +15,7 @@ RUN umask 0000 && conda env update -f /environment.yml
 # (https://github.com/conda-forge/gdal-feedstock/issues/83#issue-162911573)
 ENV CPL_ZIP_ENCODING=UTF-8
 
-COPY notebook_config.yml.template /notebook_config.yml.template
+COPY notebook_config.yml /notebook_config.yml
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins

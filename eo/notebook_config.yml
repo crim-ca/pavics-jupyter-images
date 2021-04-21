@@ -6,5 +6,4 @@
 
 - repo_url: https://github.com/crim-ca/pavics-jupyter-images
   branch: master
-  source_path: nlp/notebooks
-  dest_dir: ${JUPYTERHUB_USER_DATA_DIR}/tutorial-notebooks/nlp-crim
+  source_path: eo/notebooks

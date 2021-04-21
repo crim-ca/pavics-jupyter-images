@@ -9,7 +9,7 @@ COPY environment.yml /environment.yml
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
 RUN umask 0000 && conda env update -f /environment.yml
 
-COPY notebook_config.yml.template /notebook_config.yml.template
+COPY notebook_config.yml /notebook_config.yml
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
