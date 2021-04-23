@@ -7,6 +7,8 @@ dependencies:
 - nb_conda_kernels==2.3.1
 - ipykernel==5.3.4
 - pip==20.3.3
+- python-levenshtein==0.12.2
+- shapely==1.7.0
 - pip:
   - threddsclient==0.4.2
   - birdhouse-birdy==0.7.0

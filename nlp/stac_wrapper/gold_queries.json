@@ -1,5 +1,5 @@
 {
-  "golden_queries": [
+  "queries": [
     {
       "query": "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%",
       "annotations": [
@@ -136,7 +136,7 @@
       "annotations": [
         {
           "text": "Sentinel 1",
-          "postion": [0, 10],
+          "position": [0, 10],
           "type": "property",
           "name": "platform",
           "value": "sentinel-1",
@@ -214,7 +214,7 @@
         },
         {
           "text": "mode IW",
-          "property": [14, 21],
+          "position": [14, 21],
           "type": "property",
           "name": "sensor operational mode",
           "value": "IW",
@@ -353,7 +353,7 @@
         {
           "text": "CO2 concentrations",
           "position": [10, 29],
-          "type": "target_var",
+          "type": "target",
           "name": ["mole_fraction_of_carbon_dioxide_in_air"]
         },
         {
@@ -391,7 +391,7 @@
         {
           "text": "carbon fluxes between the atmosphere and the ocean",
           "position": [11, 61],
-          "type": "target_var",
+          "type": "target",
           "name": ["nbp", "fgco2"]
         },
         {
@@ -411,7 +411,7 @@
         {
           "text": "describing the area of the grids and the fraction of land and ocean",
           "position": [35, 102],
-          "type": "target_var",
+          "type": "target",
           "name": ["areacello", "areacella", "sftlf", "sftof"]
         }
       ]
