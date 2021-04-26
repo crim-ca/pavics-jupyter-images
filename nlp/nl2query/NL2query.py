@@ -4,7 +4,7 @@ class Annotation(TypedDict):
     """ typed dict definition of one annotation.
     must include these fields """
     text: str
-    position: List[int, int]
+    position: List[int]
     type: str
 
 class QueryAnnotationsDict(TypedDict):
@@ -51,7 +51,7 @@ class NL2Query:
     # one config file per nl2query implementation
     config = None
 
-    def init(self, config: str = None):
+    def __init__(self, config: str = None):
         self.config = config
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:

@@ -1,5 +1,5 @@
-import NL2query
 from NL2query import *
+
 
 class MyEngine:
     """ mockup class of an annotator engine """
@@ -10,14 +10,15 @@ class MyEngine:
     def get_annotations(self, nlq: str):
         # call the engine to annotate the nl query
         # and return a list of engine-specific annotations
-        return [["geoname","some identified text"], ["named entity", "some other text"]]
+        return [["geoname", "some identified text"], ["named entity", "some other text"]]
 
 
-class MyNL2query(NL2query):
+class MyNL2query(NL2Query):
     """ mockup class to try out NL2query interface"""
     engine = None
 
     def __init__(self, config: str = None):
+        NL2Query.__init__(self, config)
         # start my NL2query engine
         self.engine = MyEngine(config)
 
@@ -38,7 +39,7 @@ class MyNL2query(NL2query):
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
         return TargetAnnotation(text=annotation[1], type="target", position=[],
-                                target="", value={})
+                                name="")
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
         # get annotations from my engine
