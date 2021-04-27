@@ -52,7 +52,7 @@ class NL2Query:
     config = None
 
     def __init__(self, config: str = None):
-        self.config = config
+        NL2Query.config = config
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
         """
@@ -64,30 +64,34 @@ class NL2Query:
         """
         pass
 
-    def create_property_annotation(self, annotation) -> PropertyAnnotation:
+    def create_property_annotation(self, annotation: Any) -> PropertyAnnotation:
         """
         Takes an annotation output by the nl2query engine and
         transforms it into a predefined typed dict for property annotation.
+        The annotation object is specific to the nl2query engine implementation.
         """
         pass
 
-    def create_location_annotation(self, annotation) -> LocationAnnotation:
+    def create_location_annotation(self, annotation: Any) -> LocationAnnotation:
         """
         Takes an annotation output by the nl2query engine and
         transforms it into a predefined typed dict for location annotation.
+        The annotation object is specific to the nl2query engine implementation.
         """
         pass
 
-    def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
+    def create_temporal_annotation(self, annotation: Any) -> TemporalAnnotation:
         """
         Takes an annotation output by the nl2query engine and
         transforms it into a predefined typed dict for temporal annotation.
+        The annotation object is specific to the nl2query engine implementation.
         """
         pass
 
-    def create_target_annotation(self, annotation) -> TargetAnnotation:
+    def create_target_annotation(self, annotation: Any) -> TargetAnnotation:
         """
         Takes an annotation output by the nl2query engine and
         transforms it into a predefined typed dict for target annotation.
+        The annotation object is specific to the nl2query engine implementation.
         """
         pass
