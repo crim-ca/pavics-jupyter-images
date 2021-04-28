@@ -15,12 +15,11 @@ class MyEngine:
 
 class MyNL2query(NL2Query):
     """ mockup class to try out NL2query interface"""
-    engine = None
 
     def __init__(self, config: str = None):
         NL2Query.__init__(self, config)
         # start my NL2query engine
-        self.engine = MyEngine(config)
+        self.engine = MyEngine(self.config)
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
         # take annotation given by the engine

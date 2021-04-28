@@ -48,11 +48,9 @@ class NL2Query:
     """ class defining the minimal interface
     that any Nl2query module should implement
     """
-    # one config file per nl2query implementation
-    config = None
 
     def __init__(self, config: str = None):
-        NL2Query.config = config
+        self.config = config
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
         """
