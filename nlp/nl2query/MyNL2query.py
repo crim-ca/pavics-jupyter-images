@@ -16,14 +16,15 @@ class MyEngine:
 class MyNL2query(NL2Query):
     """ mockup class to try out NL2query interface"""
 
-    def __init__(self, config: str = None):
-        NL2Query.__init__(self, config)
+    def __init__(self, config_file: str = None):
+        NL2Query.__init__(self, config_file)
         # start my NL2query engine
+        # self.config being a dict created by NL2Query.__init__
         self.engine = MyEngine(self.config)
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
         # take annotation given by the engine
-        # and create appropriate typeddict annotation
+        # and create appropriate typed dict annotation
         # filling in each slot as required
         return PropertyAnnotation(text=annotation[1], type="property", position=[],
                                   name="", value="", value_type="", operation="")
@@ -38,7 +39,7 @@ class MyNL2query(NL2Query):
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
         return TargetAnnotation(text=annotation[1], type="target", position=[],
-                                name="")
+                                name=[])
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
         # get annotations from my engine
@@ -58,9 +59,9 @@ class MyNL2query(NL2Query):
 
 if __name__ == "__main__":
     query = "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%"
-    config_file = "config.ini"
+    config_f = "config.ini"
     # call my nl2query class
-    my_instance = MyNL2query(config_file)
+    my_instance = MyNL2query(config_f)
     # get the structured query from the nl query
     structq = my_instance.transform_nl2query(query)
     print("Structured query: ", structq)
