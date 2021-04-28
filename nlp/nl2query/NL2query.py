@@ -1,4 +1,6 @@
 from typing import TypedDict, List, Any
+from configparser import ConfigParser
+import os
 
 class Annotation(TypedDict):
     """ typed dict definition of one annotation.
@@ -49,8 +51,17 @@ class NL2Query:
     that any Nl2query module should implement
     """
 
-    def __init__(self, config: str = None):
-        self.config = config
+    def __init__(self, config_file: str = None):
+        self.config = None
+        if config_file:
+            # parse the config file
+            if os.path.exists(config_file):
+                print("Reading config file: ", config_file)
+                self.config = ConfigParser()
+                self.config.read(config_file)
+            else:
+                print("Config file not found!")
+
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
         """
