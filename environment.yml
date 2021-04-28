@@ -10,6 +10,7 @@ dependencies:
 - python-levenshtein==0.12.2
 - shapely==1.7.0
 - spacy==3.0.6
+- torch==1.8.1
 - pip:
   - threddsclient==0.4.2
   - birdhouse-birdy==0.7.0
@@ -17,3 +18,4 @@ dependencies:
   - intake-esm==2021.1.15
   - sat-search==0.3.0
   - ipywidgets==7.6.3
+  - flair==0.8.0.post1

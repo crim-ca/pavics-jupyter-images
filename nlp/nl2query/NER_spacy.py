@@ -2,15 +2,14 @@ from NL2query import *
 import spacy
 import re
 
-class NER(NL2Query):
-    """ mockup class to try out NL2query interface"""
-    spacy_engine = None
+class NER_spacy(NL2Query):
+    """ Spacy implementation of the NL2query interface"""
 
     def __init__(self, config: str = None):
         NL2Query.__init__(self, config)
         # start my NL2query engine
         self.spacy_engine = spacy.load("en_core_web_trf")
-#        self.spacy_engine = Language.from_config(config)
+#        self.spacy_engine = Language.from_config(self.config)
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
         # take annotation given by the engine
@@ -79,7 +78,7 @@ if __name__ == "__main__":
     query = "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%"
     config_file = "spacy_config.cfg"
     # call my nl2query class
-    my_instance = NER(config_file)
+    my_instance = NER_spacy(config_file)
     # get the structured query from the nl query
     structq = my_instance.transform_nl2query(query)
     print("Structured query: ", structq)
