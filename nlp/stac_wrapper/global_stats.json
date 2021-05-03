@@ -35,61 +35,61 @@
     "span_measures": {
       "global": {
         "count": 0,
-        "perfect_match": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_begin": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_end": {"no_match": 0.0, "type_match": 0.0},
-        "split_gold_span": {"no_match": 0, "type_match": 0},
-        "split_test_span": {"no_match": 0, "type_match": 0},
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
         "overlapping_span": {
-          "no_match": {"avg": 0.0, "min": 0, "max": 0},
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
           "type_match": {"avg": 0.0, "min": 0, "max": 0}
         }
       },
       "property": {
         "count": 0,
-        "perfect_match": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_begin": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_end": {"no_match": 0.0, "type_match": 0.0},
-        "split_gold_span": {"no_match": 0, "type_match": 0},
-        "split_test_span": {"no_match": 0, "type_match": 0},
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
         "overlapping_span": {
-          "no_match": {"avg": 0.0, "min": 0, "max": 0},
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
           "type_match": {"avg": 0.0, "min": 0, "max": 0}
         }
       },
       "location": {
         "count": 0,
-        "perfect_match": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_begin": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_end": {"no_match": 0.0, "type_match": 0.0},
-        "split_gold_span": {"no_match": 0, "type_match": 0},
-        "split_test_span": {"no_match": 0, "type_match": 0},
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
         "overlapping_span": {
-          "no_match": {"avg": 0.0, "min": 0, "max": 0},
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
           "type_match": {"avg": 0.0, "min": 0, "max": 0}
         }
       },
       "tempex": {
         "count": 0,
-        "perfect_match": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_begin": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_end": {"no_match": 0.0, "type_match": 0.0},
-        "split_gold_span": {"no_match": 0, "type_match": 0},
-        "split_test_span": {"no_match": 0, "type_match": 0},
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
         "overlapping_span": {
-          "no_match": {"avg": 0.0, "min": 0, "max": 0},
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
           "type_match": {"avg": 0.0, "min": 0, "max": 0}
         }
       },
       "target": {
         "count": 0,
-        "perfect_match": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_begin": {"no_match": 0.0, "type_match": 0.0},
-        "perfect_end": {"no_match": 0.0, "type_match": 0.0},
-        "split_gold_span": {"no_match": 0, "type_match": 0},
-        "split_test_span": {"no_match": 0, "type_match": 0},
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
         "overlapping_span": {
-          "no_match": {"avg": 0.0, "min": 0, "max": 0},
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
           "type_match": {"avg": 0.0, "min": 0, "max": 0}
         }
       }
