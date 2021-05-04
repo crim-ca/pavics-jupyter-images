@@ -1,9 +1,10 @@
 # Config file containing the list of notebooks to download for a specific image.
 #
-# Used in the deploy-data-specific-image script from birdhouse-deploy.
+# Used in the deploy-data-specific-image script from pavics-jupyter-base.
 # More details on this config can be found on this script file :
-#   https://github.com/bird-house/birdhouse-deploy/blob/master/birdhouse/deployment/deploy-data-specific-image
+#   https://github.com/bird-house/pavics-jupyter-base/blob/master/scheduler-jobs/deploy_data_specific_image
 
 - repo_url: https://github.com/crim-ca/pavics-jupyter-images
   branch: master
   source_path: eo/notebooks
+  dest_sub_dir:
