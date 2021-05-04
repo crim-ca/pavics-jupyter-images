@@ -42,7 +42,7 @@ span_measure_template = {"count": 0,
 attr_measure_template = {
     "count": 0,
     "total_span_type_match": 0,
-    "per_annotation_span_perfect_match": 0.0,
+    "per_annotation_span_perfect_match_precision": 0.0,
     "per_annotation_overlapping_span_perfect_match": 0.0,
     "per_annotation_attribute_match": {
         "avg": 0.0,
@@ -226,10 +226,10 @@ def eval_attribute(gold: Dict, test: Dict) -> Dict:
         # exact span match
         if test_span in gold_spans:
             gidx = gold_spans.index(test_span)
-            # per_annotation_span_perfect_match
+            # per_annotation_span_perfect_match_precision
             # % of annotation having all attribute matched when span is same
             if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
-                attribute_measures[test_type]['per_annotation_span_perfect_match'] += 1
+                attribute_measures[test_type]['per_annotation_span_perfect_match_precision'] += 1
         else:
             # no exact span match, find overlapping span match
             for gidx, gspan in enumerate(gold_spans):
@@ -254,8 +254,8 @@ def eval_attribute(gold: Dict, test: Dict) -> Dict:
 
     for annot_type in ANNOTATION_TYPES:
         # count of annotations of all attributes matched for exact span / nr of annots of that type
-        attribute_measures[annot_type]['per_annotation_span_perfect_match'] = \
-            attribute_measures[annot_type]['per_annotation_span_perfect_match'] / count[annot_type] if count[annot_type] else 0
+        attribute_measures[annot_type]['per_annotation_span_perfect_match_precision'] = \
+            attribute_measures[annot_type]['per_annotation_span_perfect_match_precision'] / count[annot_type] if count[annot_type] else 0
         # per_annotation_overlapping_span_perfect_match
         attribute_measures[annot_type]['per_annotation_overlapping_span_perfect_match'] = \
             attribute_measures[annot_type]['per_annotation_overlapping_span_perfect_match'] / count[annot_type] if count[annot_type] else 0
@@ -561,8 +561,8 @@ def calc_global_attr_scores(attr_dicts: List[Dict]) -> Dict:
         attr_scores[annot_type]["count"] = sum([attr_dict[annot_type]['count'] for attr_dict in attr_dicts])
         attr_scores[annot_type]["total_span_type_match"] = sum(
             [attr_dict[annot_type]["total_span_type_match"] for attr_dict in attr_dicts])
-        attr_scores[annot_type]["per_annotation_span_perfect_match"] = sum(
-            [attr_dict[annot_type]["per_annotation_span_perfect_match"] for attr_dict in attr_dicts])
+        attr_scores[annot_type]["per_annotation_span_perfect_match_precision"] = sum(
+            [attr_dict[annot_type]["per_annotation_span_perfect_match_precision"] for attr_dict in attr_dicts])
         attr_scores[annot_type]["per_annotation_overlapping_span_perfect_match"] = sum(
             [attr_dict[annot_type]["per_annotation_overlapping_span_perfect_match"] for attr_dict in attr_dicts])
         per_annot_attr_match += [attr_dict[annot_type]["per_annotation_attribute_match"]['min'] for attr_dict in
@@ -571,12 +571,12 @@ def calc_global_attr_scores(attr_dicts: List[Dict]) -> Dict:
             [attr_dict[annot_type]["per_annotation_attribute_match"]['min'] for attr_dict in attr_dicts])
         attr_scores['global']["count"] += attr_scores[annot_type]["count"]
         attr_scores['global']["total_span_type_match"] += attr_scores[annot_type]["total_span_type_match"]
-        attr_scores['global']["per_annotation_span_perfect_match"] += attr_scores[annot_type][
-            "per_annotation_span_perfect_match"]
+        attr_scores['global']["per_annotation_span_perfect_match_precision"] += attr_scores[annot_type][
+            "per_annotation_span_perfect_match_precision"]
         attr_scores['global']["per_annotation_overlapping_span_perfect_match"] += \
             attr_scores[annot_type]["per_annotation_overlapping_span_perfect_match"]
-        attr_scores[annot_type]["per_annotation_span_perfect_match"] = \
-            attr_scores[annot_type]["per_annotation_span_perfect_match"] / len( attr_dicts)
+        attr_scores[annot_type]["per_annotation_span_perfect_match_precision"] = \
+            attr_scores[annot_type]["per_annotation_span_perfect_match_precision"] / len( attr_dicts)
         attr_scores[annot_type]["per_annotation_overlapping_span_perfect_match"] = \
             attr_scores[annot_type][ "per_annotation_overlapping_span_perfect_match"] / len(attr_dicts)
 
@@ -709,6 +709,6 @@ def global_stats(stats_path: str, gold_path: str, test_path: str, out_path: str)
 
 
 if __name__ == "__main__":
-    path = os.path.dirname(os.path.realpath(__file__)) + "/"
-    global_stats(path + "global_stats.json", path + "gold_queries.json",
-                 path + "noisy_gold_queries.json", path + "out.json")
+    path = os.path.dirname(os.path.realpath(__file__))
+    global_stats(os.path.join(path, "global_stats.json"), os.path.join(path, "gold_queries.json"),
+                 os.path.join(path, "noisy_gold_queries.json"), os.path.join(path, "out.json"))
