@@ -1,4 +1,4 @@
-# Config file containing the list of notebooks to download for a specific image.
+# Config file containing the list of notebooks directories to download for a specific image.
 #
 # Used in the deploy-data-specific-image script from pavics-jupyter-base.
 # More details on this config can be found on this script file :
@@ -6,5 +6,10 @@
 
 - repo_url: https://github.com/crim-ca/pavics-jupyter-images
   branch: master
-  source_path: nlp/notebooks
-  dest_sub_dir:
+  source_dir: nlp/notebooks
+  dest_sub_dir: nlp
+
+- repo_url: https://github.com/Ouranosinc/pavics-sdi
+  branch: master
+  source_dir: docs/source/notebooks
+  dest_sub_dir: common
