@@ -1,6 +1,9 @@
+import requests
+import json
 from NL2query import *
 from flair.data import Sentence
 from flair.models import SequenceTagger
+
 
 class NER_flair(NL2Query):
     """ Flair NLP implementation of the NL2query interface"""
@@ -21,6 +24,20 @@ class NER_flair(NL2Query):
     def create_location_annotation(self, annotation) -> LocationAnnotation:
         # get gejson of location
         geojson = {}
+        # use geogratis - only for Canada
+        req = requests.get('http://geogratis.gc.ca/services/geolocation/en/locate?q=' + annotation['text'])
+        if req.status_code == 200:
+            result = json.loads(req.text)
+            # take the first best match
+            if result:
+                if 'bbox' in result[0]:
+                    # create polygon feature from bbox
+                    geojson = {"type": "Polygon", "coordinates":
+                               [[[result[0]['bbox'][i], result[0]['bbox'][i + 1]]
+                                for i in range(0, len(result[0]['bbox']), 2)]]}
+                elif 'geometry' in result[0]:
+                    # point feature
+                    geojson = result[0]['geometry']
         return LocationAnnotation(text=annotation['text'], type="location", position=[annotation['start_pos'], annotation['end_pos']],
                                   matchingType="", name=annotation['text'], value=geojson)
 
