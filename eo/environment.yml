@@ -30,6 +30,8 @@ dependencies:
   - six
   - tensorboardX
   - tqdm
+  # for pip packages, include even if already in pavics-jupyter-base image, to avoid a warning problem on DockerHub
+  - pip
   - pip:
     # Install kornia from pypi, versions from conda are older and create conflicting errors with latest python version
     - kornia
