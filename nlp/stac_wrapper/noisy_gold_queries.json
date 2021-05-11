@@ -16,7 +16,7 @@
           "text": "over Ottawa",
           "position": [11, 22],
           "type": "location",
-          "matchingType": "overlapping",
+          "matchingType": "overlap",
           "name": "Ottawa",
           "value": {
               "type": "Polygon",
@@ -73,7 +73,7 @@
           "text": "over Ottawa",
           "position": [52, 63],
           "type": "location",
-          "matchingType": "overlapping",
+          "matchingType": "overlap",
           "name": "Ottawa",
           "value": {
               "type": "Polygon",
@@ -121,7 +121,7 @@
           "text": "montreal",
           "position": [15, 23],
           "type": "location",
-          "matchingType": "overlapping",
+          "matchingType": "overlap",
           "name": "Montreal",
           "value": {
               "type": "Polygon",
@@ -169,7 +169,7 @@
           "text": "(45.5017° N, 73.5673° W)",
           "position": [31, 55],
           "type": "location",
-          "matchingType": "overlapping",
+          "matchingType": "overlap",
           "name": "Boulevard Robert-Bourassa, Montreal",
           "value": {
               "type": "Point",
@@ -282,7 +282,7 @@
           "text": "over Montreal",
           "position": [74, 87],
           "type": "location",
-          "matchingType": "overlapping",
+          "matchingType": "overlap",
           "name": "Montreal",
           "value": {
               "type": "Polygon",
