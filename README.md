@@ -13,3 +13,11 @@ These images were first initialized with the packages listed on this
 The Docker image builds can be found on Docker Hub : 
 * [eo](https://hub.docker.com/repository/docker/pavics/crim-jupyter-eo)
 * [nlp](https://hub.docker.com/repository/docker/pavics/crim-jupyter-nlp)
+
+The notebooks associated to each specific image are found on this repo, on their corresponding notebook subfolder. 
+
+Also, a yaml configuration file can be found for each image, containing a list of parameters used 
+by the [deploy_data_specific_image script](https://github.com/bird-house/pavics-jupyter-base/blob/master/scheduler-jobs/deploy_data_specific_image)
+on the [bird-house/pavics-jupyter-base repo](https://github.com/bird-house/pavics-jupyter-base). 
+This script is used to download and update the image's associated notebooks that should be available on 
+the JupyterLab environment for DACCS.

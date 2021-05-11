@@ -1,4 +1,4 @@
-FROM birdhouse/pavics-jupyter-base:0.1.0
+FROM birdhouse/pavics-jupyter-base:0.2.0
 
 # must update conda env as root, because of a permission error when having pip dependencies in the input yml file
 USER root
@@ -14,6 +14,8 @@ RUN umask 0000 && conda env update -f /environment.yml
 #   normal user installation with conda activation configures everything correctly
 # (https://github.com/conda-forge/gdal-feedstock/issues/83#issue-162911573)
 ENV CPL_ZIP_ENCODING=UTF-8
+
+COPY notebook_config.yml /notebook_config.yml
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
