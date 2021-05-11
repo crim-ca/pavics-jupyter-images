@@ -1,49 +1,132 @@
 from typing import TypedDict, List, Any
 from configparser import ConfigParser
 import os
+import json
 
-class Annotation(TypedDict):
-    """ typed dict definition of one annotation.
+
+class Annotation:
+    """class definition of one annotation.
     must include these fields """
-    text: str
-    position: List[int]
-    type: str
+    def __init__(self, text: str, position: List[int], annot_type: str):
+        self.text = text
+        self.position = position
+        if annot_type in ["property", "location", "tempex", "target"]:
+            self.annot_type = annot_type
+        else:
+            raise Exception("Unknown annotation type! "
+                            "Must be one of: [property, location, tempex, target]")
 
-class QueryAnnotationsDict(TypedDict):
-    """ typed dict definition of all annotations for a query"""
-    query: str
-    annotations: List[Annotation]
+    def to_dict(self):
+        return {"text": self.text, "position": self.position, "type": self.annot_type}
+
+    def __repr__(self):
+        return json.dumps(self.to_dict())
+
+
+class QueryAnnotationsDict:
+    """ class definition of all annotations for a query"""
+    def __init__(self, query: str, annotations: List[Annotation]):
+        self.query = query
+        self.annotations = annotations
+
+    def to_dict(self):
+        return {"query": self.query,
+                "annotations": [annot.to_dict() for annot in self.annotations]}
+
+    def __repr__(self):
+        return json.dumps(self.to_dict())
+
 
 class PropertyAnnotation(Annotation):
-    """ typed dict definition for a property annotation
+    """ class definition for a property annotation
     must include Annotation superclass fields
     and additional ones defined here """
-    name: str
-    value: Any
-    value_type: str
-    operation: str
+    def __init__(self, text: str, position: List[int], name: str,
+                 value: Any, value_type: str, operation: str):
+        super().__init__(text, position, "property")
+        self.name = name
+        self.value = value
+        if value_type in ["string", "percentage", "integer"]:
+            self.value_type = value_type
+        else:
+            raise Exception("Unknown value type for property annotation! "
+                            "Must be one of: [string, percentage, integer]")
+        if operation in ["eq", "lt", "gt", "diff", "let", "get", "sort"]:
+            self.operation = operation
+        else:
+            raise Exception("Unknown operation for property annotation! "
+                            "Must be one of: [eq, lt, gt, diff, let, get, sort]")
+
+    def to_dict(self):
+        return {"text": self.text, "position": self.position, "type": "property",
+                "name": self.name, "value": self.value, "value_type": self.value_type}
+
+    def __repr__(self):
+        return json.dumps(self.to_dict())
+
 
 class LocationAnnotation(Annotation):
-    """ typed dict definition for a location annotation
+    """ class definition for a location annotation
         must include Annotation superclass fields
         and additional ones defined here """
-    matchingType: str
-    name: str
-    value: Any
+    def __init__(self, text: str, position: List[int], name: str, value: Any, matching_type: str):
+        super().__init__(text, position, "location")
+        self.name = name
+        self.value = value
+        if matching_type in ["overlap", "intersect"]:
+            self.matching_type = matching_type
+        else:
+            raise Exception("Unknown matching type for location annotation! "
+                            "Must be one of: [overlap, intersect]")
+
+    def to_dict(self):
+        return {"text": self.text, "position": self.position, "type": "location",
+                "name": self.name, "value": self.value, "matchingType": self.matching_type}
+
+    def __repr__(self):
+        return json.dumps(self.to_dict())
+
 
 class TemporalAnnotation(Annotation):
-    """ typed dict definition for a temporal annotation
+    """ class definition for a temporal annotation
         must include Annotation superclass fields
         and additional ones defined here """
-    tempex_type: str
-    target: str
-    value: Any
+    def __init__(self, text: str, position: List[int], tempex_type: str, target: str, value: Any):
+        super().__init__(text, position, "tempex")
+        if tempex_type in ["range", "point"]:
+            self.tempex_tye = tempex_type
+        else:
+            raise Exception("Unknown tempex type for temporal annotation! "
+                            "Must be one of: [range, point]")
+        if target in ["dataDate", "publishedDate"]:
+            self.target = target
+        else:
+            raise Exception("Unknown target for temporal annotation! "
+                            "Must be one of: [dataDate, publishedDate]")
+        self.value = value
+
+    def to_dict(self):
+        return {"text": self.text, "position": self.position, "type": "tempex",
+                "tempex_type": self.tempex_tye, "target": self.target}
+
+    def __repr__(self):
+        return json.dumps(self.to_dict())
+
 
 class TargetAnnotation(Annotation):
-    """ typed dict definition for a target annotation
+    """ class definition for a target annotation
         must include Annotation superclass fields
         and additional ones defined here """
-    name: List[str]
+    def __init__(self, text: str, position: List[int], name: List[str]):
+        super().__init__(text, position, "target")
+        self.name = name
+
+    def to_dict(self):
+        return {"text": self.text, "position": self.position,
+                "type": "target", "name": self.name}
+
+    def __repr__(self):
+        return json.dumps(self.to_dict())
 
 
 class NL2Query:
