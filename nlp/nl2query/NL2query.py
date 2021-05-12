@@ -3,6 +3,14 @@ from configparser import ConfigParser
 import os
 import json
 
+# define list of possible values for some arguments
+ANNOTATION_TYPES = ["property", "location", "tempex", "target"]
+VALUE_TYPES = ["string", "percentage", "integer"]
+OPERATIONS = ["eq", "lt", "gt", "diff", "let", "get", "sort"]
+MATCHING_TYPES = ["overlap", "intersect"]
+TEMPEX_TYPES = ["range", "point"]
+TEMPEX_TARGETS = ["dataDate", "publishedDate"]
+
 
 class Annotation:
     """class definition of one annotation.
@@ -10,11 +18,11 @@ class Annotation:
     def __init__(self, text: str, position: List[int], annot_type: str):
         self.text = text
         self.position = position
-        if annot_type in ["property", "location", "tempex", "target"]:
+        if annot_type in ANNOTATION_TYPES:
             self.annot_type = annot_type
         else:
             raise Exception("Unknown annotation type! "
-                            "Must be one of: [property, location, tempex, target]")
+                            "Must be one of: ", ANNOTATION_TYPES)
 
     def to_dict(self):
         return {"text": self.text, "position": self.position, "type": self.annot_type}
@@ -46,19 +54,19 @@ class PropertyAnnotation(Annotation):
         super().__init__(text, position, "property")
         self.name = name
         self.value = value
-        if value_type in ["string", "percentage", "integer"]:
+        if value_type in VALUE_TYPES:
             self.value_type = value_type
         else:
             raise Exception("Unknown value type for property annotation! "
-                            "Must be one of: [string, percentage, integer]")
-        if operation in ["eq", "lt", "gt", "diff", "let", "get", "sort"]:
+                            "Must be one of: ", VALUE_TYPES)
+        if operation in OPERATIONS:
             self.operation = operation
         else:
             raise Exception("Unknown operation for property annotation! "
-                            "Must be one of: [eq, lt, gt, diff, let, get, sort]")
+                            "Must be one of: ", OPERATIONS)
 
     def to_dict(self):
-        return {"text": self.text, "position": self.position, "type": "property",
+        return {"text": self.text, "position": self.position, "type": self.annot_type,
                 "name": self.name, "value": self.value, "value_type": self.value_type}
 
     def __repr__(self):
@@ -73,14 +81,14 @@ class LocationAnnotation(Annotation):
         super().__init__(text, position, "location")
         self.name = name
         self.value = value
-        if matching_type in ["overlap", "intersect"]:
+        if matching_type in MATCHING_TYPES:
             self.matching_type = matching_type
         else:
             raise Exception("Unknown matching type for location annotation! "
-                            "Must be one of: [overlap, intersect]")
+                            "Must be one of: ", MATCHING_TYPES)
 
     def to_dict(self):
-        return {"text": self.text, "position": self.position, "type": "location",
+        return {"text": self.text, "position": self.position, "type": self.annot_type,
                 "name": self.name, "value": self.value, "matchingType": self.matching_type}
 
     def __repr__(self):
@@ -93,20 +101,20 @@ class TemporalAnnotation(Annotation):
         and additional ones defined here """
     def __init__(self, text: str, position: List[int], tempex_type: str, target: str, value: Any):
         super().__init__(text, position, "tempex")
-        if tempex_type in ["range", "point"]:
+        if tempex_type in TEMPEX_TYPES:
             self.tempex_tye = tempex_type
         else:
             raise Exception("Unknown tempex type for temporal annotation! "
-                            "Must be one of: [range, point]")
-        if target in ["dataDate", "publishedDate"]:
+                            "Must be one of: ", TEMPEX_TYPES)
+        if target in TEMPEX_TARGETS:
             self.target = target
         else:
             raise Exception("Unknown target for temporal annotation! "
-                            "Must be one of: [dataDate, publishedDate]")
+                            "Must be one of: ", TEMPEX_TARGETS)
         self.value = value
 
     def to_dict(self):
-        return {"text": self.text, "position": self.position, "type": "tempex",
+        return {"text": self.text, "position": self.position, "type": self.annot_type,
                 "tempex_type": self.tempex_tye, "target": self.target}
 
     def __repr__(self):
@@ -123,7 +131,7 @@ class TargetAnnotation(Annotation):
 
     def to_dict(self):
         return {"text": self.text, "position": self.position,
-                "type": "target", "name": self.name}
+                "type": self.annot_type, "name": self.name}
 
     def __repr__(self):
         return json.dumps(self.to_dict())
@@ -152,14 +160,14 @@ class NL2Query:
         transforms it into a structured query
         by calling the nl2query engine.
         Returns the equivalent structured query in a
-        predefined query annotations dict format.
+        predefined query annotations object format.
         """
         pass
 
     def create_property_annotation(self, annotation: Any) -> PropertyAnnotation:
         """
         Takes an annotation output by the nl2query engine and
-        transforms it into a predefined typed dict for property annotation.
+        transforms it into a predefined class object for property annotation.
         The annotation object is specific to the nl2query engine implementation.
         """
         pass
@@ -167,7 +175,7 @@ class NL2Query:
     def create_location_annotation(self, annotation: Any) -> LocationAnnotation:
         """
         Takes an annotation output by the nl2query engine and
-        transforms it into a predefined typed dict for location annotation.
+        transforms it into a predefined class object for location annotation.
         The annotation object is specific to the nl2query engine implementation.
         """
         pass
@@ -175,7 +183,7 @@ class NL2Query:
     def create_temporal_annotation(self, annotation: Any) -> TemporalAnnotation:
         """
         Takes an annotation output by the nl2query engine and
-        transforms it into a predefined typed dict for temporal annotation.
+        transforms it into a predefined class object for temporal annotation.
         The annotation object is specific to the nl2query engine implementation.
         """
         pass
@@ -183,7 +191,7 @@ class NL2Query:
     def create_target_annotation(self, annotation: Any) -> TargetAnnotation:
         """
         Takes an annotation output by the nl2query engine and
-        transforms it into a predefined typed dict for target annotation.
+        transforms it into a predefined class object for target annotation.
         The annotation object is specific to the nl2query engine implementation.
         """
         pass
