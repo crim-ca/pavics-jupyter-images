@@ -1,4 +1,4 @@
-from NL2query import *
+from NL2QueryInterface import *
 
 
 class MyEngine:
@@ -14,11 +14,14 @@ class MyEngine:
                 ["named entity", "some other text", 13, 28]]
 
 
-class MyNL2query(NL2Query):
+class MyNL2query(NL2QueryInterface):
     """ mockup class to try out NL2query interface"""
 
     def __init__(self, config_file: str = None):
-        NL2Query.__init__(self, config_file)
+        # call super's implementation of init
+        # to handle config file reading
+        super().__init__(config_file)
+        print("Config contents:", self.config)
         # start my NL2query engine
         # self.config being a dict created by NL2Query.__init__
         self.engine = MyEngine(self.config)

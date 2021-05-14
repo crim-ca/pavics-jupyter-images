@@ -1,4 +1,5 @@
-from typing import TypedDict, List, Any
+from abc import ABC, abstractmethod
+from typing import List, Any
 from configparser import ConfigParser
 import os
 import json
@@ -137,12 +138,20 @@ class TargetAnnotation(Annotation):
         return json.dumps(self.to_dict())
 
 
-class NL2Query:
+class NL2QueryInterface(ABC):
     """ class defining the minimal interface
     that any Nl2query module should implement
     """
 
+    @abstractmethod
     def __init__(self, config_file: str = None):
+        """
+        initialize method of the NL2Query interface.
+        this abstract method needs to be overridden by the
+        implementing class,
+        but can use default implementation here by calling
+        super().__init__(config_file)
+        """
         self.config = None
         if config_file:
             # parse the config file
@@ -153,7 +162,7 @@ class NL2Query:
             else:
                 print("Config file not found!")
 
-
+    @abstractmethod
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
         """
         Takes a natural language query string and
@@ -164,6 +173,7 @@ class NL2Query:
         """
         pass
 
+    @abstractmethod
     def create_property_annotation(self, annotation: Any) -> PropertyAnnotation:
         """
         Takes an annotation output by the nl2query engine and
@@ -172,6 +182,7 @@ class NL2Query:
         """
         pass
 
+    @abstractmethod
     def create_location_annotation(self, annotation: Any) -> LocationAnnotation:
         """
         Takes an annotation output by the nl2query engine and
@@ -180,6 +191,7 @@ class NL2Query:
         """
         pass
 
+    @abstractmethod
     def create_temporal_annotation(self, annotation: Any) -> TemporalAnnotation:
         """
         Takes an annotation output by the nl2query engine and
@@ -188,6 +200,7 @@ class NL2Query:
         """
         pass
 
+    @abstractmethod
     def create_target_annotation(self, annotation: Any) -> TargetAnnotation:
         """
         Takes an annotation output by the nl2query engine and
