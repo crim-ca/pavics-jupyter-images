@@ -9,6 +9,7 @@ import copy
 import json
 import datetime
 import os
+from MetricsClasses import *
 from shapely.geometry import Polygon
 from Levenshtein import distance
 from typing import List, Dict, Any
@@ -18,16 +19,6 @@ ANNOTATION_TYPES = ["property", "location", "tempex", "target"]
 VALUE_TYPES = ["global", "type", "name", "bbox", "tempex", "numeric", "target"]
 
 # results collection JSON structure templates
-data_measure_template = {"total_annotation": 0,
-                         "total_annotation_per_type": {
-                             "property": 0,
-                             "location": 0,
-                             "tempex": 0,
-                             "target": 0
-                         },
-                         "annotation_per_query": {"avg": 0.0, "min": 0, "max": 0}
-                         }
-
 span_measure_template = {"count": 0,
                          "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
                          "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
@@ -73,31 +64,29 @@ def eval_data(gold: Dict, test: Dict) -> Dict:
     given the gold equivalent query annotations.
     Return a dictionary with a predefined template for the results.
     """
-    # create measures dictionary
-
-    data_measures = {'gold_data': copy.deepcopy(data_measure_template),
-                     'test_data': copy.deepcopy(data_measure_template)}
 
     # annotation counts
     gold_annotations = gold['annotations']
-    data_measures['gold_data']['total_annotation'] = len(gold_annotations)
-    # for now set the min and max both equal to the count.
-    # we will count averages and global values outside this function
-    test_annotations = test['annotations']
-    data_measures['test_data']['total_annotation'] = len(test_annotations)
-
     # annotation count per type
     gold_types = [ann['type'] for ann in gold_annotations]
-    data_measures['gold_data']['total_annotation_per_type']['property'] = gold_types.count('property')
-    data_measures['gold_data']['total_annotation_per_type']['tempex'] = gold_types.count('tempex')
-    data_measures['gold_data']['total_annotation_per_type']['location'] = gold_types.count('location')
-    data_measures['gold_data']['total_annotation_per_type']['target'] = gold_types.count('target')
-
+    # create data metrics class instance
+    gold_data = DataMetrics(total_ann=len(gold_annotations),
+                            total_prop=gold_types.count('property'),
+                            total_loc=gold_types.count('location'),
+                            total_temp=gold_types.count('tempex'),
+                            total_targ=gold_types.count('target'))
+    # we will count averages and global values outside this function
+    # same structure for test
+    test_annotations = test['annotations']
     test_types = [ann['type'] for ann in test_annotations]
-    data_measures['test_data']['total_annotation_per_type']['property'] = test_types.count('property')
-    data_measures['test_data']['total_annotation_per_type']['tempex'] = test_types.count('tempex')
-    data_measures['test_data']['total_annotation_per_type']['location'] = test_types.count('location')
-    data_measures['test_data']['total_annotation_per_type']['target'] = test_types.count('target')
+    test_data = DataMetrics(total_ann=len(test_annotations),
+                            total_prop=test_types.count('property'),
+                            total_loc=test_types.count('location'),
+                            total_temp=test_types.count('tempex'),
+                            total_targ=test_types.count('target'))
+    # create measures dictionary
+    data_measures = {'gold_data': gold_data.to_dict(),
+                     'test_data': test_data.to_dict()}
 
     return data_measures
 
@@ -372,7 +361,7 @@ def eval_value(gold: Dict, test: Dict) -> Dict:
         if 'name' in ann.keys():
             value_measures['name']['total_matching_attributes'] += 1
         if 'value' in ann.keys() and type(ann['value']) == str:
-            print(ann['value'])
+            #print(ann['value'])
             if isnumeric(ann['value']):
                 value_measures['numeric']['total_matching_attributes'] += 1
         for gidx, gspan in enumerate(gold_spans):
@@ -524,15 +513,15 @@ def calc_global_data_scores(data_dicts: List[Dict]) -> Dict:
     # a list of data dicts
     # a data dict is one 'data_measurements' dict
     data_scores = {
-        "gold_data": copy.deepcopy(data_measure_template),
-        "test_data": copy.deepcopy(data_measure_template)
+        "gold_data": DataMetrics().to_dict(),
+        "test_data": DataMetrics().to_dict()
     }
 
     for data_type in DATA_TYPES:
         data_scores[data_type]['total_annotation'] = sum(
             [data_dict[data_type]['total_annotation'] for data_dict in data_dicts])
         data_scores[data_type]['annotation_per_query'] = avg_min_max(
-            [data_dict['gold_data']['total_annotation'] for data_dict in data_dicts])
+            [data_dict[data_type]['total_annotation'] for data_dict in data_dicts])
         for annot_type in ANNOTATION_TYPES:
             data_scores[data_type]['total_annotation_per_type'][annot_type] = sum(
                 [data_dict[data_type]['total_annotation_per_type'][annot_type] for data_dict in data_dicts])
@@ -691,7 +680,7 @@ def global_stats(stats_path: str, gold_path: str, test_path: str, out_path: str)
 
         # calculate global scores
         stats['data_measures'] = calc_global_data_scores(global_data)
-        print("Global data measures:")
+        print("GLOBAL data measures:")
         pprint.pprint(stats['data_measures'])
         stats['span_measures'] = calc_global_span_scores(global_span)
         print("GLOBAL span measures: ")
