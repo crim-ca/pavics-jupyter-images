@@ -19,17 +19,6 @@ ANNOTATION_TYPES = ["property", "location", "tempex", "target"]
 VALUE_TYPES = ["global", "type", "name", "bbox", "tempex", "numeric", "target"]
 
 # results collection JSON structure templates
-span_measure_template = {"count": 0,
-                         "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
-                         "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
-                         "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
-                         "split_gold_span": {"no_type_match": 0, "type_match": 0},
-                         "split_test_span": {"no_type_match": 0, "type_match": 0},
-                         "overlapping_span": {
-                             "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
-                             "type_match": {"avg": 0.0, "min": 0, "max": 0}
-                         }}
-
 attr_measure_template = {
     "count": 0,
     "total_span_type_match": 0,
@@ -85,10 +74,9 @@ def eval_data(gold: Dict, test: Dict) -> Dict:
                                                 total_temp=test_types.count('tempex'),
                                                 total_targ=test_types.count('target'))
     # create measures dictionary
-    data_measures = {'gold_data': gold_data,
-                     'test_data': test_data}
+    data_measures = DataMeasures(gold_data, test_data)
 
-    return data_measures
+    return data_measures.to_dict()
 
 
 def eval_span(gold: Dict, test: Dict) -> Dict:
@@ -98,12 +86,7 @@ def eval_span(gold: Dict, test: Dict) -> Dict:
     Return a dictionary with a predefined template for the results.
     """
     # create measures dictionary
-    span_measures = {
-        "property": copy.deepcopy(span_measure_template),
-        "location": copy.deepcopy(span_measure_template),
-        "tempex": copy.deepcopy(span_measure_template),
-        "target": copy.deepcopy(span_measure_template)
-    }
+    span_measures = SpanMeasures.get_span_measures()
 
     # calculate span measures
     gold_types = [ann['type'] for ann in gold['annotations']]
@@ -432,13 +415,7 @@ def calc_global_span_scores(span_dicts: List[Dict]) -> Dict:
    per annotation.
    Returns a dictionary with a predefined template.
    """
-    span_measures = {
-        "global": copy.deepcopy(span_measure_template),
-        "property": copy.deepcopy(span_measure_template),
-        "location": copy.deepcopy(span_measure_template),
-        "tempex": copy.deepcopy(span_measure_template),
-        "target": copy.deepcopy(span_measure_template)
-    }
+    span_measures = SpanMeasures.get_span_measures()
     # count global measures
     count = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
     overlap = {'property': [], 'location': [], 'tempex': [], 'target': []}
@@ -512,10 +489,7 @@ def calc_global_data_scores(data_dicts: List[Dict]) -> Dict:
     """
     # a list of data dicts
     # a data dict is one 'data_measurements' dict
-    data_scores = {
-        "gold_data": DataMetrics.create_data_metrics(),
-        "test_data": DataMetrics.create_data_metrics()
-    }
+    data_scores = DataMeasures.get_data_measures()
 
     for data_type in DATA_TYPES:
         data_scores[data_type]['total_annotation'] = sum(
