@@ -70,23 +70,23 @@ def eval_data(gold: Dict, test: Dict) -> Dict:
     # annotation count per type
     gold_types = [ann['type'] for ann in gold_annotations]
     # create data metrics class instance
-    gold_data = DataMetrics(total_ann=len(gold_annotations),
-                            total_prop=gold_types.count('property'),
-                            total_loc=gold_types.count('location'),
-                            total_temp=gold_types.count('tempex'),
-                            total_targ=gold_types.count('target'))
+    gold_data = DataMetrics.create_data_metrics(total_ann=len(gold_annotations),
+                                                total_prop=gold_types.count('property'),
+                                                total_loc=gold_types.count('location'),
+                                                total_temp=gold_types.count('tempex'),
+                                                total_targ=gold_types.count('target'))
     # we will count averages and global values outside this function
     # same structure for test
     test_annotations = test['annotations']
     test_types = [ann['type'] for ann in test_annotations]
-    test_data = DataMetrics(total_ann=len(test_annotations),
-                            total_prop=test_types.count('property'),
-                            total_loc=test_types.count('location'),
-                            total_temp=test_types.count('tempex'),
-                            total_targ=test_types.count('target'))
+    test_data = DataMetrics.create_data_metrics(total_ann=len(test_annotations),
+                                                total_prop=test_types.count('property'),
+                                                total_loc=test_types.count('location'),
+                                                total_temp=test_types.count('tempex'),
+                                                total_targ=test_types.count('target'))
     # create measures dictionary
-    data_measures = {'gold_data': gold_data.to_dict(),
-                     'test_data': test_data.to_dict()}
+    data_measures = {'gold_data': gold_data,
+                     'test_data': test_data}
 
     return data_measures
 
@@ -513,8 +513,8 @@ def calc_global_data_scores(data_dicts: List[Dict]) -> Dict:
     # a list of data dicts
     # a data dict is one 'data_measurements' dict
     data_scores = {
-        "gold_data": DataMetrics().to_dict(),
-        "test_data": DataMetrics().to_dict()
+        "gold_data": DataMetrics.create_data_metrics(),
+        "test_data": DataMetrics.create_data_metrics()
     }
 
     for data_type in DATA_TYPES:
