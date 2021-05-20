@@ -9,6 +9,8 @@ dependencies:
 - pip==20.3.3
 - python-levenshtein==0.12.2
 - shapely==1.7.0
+- numpy==1.19.2
+- perl==5.26.2
 - pip:
   - threddsclient==0.4.2
   - birdhouse-birdy==0.7.0
@@ -17,4 +19,3 @@ dependencies:
   - sat-search==0.3.0
   - ipywidgets==7.6.3
   - duckling==1.8.0
-  - jpype1==0.6.3
