@@ -1,15 +1,15 @@
-from NL2query import *
+from NL2QueryInterface import *
 import os.path
 from subprocess import check_output
 from xml.etree import ElementTree
 from datetime import datetime
 from dateutil import parser
 
-class TER_heideltime(NL2Query):
+class TER_heideltime(NL2QueryInterface):
     """ Heideltime implementation of the NL2query interface"""
 
     def __init__(self, config: str = None):
-        NL2Query.__init__(self, config)
+        super().__init__(config)
         # check heideltime and treetagger
         self.heideltime_jar = "heideltime/de.unihd.dbs.heideltime.standalone.jar"
         self.heideltime_config = "heideltime/config.props"
@@ -60,19 +60,20 @@ class TER_heideltime(NL2Query):
         # and create appropriate typeddict annotation
         # filling in each slot as required
 
-        return PropertyAnnotation(text=annotation.text, type="property", position=[annotation.start_char, annotation.end_char],
+        return PropertyAnnotation(text=annotation.text, position=[annotation.start_char, annotation.end_char],
                                   name="", value="", value_type="", operation="")
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
         # get gejson of location
         geojson = {}
-        return LocationAnnotation(text=annotation.text, type="location", position=[annotation.start_char, annotation.end_char],
-                                  matchingType="", name=annotation.text, value=geojson)
+        return LocationAnnotation(text=annotation.text, position=[annotation.start_char, annotation.end_char],
+                                  matching_type="", name=annotation.text, value=geojson)
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         # get standard dateformat from text
         datestr = annotation.attrib['value']
         datetype = annotation.attrib['type']
+        t_type = "point"
         if datetype == "DURATION":
             datetm = {"start": datetime.strptime(datestr['start']).strftime("YYYY-MM-DDTHH:MM:SS"),
                       "end": datetime.strptime(datestr['end']).strftime("YYYY-MM-DDTHH:MM:SS")}
@@ -83,11 +84,11 @@ class TER_heideltime(NL2Query):
             # but we don't know the format
             #datetm = datetime.strptime(datestr, detected_format).strftime("YYYY-MM-DDTHH:MM:SS")
             t_type = "point"
-        return TemporalAnnotation(text=annotation.text, type="tempex", position=[annotation.attrib['start'], annotation.attrib['end']],
+        return TemporalAnnotation(text=annotation.text, position=[annotation.attrib['start'], annotation.attrib['end']],
                                   tempex_type=t_type, target="dataDate", value=datestr)
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
-        return TargetAnnotation(text=annotation['text'], type="target", position=[annotation['start'], annotation['end']],
+        return TargetAnnotation(text=annotation['text'],  position=[annotation['start'], annotation['end']],
                                 name=[""])
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:

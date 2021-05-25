@@ -1,12 +1,12 @@
 from jpype._jvmfinder import JVMNotFoundException
-from NL2query import *
+from NL2QueryInterface import *
 from duckling import DucklingWrapper
 
-class TER_duckling(NL2Query):
+class TER_duckling(NL2QueryInterface):
     """ Duckling implementation of the NL2query interface"""
 
     def __init__(self, config: str = None):
-        NL2Query.__init__(self, config)
+        super().__init__(config)
         # start my Duckling engine
         try:
             self.duck = DucklingWrapper()
@@ -27,14 +27,14 @@ class TER_duckling(NL2Query):
             val_type = "string"
         operation = "eq"
 
-        return PropertyAnnotation(text=annotation['text'], type="property", position=[annotation['start'], annotation['end']],
+        return PropertyAnnotation(text=annotation['text'], position=[annotation['start'], annotation['end']],
                                   name="", value=val, value_type=val_type, operation=operation)
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
         # get gejson of location
         geojson = {}
-        return LocationAnnotation(text=annotation.text, type="location", position=[annotation.start_char, annotation.end_char],
-                                  matchingType="", name=annotation.text, value=geojson)
+        return LocationAnnotation(text=annotation.text,position=[annotation.start_char, annotation.end_char],
+                                  matching_type="", name=annotation.text, value=geojson)
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         # get standard dateformat from text
@@ -45,11 +45,11 @@ class TER_duckling(NL2Query):
         else:
             datetm = datetm.split('.')[0]+"Z"
             t_type = "point"
-        return TemporalAnnotation(text=annotation['text'], type="tempex", position=[annotation['start'], annotation['end']],
+        return TemporalAnnotation(text=annotation['text'], position=[annotation['start'], annotation['end']],
                                   tempex_type=t_type, target="dataDate", value=datetm)
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
-        return TargetAnnotation(text=annotation['text'], type="target", position=[annotation['start'], annotation['end']],
+        return TargetAnnotation(text=annotation['text'], position=[annotation['start'], annotation['end']],
                                 name=[""])
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
