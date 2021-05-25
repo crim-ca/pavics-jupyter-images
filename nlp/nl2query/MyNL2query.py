@@ -10,8 +10,10 @@ class MyEngine:
     def get_annotations(self, nlq: str):
         # call the engine to annotate the nl query
         # and return a list of engine-specific annotations
-        return [["geoname", "some identified text", 20, 40],
-                ["named entity", "some other text", 13, 28]]
+        return [["geoname", "some identified location", 20, 40],
+                ["named entity", "some text", 13, 28],
+                ["time", "from x to y", 55, 66],
+                ["var", 'cmpi6', 70, 75]]
 
 
 class MyNL2query(NL2QueryInterface):
@@ -39,11 +41,11 @@ class MyNL2query(NL2QueryInterface):
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         return TemporalAnnotation(text=annotation[1], position=[annotation[2], annotation[3]],
-                                  tempex_type="", target="", value={})
+                                  tempex_type="range", target="dataDate", value=("x", "y"))
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
         return TargetAnnotation(text=annotation[1], position=[annotation[2], annotation[3]],
-                                name=[])
+                                name=[annotation[1]])
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
         # get annotations from my engine
@@ -51,12 +53,16 @@ class MyNL2query(NL2QueryInterface):
         # collect annotations in a list of typed dicts
         annot_dicts = []
         for result in engine_results:
+            print(result)
             # check the type and create appropriate annotatation type
             if result[0] == "named entity":
                 annot_dicts.append(self.create_property_annotation(result))
             elif result[0] == "geoname":
                 annot_dicts.append(self.create_location_annotation(result))
-            # elif etc...
+            elif result[0] == "time":
+                annot_dicts.append(self.create_temporal_annotation(result))
+            elif result[0] == "var":
+                annot_dicts.append(self.create_target_annotation(result))
         # return a query annotations typed dict as required
         return QueryAnnotationsDict(query=nlq, annotations=annot_dicts)
 
