@@ -103,7 +103,7 @@ class TemporalAnnotation(Annotation):
     def __init__(self, text: str, position: List[int], tempex_type: str, target: str, value: Any):
         super().__init__(text, position, "tempex")
         if tempex_type in TEMPEX_TYPES:
-            self.tempex_tye = tempex_type
+            self.tempex_type = tempex_type
         else:
             raise Exception("Unknown tempex type for temporal annotation! "
                             "Must be one of: ", TEMPEX_TYPES)
@@ -112,11 +112,14 @@ class TemporalAnnotation(Annotation):
         else:
             raise Exception("Unknown target for temporal annotation! "
                             "Must be one of: ", TEMPEX_TARGETS)
-        self.value = value
+        if self.tempex_type == "range" and type(value) == tuple:
+            self.value = {"start": value[0], "end": value[1]}
+        else:
+            self.value = value
 
     def to_dict(self):
         return {"text": self.text, "position": self.position, "type": self.annot_type,
-                "tempex_type": self.tempex_tye, "target": self.target}
+                "tempex_type": self.tempex_type, "target": self.target, "value": self.value}
 
     def __repr__(self):
         return json.dumps(self.to_dict())
