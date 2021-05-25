@@ -1,15 +1,15 @@
 import requests
 import json
-from NL2query import *
+from NL2QueryInterface import *
 from flair.data import Sentence
 from flair.models import SequenceTagger
 
 
-class NER_flair(NL2Query):
+class NER_flair(NL2QueryInterface):
     """ Flair NLP implementation of the NL2query interface"""
 
     def __init__(self, config: str = None):
-        NL2Query.__init__(self, config)
+        super().__init__(config)
         # start my NL2query engine
         # load the NER tagger
         self.tagger = SequenceTagger.load('ner-large')
@@ -18,7 +18,7 @@ class NER_flair(NL2Query):
         # take annotation given by the engine
         # and create appropriate typeddict annotation
         # filling in each slot as required
-        return PropertyAnnotation(text=annotation['text'], type="property", position=[annotation['start_pos'], annotation['end_pos']],
+        return PropertyAnnotation(text=annotation['text'], position=[annotation['start_pos'], annotation['end_pos']],
                                   name="", value="", value_type="", operation="")
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
@@ -38,16 +38,16 @@ class NER_flair(NL2Query):
                 elif 'geometry' in result[0]:
                     # point feature
                     geojson = result[0]['geometry']
-        return LocationAnnotation(text=annotation['text'], type="location", position=[annotation['start_pos'], annotation['end_pos']],
-                                  matchingType="", name=annotation['text'], value=geojson)
+        return LocationAnnotation(text=annotation['text'], position=[annotation['start_pos'], annotation['end_pos']],
+                                  matching_type="overlap", name=annotation['text'], value=geojson)
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         # get standard dateformat from text
-        return TemporalAnnotation(text=annotation['text'], type="tempex", position=[annotation['start_pos'], annotation['end_pos']],
+        return TemporalAnnotation(text=annotation['text'],  position=[annotation['start_pos'], annotation['end_pos']],
                                   tempex_type="", target="", value={})
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
-        return TargetAnnotation(text=annotation['text'], type="target", position=[annotation['start_pos'], annotation['end_pos']],
+        return TargetAnnotation(text=annotation['text'], position=[annotation['start_pos'], annotation['end_pos']],
                                 name=[""])
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:

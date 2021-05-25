@@ -1,14 +1,14 @@
-from NL2query import *
+from NL2QueryInterface import *
 import spacy
 import requests
 import re
 import json
 
-class NER_spacy(NL2Query):
+class NER_spacy(NL2QueryInterface):
     """ Spacy implementation of the NL2query interface"""
 
     def __init__(self, config: str = None):
-        NL2Query.__init__(self, config)
+        super().__init__(config)
         # start my NL2query engine
         self.spacy_engine = spacy.load("en_core_web_trf")
 #        self.spacy_engine = Language.from_config(self.config)
@@ -33,10 +33,11 @@ class NER_spacy(NL2Query):
                 val = float(val)
             val_type = "integer"
             # extract operation ex: "less than" -> "lt"
-            operation = ""
+            print("Need a parser to detect operation! ex: less than -> lt. Default is 'eq'.")
+            operation = "eq"
         if annotation.label_ == "PERCENT":
             val_type = "percentage"
-        return PropertyAnnotation(text=annotation.text, type="property", position=[annotation.start_char, annotation.end_char],
+        return PropertyAnnotation(text=annotation.text, position=[annotation.start_char, annotation.end_char],
                                   name="", value=val, value_type=val_type, operation=operation)
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
@@ -56,17 +57,18 @@ class NER_spacy(NL2Query):
                 elif 'geometry' in result[0]:
                     # point feature
                     geojson = result[0]['geometry']
-        return LocationAnnotation(text=annotation.text, type="location", position=[annotation.start_char, annotation.end_char],
-                                  matchingType="", name=annotation.text, value=geojson)
+        return LocationAnnotation(text=annotation.text,  position=[annotation.start_char, annotation.end_char],
+                                  matching_type="overlap", name=annotation.text, value=geojson)
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         # get standard dateformat from text
         datetime = {}
-        return TemporalAnnotation(text=annotation.text, type="tempex", position=[annotation.start_char, annotation.end_char],
-                                  tempex_type="", target="", value=datetime)
+        print("Need a datestring parser to get the actual value. We don't know in what format the string date is!")
+        return TemporalAnnotation(text=annotation.text, position=[annotation.start_char, annotation.end_char],
+                                  tempex_type="range", target="dataDate", value=datetime)
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
-        return TargetAnnotation(text=annotation.text, type="target", position=[annotation.start_char, annotation.end_char],
+        return TargetAnnotation(text=annotation.text, position=[annotation.start_char, annotation.end_char],
                                 name=[""])
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
