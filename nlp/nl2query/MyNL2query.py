@@ -1,4 +1,4 @@
-from NL2query import *
+from NL2QueryInterface import *
 
 
 class MyEngine:
@@ -10,35 +10,39 @@ class MyEngine:
     def get_annotations(self, nlq: str):
         # call the engine to annotate the nl query
         # and return a list of engine-specific annotations
-        return [["geoname", "some identified text"], ["named entity", "some other text"]]
+        return [["geoname", "some identified text", 20, 40],
+                ["named entity", "some other text", 13, 28]]
 
 
-class MyNL2query(NL2Query):
+class MyNL2query(NL2QueryInterface):
     """ mockup class to try out NL2query interface"""
 
     def __init__(self, config_file: str = None):
-        NL2Query.__init__(self, config_file)
+        # call super's implementation of init
+        # to handle config file reading
+        super().__init__(config_file)
+        print("Config contents:", self.config)
         # start my NL2query engine
         # self.config being a dict created by NL2Query.__init__
         self.engine = MyEngine(self.config)
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
         # take annotation given by the engine
-        # and create appropriate typed dict annotation
+        # and create appropriate annotation class
         # filling in each slot as required
-        return PropertyAnnotation(text=annotation[1], type="property", position=[],
-                                  name="", value="", value_type="", operation="")
+        return PropertyAnnotation(text=annotation[1], position=[annotation[2], annotation[3]],
+                                  name="", value=annotation[1], value_type="string", operation="eq")
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
-        return LocationAnnotation(text=annotation[1], type="location", position=[],
-                                  matchingType="", name="", value={})
+        return LocationAnnotation(text=annotation[1], position=[annotation[2], annotation[3]],
+                                  name="", value={}, matching_type="overlap")
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
-        return TemporalAnnotation(text=annotation[1], type="tempex", position=[],
+        return TemporalAnnotation(text=annotation[1], position=[annotation[2], annotation[3]],
                                   tempex_type="", target="", value={})
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
-        return TargetAnnotation(text=annotation[1], type="target", position=[],
+        return TargetAnnotation(text=annotation[1], position=[annotation[2], annotation[3]],
                                 name=[])
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
@@ -64,4 +68,5 @@ if __name__ == "__main__":
     my_instance = MyNL2query(config_f)
     # get the structured query from the nl query
     structq = my_instance.transform_nl2query(query)
-    print("Structured query: ", structq)
+    print("Structured query as Dict: ", structq.to_dict())
+    print("Structured query as string: ", structq)
