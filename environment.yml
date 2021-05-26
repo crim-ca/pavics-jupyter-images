@@ -18,5 +18,5 @@ dependencies:
   - intake-esm==2021.1.15
   - sat-search==0.3.0
   - ipywidgets==7.6.3
-  - duckling==1.8.0
+  - pyduckling==0.0.1
   - jpype1==0.6.3
