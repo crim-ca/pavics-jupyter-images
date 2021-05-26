@@ -31,6 +31,7 @@ class TER_heideltime(NL2QueryInterface):
                 tf.close()
             out = check_output(['java', '-jar', self.heideltime_jar,
                                 self.tempfile,
+                                '-it',
                                 '-l', 'english',
                                 '-t', 'colloquial',
                                 '-c', self.heideltime_config])
@@ -38,13 +39,20 @@ class TER_heideltime(NL2QueryInterface):
             os.remove(self.tempfile)
             # decode output and read it as xml
             out_tree = ElementTree.fromstring(out.decode())
+            print("Heideltime returned:\n", out.decode())
+
             if out_tree.tag == "TimeML":
                 # if timeml tag is found
-                return out_tree.findall('TIMEX3')
+                found = []
+                for item in out_tree.iter():
+                    if item.tag in ["TIMEX3", "TIMEX3INTERVAL"]:
+                        found.append(item)
+                return found
             else:
                 print("Error finding temporal annotations in output: ", out.decode())
                 return []
-        except Exception:
+        except Exception as e:
+            print(e)
             print("- Make sure your treetagger installation is correct for your machine: "
                   "https://www.cis.lmu.de/~schmid/tools/TreeTagger/."
                   "Check that the path in cmd/tree-tagger-english script are correct. "
@@ -71,21 +79,28 @@ class TER_heideltime(NL2QueryInterface):
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         # get standard dateformat from text
-        datestr = annotation.attrib['value']
-        datetype = annotation.attrib['type']
         t_type = "point"
-        if datetype == "DURATION":
-            datetm = {"start": datetime.strptime(datestr['start']).strftime("YYYY-MM-DDTHH:MM:SS"),
-                      "end": datetime.strptime(datestr['end']).strftime("YYYY-MM-DDTHH:MM:SS")}
+        dateval = ""
+        if annotation.tag == "TIMEX3":
+            datestr = annotation.attrib['value']
+            datetype = annotation.attrib['type']
+            if datetype == "DURATION":
+                datetm = {"start": datetime.strptime(datestr['start']).strftime("YYYY-MM-DDTHH:MM:SS"),
+                          "end": datetime.strptime(datestr['end']).strftime("YYYY-MM-DDTHH:MM:SS")}
+                t_type = "range"
+            elif datetype in ["DATE", "TIME"]:
+                # convert here any date string detected by heideltime to
+                # the format YYYY-MM-DDTHH:MM:SSZ
+                # but we don't know the format
+                #datetm = datetime.strptime(datestr, detected_format).strftime("YYYY-MM-DDTHH:MM:SS")
+                t_type = "point"
+        elif annotation.tag == "TIMEX3INTERVAL":
+            start = annotation.attrib['earliestBegin'] + "Z"
+            end = annotation.attrib['latestEnd'] + "Z"
             t_type = "range"
-        elif datetype in ["DATE", "TIME"]:
-            # convert here any date string detected by heideltime to
-            # the format YYYY-MM-DDTHH:MM:SSZ
-            # but we don't know the format
-            #datetm = datetime.strptime(datestr, detected_format).strftime("YYYY-MM-DDTHH:MM:SS")
-            t_type = "point"
+            dateval = {"start": start, "end": end}
         return TemporalAnnotation(text=annotation.text, position=[annotation.attrib['start'], annotation.attrib['end']],
-                                  tempex_type=t_type, target="dataDate", value=datestr)
+                                  tempex_type=t_type, target="dataDate", value=dateval)
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
         return TargetAnnotation(text=annotation['text'],  position=[annotation['start'], annotation['end']],
@@ -97,11 +112,15 @@ class TER_heideltime(NL2QueryInterface):
         # get annotations from my engine
         annots = self.call_heideltime(nlq)#, reference_time=str(datetime.datetime.today()))
         for timex3 in annots:
+            print(timex3.text, timex3.tag, timex3.attrib)
             # we have to add span position
-            start_pos = nlq.index(timex3.text)
-            end_pos = start_pos + len(timex3.text)
-            timex3.attrib.update({"start": start_pos, "end": end_pos})
-            print(timex3.text, timex3.attrib)
+            if timex3.text:
+                start_pos = nlq.index(timex3.text)
+                end_pos = start_pos + len(timex3.text)
+                timex3.attrib.update({"start": start_pos, "end": end_pos})
+            else:
+                print("Warning! Annotation with empty text.")
+                timex3.attrib.update({"start": -1, "end": -1})
             annot_dicts.append(self.create_temporal_annotation(timex3))
         # return a query annotations typed dict as required
         return QueryAnnotationsDict(query=nlq, annotations=annot_dicts)
