@@ -11,13 +11,13 @@ class TER_heideltime(NL2QueryInterface):
     def __init__(self, config: str = None):
         super().__init__(config)
         # check heideltime and treetagger
-        self.heideltime_jar = "heideltime/de.unihd.dbs.heideltime.standalone.jar"
-        self.heideltime_config = "heideltime/config.props"
-        self.treetagger = "heideltime/tree-tagger-linux-3.2.3/bin/tree-tagger"
-        self.tempfile = "heideltime/temp.txt"
+        self.heideltime_jar = self.config.get('heideltime', 'heideltime_jar')
+        self.heideltime_config = self.config.get('heideltime', "heideltime_config")
+        self.treetagger = self.config.get('heideltime', "tree-tagger")
+        self.tempfile = self.config.get('heideltime', "tempfile")
         if not os.path.exists(self.heideltime_jar) or \
             not os.path.exists(self.heideltime_config) or \
-             not os.path.exists(self.treetagger):
+            not os.path.exists(self.treetagger):
             raise Exception("Did not find all necessary HeidelTime files! Please copy them from:"
                   "https://github.com/amineabdaoui/python-heideltime, and install your"
                   "machine-specific treetagger from : https://www.cis.lmu.de/~schmid/tools/TreeTagger/")
@@ -110,7 +110,7 @@ class TER_heideltime(NL2QueryInterface):
 if __name__ == "__main__":
     query = "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%"
     # call my nl2query class
-    my_instance = TER_heideltime()
+    my_instance = TER_heideltime('heideltime_config.cfg')
     # get the structured query from the nl query
     structq = my_instance.transform_nl2query(query)
     print("Structured query: ", structq)

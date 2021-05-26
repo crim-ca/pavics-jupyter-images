@@ -74,9 +74,9 @@ class TER_duckling(NL2QueryInterface):
         print("\nDuckling detected:")
         for d in doc:
             print(d['body'], d['value'], d['dim'])
-            if d['dim'] == "time":
+            if d['dim'] in ["time", "duration"]:
                 annot_dicts.append(self.create_temporal_annotation(d))
-            elif d['dim'] in ["number", "amount-of-money"]:
+            elif d['dim'] in ["number", "temperature", "quantity", "amount-of-money"]:
                 annot_dicts.append(self.create_property_annotation(d))
         # return a query annotations typed dict as required
         return QueryAnnotationsDict(query=nlq, annotations=annot_dicts)
