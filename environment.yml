@@ -16,3 +16,4 @@ dependencies:
   - intake-esm==2021.1.15
   - sat-search==0.3.0
   - ipywidgets==7.6.3
+  - textsearch=0.0.21
