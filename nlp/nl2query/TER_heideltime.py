@@ -61,7 +61,7 @@ class TER_heideltime(NL2QueryInterface):
                   "- Make sure you have JVM installed \n"
                   "- Make sure heideltime is correct. Set treetagger's path in config.props. Try calling"
                   "java -jar de.unihd.dbs.heideltime.standalone.jar temp.txt -l english -c config.props")
-
+            exit()
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
         # take annotation given by the engine
