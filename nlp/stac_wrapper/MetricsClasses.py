@@ -1,4 +1,4 @@
-
+from typing import List, Dict
 
 ANNOTATION_TYPES = ["property", "location", "tempex", "target"]
 
@@ -32,20 +32,31 @@ class DataMetrics:
 
 
     @staticmethod
-    def create_data_metrics(total_ann: int = 0, total_prop: int = 0, total_loc: int = 0,
-                 total_temp: int= 0, total_targ: int = 0,
-                 annot_avg: float = 0.0, annot_min: int = 0, annot_max: int = 0):
-        return {"total_annotation": total_ann,
-                "total_annotation_per_type": {
-                    "property": total_prop,
-                    "location": total_loc,
-                    "tempex": total_temp,
-                    "target": total_targ
-                },
-                "annotation_per_query": {"avg": annot_avg,
-                                         "min": annot_min,
-                                         "max": annot_max}
-                }
+    def create_data_metrics(annotations: List[Dict] = None):
+        if annotations:
+            ann_types = [ann['type'] for ann in annotations]
+            # create data metrics class instance
+            return {"total_annotation": len(annotations),
+                    "total_annotation_per_type": {
+                        "property": ann_types.count('property'),
+                        "location": ann_types.count('location'),
+                        "tempex": ann_types.count('tempex'),
+                        "target": ann_types.count('target')},
+                    "annotation_per_query": {"avg": 0.0,
+                                             "min": 0,
+                                             "max": 0}
+                    }
+        else:
+            return {"total_annotation": 0,
+                    "total_annotation_per_type": {
+                        "property": 0,
+                        "location": 0,
+                        "tempex": 0,
+                        "target": 0},
+                    "annotation_per_query": {"avg": 0.0,
+                                             "min": 0,
+                                             "max": 0}
+                    }
 
 
 class DataMeasures:
