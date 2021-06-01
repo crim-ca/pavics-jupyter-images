@@ -3,23 +3,37 @@ from typing import Any
 
 
 class Vocabulary:
-    def __init__(self):
+    def __init__(self, file: str = None):
         # map of var-values
         self.vocab = {}
-
-    def read_vocabulary(self, file: str):
-        with open(file, "r") as f:
-            vocab = json.load(f)
-        if vocab:
-            for vals in vocab.values():
-                if "values" not in vals.keys() or \
-                  "aliases" not in vals.keys():
-                    raise Exception("Could not read vocabulary file. Missing key values.")
-            # all is good
-            self.vocab = vocab
+        if file:
+            with open(file, "r") as f:
+                vocab = json.load(f)
+            if vocab:
+                for vals in vocab.values():
+                    if "values" not in vals.keys() or \
+                      "aliases" not in vals.keys():
+                        raise Exception("Could not read vocabulary file. Missing key values.")
+                # all is good
+                self.vocab = vocab
+                self.vars = self.get_vars_list()
+                self.values = self.get_values_list()
 
     def get_vocab_dict(self):
         return self.vocab
+
+    def get_vars_list(self):
+        keys = []
+        for key in self.vocab:
+            keys.append(key)
+            keys += self.vocab[key]['aliases']
+        return keys
+
+    def get_values_list(self):
+        values = []
+        for key in self.vocab:
+            values += [x for x in self.vocab[key]['values'] if type(x) == str]
+        return values
 
     def add_var_val(self, var: str, val: Any):
         # add variable and a list of possible names (aliases) for it
