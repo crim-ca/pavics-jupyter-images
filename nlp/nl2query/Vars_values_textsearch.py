@@ -12,17 +12,23 @@ class Vars_values_textsearch(NL2QueryInterface):
         if self.config:
             self.ts = TextSearch(case=self.config['textsearch']['case'],
                                  returns=self.config['textsearch']['returns'])
+
             # get vocabs
             self.vocabs = {'cmip6': Vocabulary(self.config['vocabs']['cmip6']),
                            'peps': Vocabulary(self.config['vocabs']['peps']),
-                            'copernicus': Vocabulary(self.config['vocabs']['copernicus']),
-                           # 'paviccs': Vocabulary(self.config['vocabs']['peps'],
-                           'cf_standard_names': Vocabulary(self.config['vocabs']['cf_standard_names'])
-                          }
+                           'copernicus': Vocabulary(self.config['vocabs']['copernicus']),
+                           'cf_standard_names': Vocabulary(self.config['vocabs']['cf_standard_names']),
+                           'paviccs': Vocabulary(self.config['vocabs']['peps'])
+                           }
+
         else:
             print("Please define vocabulary file paths in a config, and "
                   "pass it to the constructor!")
             exit()
+        self.words = {}
+        for key in self.vocabs:
+            self.words[key] = self.vocabs[key].get_vars_list()
+
         self.words_list = []
         self.vars_list = []
         self.values_list = []
@@ -45,10 +51,16 @@ class Vars_values_textsearch(NL2QueryInterface):
         value = ""
         if annotation.match in self.vars_list:
             name = annotation.norm
+            # value is the detected value
         # if matched string is a value to a variable, put it in value,
         # and find variable name in vocab
         if annotation.match in self.values_list:
             value = annotation.norm
+            for vocab in self.vocabs:
+                name = self.vocabs[vocab].find_var_of_value(value)
+                if name:
+                    break
+
         if value.isdigit():
             value_type = "integer"
             value = int(value)
@@ -65,7 +77,7 @@ class Vars_values_textsearch(NL2QueryInterface):
         return {}
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
-        print("Searching vocabulary words...\n")
+        print("Searching vocabulary words...")
         annotations_list = []
         for result in self.ts.findall(nlq):
             print(result)
@@ -76,6 +88,7 @@ class Vars_values_textsearch(NL2QueryInterface):
 if __name__ == "__main__":
     myvarval = Vars_values_textsearch("varval_config.cfg")
     nlquery = "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%"
+    nlquery = "I want the CO2 concentrations used to force the CMIP6 models in ScenarioMIP"
     structq = myvarval.transform_nl2query(nlq=nlquery)
     print("Structured query: ", structq)
 

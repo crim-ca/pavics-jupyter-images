@@ -35,7 +35,16 @@ class Vocabulary:
             values += [x for x in self.vocab[key]['values'] if type(x) == str]
         return values
 
-    def add_var_val(self, var: str, val: Any):
+    def find_var_of_value(self, val: Any):
+        for key in self.vocab:
+            if type(self.vocab[key]['values']) == list and \
+                    val in self.vocab[key]['values']:
+                return key
+            elif val == self.vocab[key]['values']:
+                return key
+        return None
+
+    def add_var_value(self, var: str, val: Any):
         # add variable and a list of possible names (aliases) for it
         # and values as a list of possible values or type
         if var not in self.vocab.keys():
@@ -48,7 +57,7 @@ class Vocabulary:
         # find var in vocab
         if var not in self.vocab.keys():
             # new var, new alias, no value known
-            self.add_var_val(var, [])
+            self.add_var_value(var, [])
         # add alias
         self.vocab[var]['aliases'] += alias
 
@@ -60,7 +69,7 @@ class Vocabulary:
             self.vocab[var]['values'].append(newval)
         else:
             # it's a new var entry
-            self.add_var_val(var, newval)
+            self.add_var_value(var, newval)
 
     def stats(self):
         return {"Number of variable-value groups": len(self.vocab),

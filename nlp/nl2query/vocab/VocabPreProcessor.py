@@ -15,9 +15,9 @@ def process_cf_standard_names(path:str):
             var = (entry.attrib['id']).replace("_", " ")
             units = entry.find('.//canonical_units')
             if units.text in [1, "day", "month", "year"]:
-                my_vocab.add_var_val(var, 'int')
+                my_vocab.add_var_value(var, 'int')
             else:
-                my_vocab.add_var_val(var, 'float')
+                my_vocab.add_var_value(var, 'float')
             # extract from description?
         elif entry.tag == "alias":
             alias = entry.attrib['id'].replace("_", " ")
@@ -48,7 +48,7 @@ def process_copernicus(file:str):
                         for v2 in v:
                             aggregated_vals.add(v2)
                 val = list(aggregated_vals)
-            my_vocab.add_var_val(key.replace("_", " "), val)
+            my_vocab.add_var_value(key.replace("_", " "), val)
 
     print("First 5 items of the vocabulary: ", list(my_vocab.get_vocab_dict().items())[:5])
     print("Generated vocabulary with: ", my_vocab.stats())
@@ -65,9 +65,9 @@ def process_peps(file: str):
             val = peps_file['peps']['all'][key]
             if type(val) == dict:
                 for key2, val2 in val.items():
-                    my_vocab.add_var_val(key2, val2)
+                    my_vocab.add_var_value(key2, val2)
             else:
-                my_vocab.add_var_val(key, val)
+                my_vocab.add_var_value(key, val)
     print("First 5 items of the vocabulary: ", list(my_vocab.get_vocab_dict().items())[:5])
     print("Generated vocabulary with: ", my_vocab.stats())
     return my_vocab
@@ -86,12 +86,13 @@ def process_cmip6(file: str):
                 # add value of val if length < 30 -> possible label, not long description
                 vals += [v for v in val.values() if len(v) < 30]
                 vals += [v.replace("-", " ") for v in val.keys() if "-" in v]
-                my_vocab.add_var_val(key.replace("_", " "),  vals)
+                my_vocab.add_var_value(key.replace("_", " "), vals)
             else:
-                my_vocab.add_var_val(key.replace("_", " "), val)
+                my_vocab.add_var_value(key.replace("_", " "), val)
     print("First 5 items of the vocabulary: ", list(my_vocab.get_vocab_dict().items())[:5])
     print("Generated vocabulary with: ", my_vocab.stats())
     return my_vocab
+
 
 def isfloat(value):
     try:
@@ -99,6 +100,7 @@ def isfloat(value):
         return True
     except ValueError:
         return False
+
 
 def process_paviccs(file: str):
     my_vocab = Vocabulary()
@@ -117,9 +119,9 @@ def process_paviccs(file: str):
                     if 'standard_name' in val[0][v]:
                         alias.add(val[0][v]['standard_name'].replace("_", " "))
                     if 'units' in val[0][v]:
-                        my_vocab.add_var_val(newvar, val[0][v]['units'])
+                        my_vocab.add_var_value(newvar, val[0][v]['units'])
                     else:
-                        my_vocab.add_var_val(newvar, [])
+                        my_vocab.add_var_value(newvar, [])
                     my_vocab.add_variable_alias(newvar, list(alias))
             else:
                 newval = []
@@ -133,7 +135,7 @@ def process_paviccs(file: str):
                 newkey = key.lower().replace("_", " ")
                 # de-camelcase
                 newkey = " ".join(re.sub('([A-Z][a-z]+)', r' \1', re.sub('([A-Z]+)', r' \1', newkey)).split())
-                my_vocab.add_var_val(newkey, newval)
+                my_vocab.add_var_value(newkey, newval)
 
     print("First 5 items of the vocabulary: ", list(my_vocab.get_vocab_dict().items())[:5])
     print("Generated vocabulary with: ", my_vocab.stats())
