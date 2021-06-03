@@ -35,7 +35,7 @@ class DataMetrics:
                 }
 
     @staticmethod
-    def create_data_metrics(annotations: List[Dict]) -> DataMetrics:
+    def create_data_metrics(annotations: List[Dict]):
         if annotations:
             ann_types = [ann['type'] for ann in annotations]
             # create data metrics class instance
@@ -261,8 +261,13 @@ class AttributeMetrics:
 
 class AttributeMeasures:
 
-    def __init__(self, prop_attr: AttributeMetrics = None, loc_attr: AttributeMetrics = None,
+    def __init__(self, global_attr: AttributeMetrics = None,
+                 prop_attr: AttributeMetrics = None, loc_attr: AttributeMetrics = None,
                  temp_attr: AttributeMetrics = None, targ_attr: AttributeMetrics = None):
+        if global_attr:
+            self.global_attribute = global_attr
+        else:
+            self.global_attribute = AttributeMetrics()
         if prop_attr:
             self.property_attribute = prop_attr
         else:
@@ -282,6 +287,7 @@ class AttributeMeasures:
 
     def to_dict(self):
         return {
+            "global": self.global_attribute.to_dict(),
             "property": self.property_attribute.to_dict(),
             "location": self.location_attribute.to_dict(),
             "tempex": self.tempex_attribute.to_dict(),

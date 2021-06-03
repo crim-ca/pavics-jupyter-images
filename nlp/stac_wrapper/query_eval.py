@@ -183,7 +183,6 @@ def calc_global_attr_scores(attr_dicts: List[Dict]) -> Dict:
     Returns a dictionary with a predefined template.
     """
     attr_scores = AttributeMeasures().to_dict()
-    attr_dicts = [attr_dict.to_dict() for attr_dict in attr_dicts]
     per_annot_attr_match = []
     for annot_type in ANNOTATION_TYPES:
         attr_scores[annot_type]["count"] = sum([attr_dict[annot_type]['count'] for attr_dict in attr_dicts])
@@ -221,7 +220,6 @@ def calc_global_val_scores(val_dicts: List[Dict]) -> Dict:
     of evaluation scores.
     """
     val_scores = ValueMeasures().to_dict()
-    val_dicts = [val_dict.to_dict() for val_dict in val_dicts]
 
     for value_type in VALUE_TYPES:  # annotation type
         val_scores[value_type]['total_matching_attributes'] = sum(
