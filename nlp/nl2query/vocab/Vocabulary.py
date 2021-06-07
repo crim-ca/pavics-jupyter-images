@@ -48,7 +48,10 @@ class Vocabulary:
         # add variable and a list of possible names (aliases) for it
         # and values as a list of possible values or type
         if var not in self.vocab.keys():
-            self.vocab[var] = {"values": val, "aliases": []}
+            if type(val) == list:
+                self.vocab[var] = {"values": val, "aliases": []}
+            else:
+                self.vocab[var] = {"values": [val], "aliases": []}
         else:
             # handle adding under same key
             self.add_value_option(var, val)
@@ -59,13 +62,14 @@ class Vocabulary:
             # new var, new alias, no value known
             self.add_var_value(var, [])
         # add alias
-        self.vocab[var]['aliases'] += alias
+        if type(alias) == list:
+            self.vocab[var]['aliases'] += alias
+        else:
+            self.vocab[var]['aliases'].append(alias)
 
     def add_value_option(self, var, newval):
         # find var in vocab, add new value option
         if var in self.vocab.keys():
-            if not type(self.vocab[var]['values']) == list:
-                self.vocab[var]['values'] = [self.vocab[var]['values']]
             self.vocab[var]['values'].append(newval)
         else:
             # it's a new var entry

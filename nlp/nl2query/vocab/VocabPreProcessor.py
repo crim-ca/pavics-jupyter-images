@@ -1,34 +1,72 @@
 import json
 import os
 import re
+import requests
 from xml.etree import ElementTree as ET
 from Vocabulary import Vocabulary
+from bs4 import BeautifulSoup
 
-def process_cf_standard_names(path:str):
+
+def parse_mip_vars(mip_out:str):
+    mip = []
+    headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Max-Age': '3600',
+        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
+    }
+    base_url = "http://clipc-services.ceda.ac.uk/dreq/"
+    req = requests.get(base_url + "index/var.html", headers)
+    soup = BeautifulSoup(req.content, 'html.parser')
+    for li in (soup.find_all('li')):
+        link = li.find('a')
+        var = link.string
+        url = base_url + link['href'][3:]
+        req_var = requests.get(url, headers)
+        soup_var = BeautifulSoup(req_var.content, 'html.parser')
+        for li_var in soup_var.find_all('li'):
+            if 'title' == li_var.contents[0]:
+                alias = li_var.contents[-1][2:]
+            if "CF Standard Names" in li_var.contents[0]:
+                standard_name = li_var.contents[-1].a['href'][2:-5].replace("_", " ")
+        if standard_name and var and alias:
+            mip.append(standard_name, var, alias)
+
+        with open(mip_out, "w") as f:
+            json.dump(mip, f)
+
+
+def process_cf_standard_names(xml_path: str, mip_path: str):
     my_vocab = Vocabulary()
-    tree = ET.parse(path)
+    tree = ET.parse(xml_path)
     if tree.getroot():
         print("Successfully read XML file.")
     for entry in tree.getroot():
         if entry.tag == "entry":
             # extract id
             var = (entry.attrib['id']).replace("_", " ")
-            units = entry.find('.//canonical_units')
-            if units.text in [1, "day", "month", "year"]:
-                my_vocab.add_var_value(var, 'int')
-            else:
-                my_vocab.add_var_value(var, 'float')
+            my_vocab.add_var_value(var, [])
             # extract from description?
         elif entry.tag == "alias":
             alias = entry.attrib['id'].replace("_", " ")
             var = entry.find('./entry_id').text.replace("_", " ")
             my_vocab.add_variable_alias(var, alias)
             my_vocab.add_variable_alias(alias, var)
+
+    # process other mip vars file
+    with open(mip_path, "r") as f:
+        mip_vars = json.load(f)
+        for line in mip_vars:
+            my_vocab.add_variable_alias(var=line[0], alias=line[2])
+            my_vocab.add_var_value(var=line[0], val=line[1])
+
     print("First 5 items of the vocabulary: ", list(my_vocab.get_vocab_dict().items())[:5])
     print("Generated vocabulary with: ", my_vocab.stats())
     return my_vocab
 
-def process_copernicus(file:str):
+
+def process_copernicus(file: str):
     my_vocab = Vocabulary()
     with open(file, "r") as f:
         cop_file = json.load(f)
@@ -144,7 +182,10 @@ def process_paviccs(file: str):
 if __name__ == "__main__":
     path = "/misc/data23-bs/DACCS/wp15/metadata/vocab/"
     cf_standard_name = "cf-standard-name-table.xml"
-    cf_vocab = process_cf_standard_names(os.path.join(path, cf_standard_name))
+    mip_path = "mip_vars.json"
+    #!! done only once
+    # parse_mip_vars(mip_path)
+    cf_vocab = process_cf_standard_names(os.path.join(path, cf_standard_name), mip_path)
     with open("proc_vocab_cf_standard_names.json", "w") as f:
         json.dump(cf_vocab.get_vocab_dict(), f)
     print("Vocabulary written to file. ")
