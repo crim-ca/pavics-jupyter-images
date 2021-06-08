@@ -44,6 +44,16 @@ class Vocabulary:
                 return key
         return None
 
+    def find_value_of_var(self, var: str):
+        if var in self.vocab:
+            return self.vocab[var]['values']
+        # key could be an alias
+        else:
+            for key in self.vocab:
+                if var in self.vocab[key]['aliases']:
+                    return self.vocab[key]['values']
+        return None
+
     def add_var_value(self, var: str, val: Any):
         # add variable and a list of possible names (aliases) for it
         # and values as a list of possible values or type
