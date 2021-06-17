@@ -147,7 +147,7 @@ def calc_global_span_scores(span_measures_list: List[SpanMeasures]) -> SpanMeasu
     global_span_measures.get_span_metrics('global').perfect_begin_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).perfect_begin_type_match for annot_type in ANNOTATION_TYPES]) / global_count
     global_span_measures.get_span_metrics('global').perfect_end_no_type_match = sum(
-        [global_span_measures.getget_span_metricsattr(annot_type).perfect_end_no_type_match for annot_type in ANNOTATION_TYPES]) / global_count
+        [global_span_measures.get_span_metrics(annot_type).perfect_end_no_type_match for annot_type in ANNOTATION_TYPES]) / global_count
     global_span_measures.get_span_metrics('global').perfect_end_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).perfect_end_type_match for annot_type in ANNOTATION_TYPES]) / global_count
     global_span_measures.get_span_metrics('global').split_gold_no_type_match = sum(
