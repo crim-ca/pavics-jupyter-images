@@ -14,11 +14,10 @@ class MinMaxAvg:
     Class that defines a minimum, a maximum and an average value
     calculated from a list of numeric values.
     """
-    def __init__(self, value_list: List = [], minn: int = 0, maxx: int = 0, avg: float = 0.0):
+    def __init__(self, minn: int = 0, maxx: int = 0, avg: float = 0.0):
         self.minn = minn
         self.maxx = maxx
         self.avg = avg
-        self.value_list = value_list
 
     def to_dict(self):
         """
