@@ -29,6 +29,7 @@ class NER_flair(NL2QueryInterface):
         if req.status_code == 200:
             result = json.loads(req.text)
             # take the first best match
+            # TODO: develop a better heuristic than the first best match
             if result:
                 if 'bbox' in result[0]:
                     # create polygon feature from bbox
