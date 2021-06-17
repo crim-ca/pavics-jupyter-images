@@ -14,10 +14,11 @@ class MinMaxAvg:
     Class that defines a minimum, a maximum and an average value
     calculated from a list of numeric values.
     """
-    def __init__(self, minn: int = 0, maxx: int = 0, avg: float = 0.0):
+    def __init__(self, value_list: List = [], minn: int = 0, maxx: int = 0, avg: float = 0.0):
         self.minn = minn
         self.maxx = maxx
         self.avg = avg
+        self.value_list = value_list
 
     def to_dict(self):
         """
@@ -65,7 +66,7 @@ class DataMetrics:
                 "annotation_per_query": self.annotation_per_query.to_dict()
                 }
 
-    def getattr(self, name: str):
+    def get_metric(self, name: str):
         """
         Function to access a specific parameter by its name.
         """
@@ -81,7 +82,7 @@ class DataMetrics:
             return self.total_annotation_target
         return None
 
-    def setattr(self, name: str, value):
+    def set_metric(self, name: str, value):
         """ Setter function for some variables
         specific by their name."""
         if name == "global":
@@ -132,7 +133,7 @@ class DataMeasures:
         return {"gold_data": self.gold_metrics.to_dict(),
                 "test_data": self.test_metrics.to_dict()}
 
-    def getattr(self, name: str):
+    def get_data_metrics(self, name: str):
         """
         Function to access a specific parameter by its name.
         """
@@ -210,29 +211,15 @@ class SpanMeasures:
     Class to define span measures that include span metrics,
     and calculate the span measures from a list of annotations"""
 
-    def __init__(self, global_span: SpanMetrics = None, prop_span: SpanMetrics = None,
-                 loc_span: SpanMetrics = None,  temp_span: SpanMetrics = None,
-                 targ_span: SpanMetrics = None):
-        if global_span:
-            self.global_span = global_span
-        else:
-            self.global_span = SpanMetrics()
-        if prop_span:
-            self.property_span = prop_span
-        else:
-            self.property_span = SpanMetrics()
-        if loc_span:
-            self.location_span = loc_span
-        else:
-            self.location_span = SpanMetrics()
-        if temp_span:
-            self.tempex_span = temp_span
-        else:
-            self.tempex_span = SpanMetrics()
-        if targ_span:
-            self.target_span = targ_span
-        else:
-            self.target_span = SpanMetrics()
+    def __init__(self, global_span: SpanMetrics = SpanMetrics(), prop_span: SpanMetrics = SpanMetrics(),
+                 loc_span: SpanMetrics = SpanMetrics(),  temp_span: SpanMetrics = SpanMetrics(),
+                 targ_span: SpanMetrics = SpanMetrics()):
+        self.global_span = global_span
+        self.property_span = prop_span
+        self.location_span = loc_span
+        self.tempex_span = temp_span
+        self.target_span = targ_span
+
 
     def to_dict(self):
         """
@@ -245,7 +232,7 @@ class SpanMeasures:
                 "target": self.target_span.to_dict()
                 }
 
-    def getattr(self, name: str):
+    def get_span_metrics(self, name: str):
         """
         Function to access a specific parameter by its name.
         """
@@ -279,7 +266,7 @@ class SpanMeasures:
         # TODO! if gold_spans is only length 1, the result has an empty item in the list?
         for idx, span in enumerate(test_spans):
             # update count
-            span_measures.getattr(test_types[idx]).count += 1
+            span_measures.get_span_metrics(test_types[idx]).count += 1
             # perfect match
             if span in gold_spans:
                 # exact match
@@ -287,9 +274,9 @@ class SpanMeasures:
                 # check for type match
                 gold_idx = gold_spans.index(span)  # we do not presume the test and gold are aligned
                 if test_types[idx] == gold_types[gold_idx]:
-                    span_measures.getattr(test_types[idx]).perfect_match_type_match += 1
+                    span_measures.get_span_metrics(test_types[idx]).perfect_match_type_match += 1
                 else:
-                    span_measures.getattr(test_types[idx]).perfect_match_no_type_match += 1
+                    span_measures.get_span_metrics(test_types[idx]).perfect_match_no_type_match += 1
             else:
                 # not perfect match
                 # check for some kind of overlap
@@ -298,35 +285,35 @@ class SpanMeasures:
                 type_match_count = 0
                 for gidx, gspan in enumerate(gold_spans):
                     if range(max(span[0], gspan[0]), min(span[-1], gspan[-1])):
+                        overlap_count += 1
                         # includes perfect end and begin
                         if test_types[idx] == gold_types[gidx]:
-                            span_measures.getattr(test_types[idx]).overlapping_span_type_match.minn += 1
+                            span_measures.get_span_metrics(test_types[idx]).overlapping_span_type_match.minn += 1
                             type_match_count += 1
                         else:
-                            span_measures.getattr(test_types[idx]).overlapping_span_no_type_match.minn += 1
+                            span_measures.get_span_metrics(test_types[idx]).overlapping_span_no_type_match.minn += 1
                         # perfect begin
                         if span[0] == gold_spans[gidx][0]:
                             # begin match (including exact match)
                             # update type-specific count
                             if test_types[idx] == gold_types[gidx]:
-                                span_measures.getattr(test_types[idx]).perfect_begin_type_match += 1
+                                span_measures.get_span_metrics(test_types[idx]).perfect_begin_type_match += 1
                             else:
-                                span_measures.getattr(test_types[idx]).perfect_begin_no_type_match += 1
+                                span_measures.get_span_metrics(test_types[idx]).perfect_begin_no_type_match += 1
                         # perfect end
                         if span[1] == gold_spans[gidx][1]:
                             # end match (including exact match)
                             # update type-specific count
                             if test_types[idx] == gold_types[gidx]:
-                                span_measures.getattr(test_types[idx]).perfect_end_type_match += 1
+                                span_measures.get_span_metrics(test_types[idx]).perfect_end_type_match += 1
                             else:
-                                span_measures.getattr(test_types[idx]).perfect_end_no_type_match += 1
-                        overlap_count += 1
-                    if overlap_count > 1:
-                        # this test span matches several gold spans = split-test
-                        if overlap_count == type_match_count:
-                            span_measures.getattr(test_types[idx]).split_test_type_match += 1
-                        else:
-                            span_measures.getattr(test_types[idx]).split_test_type_no_type_match += 1
+                                span_measures.get_span_metrics(test_types[idx]).perfect_end_no_type_match += 1
+                if overlap_count > 1:
+                    # this test span matches several gold spans = split-test
+                    if overlap_count == type_match_count:
+                        span_measures.get_span_metrics(test_types[idx]).split_test_type_match += 1
+                    else:
+                        span_measures.get_span_metrics(test_types[idx]).split_test_type_no_type_match += 1
 
         # split gold
         for gidx, gspan in enumerate(gold_spans):
@@ -341,9 +328,9 @@ class SpanMeasures:
             if split_count > 1:
                 # we have split gold span
                 if split_count == type_match_count:
-                    span_measures.getattr(gold_types[gidx]).split_gold_type_match += 1
+                    span_measures.get_span_metrics(gold_types[gidx]).split_gold_type_match += 1
                 else:
-                    span_measures.getattr(gold_types[gidx]).split_gold_no_type_match += 1
+                    span_measures.get_span_metrics(gold_types[gidx]).split_gold_no_type_match += 1
         return span_measures
 
 
@@ -377,29 +364,16 @@ class AttributeMeasures:
     """Class that defines one attribute measures composed of attribute metrics,
     and calculates it from a list of annotations"""
 
-    def __init__(self, global_attr: AttributeMetrics = None,
-                 prop_attr: AttributeMetrics = None, loc_attr: AttributeMetrics = None,
-                 temp_attr: AttributeMetrics = None, targ_attr: AttributeMetrics = None):
-        if global_attr:
-            self.global_attribute = global_attr
-        else:
-            self.global_attribute = AttributeMetrics()
-        if prop_attr:
-            self.property_attribute = prop_attr
-        else:
-            self.property_attribute = AttributeMetrics()
-        if loc_attr:
-            self.location_attribute = loc_attr
-        else:
-            self.location_attribute = AttributeMetrics()
-        if temp_attr:
-            self.tempex_attribute = temp_attr
-        else:
-            self.tempex_attribute = AttributeMetrics()
-        if targ_attr:
-            self.target_attribute = targ_attr
-        else:
-            self.target_attribute = AttributeMetrics()
+    def __init__(self, global_attr: AttributeMetrics = AttributeMetrics(),
+                 prop_attr: AttributeMetrics = AttributeMetrics(),
+                 loc_attr: AttributeMetrics = AttributeMetrics(),
+                 temp_attr: AttributeMetrics = AttributeMetrics(),
+                 targ_attr: AttributeMetrics = AttributeMetrics()):
+        self.global_attribute = global_attr
+        self.property_attribute = prop_attr
+        self.location_attribute = loc_attr
+        self.tempex_attribute = temp_attr
+        self.target_attribute = targ_attr
 
     def to_dict(self):
         """
@@ -413,7 +387,7 @@ class AttributeMeasures:
             "target": self.target_attribute.to_dict()
         }
 
-    def getattr(self, name: str):
+    def get_attribute_metrics(self, name: str):
         """
         Function to access a specific parameter by its name.
         """
@@ -450,7 +424,7 @@ class AttributeMeasures:
             # obligatory for property, tempex, location: type, position, name, value
             # obligatory for target: type, position, name
             test_type = ann['type']
-            attribute_measures.getattr(test_type).count += len(ann)
+            attribute_measures.get_attribute_metrics(test_type).count += len(ann)
             test_span = ann['position']
             # exact span match
             if test_span in gold_spans:
@@ -458,7 +432,7 @@ class AttributeMeasures:
                 # per_annotation_span_perfect_match_precision
                 # % of annotation having all attribute matched when span is same
                 if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
-                    attribute_measures.getattr(test_type).perfect_match_precision += 1
+                    attribute_measures.get_attribute_metrics(test_type).perfect_match_precision += 1
             else:
                 # no exact span match, find overlapping span match
                 for gidx, gspan in enumerate(gold_spans):
@@ -470,25 +444,25 @@ class AttributeMeasures:
                         # but as a count instead of %
                         # exact type match
                         if test_type == gold_types[gidx]:
-                            attribute_measures.getattr(test_type).total_span_type_match += 1
+                            attribute_measures.get_attribute_metrics(test_type).total_span_type_match += 1
                         # per_annotation_overlapping_span_perfect_match
                         # % of annotation having all attribute matched, for overlapping span
                         if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
-                            attribute_measures.getattr(test_type).overlapping_perfect_match += 1
+                            attribute_measures.get_attribute_metrics(test_type).overlapping_perfect_match += 1
                         # per_annotation_attribute_match
                         # % of matching attribute name / total number of attribute in an annotation
                         # compared to overlapping spans
-                        attribute_measures.getattr(test_type).attribute_match.minn = \
+                        attribute_measures.get_attribute_metrics(test_type).attribute_match.minn = \
                             len(set(ann.keys()).intersection(gold_ann[gidx].keys())) / len(ann)
 
         for annot_type in ANNOTATION_TYPES:
             # count of annotations of all attributes matched for exact span / nr of annots of that type
-            attribute_measures.getattr(annot_type).perfect_match_precision= \
-                attribute_measures.getattr(annot_type).perfect_match_precision / count[annot_type] if \
+            attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision= \
+                attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision / count[annot_type] if \
                 count[annot_type] else 0
             # per_annotation_overlapping_span_perfect_match
-            attribute_measures.getattr(annot_type).overlapping_perfect_match = \
-                attribute_measures.getattr(annot_type).overlapping_perfect_match / count[annot_type] if \
+            attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match = \
+                attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match / count[annot_type] if \
                 count[annot_type] else 0
 
         return attribute_measures
@@ -580,60 +554,33 @@ class ValueMeasures:
     """Class that defines one value measures composed of value metrics,
     and calculates it from a list of annotations"""
 
-    def __init__(self, global_val: ValueMetrics = None, type_val: ValueMetrics = None, name_val: ValueMetrics = None,
-                 bbx_val: ValueMetrics = None, tempex_val: ValueMetrics = None, numeric_val: ValueMetrics = None,
-                 target_val: ValueMetrics = None, global_ratio_matching_attr: float = 0.0,
-                 name_levenstein: MinMaxAvg = None, bbox_iou: MinMaxAvg = None, tempex_dur_overlap: MinMaxAvg = None,
-                 numeric_val_offset: MinMaxAvg = None, target_match_elem: MinMaxAvg = None):
-        if global_val:
-            self.global_value = global_val
-        else:
-            self.global_value = ValueMetrics()
-        if type_val:
-            self.type_value = type_val
-        else:
-            self.type_value = ValueMetrics()
-        if name_val:
-            self.name_value = name_val
-        else:
-            self.name_value = ValueMetrics()
-        if bbx_val:
-            self.bbox_value = bbx_val
-        else:
-            self.bbox_value = ValueMetrics()
-        if tempex_val:
-            self.tempex_value = tempex_val
-        else:
-            self.tempex_value = ValueMetrics()
-        if numeric_val:
-            self.numeric_value = numeric_val
-        else:
-            self.numeric_value = ValueMetrics()
-        if target_val:
-            self.target_value = target_val
-        else:
-            self.target_value = ValueMetrics()
+    def __init__(self, global_val: ValueMetrics = ValueMetrics(),
+                 type_val: ValueMetrics = ValueMetrics(),
+                 name_val: ValueMetrics = ValueMetrics(),
+                 bbx_val: ValueMetrics = ValueMetrics(),
+                 tempex_val: ValueMetrics = ValueMetrics(),
+                 numeric_val: ValueMetrics = ValueMetrics(),
+                 target_val: ValueMetrics = ValueMetrics(),
+                 global_ratio_matching_attr: float = 0.0,
+                 name_levenstein: MinMaxAvg = MinMaxAvg(),
+                 bbox_iou: MinMaxAvg = MinMaxAvg(),
+                 tempex_dur_overlap: MinMaxAvg = MinMaxAvg(),
+                 numeric_val_offset: MinMaxAvg = MinMaxAvg(),
+                 target_match_elem: MinMaxAvg = MinMaxAvg()):
+        self.global_value = global_val
+        self.type_value = type_val
+        self.name_value = name_val
+        self.bbox_value = bbx_val
+        self.tempex_value = tempex_val
+        self.numeric_value = numeric_val
+        self.target_value = target_val
         self.global_ratio_matching_attribute = global_ratio_matching_attr
-        if name_levenstein:
-            self.name_levenstein = name_levenstein
-        else:
-            self.name_levenstein = MinMaxAvg()
-        if bbox_iou:
-            self.bbox_iou = bbox_iou
-        else:
-            self.bbox_iou = MinMaxAvg()
-        if tempex_dur_overlap:
-            self.tempex_duration_overlap = tempex_dur_overlap
-        else:
-            self.tempex_duration_overlap = MinMaxAvg()
-        if numeric_val_offset:
-            self.numeric_value_offset = numeric_val_offset
-        else:
-            self.numeric_value_offset = MinMaxAvg()
-        if target_match_elem:
-            self.target_matching_element = target_match_elem
-        else:
-            self.target_matching_element = MinMaxAvg()
+        self.name_levenstein = name_levenstein
+        self.bbox_iou = bbox_iou
+        self.tempex_duration_overlap = tempex_dur_overlap
+        self.numeric_value_offset = numeric_val_offset
+        self.target_matching_element = target_match_elem
+
 
     def to_dict(self):
         """
@@ -660,7 +607,7 @@ class ValueMeasures:
                            "matching_element": self.target_matching_element.to_dict()}
                 }
 
-    def getattr(self, name: str):
+    def get_value_metrics(self, name: str):
         """
         Function to access a specific parameter by its name.
         """
@@ -697,62 +644,62 @@ class ValueMeasures:
             test_span = ann['position']
             # how many location/tempex attributes we have
             if test_type == 'location':
-                value_measures.getattr('bbox').total_matching_attributes += 1
+                value_measures.get_value_metrics('bbox').total_matching_attributes += 1
             if test_type == 'tempex':
-                value_measures.getattr('tempex').total_matching_attributes += 1
+                value_measures.get_value_metrics('tempex').total_matching_attributes += 1
             if test_type == 'target':
-                value_measures.getattr('target').total_matching_attributes += 1
+                value_measures.get_value_metrics('target').total_matching_attributes += 1
             if 'name' in ann.keys():
-                value_measures.getattr('name').total_matching_attributes += 1
+                value_measures.get_value_metrics('name').total_matching_attributes += 1
             if 'value' in ann.keys() and type(ann['value']) == str:
                 # print(ann['value'])
                 if isnumeric(ann['value']):
-                    value_measures.getattr('numeric').total_matching_attributes += 1
+                    value_measures.get_value_metrics('numeric').total_matching_attributes += 1
             for gidx, gspan in enumerate(gold_spans):
                 # overlapping span
                 if range(max(gspan[0], test_span[0]), min(gspan[-1], test_span[-1])):
                     # all attributes match
                     if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
-                        value_measures.getattr('global').total_matching_attributes += 1
+                        value_measures.get_value_metrics('global').total_matching_attributes += 1
                     #  for matching attribute type
                     if gold_types[gidx] == test_type:
-                        value_measures.getattr('type').perfect_value_match += 1
+                        value_measures.get_value_metrics('type').perfect_value_match += 1
                         if test_type == 'location':
                             if ann['value'] == gold_ann[gidx]['value']:
-                                value_measures.getattr('bbox').perfect_value_match += 1
+                                value_measures.get_value_metrics('bbox').perfect_value_match += 1
                             value_measures.bbox_iou.minn = \
                                 intersect_over_union(ann['value'], gold_ann[gidx]['value'])
                         if test_type == 'tempex':
                             if ann['value'] == gold_ann[gidx]['value']:
-                                value_measures.getattr('tempex').perfect_value_match += 1
+                                value_measures.get_value_metrics('tempex').perfect_value_match += 1
                             value_measures.tempex_duration_overlap.minn = \
                                 duration_overlap(ann['value'], gold_ann[gidx]['value'])
                         if test_type == 'target':
                             if ann['name'] == gold_ann[gidx]['name']:
-                                value_measures.getattr('target').perfect_value_match += 1
+                                value_measures.get_value_metrics('target').perfect_value_match += 1
                             value_measures.target_matching_element.minn = \
                                 len(set(ann['name']).intersection(gold_ann[gidx]['name']))
                         if test_type != 'tempex':
                             if gold_ann[gidx]['name'] == ann['name']:
-                                value_measures.getattr('name').perfect_value_match += 1
+                                value_measures.get_value_metrics('name').perfect_value_match += 1
                             if test_type != 'target':
                                 value_measures.name_levenstein.minn = \
                                     levenshtein(ann['name'].lower(), gold_ann[gidx]['name'].lower())
                         if 'value' in gold_ann[gidx].keys() and isnumeric(gold_ann[gidx]['value']) \
                                 and isnumeric(ann['value']):
                             if gold_ann[gidx]['value'] == ann['value']:
-                                value_measures.getattr('numeric').perfect_value_match += 1
+                                value_measures.get_value_metrics('numeric').perfect_value_match += 1
                             value_measures.numeric_value_offset.minn = \
                                 abs(float(ann['value']) - float(gold_ann[gidx]['value']))
         # there are as many type attribute counts, as many annotations
-        value_measures.getattr('type').total_matching_attributes = len(test)
+        value_measures.get_value_metrics('type').total_matching_attributes = len(test)
         for value_type in VALUE_TYPES:
-            if value_measures.getattr(value_type).total_matching_attributes:
-                value_measures.getattr(value_type).perfect_value_match = \
-                    value_measures.getattr(value_type).perfect_value_match \
-                    / value_measures.getattr(value_type).total_matching_attributes
+            if value_measures.get_value_metrics(value_type).total_matching_attributes:
+                value_measures.get_value_metrics(value_type).perfect_value_match = \
+                    value_measures.get_value_metrics(value_type).perfect_value_match \
+                    / value_measures.get_value_metrics(value_type).total_matching_attributes
 
-        value_measures.getattr('global').ratio_matching_attributes = \
-            value_measures.getattr('global').total_matching_attributes / len(test)
+        value_measures.get_value_metrics('global').ratio_matching_attributes = \
+            value_measures.get_value_metrics('global').total_matching_attributes / len(test)
 
         return value_measures

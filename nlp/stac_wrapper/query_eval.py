@@ -70,7 +70,7 @@ def eval_value(gold: Dict, test: Dict) -> ValueMeasures:
     return value_measures
 
 
-def calc_global_data_scores(data_dicts: List[DataMeasures]) -> DataMeasures:
+def calc_global_data_scores(data_measures_list: List[DataMeasures]) -> DataMeasures:
     """
     Calculates global data evaluation scores
     given a dictionary of individual data scores
@@ -79,26 +79,27 @@ def calc_global_data_scores(data_dicts: List[DataMeasures]) -> DataMeasures:
     """
     # a list of data dicts
     # a data dict is one 'data_measurements' dict
-    data_scores = DataMeasures()
+    global_data_measures = DataMeasures()
+
     for data_type in DATA_TYPES:
-        data_scores.getattr(data_type).total_annotation = sum(
-            [data_dict.getattr(data_type).total_annotation for data_dict in data_dicts])
-        data_scores.getattr(data_type).annotation_per_query = MinMaxAvg.calc_avg_min_max(
-            [data_dict.getattr(data_type).total_annotation for data_dict in data_dicts])
+        global_data_measures.get_data_metrics(data_type).total_annotation = sum(
+            [data_measures.get_data_metrics(data_type).total_annotation for data_measures in data_measures_list])
+        global_data_measures.get_data_metrics(data_type).annotation_per_query = MinMaxAvg.calc_avg_min_max(
+            [data_measures.get_data_metrics(data_type).total_annotation for data_measures in data_measures_list])
         for annot_type in ANNOTATION_TYPES:
-            data_scores.getattr(data_type).setattr(annot_type, sum(
-                [data_dict.getattr(data_type).getattr(annot_type) for data_dict in data_dicts]))
-    return data_scores
+            global_data_measures.get_data_metrics(data_type).set_metric(annot_type, sum(
+                [data_measures.get_data_metrics(data_type).get_metric(annot_type) for data_measures in data_measures_list]))
+    return global_data_measures
 
 
-def calc_global_span_scores(span_dicts: List[SpanMeasures]) -> SpanMeasures:
+def calc_global_span_scores(span_measures_list: List[SpanMeasures]) -> SpanMeasures:
     """
    Calculates global span evaluation scores
    given a dictionary of individual span scores
    per annotation.
    Returns a SpanMeasures instance with the results.
    """
-    span_measures = SpanMeasures()
+    global_span_measures = SpanMeasures()
     # count global measures
     count = {'property': 0, 'location': 0, 'tempex': 0, 'target': 0}
     overlap = {'property': [], 'location': [], 'tempex': [], 'target': []}
@@ -106,126 +107,126 @@ def calc_global_span_scores(span_dicts: List[SpanMeasures]) -> SpanMeasures:
 
     for annot_type in ANNOTATION_TYPES:
         # total span counts per type
-        span_measures.getattr(annot_type).count = sum([span_dict.getattr(annot_type).count for span_dict in span_dicts])
-        count[annot_type] = span_measures.getattr(annot_type).count
-        span_measures.getattr('global').count += span_measures.getattr(annot_type).count
-        span_measures.getattr(annot_type).perfect_begin_no_type_match = sum(
-            [span_dict.getattr(annot_type).perfect_begin_no_type_match for span_dict in span_dicts]) / count[annot_type]
-        span_measures.getattr(annot_type).perfect_begin_type_match = sum(
-            [span_dict.getattr(annot_type).perfect_begin_type_match for span_dict in span_dicts]) / count[annot_type]
-        span_measures.getattr(annot_type).perfect_end_no_type_match = sum(
-            [span_dict.getattr(annot_type).perfect_end_no_type_match for span_dict in span_dicts]) / count[annot_type]
-        span_measures.getattr(annot_type).perfect_end_type_match = sum(
-            [span_dict.getattr(annot_type).perfect_end_type_match for span_dict in span_dicts]) / count[annot_type]
-        span_measures.getattr(annot_type).perfect_match_no_type_match = sum(
-            [span_dict.getattr(annot_type).perfect_match_no_type_match for span_dict in span_dicts]) / count[annot_type]
-        span_measures.getattr(annot_type).perfect_match_type_match = sum(
-            [span_dict.getattr(annot_type).perfect_match_type_match for span_dict in span_dicts]) / count[annot_type]
-        overlap[annot_type] = [span_dict.getattr(annot_type).overlapping_span_no_type_match.minn for span_dict in
-                               span_dicts]
-        overlap_t[annot_type] = [span_dict.getattr(annot_type).overlapping_span_type_match.minn for span_dict in
-                                 span_dicts]
-        span_measures.getattr(annot_type).overlapping_span_no_type_match = MinMaxAvg.calc_avg_min_max(overlap[annot_type])
-        span_measures.getattr(annot_type).overlapping_span_type_match = MinMaxAvg.calc_avg_min_max(overlap_t[annot_type])
-        span_measures.getattr(annot_type).split_gold_no_type_match = sum(
-            [span_dict.getattr(annot_type).split_gold_no_type_match for span_dict in span_dicts]) / count[annot_type]
-        span_measures.getattr(annot_type).split_gold_type_match = sum(
-            [span_dict.getattr(annot_type).split_gold_type_match for span_dict in span_dicts]) / count[annot_type]
-        span_measures.getattr(annot_type).split_test_type_no_type_match = sum(
-            [span_dict.getattr(annot_type).split_test_type_no_type_match for span_dict in span_dicts]) / count[annot_type]
-        span_measures.getattr(annot_type).split_test_type_match = sum(
-            [span_dict.getattr(annot_type).split_test_type_match for span_dict in span_dicts]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).count = sum([span_measures.get_span_metrics(annot_type).count for span_measures in span_measures_list])
+        count[annot_type] = global_span_measures.get_span_metrics(annot_type).count
+        global_span_measures.get_span_metrics('global').count += global_span_measures.get_span_metrics(annot_type).count
+        global_span_measures.get_span_metrics(annot_type).perfect_begin_no_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).perfect_begin_no_type_match for span_measures in span_measures_list]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).perfect_begin_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).perfect_begin_type_match for span_measures in span_measures_list]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).perfect_end_no_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).perfect_end_no_type_match for span_measures in span_measures_list]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).perfect_end_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).perfect_end_type_match for span_measures in span_measures_list]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).perfect_match_no_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).perfect_match_no_type_match for span_measures in span_measures_list]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).perfect_match_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).perfect_match_type_match for span_measures in span_measures_list]) / count[annot_type]
+        overlap[annot_type] = [span_measures.get_span_metrics(annot_type).overlapping_span_no_type_match.minn for span_measures in
+                               span_measures_list]
+        overlap_t[annot_type] = [span_measures.get_span_metrics(annot_type).overlapping_span_type_match.minn for span_measures in
+                                 span_measures_list]
+        global_span_measures.get_span_metrics(annot_type).overlapping_span_no_type_match = MinMaxAvg.calc_avg_min_max(overlap[annot_type])
+        global_span_measures.get_span_metrics(annot_type).overlapping_span_type_match = MinMaxAvg.calc_avg_min_max(overlap_t[annot_type])
+        global_span_measures.get_span_metrics(annot_type).split_gold_no_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).split_gold_no_type_match for span_measures in span_measures_list]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).split_gold_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).split_gold_type_match for span_measures in span_measures_list]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).split_test_type_no_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).split_test_type_no_type_match for span_measures in span_measures_list]) / count[annot_type]
+        global_span_measures.get_span_metrics(annot_type).split_test_type_match = sum(
+            [span_measures.get_span_metrics(annot_type).split_test_type_match for span_measures in span_measures_list]) / count[annot_type]
 
-    global_count = span_measures.getattr('global').count
+    global_count = global_span_measures.get_span_metrics('global').count
 
     # calculate percentage of test
-    span_measures.getattr('global').overlapping_span_no_type_match = MinMaxAvg.calc_avg_min_max(sum(overlap.values(), []))
-    span_measures.getattr('global').overlapping_span_type_match = MinMaxAvg.calc_avg_min_max(sum(overlap_t.values(), []))
-    span_measures.getattr('global').perfect_begin_no_type_match = sum(
-        [span_measures.getattr(annot_type).perfect_begin_no_type_match for annot_type in ANNOTATION_TYPES]) / global_count
-    span_measures.getattr('global').perfect_begin_type_match = sum(
-        [span_measures.getattr(annot_type).perfect_begin_type_match for annot_type in ANNOTATION_TYPES]) / global_count
-    span_measures.getattr('global').perfect_end_no_type_match = sum(
-        [span_measures.getattr(annot_type).perfect_end_no_type_match for annot_type in ANNOTATION_TYPES]) / global_count
-    span_measures.getattr('global').perfect_end_type_match = sum(
-        [span_measures.getattr(annot_type).perfect_end_type_match for annot_type in ANNOTATION_TYPES]) / global_count
-    span_measures.getattr('global').split_gold_no_type_match = sum(
-        [span_measures.getattr(annot_type).split_gold_no_type_match for annot_type in
+    global_span_measures.get_span_metrics('global').overlapping_span_no_type_match = MinMaxAvg.calc_avg_min_max(sum(overlap.values(), []))
+    global_span_measures.get_span_metrics('global').overlapping_span_type_match = MinMaxAvg.calc_avg_min_max(sum(overlap_t.values(), []))
+    global_span_measures.get_span_metrics('global').perfect_begin_no_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).perfect_begin_no_type_match for annot_type in ANNOTATION_TYPES]) / global_count
+    global_span_measures.get_span_metrics('global').perfect_begin_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).perfect_begin_type_match for annot_type in ANNOTATION_TYPES]) / global_count
+    global_span_measures.get_span_metrics('global').perfect_end_no_type_match = sum(
+        [global_span_measures.getget_span_metricsattr(annot_type).perfect_end_no_type_match for annot_type in ANNOTATION_TYPES]) / global_count
+    global_span_measures.get_span_metrics('global').perfect_end_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).perfect_end_type_match for annot_type in ANNOTATION_TYPES]) / global_count
+    global_span_measures.get_span_metrics('global').split_gold_no_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).split_gold_no_type_match for annot_type in
          ANNOTATION_TYPES]) / global_count
-    span_measures.getattr('global').split_gold_type_match = sum(
-        [span_measures.getattr(annot_type).split_gold_type_match for annot_type in ANNOTATION_TYPES]) / global_count
-    span_measures.getattr('global').split_test_type_no_type_match = sum(
-        [span_measures.getattr(annot_type).split_test_type_no_type_match for annot_type in
+    global_span_measures.get_span_metrics('global').split_gold_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).split_gold_type_match for annot_type in ANNOTATION_TYPES]) / global_count
+    global_span_measures.get_span_metrics('global').split_test_type_no_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).split_test_type_no_type_match for annot_type in
          ANNOTATION_TYPES]) / global_count
-    span_measures.getattr('global').split_test_type_match = sum(
-        [span_measures.getattr(annot_type).split_test_type_match for annot_type in ANNOTATION_TYPES]) / global_count
-    return span_measures
+    global_span_measures.get_span_metrics('global').split_test_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).split_test_type_match for annot_type in ANNOTATION_TYPES]) / global_count
+    return global_span_measures
 
 
-def calc_global_attr_scores(attr_dicts: List[AttributeMeasures]) -> AttributeMeasures:
+def calc_global_attr_scores(attribute_measures_list: List[AttributeMeasures]) -> AttributeMeasures:
     """
     Calculates global attribute evaluation scores
     given a dictionary of individual attribute scores
     per annotation.
     Returns an AttributeMeasures instance with the results.
     """
-    attr_scores = AttributeMeasures()
+    global_attribute_measures = AttributeMeasures()
     per_annot_attr_match = []
     for annot_type in ANNOTATION_TYPES:
-        attr_scores.getattr(annot_type).count = sum(
-            [attr_dict.getattr(annot_type).count for attr_dict in attr_dicts])
-        attr_scores.getattr(annot_type).total_span_type_match = sum(
-            [attr_dict.getattr(annot_type).total_span_type_match for attr_dict in attr_dicts])
-        attr_scores.getattr(annot_type).perfect_match_precision = sum(
-            [attr_dict.getattr(annot_type).perfect_match_precision for attr_dict in attr_dicts])
-        attr_scores.getattr(annot_type).overlapping_perfect_match = sum(
-            [attr_dict.getattr(annot_type).overlapping_perfect_match for attr_dict in attr_dicts])
-        per_annot_attr_match += [attr_dict.getattr(annot_type).attribute_match.minn for attr_dict in
-                                 attr_dicts]
-        attr_scores.getattr(annot_type).attribute_match = MinMaxAvg.calc_avg_min_max(
-            [attr_dict.getattr(annot_type).attribute_match.minn for attr_dict in attr_dicts])
-        attr_scores.getattr('global').count += attr_scores.getattr(annot_type).count
-        attr_scores.getattr('global').total_span_type_match += attr_scores.getattr(annot_type).total_span_type_match
-        attr_scores.getattr('global').perfect_match_precision += attr_scores.getattr(annot_type).perfect_match_precision
-        attr_scores.getattr('global').overlapping_perfect_match += \
-            attr_scores.getattr(annot_type).overlapping_perfect_match
-        attr_scores.getattr(annot_type).perfect_match_precision = \
-            attr_scores.getattr(annot_type).perfect_match_precision / len(attr_dicts)
-        attr_scores.getattr(annot_type).overlapping_perfect_match = \
-            attr_scores.getattr(annot_type).overlapping_perfect_match / len(attr_dicts)
+        global_attribute_measures.get_attribute_metrics(annot_type).count = sum(
+            [attribute_measures.get_attribute_metrics(annot_type).count for attribute_measures in attribute_measures_list])
+        global_attribute_measures.get_attribute_metrics(annot_type).total_span_type_match = sum(
+            [attribute_measures.get_attribute_metrics(annot_type).total_span_type_match for attribute_measures in attribute_measures_list])
+        global_attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision = sum(
+            [attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision for attribute_measures in attribute_measures_list])
+        global_attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match = sum(
+            [attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match for attribute_measures in attribute_measures_list])
+        per_annot_attr_match += [attribute_measures.get_attribute_metrics(annot_type).attribute_match.minn for attribute_measures in
+                                 attribute_measures_list]
+        global_attribute_measures.get_attribute_metrics(annot_type).attribute_match = MinMaxAvg.calc_avg_min_max(
+            [attribute_measures.get_attribute_metrics(annot_type).attribute_match.minn for attribute_measures in attribute_measures_list])
+        global_attribute_measures.get_attribute_metrics('global').count += global_attribute_measures.get_attribute_metrics(annot_type).count
+        global_attribute_measures.get_attribute_metrics('global').total_span_type_match += global_attribute_measures.get_attribute_metrics(annot_type).total_span_type_match
+        global_attribute_measures.get_attribute_metrics('global').perfect_match_precision += global_attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision
+        global_attribute_measures.get_attribute_metrics('global').overlapping_perfect_match += \
+            global_attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match
+        global_attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision = \
+            global_attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision / len(attribute_measures_list)
+        global_attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match = \
+            global_attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match / len(attribute_measures_list)
 
-    attr_scores.getattr('global').attribute_match = MinMaxAvg.calc_avg_min_max(per_annot_attr_match)
-    return attr_scores
+    global_attribute_measures.get_attribute_metrics('global').attribute_match = MinMaxAvg.calc_avg_min_max(per_annot_attr_match)
+    return global_attribute_measures
 
 
-def calc_global_val_scores(val_dicts: List[ValueMeasures]) -> ValueMeasures:
+def calc_global_val_scores(value_measures_list: List[ValueMeasures]) -> ValueMeasures:
     """
     Calculate global value scores,
     given a dictionary of individual value scores
     per annotation.
     Returns a ValueMeasures instance with the results.
     """
-    val_scores = ValueMeasures()
+    global_value_measures = ValueMeasures()
 
     for value_type in VALUE_TYPES:  # annotation type
-        val_scores.getattr(value_type).total_matching_attributes = sum(
-            [val_dict.getattr(value_type).total_matching_attributes for val_dict in val_dicts])
-        val_scores.getattr(value_type).perfect_value_match = sum(
-            [val_dict.getattr(value_type).perfect_value_match for val_dict in val_dicts]) / len(val_dicts)
+        global_value_measures.get_value_metrics(value_type).total_matching_attributes = sum(
+            [value_measures.get_value_metrics(value_type).total_matching_attributes for value_measures in value_measures_list])
+        global_value_measures.get_value_metrics(value_type).perfect_value_match = sum(
+            [value_measures.get_value_metrics(value_type).perfect_value_match for value_measures in value_measures_list]) / len(value_measures_list)
 
-    val_scores.global_ratio_matching_attribute = sum(
-        [val_dict.global_ratio_matching_attribute for val_dict in val_dicts]) / len(val_dicts)
-    val_scores.name_levenstein = MinMaxAvg.calc_avg_min_max(
-        [val_dict.name_levenstein.minn for val_dict in val_dicts])
-    val_scores.bbox_iou = MinMaxAvg.calc_avg_min_max([val_dict.bbox_iou.minn for val_dict in val_dicts])
-    val_scores.tempex_duration_overlap = MinMaxAvg.calc_avg_min_max(
-        [val_dict.tempex_duration_overlap.minn for val_dict in val_dicts])
-    val_scores.numeric_value_offset = MinMaxAvg.calc_avg_min_max(
-        [val_dict.numeric_value_offset.minn for val_dict in val_dicts])
-    val_scores.target_matching_element = MinMaxAvg.calc_avg_min_max(
-        [val_dict.target_matching_element.minn for val_dict in val_dicts])
+    global_value_measures.global_ratio_matching_attribute = sum(
+        [value_measures.global_ratio_matching_attribute for value_measures in value_measures_list]) / len(value_measures_list)
+    global_value_measures.name_levenstein = MinMaxAvg.calc_avg_min_max(
+        [value_measures.name_levenstein.minn for value_measures in value_measures_list])
+    global_value_measures.bbox_iou = MinMaxAvg.calc_avg_min_max([value_measures.bbox_iou.minn for value_measures in value_measures_list])
+    global_value_measures.tempex_duration_overlap = MinMaxAvg.calc_avg_min_max(
+        [value_measures.tempex_duration_overlap.minn for value_measures in value_measures_list])
+    global_value_measures.numeric_value_offset = MinMaxAvg.calc_avg_min_max(
+        [value_measures.numeric_value_offset.minn for value_measures in value_measures_list])
+    global_value_measures.target_matching_element = MinMaxAvg.calc_avg_min_max(
+        [value_measures.target_matching_element.minn for value_measures in value_measures_list])
 
-    return val_scores
+    return global_value_measures
 
 
 def global_stats(gold_path: str, test_path: str, out_path: str) -> None:
