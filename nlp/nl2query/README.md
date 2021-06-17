@@ -1,33 +1,7 @@
 # Temporal Expression Recognition
 This readme describes how to fulfill all the necessary requirements
-to run the two TER engine: Duckling and Heidltime.
+to run the two TER engine:  Heidltime.
 
-## Duckling
-1. Install Docker on your machine.
-Follow: https://docs.docker.com/engine/install/
-   
-
-2. Check that Docker is installed correctly.
-In a terminal run: 
-   ```bash
-   docker run hello-world
-   ```
-
-3. Pull the Duckling Docker image:
-    ```bash
-    docker pull rasa/duckling
-    ```
-
-4. Start the Duckling Engine:
-    ```bash
-    docker run -p 8000:8000 rasa/duckling
-    ```
-
-5. Verify that Duckling is running correctly.
-Open https://0.0.0.0:8000 in a browser. It should display 'quack!'
-   
-
-6. Now you can run TER_duckling.py
 
 ## Heideltime
 

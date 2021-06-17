@@ -46,6 +46,7 @@ class TER_heideltime(NL2QueryInterface):
                 found = []
                 for item in out_tree.iter():
                     if item.tag in ["TIMEX3", "TIMEX3INTERVAL"]:
+                        item.text = "".join(item.itertext())
                         found.append(item)
                 return found
             else:
