@@ -25,6 +25,7 @@ class MinMaxAvg:
         """
         return {"avg": self.avg, "min": self.minn, "max": self.maxx}
 
+    @staticmethod
     def calc_avg_min_max(data_list: List):
         """
         Function that calculates average, min and max
@@ -115,15 +116,9 @@ class DataMeasures:
     """Class that defines one data measures composed of data metrics,
         and calculates it from a list of annotations"""
 
-    def __init__(self, gold_metrics: DataMetrics = None, test_metrics: DataMetrics = None):
-        if gold_metrics:
-            self.gold_metrics = gold_metrics
-        else:
-            self.gold_metrics = DataMetrics()
-        if test_metrics:
-            self.test_metrics = test_metrics
-        else:
-            self.test_metrics = DataMetrics()
+    def __init__(self, gold_metrics: DataMetrics = DataMetrics(), test_metrics: DataMetrics = DataMetrics()):
+        self.gold_metrics = gold_metrics
+        self.test_metrics = test_metrics
 
     def to_dict(self):
         """
@@ -218,7 +213,6 @@ class SpanMeasures:
         self.location_span = loc_span
         self.tempex_span = temp_span
         self.target_span = targ_span
-
 
     def to_dict(self):
         """
@@ -514,6 +508,7 @@ def duration_overlap(dur1, dur2) -> int:
     # datetime strings
     if dur1 == dur2:
         return 1
+    # TODO! divide by total duration to get IOU, better metrics
     return 0
 
 
