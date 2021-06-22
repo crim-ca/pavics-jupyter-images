@@ -157,7 +157,8 @@ class SpanMetrics:
                  perfect_end_type: float = 0.0, perfect_end_no_type: float = 0.0,
                  split_gold_type: int = 0, split_gold_no_type: int = 0,
                  split_test_type: int = 0, split_test_no_type: int = 0,
-                 overlapping_no_type: MinMaxAvg = None, overlapping_type: MinMaxAvg = None):
+                 overlapping_no_type: MinMaxAvg = MinMaxAvg(),
+                 overlapping_type: MinMaxAvg = MinMaxAvg()):
         self.count = count
         self.perfect_match_type_match = perfect_match_type
         self.perfect_match_no_type_match = perfect_match_no_type
@@ -169,14 +170,8 @@ class SpanMetrics:
         self.split_gold_no_type_match = split_gold_no_type
         self.split_test_type_match = split_test_type
         self.split_test_type_no_type_match = split_test_no_type
-        if overlapping_no_type:
-            self.overlapping_span_no_type_match = overlapping_no_type
-        else:
-            self.overlapping_span_no_type_match = MinMaxAvg()
-        if overlapping_type:
-            self.overlapping_span_type_match = overlapping_type
-        else:
-            self.overlapping_span_type_match = MinMaxAvg()
+        self.overlapping_span_no_type_match = overlapping_no_type
+        self.overlapping_span_type_match = overlapping_type
 
     def to_dict(self):
         """
@@ -277,14 +272,16 @@ class SpanMeasures:
                 overlap_count = 0
                 type_match_count = 0
                 for gidx, gspan in enumerate(gold_spans):
-                    if range(max(span[0], gspan[0]), min(span[-1], gspan[-1])):
+                    overlap = range(max(span[0], gspan[0]), min(span[-1], gspan[-1]))
+                    if overlap:
                         overlap_count += 1
+                        ratio = (overlap.stop-overlap.start) / (span[1]-span[0])
                         # includes perfect end and begin
                         if test_types[idx] == gold_types[gidx]:
-                            span_measures.get_span_metrics(test_types[idx]).overlapping_span_type_match.minn += 1
+                            span_measures.get_span_metrics(test_types[idx]).overlapping_span_type_match.minn += ratio
                             type_match_count += 1
                         else:
-                            span_measures.get_span_metrics(test_types[idx]).overlapping_span_no_type_match.minn += 1
+                            span_measures.get_span_metrics(test_types[idx]).overlapping_span_no_type_match.minn += ratio
                         # perfect begin
                         if span[0] == gold_spans[gidx][0]:
                             # begin match (including exact match)
