@@ -12,9 +12,9 @@ dependencies:
 # - ipykernel==5.3.4
 # - shapely==1.7.0
 # - perl==5.26.2
-# - python-flair
+- python-flair
 # - spacy==3.0.6
-- numpy==1.20.0
+- numpy<1.20.0
 - python-levenshtein==0.12.2
 - requests=2.25.1
 - pip==20.3.3
@@ -30,6 +30,6 @@ dependencies:
   # - jpype1==0.6.3
   # - numpy==1.20.0
   - textsearch==0.0.21
-  # - flair==0.8
+  - flair==0.8
   - spacy 
   - python-dateutil
