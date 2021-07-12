@@ -40,19 +40,3 @@ to run the two TER engine:  Heidltime.
    is passed in the 'main' as argument
 
    
-## Docker Image
-
-1. Set your position to path/to/nlk2query
-   ```bash
-   cd path/to/nl2query 
-    ```
-
-2. Build the docker image 
-   ```bash 
-    docker build -t nl2query . 
-    ```
-
-3. Run the docker image while mounting the folder as volume
-   ```bash
-    docker run -it --rm -v /path/to/nl2query:/nl2query nl2query <name_file.py> 
-    ```
