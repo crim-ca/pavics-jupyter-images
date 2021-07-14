@@ -1,22 +1,20 @@
-## DACCS - NLP docker image
+## PAVICS NLP Docker Image
 
-This image is able tu run all the python files required for the nlp notbooks.
-It has an installation of tree-tagger and java librarie needed for tree-tagger by download and extraction.
+This image contains all the nlp notebook dependencies.
+
 
 To build and run the project :
 
-### 1 .Build docker image
+### 1. Build docker image
 ```bash
-cd path/to/nlp
-docker build -t nlp .
+docker build -t crim-jupyter-nlp .
 ```
 ### 2. Run the docker image 
 ```bash
-sudo docker run -it --rm nlp bash
+docker run -it --rm crim-jupyter-nlp bash
 ```
-### 2.1 File execution after running the image
+### 2.1 File execution inside the running image
 ```bash
-source active birdy
-cd nl2query 
-python3 <python_file.py>
+source activate birdy
+python <python_file.py>
 ```

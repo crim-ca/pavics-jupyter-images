@@ -1,18 +1,25 @@
 name: birdy
 
 channels:
-- defaults
-- conda-forge
+  - defaults
+  - conda-forge
 
 dependencies:
-- python-flair
-- spacy==3.0.6
-- numpy<1.20.0
-- python-dateutil
-- python-levenshtein==0.12.2
-- requests=2.25.1
-- pip==20.3.3
+  - openjdk
+  - intake-esm
+  - intake-stac
+  - sat-search
+  - threddsclient
+  - python-flair
+  - spacy==3.1.0
+  - numpy<1.20.0
+  - python-dateutil
+  - python-levenshtein==0.12.2
+  - requests=2.25.1
+  - pip==20.3.3
+  - pip:
+    - textsearch==0.0.21
+    - spacy==3.1.0
 
-- pip:
-  - textsearch==0.0.21
-  - spacy 
+variables:
+  LANG=C.UTF-8
