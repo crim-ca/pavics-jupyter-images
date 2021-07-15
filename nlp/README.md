@@ -15,6 +15,8 @@ docker run -it --rm crim-jupyter-nlp bash
 ```
 ### 2.1 File execution inside the running image
 ```bash
-source activate birdy
+conda init 
+. ~/.bashrc
+conda activate birdy
 python <python_file.py>
 ```

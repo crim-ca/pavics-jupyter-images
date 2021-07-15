@@ -5,15 +5,15 @@ channels:
   - conda-forge
 
 dependencies:
-  - openjdk
-  - intake-esm
-  - intake-stac
-  - sat-search
-  - threddsclient
-  - python-flair
+  - intake-esm==2021.1.15
+  - intake-stac==0.3.0
+  - sat-search==0.3.0
+  - threddsclient==0.4.2
+  - openjdk==8.0.152 
+  - python-flair=0.8
   - spacy==3.1.0
-  - numpy<1.20.0
-  - python-dateutil
+  - numpy<=1.19.5
+  - python-dateutil==2.7.5
   - python-levenshtein==0.12.2
   - requests=2.25.1
   - pip==20.3.3
@@ -21,5 +21,3 @@ dependencies:
     - textsearch==0.0.21
     - spacy==3.1.0
 
-variables:
-  LANG=C.UTF-8

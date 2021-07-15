@@ -13,8 +13,10 @@ RUN umask 0000 && conda env update -f /environment.yml
 
 WORKDIR nl2query
 
+# Set the encoding to UTF-8, this is needed for heideiltime to work properly
+ENV LANG=C.UTF-8
 
-# Download spacy model
+# Download English transformer pipeline from spacy
 RUN python -m spacy download en_core_web_trf
 
 # Heideltime Tree-tagger Installation 
