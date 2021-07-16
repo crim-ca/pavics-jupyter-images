@@ -68,7 +68,8 @@ class PropertyAnnotation(Annotation):
 
     def to_dict(self):
         return {"text": self.text, "position": self.position, "type": self.annot_type,
-                "name": self.name, "value": self.value, "value_type": self.value_type}
+                "name": self.name, "value": self.value, "value_type": self.value_type,
+                "operation": self.operation}
 
     def __repr__(self):
         return json.dumps(self.to_dict())

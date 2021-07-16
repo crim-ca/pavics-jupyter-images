@@ -11,7 +11,6 @@ class TER_heideltime(NL2QueryInterface):
     def __init__(self, config: str = None):
         super().__init__(config)
         # check heideltime and treetagger
-        print(self.config)
         self.heideltime_jar = self.config.get('heideltime', 'heideltime_jar')
         self.heideltime_config = self.config.get('heideltime', "heideltime_config")
         self.treetagger = self.config.get('heideltime', "tree-tagger")
