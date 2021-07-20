@@ -13,7 +13,7 @@ RUN umask 0000 && conda env update -f /environment.yml
 
 WORKDIR nl2query
 
-# Set the encoding to UTF-8, this is needed for heideiltime to work properly
+# Set the encoding to UTF-8, this is needed for heideltime to work properly
 ENV LANG=C.UTF-8
 
 # Download English transformer pipeline from spacy
