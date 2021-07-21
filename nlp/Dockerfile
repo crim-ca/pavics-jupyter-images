@@ -39,6 +39,8 @@ RUN cd heideltime && \
     rmdir heideltime-standalone && \
     rm heideltime-standalone-2.2.1.tar.gz
 
+RUN python setup.py sdist
+RUN python setup.py install
 
 # Give read&write permission to jenkins for config
 RUN chown -R jenkins .
