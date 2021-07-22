@@ -12,6 +12,20 @@ Fixes:
 ------
 - ...
 
+0.3.0 (2021-07-21)
+===================
+
+Changes:
+--------
+- Dockerfile with the tree-tagger installation has been added
+- environment.yml has been updated to contain the necessary dependencies.
+- nl2query contains all the nlp notebook dependencies.
+- Added tutorial notebook to showcase nl2query.
+
+Fixes:
+------
+- na
+  
 0.2.0 (2021-05-11)
 ===================
 
