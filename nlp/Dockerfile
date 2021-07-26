@@ -4,20 +4,25 @@ FROM birdhouse/pavics-jupyter-base:0.2.1
 USER root
 
 COPY environment.yml /environment.yml
-COPY ./nl2query /nl2query 
+# COPY ./nl2query /nl2query 
 COPY notebook_config.yml /notebook_config.yml
 
 # update env "birdy"
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
 RUN umask 0000 && conda env update -f /environment.yml
 
-WORKDIR nl2query
+# WORKDIR nl2query
+WORKDIR /
+
 
 # Set the encoding to UTF-8, this is needed for heideltime to work properly
 ENV LANG=C.UTF-8
 
 # Download English transformer pipeline from spacy
 RUN python -m spacy download en_core_web_trf
+
+RUN mkdir heideltime
+COPY notebooks/nl2query/heideltime/config.props /heideltime/config.props 
 
 # Heideltime Tree-tagger Installation 
 RUN cd heideltime && \
@@ -39,11 +44,11 @@ RUN cd heideltime && \
     rmdir heideltime-standalone && \
     rm heideltime-standalone-2.2.1.tar.gz
 
-RUN python setup.py sdist
-RUN python setup.py install
+# RUN python setup.py sdist
+# RUN python setup.py install
 
 # Give read&write permission to jenkins for config
-RUN chown -R jenkins .
+RUN chown -R jenkins heideltime
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
