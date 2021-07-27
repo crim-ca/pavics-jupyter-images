@@ -45,12 +45,7 @@ RUN cd heideltime && \
     rmdir heideltime-standalone && \
     rm heideltime-standalone-2.2.1.tar.gz
 
-# COPY notebooks/nl2query/__init__.py /nl2query/__init__.py
-# COPY notebooks/nl2query/NL2QueryInterface.py /nl2query/NL2QueryInterface.py 
-# COPY notebooks/nl2query/TER_heideltime.py /nl2query/TER_heideltime.py 
-# COPY notebooks/nl2query/heideltime_config.cfg /nl2query/heideltime_config.cfg
-
-# COPY /heideltime/config.props /heideltime/config.props 
+COPY /heideltime/config.props /heideltime/config.props 
 
 # Give read&write permission to jenkins for config
 RUN chown -R jenkins heideltime
