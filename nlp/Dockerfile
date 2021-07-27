@@ -10,9 +10,6 @@ COPY notebook_config.yml /notebook_config.yml
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
 RUN umask 0000 && conda env update -f /environment.yml
 
-# WORKDIR /
-
-
 # Set the encoding to UTF-8, this is needed for heideltime to work properly
 ENV LANG=C.UTF-8
 
