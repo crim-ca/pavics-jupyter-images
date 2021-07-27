@@ -20,3 +20,7 @@ conda init
 conda activate birdy
 python <python_file.py>
 ```
+
+# Model flair
+The "ner-large" flair model is included in the image build. This means that the models will not be updated to the latest.
+If the latest is needed, the image will have to be rebuilt with --no-cache. 

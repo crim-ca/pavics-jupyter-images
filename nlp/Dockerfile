@@ -17,14 +17,11 @@ ENV LANG=C.UTF-8
 RUN python -m spacy download en_core_web_trf
 
 # Downloading the ner-large flair model
-RUN mkdir flair_models && cd flair_models && \
-    curl -L -o ner-large  https://huggingface.co/flair/ner-english-large/resolve/main/pytorch_model.bin > /dev/null
+RUN mkdir flair_models && \
+    curl -L -o flair_models/ner-large  https://huggingface.co/flair/ner-english-large/resolve/main/pytorch_model.bin > /dev/null
 
 # Heideltime Tree-tagger Installation 
-RUN mkdir heideltime && \
-    cd heideltime && \
-    mkdir tree-tagger-linux-3.2.3 && \
-    cd tree-tagger-linux-3.2.3 && \
+RUN mkdir -p heideltime/tree-tagger-linux-3.2.3 && cd heideltime/tree-tagger-linux-3.2.3 && \
     curl -o tree-tagger-linux-3.2.3.tar.gz  https://www.cis.lmu.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.3.tar.gz && \
     curl -o tagger-scripts.tar.gz https://www.cis.lmu.de/~schmid/tools/TreeTagger/data/tagger-scripts.tar.gz && \
     curl -o english.par.gz https://www.cis.lmu.de/~schmid/tools/TreeTagger/data/english.par.gz && \
@@ -40,8 +37,6 @@ RUN cd heideltime && \
     mv heideltime-standalone/de.unihd.dbs.heideltime.standalone.jar . && \ 
     rmdir heideltime-standalone && \
     rm heideltime-standalone-2.2.1.tar.gz
-
-COPY notebooks/nl2query/heideltime/config.props /heideltime/config.props 
 
 # Give read&write permission to jenkins for config
 RUN chown -R jenkins heideltime
