@@ -45,7 +45,7 @@ RUN cd heideltime && \
     rmdir heideltime-standalone && \
     rm heideltime-standalone-2.2.1.tar.gz
 
-COPY /heideltime/config.props /heideltime/config.props 
+COPY notebooks/nl2query/heideltime/config.props /heideltime/config.props 
 
 # Give read&write permission to jenkins for config
 RUN chown -R jenkins heideltime
