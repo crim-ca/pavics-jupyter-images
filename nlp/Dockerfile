@@ -4,15 +4,13 @@ FROM birdhouse/pavics-jupyter-base:0.2.1
 USER root
 
 COPY environment.yml /environment.yml
-# COPY ./nl2query /nl2query 
 COPY notebook_config.yml /notebook_config.yml
 
 # update env "birdy"
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
 RUN umask 0000 && conda env update -f /environment.yml
 
-# WORKDIR nl2query
-WORKDIR /
+# WORKDIR /
 
 
 # Set the encoding to UTF-8, this is needed for heideltime to work properly
@@ -21,11 +19,14 @@ ENV LANG=C.UTF-8
 # Download English transformer pipeline from spacy
 RUN python -m spacy download en_core_web_trf
 
-RUN mkdir heideltime
-COPY notebooks/nl2query/heideltime/config.props /heideltime/config.props 
+# Downloading the ner-large flair model
+RUN mkdir flair_models && cd flair_models && \
+    mkdir ner-large && cd ner-large && \
+    curl -L -O -J  https://huggingface.co/flair/ner-english-large/resolve/main/pytorch_model.bin > /dev/null
 
 # Heideltime Tree-tagger Installation 
-RUN cd heideltime && \
+RUN mkdir heideltime && \
+    cd heideltime && \
     mkdir tree-tagger-linux-3.2.3 && \
     cd tree-tagger-linux-3.2.3 && \
     curl -o tree-tagger-linux-3.2.3.tar.gz  https://www.cis.lmu.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.3.tar.gz && \
@@ -44,8 +45,12 @@ RUN cd heideltime && \
     rmdir heideltime-standalone && \
     rm heideltime-standalone-2.2.1.tar.gz
 
-# RUN python setup.py sdist
-# RUN python setup.py install
+# COPY notebooks/nl2query/__init__.py /nl2query/__init__.py
+# COPY notebooks/nl2query/NL2QueryInterface.py /nl2query/NL2QueryInterface.py 
+# COPY notebooks/nl2query/TER_heideltime.py /nl2query/TER_heideltime.py 
+# COPY notebooks/nl2query/heideltime_config.cfg /nl2query/heideltime_config.cfg
+
+# COPY /heideltime/config.props /heideltime/config.props 
 
 # Give read&write permission to jenkins for config
 RUN chown -R jenkins heideltime
