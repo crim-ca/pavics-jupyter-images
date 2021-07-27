@@ -18,8 +18,7 @@ RUN python -m spacy download en_core_web_trf
 
 # Downloading the ner-large flair model
 RUN mkdir flair_models && cd flair_models && \
-    mkdir ner-large && cd ner-large && \
-    curl -L -O -J  https://huggingface.co/flair/ner-english-large/resolve/main/pytorch_model.bin > /dev/null
+    curl -L -o ner-large  https://huggingface.co/flair/ner-english-large/resolve/main/pytorch_model.bin > /dev/null
 
 # Heideltime Tree-tagger Installation 
 RUN mkdir heideltime && \
