@@ -11,8 +11,10 @@ class NER_flair(NL2QueryInterface):
     def __init__(self, config: str = None):
         super().__init__(config)
         # start my NL2query engine
+        # Passing a config containing the local path to the model, otherwise it will download the model
+        self.model_file = self.config.get('model_file','ner-large') if config is not None else 'ner-large'
         # load the NER tagger
-        self.tagger = SequenceTagger.load('ner-large')
+        self.tagger = SequenceTagger.load(self.model_file)
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
         # take annotation given by the engine
