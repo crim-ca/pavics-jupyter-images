@@ -10,7 +10,10 @@ class NER_spacy(NL2QueryInterface):
     def __init__(self, config: str = None):
         super().__init__(config)
         # start my NL2query engine
-        self.spacy_engine = spacy.load("en_core_web_trf")
+        default = "en_core_web_trf"
+        # Getting model from a config file, otherwise use the default model
+        self.model = self.config.get("components.ner","source", fallback=default) if self.config else default
+        self.spacy_engine = spacy.load(self.model)
 #        self.spacy_engine = Language.from_config(self.config)
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:

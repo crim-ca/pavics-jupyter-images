@@ -10,9 +10,10 @@ dependencies:
   - sat-search==0.3.0
   - threddsclient==0.4.2
   - openjdk==8.0.152 
+  # python-flair=0.8 only works with numpy<=1.19.5
   - python-flair=0.8
-  - spacy==3.1.0
   - numpy<=1.19.5
+  - spacy==3.1.0
   - python-dateutil==2.7.5
   - python-levenshtein==0.12.2
   - requests=2.25.1
