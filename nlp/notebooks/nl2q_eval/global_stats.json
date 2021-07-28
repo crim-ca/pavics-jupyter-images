@@ -1,0 +1,211 @@
+{
+  "global_stats": {
+    "gold_file": "",
+    "test_file": "",
+    "data_measures": {
+      "gold_data": {
+        "total_annotation": 0,
+        "total_annotation_per_type": {
+          "property": 0,
+          "location": 0,
+          "tempex": 0,
+          "target": 0
+        },
+        "annotation_per_query": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "test_data": {
+        "total_annotation": 0,
+        "total_annotation_per_type": {
+          "property": 0,
+          "location": 0,
+          "tempex": 0,
+          "target": 0
+        },
+        "annotation_per_query": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    "span_measures": {
+      "global": {
+        "count": 0,
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
+        "overlapping_span": {
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
+          "type_match": {"avg": 0.0, "min": 0, "max": 0}
+        }
+      },
+      "property": {
+        "count": 0,
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
+        "overlapping_span": {
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
+          "type_match": {"avg": 0.0, "min": 0, "max": 0}
+        }
+      },
+      "location": {
+        "count": 0,
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
+        "overlapping_span": {
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
+          "type_match": {"avg": 0.0, "min": 0, "max": 0}
+        }
+      },
+      "tempex": {
+        "count": 0,
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
+        "overlapping_span": {
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
+          "type_match": {"avg": 0.0, "min": 0, "max": 0}
+        }
+      },
+      "target": {
+        "count": 0,
+        "perfect_match": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_begin": {"no_type_match": 0.0, "type_match": 0.0},
+        "perfect_end": {"no_type_match": 0.0, "type_match": 0.0},
+        "split_gold_span": {"no_type_match": 0, "type_match": 0},
+        "split_test_span": {"no_type_match": 0, "type_match": 0},
+        "overlapping_span": {
+          "no_type_match": {"avg": 0.0, "min": 0, "max": 0},
+          "type_match": {"avg": 0.0, "min": 0, "max": 0}
+        }
+      }
+    },
+    "attribute_measures": {
+      "global": {
+        "count": 0,
+        "total_span_type_match": 0,
+        "per_annotation_span_perfect_match_precision": 0.0,
+        "per_annotation_overlapping_span_perfect_match": 0.0,
+        "per_annotation_attribute_match": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "property": {
+        "count": 0,
+        "total_span_type_match": 0,
+        "per_annotation_span_perfect_match_precision": 0.0,
+        "per_annotation_overlapping_span_perfect_match": 0.0,
+        "per_annotation_attribute_match": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "location": {
+        "count": 0,
+        "total_span_type_match": 0,
+        "per_annotation_span_perfect_match_precision": 0.0,
+        "per_annotation_overlapping_span_perfect_match": 0.0,
+        "per_annotation_attribute_match": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "tempex": {
+        "count": 0,
+        "total_span_type_match": 0,
+        "per_annotation_span_perfect_match_precision": 0.0,
+        "per_annotation_overlapping_span_perfect_match": 0.0,
+        "per_annotation_attribute_match": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "target": {
+        "count": 0,
+        "total_span_type_match": 0,
+        "per_annotation_span_perfect_match_precision": 0.0,
+        "per_annotation_overlapping_span_perfect_match": 0.0,
+        "per_annotation_attribute_match": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    "value_measures": {
+      "global": {
+        "total_matching_attributes": 0,
+        "ratio_matching_attributes": 0.0,
+        "perfect_value_match": 0.0
+      },
+      "type": {
+        "total_matching_attributes": 0,
+        "perfect_value_match": 0.0
+      },
+      "name": {
+        "total_matching_attributes": 0,
+        "perfect_value_match": 0.0,
+        "levenstein": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "bbox": {
+        "total_matching_attributes": 0,
+        "perfect_value_match": 0.0,
+        "intersect_over_union": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "tempex": {
+        "total_matching_attributes": 0,
+        "perfect_value_match": 0.0,
+        "duration_overlap": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "numeric": {
+        "total_matching_attributes": 0,
+        "perfect_value_match": 0.0,
+        "value_offset": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "target": {
+        "total_matching_attributes": 0,
+        "perfect_value_match": 0.0,
+        "matching_element": {
+          "avg": 0.0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    }
+  }
+}
