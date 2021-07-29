@@ -21,6 +21,8 @@ Changes:
 - environment.yml has been updated to contain the necessary dependencies.
 - nl2query contains all the nlp notebook dependencies.
 - Added tutorial notebook to showcase nl2query.
+- Added nl2q_eval folder and files
+- Added tests
 
 Fixes:
 ------

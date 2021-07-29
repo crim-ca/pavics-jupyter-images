@@ -4,14 +4,11 @@ FROM birdhouse/pavics-jupyter-base:0.2.1
 USER root
 
 COPY environment.yml /environment.yml
-COPY ./nl2query /nl2query 
 COPY notebook_config.yml /notebook_config.yml
 
 # update env "birdy"
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
 RUN umask 0000 && conda env update -f /environment.yml
-
-WORKDIR nl2query
 
 # Set the encoding to UTF-8, this is needed for heideltime to work properly
 ENV LANG=C.UTF-8
@@ -19,10 +16,12 @@ ENV LANG=C.UTF-8
 # Download English transformer pipeline from spacy
 RUN python -m spacy download en_core_web_trf
 
+# Downloading the ner-large flair model
+RUN mkdir flair_models && \
+    curl -L -o flair_models/ner-large  https://huggingface.co/flair/ner-english-large/resolve/main/pytorch_model.bin > /dev/null
+
 # Heideltime Tree-tagger Installation 
-RUN cd heideltime && \
-    mkdir tree-tagger-linux-3.2.3 && \
-    cd tree-tagger-linux-3.2.3 && \
+RUN mkdir -p heideltime/tree-tagger-linux-3.2.3 && cd heideltime/tree-tagger-linux-3.2.3 && \
     curl -o tree-tagger-linux-3.2.3.tar.gz  https://www.cis.lmu.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.3.tar.gz && \
     curl -o tagger-scripts.tar.gz https://www.cis.lmu.de/~schmid/tools/TreeTagger/data/tagger-scripts.tar.gz && \
     curl -o english.par.gz https://www.cis.lmu.de/~schmid/tools/TreeTagger/data/english.par.gz && \
@@ -39,11 +38,8 @@ RUN cd heideltime && \
     rmdir heideltime-standalone && \
     rm heideltime-standalone-2.2.1.tar.gz
 
-RUN python setup.py sdist
-RUN python setup.py install
-
 # Give read&write permission to jenkins for config
-RUN chown -R jenkins .
+RUN chown -R jenkins heideltime
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
