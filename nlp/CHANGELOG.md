@@ -59,7 +59,7 @@ Changes:
 - Custom notebooks specific to the environment can now be added to the docker image
 
 Fixes:
-------S
+------
 - na
 
 0.1.0 (2021-02-22)
