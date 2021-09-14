@@ -11,7 +11,18 @@ Changes:
 Fixes:
 ------
 - ...
+  
+0.2.1 (2021-06-01)
+===================
 
+Changes:
+--------
+- na, test of renovate bot from jupyter-base master commit
+
+Fixes:
+------
+- na
+  
 0.2.0 (2021-05-11)
 ===================
 
