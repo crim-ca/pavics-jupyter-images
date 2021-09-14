@@ -17,7 +17,7 @@ Fixes:
 
 Changes:
 --------
-- Update base image version in Dockerfiles
+- Update base image version in Dockerfile
 
 Fixes:
 ------
