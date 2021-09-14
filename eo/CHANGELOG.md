@@ -12,23 +12,12 @@ Fixes:
 ------
 - ...
   
-0.2.2 (2021-09-14)
-===================
-
-Changes:
---------
-- Follow-up of the `pavics-jupyter-base` version bump.
-
-Fixes:
-------
-- na
-
 0.2.1 (2021-06-01)
 ===================
 
 Changes:
 --------
-- Test of renovate bot from `pavics-jupyter-base` master commit.
+- na, test of renovate bot from jupyter-base master commit
 
 Fixes:
 ------

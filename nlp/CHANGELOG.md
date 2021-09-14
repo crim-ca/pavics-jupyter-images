@@ -17,7 +17,7 @@ Fixes:
 
 Changes:
 --------
-- Follow-up of the `pavics-jupyter-base` version bump.
+- na, follow-up of the `pavics-jupyter-base` version bump
 
 Fixes:
 ------
@@ -45,7 +45,7 @@ Fixes:
 
 Changes:
 --------
-- Test of renovate bot from `pavics-jupyter-base` master commit.
+- na, test of renovate bot from `pavics-jupyter-base` master commit
 
 Fixes:
 ------
