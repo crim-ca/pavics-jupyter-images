@@ -17,7 +17,7 @@ Fixes:
 
 Changes:
 --------
-- na, follow-up of the `pavics-jupyter-base` version bump
+- Update base image version in Dockerfile
 
 Fixes:
 ------
@@ -38,7 +38,6 @@ Changes:
 Fixes:
 ------
 - na
-  
 
 0.2.1 (2021-06-01)
 ===================
