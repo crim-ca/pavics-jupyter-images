@@ -45,7 +45,7 @@ Fixes:
 
 Changes:
 --------
-- Test of renovate bot from `pavics-jupyter-base` master commit.
+- na, test of renovate bot from `pavics-jupyter-base` master commit
 
 Fixes:
 ------
