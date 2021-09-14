@@ -12,6 +12,17 @@ Fixes:
 ------
 - ...
 
+0.3.1 (2021-09-14)
+===================
+
+Changes:
+--------
+- Follow-up of the `pavics-jupyter-base` version bump.
+
+Fixes:
+------
+- na
+
 0.3.0 (2021-07-21)
 ===================
 
@@ -28,6 +39,18 @@ Fixes:
 ------
 - na
   
+
+0.2.1 (2021-06-01)
+===================
+
+Changes:
+--------
+- Test of renovate bot from `pavics-jupyter-base` master commit.
+
+Fixes:
+------
+- na
+ 
 0.2.0 (2021-05-11)
 ===================
 
@@ -36,7 +59,7 @@ Changes:
 - Custom notebooks specific to the environment can now be added to the docker image
 
 Fixes:
-------
+------S
 - na
 
 0.1.0 (2021-02-22)
