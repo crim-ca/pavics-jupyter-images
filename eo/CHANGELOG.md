@@ -18,6 +18,7 @@ Fixes:
 Changes:
 --------
 - Follow-up of the `pavics-jupyter-base` version bump.
+- Update the `FROM` in Dockerfile
 
 Fixes:
 ------
