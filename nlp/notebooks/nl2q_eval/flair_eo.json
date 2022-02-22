@@ -1,0 +1,1 @@
+{"query": "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%", "annotations": [{"text": "Ottawa", "position": [16, 22], "type": "location", "name": "Ottawa", "value": {"type": "Polygon", "coordinates": [[[-76.3631149, 44.9445516], [-75.2324963, 45.544859]]]}, "matchingType": "overlap"}]}
