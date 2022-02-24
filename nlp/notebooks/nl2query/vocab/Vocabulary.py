@@ -32,7 +32,7 @@ class Vocabulary:
     def get_values_list(self):
         values = []
         for key in self.vocab:
-            values += [x for x in self.vocab[key]['values'] if type(x) == str]
+            values += [x for x in self.vocab[key]['values'] if (type(x) == str and len(x) > 1)]
         return values
 
     def find_var_of_value(self, val: Any):
