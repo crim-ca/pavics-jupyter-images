@@ -1,4 +1,4 @@
-FROM birdhouse/pavics-jupyter-base:0.2.2
+FROM birdhouse/pavics-jupyter-base:0.3.0
 
 # must update conda env as root, because of a permission error when having pip dependencies in the input yml file
 USER root

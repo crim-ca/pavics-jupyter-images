@@ -11,6 +11,18 @@ Changes:
 Fixes:
 ------
 - ...
+
+0.2.3 (2022-12-13)
+===================
+
+Changes:
+--------
+- Update base image version in Dockerfile
+
+Fixes:
+------
+- na
+
   
 0.2.2 (2021-09-14)
 ===================
