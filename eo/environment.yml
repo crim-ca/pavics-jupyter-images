@@ -15,7 +15,6 @@ dependencies:
   # TODO: These next packages could possibly be added to a more generic 'vision' image, from which 'eo' would be built
   - h5py
   - googledrivedownloader
-  - opencv
   - pillow>=7.1
 
   # TODO: These next packages could possibly be added to a more specific 'ML' image, built from the 'eo' image
@@ -35,7 +34,11 @@ dependencies:
   - pip:
     # Install kornia from pypi, versions from conda are older and create conflicting errors with latest python version
     - kornia
-    - opencv-python
+    # Use opencv-python-headless instead of opencv or opencv-python.
+    # This package is smaller and avoids having to do the full installation of opencv from source.
+    # Also, the opencv package was producing some errors during the environment installation and the opencv-python was
+    # requiring a prior installation of python3-opencv via apt-get to include additional required library files.
+    - opencv-python-headless
     - orion
     - torch
     - torchvision>=0.6
