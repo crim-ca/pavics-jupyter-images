@@ -12,12 +12,13 @@ Fixes:
 ------
 - ...
 
-0.3.3 (2022-12-13)
+0.4.0 (2022-12-20)
 ===================
 
 Changes:
 --------
 - Update base image version in Dockerfile
+- Use `mamba` instead of `conda` for environment installation
 
 Fixes:
 ------
