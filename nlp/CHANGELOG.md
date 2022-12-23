@@ -12,18 +12,27 @@ Fixes:
 ------
 - ...
 
-0.4.0 (2022-12-20)
+0.4.0 (2022-12-23)
 ===================
 
 Changes:
 --------
-- Update base image version in Dockerfile
 - Use `mamba` instead of `conda` for environment installation
 
 Fixes:
 ------
 - na
 
+0.3.3 (2022-12-13)
+===================
+
+Changes:
+--------
+- Update base image version in Dockerfile
+
+Fixes:
+------
+- na
 
 0.3.2 (2022-02-17)
 ===================

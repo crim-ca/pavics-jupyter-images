@@ -12,17 +12,27 @@ Fixes:
 ------
 - ...
 
-0.3.0 (2022-12-20)
+0.3.0 (2022-12-23)
 ===================
 
 Changes:
 --------
-- Update base image version in Dockerfile
 - Use `mamba` instead of `conda` for environment installation
 
 Fixes:
 ------
 - Avoid problems with the `opencv` and `opencv-python` packages by replacing them with the `opencv-python-headless` package
+
+0.2.3 (2022-12-13)
+===================
+
+Changes:
+--------
+- Update base image version in Dockerfile
+
+Fixes:
+------
+- na
   
 0.2.2 (2021-09-14)
 ===================
