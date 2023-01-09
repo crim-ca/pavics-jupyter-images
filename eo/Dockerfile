@@ -1,4 +1,4 @@
-FROM birdhouse/pavics-jupyter-base:0.3.0
+FROM birdhouse/pavics-jupyter-base:0.4.0
 
 # must update conda env as root, because of a permission error when having pip dependencies in the input yml file
 USER root
@@ -7,7 +7,10 @@ COPY environment.yml /environment.yml
 
 # update env "birdy"
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
-RUN umask 0000 && conda env update -f /environment.yml
+RUN umask 0000 && mamba env update -f /environment.yml
+
+# Give ownership of the conda cache folder to jenkins, to enable installing packages by the user from JupyterLab
+RUN chown -R 1000:1000 /opt/conda/pkgs/cache
 
 # fix logged warning from GDAL sub-package when accessing Sentinel data via SAFE.ZIP
 #   only problematic here when using the 'root' conda env

@@ -1,0 +1,8 @@
+### IDE
+**/.idea/
+**/.vscode/
+
+### Notebooks
+# expect examples per domain
+./*.ipynb
+**/.ipynb_checkpoints/

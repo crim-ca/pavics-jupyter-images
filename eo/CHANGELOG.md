@@ -12,6 +12,17 @@ Fixes:
 ------
 - ...
 
+0.3.0 (2022-12-23)
+===================
+
+Changes:
+--------
+- Use `mamba` instead of `conda` for environment installation
+
+Fixes:
+------
+- Avoid problems with the `opencv` and `opencv-python` packages by replacing them with the `opencv-python-headless` package
+
 0.2.3 (2022-12-13)
 ===================
 
@@ -22,7 +33,6 @@ Changes:
 Fixes:
 ------
 - na
-
   
 0.2.2 (2021-09-14)
 ===================
