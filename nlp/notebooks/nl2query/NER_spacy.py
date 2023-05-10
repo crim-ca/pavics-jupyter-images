@@ -4,6 +4,26 @@ import requests
 import re
 import json
 
+
+def get_bbox_geogratis(location:str):
+    # use geogratis - only for Canada
+    geojson = {}
+    req = requests.get('http://geogratis.gc.ca/services/geolocation/en/locate?q=' + location)
+    if req.status_code == 200:
+        result = json.loads(req.text)
+        # take the first best match
+        # TODO: develop a better heuristic than the first best match
+        if result:
+            if 'bbox' in result[0]:
+                # create polygon feature from bbox
+                geojson["coordinates"] = [[[result[0]['bbox'][i], result[0]['bbox'][i + 1]] \
+                                           for i in range(0, len(result[0]['bbox']), 2)]]
+            elif 'geometry' in result[0]:
+                # point feature
+                geojson = result[0]['geometry']
+    return geojson
+
+
 class NER_spacy(NL2QueryInterface):
     """ Spacy implementation of the NL2query interface"""
 
@@ -45,22 +65,8 @@ class NER_spacy(NL2QueryInterface):
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
         # get gejson of location
-        geojson = {}
-        # use geogratis - only for Canada
-        req = requests.get('http://geogratis.gc.ca/services/geolocation/en/locate?q=' + annotation.text)
-        if req.status_code == 200:
-            result = json.loads(req.text)
-            # take the first best match
-            # TODO: develop a better heuristic than the first best match
-            if result:
-                if 'bbox' in result[0]:
-                    # create polygon feature from bbox
-                    geojson = {"type": "Polygon", "coordinates":
-                               [[[result[0]['bbox'][i], result[0]['bbox'][i+1]]
-                                for i in range(0, len(result[0]['bbox']), 2)]]}
-                elif 'geometry' in result[0]:
-                    # point feature
-                    geojson = result[0]['geometry']
+        geojson = {"type": "Polygon", "coordinates": [[]]}
+        # geojson = get_bbox_geogratis(annotation.text)
         return LocationAnnotation(text=annotation.text,  position=[annotation.start_char, annotation.end_char],
                                   matching_type="overlap", name=annotation.text, value=geojson)
 
@@ -81,10 +87,10 @@ class NER_spacy(NL2QueryInterface):
         # collect annotations in a list of typed dicts
         annot_dicts = []
         for ent in doc.ents:
-            print(ent.text, ent.start_char, ent.end_char, ent.label_)
+            print("SPACY NER:",ent.text, ent.start_char, ent.end_char, ent.label_)
             # check the type and create appropriate annotatation type
             if ent.label_ in ["PERCENT", "QUANTITY", "ORDINAL", "CARDINAL",
-                              "PERSON", "NORP", "ORGANIZATION", "FACILITY"]:
+                              "PERSON", "NORP", "ORGANIZATION", "ORG", "FACILITY"]:
                 annot_dicts.append(self.create_property_annotation(ent))
             elif ent.label_ in ["GPE", "LOCATION"]:
                 annot_dicts.append(self.create_location_annotation(ent))

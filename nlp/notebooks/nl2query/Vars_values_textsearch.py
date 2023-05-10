@@ -106,7 +106,7 @@ class Vars_values_textsearch(NL2QueryInterface):
         pass
 
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
-        print("Searching vocabulary words...")
+        print("TEXTSEARCH:")
         annotations_list = []
         for result in self.ts.findall(nlq):
             print(result)
