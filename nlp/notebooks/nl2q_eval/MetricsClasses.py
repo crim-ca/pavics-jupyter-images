@@ -2,6 +2,7 @@ from typing import List, Dict, Any
 from shapely.geometry import Polygon
 from Levenshtein import distance
 import datetime
+import re
 
 # global variables
 DATA_TYPES = ['gold_data', 'test_data']
@@ -32,6 +33,8 @@ class MinMaxAvg:
         of a list of numeric values.
         Returns an instance of MinMaxAvg class.
         """
+        if len(data_list) == 0:
+            return MinMaxAvg(avg=0, minn=0, maxx=0)
         return MinMaxAvg(avg=sum(data_list) / len(data_list),
                          minn=min(data_list), maxx=max(data_list))
 
@@ -234,6 +237,79 @@ class SpanMeasures:
             return self.target_span
         return None
 
+
+    @staticmethod
+    def span_overlap(gold_span, test_span):
+        """takes the span positions of gold and test
+        and checks if there is any overlap
+        even in the split annotation cases"""
+        if not(len(gold_span) == 2 and len(test_span) == 2):
+            return False
+        if type(test_span[0]) == list:
+            for split_tspan in test_span:
+                if type(gold_span[0]) == list:
+                    for split_gspan in gold_span:
+                        return range(max(split_gspan[0], split_tspan[0]), min(split_gspan[-1], split_tspan[-1]))
+                else:
+                    return range(max(gold_span[0], split_tspan[0]), min(gold_span[-1], split_tspan[-1]))
+        else:
+            if type(gold_span[0]) == list:
+                for split_gspan in gold_span:
+                    return range(max(split_gspan[0], test_span[0]), min(split_gspan[-1], test_span[-1]))
+            else:
+                return range(max(gold_span[0], test_span[0]), min(gold_span[-1], test_span[-1]))
+        return 0
+
+    @staticmethod
+    def span_begin_overlap(gold_span, test_span):
+        """takes the span positions of gold and test
+        and checks if there is any overlap
+        even in the split annotation cases"""
+        if not (len(gold_span) == 2 and len(test_span) == 2):
+            return False
+        if type(test_span[0]) == list:
+            for split_tspan in test_span:
+                if type(gold_span[0]) == list:
+                    for split_gspan in gold_span:
+                        if split_gspan[0] == split_tspan[0]:
+                            return True
+                else:
+                    if gold_span[0] == split_tspan[0]:
+                        return True
+        else:
+            if type(gold_span[0]) == list:
+                for split_gspan in gold_span:
+                    if split_gspan[0] == test_span[0]:
+                        return True
+            elif gold_span[0] == test_span[0]:
+                return True
+        return False
+
+    @staticmethod
+    def span_end_overlap(gold_span, test_span):
+        """takes the span positions of gold and test
+        and checks if there is any overlap
+        even in the split annotation cases"""
+        if not (len(gold_span) == 2 and len(test_span) == 2):
+            return False
+        if type(test_span[0]) == list:
+            for split_tspan in test_span:
+                if type(gold_span[0]) == list:
+                    for split_gspan in gold_span:
+                        if split_gspan[-1] == split_tspan[-1]:
+                            return True
+                else:
+                    if gold_span[-1] == split_tspan[-1]:
+                        return True
+        else:
+            if type(gold_span[0]) == list:
+                for split_gspan in gold_span:
+                    if split_gspan[-1] == test_span[-1]:
+                        return True
+            elif gold_span[-1] == test_span[-1]:
+                return True
+        return False
+
     @staticmethod
     def get_span_measures(gold: List[Dict], test: List[Dict]):
         """
@@ -252,7 +328,8 @@ class SpanMeasures:
         # TODO! if gold_spans is only length 1, the result has an empty item in the list?
         for idx, span in enumerate(test_spans):
             # update count
-            span_measures.get_span_metrics(test_types[idx]).count += 1
+            span_metric_test_type = span_measures.get_span_metrics(test_types[idx])
+            span_metric_test_type.count += 1
             # perfect match
             if span in gold_spans:
                 # exact match
@@ -260,9 +337,9 @@ class SpanMeasures:
                 # check for type match
                 gold_idx = gold_spans.index(span)  # we do not presume the test and gold are aligned
                 if test_types[idx] == gold_types[gold_idx]:
-                    span_measures.get_span_metrics(test_types[idx]).perfect_match_type_match += 1
+                    span_metric_test_type.perfect_match_type_match += 1
                 else:
-                    span_measures.get_span_metrics(test_types[idx]).perfect_match_no_type_match += 1
+                    span_metric_test_type.perfect_match_no_type_match += 1
             else:
                 # not perfect match
                 # check for some kind of overlap
@@ -270,48 +347,49 @@ class SpanMeasures:
                 overlap_count = 0
                 type_match_count = 0
                 for gidx, gspan in enumerate(gold_spans):
-                    overlap = range(max(span[0], gspan[0]), min(span[-1], gspan[-1]))
+                    overlap = SpanMeasures.span_overlap(span, gspan)
                     if overlap:
                         overlap_count += 1
                         ratio = (overlap.stop-overlap.start) / (span[1]-span[0])
                         # includes perfect end and begin
                         if test_types[idx] == gold_types[gidx]:
-                            span_measures.get_span_metrics(test_types[idx]).overlapping_span_type_match.minn += ratio
+                            span_metric_test_type.overlapping_span_type_match.minn += ratio
                             type_match_count += 1
                         else:
-                            span_measures.get_span_metrics(test_types[idx]).overlapping_span_no_type_match.minn += ratio
+                            span_metric_test_type.overlapping_span_no_type_match.minn += ratio
                         # perfect begin
-                        if span[0] == gold_spans[gidx][0]:
+                        if SpanMeasures.span_begin_overlap(span, gold_spans[gidx]):#span[0] == gold_spans[gidx][0]:
                             # begin match (including exact match)
                             # update type-specific count
                             if test_types[idx] == gold_types[gidx]:
-                                span_measures.get_span_metrics(test_types[idx]).perfect_begin_type_match += 1
+                                span_metric_test_type.perfect_begin_type_match += 1
                             else:
-                                span_measures.get_span_metrics(test_types[idx]).perfect_begin_no_type_match += 1
+                                span_metric_test_type.perfect_begin_no_type_match += 1
                         # perfect end
-                        if span[1] == gold_spans[gidx][1]:
+                        if SpanMeasures.span_end_overlap(span, gold_spans[gidx]):#span[1] == gold_spans[gidx][1]:
                             # end match (including exact match)
                             # update type-specific count
                             if test_types[idx] == gold_types[gidx]:
-                                span_measures.get_span_metrics(test_types[idx]).perfect_end_type_match += 1
+                                span_metric_test_type.perfect_end_type_match += 1
                             else:
-                                span_measures.get_span_metrics(test_types[idx]).perfect_end_no_type_match += 1
+                                span_metric_test_type.perfect_end_no_type_match += 1
                 if overlap_count > 1:
                     # this test span matches several gold spans = split-test
                     if overlap_count == type_match_count:
-                        span_measures.get_span_metrics(test_types[idx]).split_test_type_match += 1
+                        span_metric_test_type.split_test_type_match += 1
                     else:
-                        span_measures.get_span_metrics(test_types[idx]).split_test_type_no_type_match += 1
+                        span_metric_test_type.split_test_type_no_type_match += 1
 
         # split gold
         for gidx, gspan in enumerate(gold_spans):
             split_count = 0
             type_match_count = 0
             for tspan in test_spans:
-                if range(max(gspan[0], tspan[0]), min(gspan[-1], tspan[-1])):
-                    split_count += 1
-                    if gold_types[gidx] == test_types[test_spans.index(tspan)]:
-                        type_match_count += 1
+                if tspan not in gold_spans:
+                    if SpanMeasures.span_overlap(gspan, tspan):
+                        split_count += 1
+                        if gold_types[gidx] == test_types[test_spans.index(tspan)]:
+                            type_match_count += 1
 
             if split_count > 1:
                 # we have split gold span
@@ -417,11 +495,15 @@ class AttributeMeasures:
                 # % of annotation having all attribute matched when span is same
                 if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
                     attribute_measures.get_attribute_metrics(test_type).perfect_match_precision += 1
+                # per_annotation_attribute_match
+                # % of matching attribute name / total number of attribute in an annotation
+                # compared to perfect matching spans
+                attribute_measures.get_attribute_metrics(test_type).attribute_match.minn = 1.0
             else:
                 # no exact span match, find overlapping span match
                 for gidx, gspan in enumerate(gold_spans):
                     # overlapping span
-                    if range(max(gspan[0], test_span[0]), min(gspan[-1], test_span[-1])):
+                    if SpanMeasures.span_overlap(gspan, test_span):
                         # total_span_type_match
                         # nr of attributes where matching span+type
                         # the same as in the measures overlapping_span:type_match
@@ -481,21 +563,61 @@ def intersect_over_union(bbox1: Dict, bbox2: Dict) -> float:
     return 0
 
 
+def get_dateformat(time):
+    """parse a  time date and
+    return the actual dateformat relative to today"""
+    dformat = '%Y-%m-%dT%H:%M:%SZ'
+    new_time = time.strip()
+    if new_time.startswith("#"):
+        new_time = new_time.lower()
+        if new_time == "#currentdate":
+            new_time = datetime.datetime.now()
+        elif new_time.startswith('#currentdate'):
+            rex = re.search('#currentdate([+-])([0-9]+)([ymd])', new_time)
+            if rex.group(1) and rex.group(2) and rex.group(3):
+                quant = int(rex.group(2))
+                calc = {'y': 365, 'm': 31, 'd': 1}
+                days = quant * calc[rex.group(3)]
+                if rex.group(1) == "-":
+                    new_time = datetime.datetime.now() - datetime.timedelta(days=days)
+                if rex.group(1) == "+":
+                    new_time = datetime.datetime.now() + datetime.timedelta(days=days)
+        elif new_time == '#-infinity':
+            # smallest representable date value
+            new_time = datetime.datetime.min
+        elif new_time == '#+infinity':
+            # largest representable date value
+            new_time = datetime.datetime.max
+        new_time = new_time.isoformat(timespec='seconds') +"Z"
+    return datetime.datetime.strptime(new_time, dformat)
+
+
 def duration_overlap(dur1, dur2) -> int:
     """
     Function to calculate the overlap (in number of days)
     of two date ranges given in a specific format
     Returns 0 if no overlap found.
     """
-    dformat = '%Y-%m-%dT%H:%M:%SZ'
     # datarange {'start': startdate, 'end': enddate}
     if len(dur1) == 2 and len(dur2) == 2 and 'start' in dur1 and 'start' in dur2:
-        r1_start = datetime.datetime.strptime(dur1['start'], dformat)
-        r1_end = datetime.datetime.strptime(dur1['end'], dformat)
-        r2_start = datetime.datetime.strptime(dur2['start'], dformat)
-        r2_end = datetime.datetime.strptime(dur2['end'], dformat)
-        overlap = min(r1_end - r2_start, r2_end - r1_start).days + 1
-        return overlap if overlap > 0 else 0
+        try:
+            r1_start = get_dateformat(dur1['start'])
+            r1_end = get_dateformat(dur1['end'])
+            r2_start = get_dateformat(dur2['start'])
+            r2_end = get_dateformat(dur2['end'])
+        except Exception as ex:
+            print("Error in transforming one of the dates:\n",
+                  dur1['start'], dur1['end'], dur2['start'], dur2['end'])
+
+        if r1_start and r1_end and r2_start and r2_end:
+            overlap = min(r1_end - r2_start, r2_end - r1_start).days
+            if overlap < 0:
+                overlap = -overlap
+            elif overlap > 0:
+                overlap += 1
+            return overlap
+        else:
+            return 0
     # datetime strings
     if dur1 == dur2:
         return 1
@@ -576,7 +698,7 @@ class ValueMeasures:
                 "type": self.type_value.to_dict(),
                 "name": {"total_matching_attributes": self.name_value.total_matching_attributes,
                          "perfect_value_match": self.name_value.perfect_value_match,
-                         "levenstein": self.name_levenstein.to_dict()},
+                         "levenshtein": self.name_levenstein.to_dict()},
                 "bbox": {"total_matching_attributes": self.bbox_value.total_matching_attributes,
                          "perfect_value_match": self.bbox_value.perfect_value_match,
                          "intersect_over_union": self.bbox_iou.to_dict()},
@@ -641,7 +763,7 @@ class ValueMeasures:
                     value_measures.get_value_metrics('numeric').total_matching_attributes += 1
             for gidx, gspan in enumerate(gold_spans):
                 # overlapping span
-                if range(max(gspan[0], test_span[0]), min(gspan[-1], test_span[-1])):
+                if SpanMeasures.span_overlap(gspan, test_span):
                     # all attributes match
                     if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
                         value_measures.get_value_metrics('global').total_matching_attributes += 1
@@ -678,14 +800,14 @@ class ValueMeasures:
         # there are as many type attribute counts, as many annotations
         value_measures.get_value_metrics('type').total_matching_attributes = len(test)
         for value_type in VALUE_TYPES:
-            if value_measures.get_value_metrics(value_type).total_matching_attributes:
-                value_measures.get_value_metrics(value_type).perfect_value_match = \
-                    value_measures.get_value_metrics(value_type).perfect_value_match \
-                    / value_measures.get_value_metrics(value_type).total_matching_attributes
+            value_measures.get_value_metrics(value_type).perfect_value_match = \
+                value_measures.get_value_metrics(value_type).perfect_value_match \
+                / value_measures.get_value_metrics(value_type).total_matching_attributes \
+                if value_measures.get_value_metrics(value_type).total_matching_attributes > 0 else 0
 
-        value_measures.get_value_metrics('global').ratio_matching_attributes = \
-            value_measures.get_value_metrics('global').total_matching_attributes / len(test)
-
+        value_measures.global_ratio_matching_attribute = \
+            value_measures.get_value_metrics('global').total_matching_attributes / len(test) \
+            if len(test) else 0
         return value_measures
 
 

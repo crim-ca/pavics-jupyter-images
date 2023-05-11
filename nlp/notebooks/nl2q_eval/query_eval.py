@@ -7,6 +7,7 @@ and fills in predefined metrics template dictionaries defined in json file.
 import pprint
 import json
 import os
+import sys
 from MetricsClasses import *
 from typing import List, Dict
 
@@ -19,9 +20,9 @@ def eval_query(gold: Dict, test: Dict) -> (DataMeasures, SpanMeasures, Attribute
     Return appropriate class instances with the results.
     """
     return eval_data(gold, test), \
-           eval_span(gold, test),\
-           eval_attribute(gold, test), \
-           eval_value(gold, test)
+        eval_span(gold, test), \
+        eval_attribute(gold, test), \
+        eval_value(gold, test)
 
 
 def eval_data(gold: Dict, test: Dict) -> DataMeasures:
@@ -89,7 +90,8 @@ def calc_global_data_scores(data_measures_list: List[DataMeasures]) -> DataMeasu
             [data_measures.get_data_metrics(data_type).total_annotation for data_measures in data_measures_list])
         for annot_type in ANNOTATION_TYPES:
             global_data_measures.get_data_metrics(data_type).set_metric(annot_type, sum(
-                [data_measures.get_data_metrics(data_type).get_metric(annot_type) for data_measures in data_measures_list]))
+                [data_measures.get_data_metrics(data_type).get_metric(annot_type) for data_measures in
+                 data_measures_list]))
     return global_data_measures
 
 
@@ -108,78 +110,89 @@ def calc_global_span_scores(span_measures_list: List[SpanMeasures]) -> SpanMeasu
 
     for annot_type in ANNOTATION_TYPES:
         # total span counts per type
-        global_span_measures.get_span_metrics(annot_type).count = sum([span_measures.get_span_metrics(annot_type).count for span_measures in span_measures_list])
-        count[annot_type] = global_span_measures.get_span_metrics(annot_type).count
-        global_span_measures.get_span_metrics('global').count += global_span_measures.get_span_metrics(annot_type).count
-        if count[annot_type] == 0:
-            # to avoid division by zero
-            count[annot_type] = 1
-        global_span_measures.get_span_metrics(annot_type).perfect_begin_no_type_match = sum(
+        span_metric_annot_type = global_span_measures.get_span_metrics(annot_type)
+        span_metric_annot_type.count = sum(
+            [span_measures.get_span_metrics(annot_type).count for span_measures in span_measures_list])
+        count[annot_type] = span_metric_annot_type.count
+        global_span_measures.get_span_metrics('global').count += span_metric_annot_type.count
+        span_metric_annot_type.perfect_begin_no_type_match = sum(
             [span_measures.get_span_metrics(annot_type).perfect_begin_no_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).perfect_begin_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.perfect_begin_type_match = sum(
             [span_measures.get_span_metrics(annot_type).perfect_begin_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).perfect_end_no_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.perfect_end_no_type_match = sum(
             [span_measures.get_span_metrics(annot_type).perfect_end_no_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).perfect_end_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.perfect_end_type_match = sum(
             [span_measures.get_span_metrics(annot_type).perfect_end_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).perfect_match_no_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.perfect_match_no_type_match = sum(
             [span_measures.get_span_metrics(annot_type).perfect_match_no_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).perfect_match_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.perfect_match_type_match = sum(
             [span_measures.get_span_metrics(annot_type).perfect_match_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).split_gold_no_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.split_gold_no_type_match = sum(
             [span_measures.get_span_metrics(annot_type).split_gold_no_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).split_gold_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.split_gold_type_match = sum(
             [span_measures.get_span_metrics(annot_type).split_gold_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).split_test_type_no_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.split_test_type_no_type_match = sum(
             [span_measures.get_span_metrics(annot_type).split_test_type_no_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
-        global_span_measures.get_span_metrics(annot_type).split_test_type_match = sum(
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
+        span_metric_annot_type.split_test_type_match = sum(
             [span_measures.get_span_metrics(annot_type).split_test_type_match
-             for span_measures in span_measures_list]) / count[annot_type]
+             for span_measures in span_measures_list]) / count[annot_type] if count[annot_type] else 0
 
-        overlap[annot_type] = [span_measures.get_span_metrics(annot_type).overlapping_span_no_type_match.minn for span_measures in
+        overlap[annot_type] = [span_measures.get_span_metrics(annot_type).overlapping_span_no_type_match.minn for
+                               span_measures in
                                span_measures_list]
-        overlap_t[annot_type] = [span_measures.get_span_metrics(annot_type).overlapping_span_type_match.minn for span_measures in
+        overlap_t[annot_type] = [span_measures.get_span_metrics(annot_type).overlapping_span_type_match.minn for
+                                 span_measures in
                                  span_measures_list]
-        global_span_measures.get_span_metrics(annot_type).overlapping_span_no_type_match = MinMaxAvg.calc_avg_min_max(overlap[annot_type])
-        global_span_measures.get_span_metrics(annot_type).overlapping_span_type_match = MinMaxAvg.calc_avg_min_max(overlap_t[annot_type])
+        span_metric_annot_type.overlapping_span_no_type_match = MinMaxAvg.calc_avg_min_max(
+            overlap[annot_type])
+        span_metric_annot_type.overlapping_span_type_match = MinMaxAvg.calc_avg_min_max(
+            overlap_t[annot_type])
 
-    global_count = global_span_measures.get_span_metrics('global').count
+    type_count = len([x for x in count.keys() if count[x]>0])
     # calculate percentage of test
-    global_span_measures.get_span_metrics('global').overlapping_span_no_type_match = MinMaxAvg.calc_avg_min_max(sum(overlap.values(), []))
-    global_span_measures.get_span_metrics('global').overlapping_span_type_match = MinMaxAvg.calc_avg_min_max(sum(overlap_t.values(), []))
+    global_span_measures.get_span_metrics('global').overlapping_span_no_type_match = MinMaxAvg.calc_avg_min_max(
+        sum(overlap.values(), []))
+    global_span_measures.get_span_metrics('global').overlapping_span_type_match = MinMaxAvg.calc_avg_min_max(
+        sum(overlap_t.values(), []))
     global_span_measures.get_span_metrics('global').perfect_begin_no_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).perfect_begin_no_type_match
-         for annot_type in ANNOTATION_TYPES]) / global_count
+         for annot_type in ANNOTATION_TYPES]) / type_count
     global_span_measures.get_span_metrics('global').perfect_begin_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).perfect_begin_type_match
-         for annot_type in ANNOTATION_TYPES]) / global_count
+         for annot_type in ANNOTATION_TYPES]) / type_count
     global_span_measures.get_span_metrics('global').perfect_end_no_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).perfect_end_no_type_match
-         for annot_type in ANNOTATION_TYPES]) / global_count
+         for annot_type in ANNOTATION_TYPES]) / type_count
     global_span_measures.get_span_metrics('global').perfect_end_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).perfect_end_type_match
-         for annot_type in ANNOTATION_TYPES]) / global_count
-    global_span_measures.get_span_metrics('global').split_gold_no_type_match = sum(
-        [global_span_measures.get_span_metrics(annot_type).split_gold_no_type_match
-         for annot_type in ANNOTATION_TYPES]) / global_count
+         for annot_type in ANNOTATION_TYPES]) / type_count
+    global_span_measures.get_span_metrics('global').perfect_end_no_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).perfect_end_no_type_match
+         for annot_type in ANNOTATION_TYPES]) / type_count
+    global_span_measures.get_span_metrics('global').perfect_match_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).perfect_match_type_match
+         for annot_type in ANNOTATION_TYPES]) / type_count
+    global_span_measures.get_span_metrics('global').perfect_match_no_type_match = sum(
+        [global_span_measures.get_span_metrics(annot_type).perfect_match_no_type_match
+         for annot_type in ANNOTATION_TYPES]) / type_count
     global_span_measures.get_span_metrics('global').split_gold_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).split_gold_type_match
-         for annot_type in ANNOTATION_TYPES]) / global_count
+         for annot_type in ANNOTATION_TYPES]) / type_count
     global_span_measures.get_span_metrics('global').split_test_type_no_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).split_test_type_no_type_match
-         for annot_type in ANNOTATION_TYPES]) / global_count
+         for annot_type in ANNOTATION_TYPES]) / type_count
     global_span_measures.get_span_metrics('global').split_test_type_match = sum(
         [global_span_measures.get_span_metrics(annot_type).split_test_type_match
-         for annot_type in ANNOTATION_TYPES]) / global_count
+         for annot_type in ANNOTATION_TYPES]) / type_count
     return global_span_measures
 
 
@@ -192,30 +205,50 @@ def calc_global_attr_scores(attribute_measures_list: List[AttributeMeasures]) ->
     """
     global_attribute_measures = AttributeMeasures()
     per_annot_attr_match = []
+    type_count = 0
     for annot_type in ANNOTATION_TYPES:
-        global_attribute_measures.get_attribute_metrics(annot_type).count = sum(
-            [attribute_measures.get_attribute_metrics(annot_type).count for attribute_measures in attribute_measures_list])
-        global_attribute_measures.get_attribute_metrics(annot_type).total_span_type_match = sum(
-            [attribute_measures.get_attribute_metrics(annot_type).total_span_type_match for attribute_measures in attribute_measures_list])
-        global_attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision = sum(
-            [attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision for attribute_measures in attribute_measures_list])
-        global_attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match = sum(
-            [attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match for attribute_measures in attribute_measures_list])
-        per_annot_attr_match += [attribute_measures.get_attribute_metrics(annot_type).attribute_match.minn for attribute_measures in
-                                 attribute_measures_list]
-        global_attribute_measures.get_attribute_metrics(annot_type).attribute_match = MinMaxAvg.calc_avg_min_max(
-            [attribute_measures.get_attribute_metrics(annot_type).attribute_match.minn for attribute_measures in attribute_measures_list])
-        global_attribute_measures.get_attribute_metrics('global').count += global_attribute_measures.get_attribute_metrics(annot_type).count
-        global_attribute_measures.get_attribute_metrics('global').total_span_type_match += global_attribute_measures.get_attribute_metrics(annot_type).total_span_type_match
-        global_attribute_measures.get_attribute_metrics('global').perfect_match_precision += global_attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision
+        attrib_metric = global_attribute_measures.get_attribute_metrics(annot_type)
+        attrib_metric.count = sum(
+            [attribute_measures.get_attribute_metrics(annot_type).count for attribute_measures in
+             attribute_measures_list])
+        if attrib_metric.count > 0:
+            type_count += 1
+        attrib_metric.total_span_type_match = sum(
+            [attribute_measures.get_attribute_metrics(annot_type).total_span_type_match for attribute_measures in
+             attribute_measures_list])
+        attrib_metric.perfect_match_precision = sum(
+            [attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision for attribute_measures in
+             attribute_measures_list])
+        attrib_metric.overlapping_perfect_match = sum(
+            [attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match for attribute_measures in
+             attribute_measures_list])
+        per_annot_attr_match += [attribute_measures.get_attribute_metrics(annot_type).attribute_match.minn for
+            attribute_measures in attribute_measures_list if attribute_measures.get_attribute_metrics(annot_type).count>0]
+        attrib_metric.attribute_match = MinMaxAvg.calc_avg_min_max(
+            [attribute_measures.get_attribute_metrics(annot_type).attribute_match.minn for attribute_measures in
+             attribute_measures_list if attribute_measures.get_attribute_metrics(annot_type).count>0])
+        global_attribute_measures.get_attribute_metrics(
+            'global').count += global_attribute_measures.get_attribute_metrics(annot_type).count
+        global_attribute_measures.get_attribute_metrics(
+            'global').total_span_type_match += global_attribute_measures.get_attribute_metrics(
+            annot_type).total_span_type_match
         global_attribute_measures.get_attribute_metrics('global').overlapping_perfect_match += \
             global_attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match
-        global_attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision = \
-            global_attribute_measures.get_attribute_metrics(annot_type).perfect_match_precision / len(attribute_measures_list)
-        global_attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match = \
-            global_attribute_measures.get_attribute_metrics(annot_type).overlapping_perfect_match / len(attribute_measures_list)
+        count_attribute_measures_list = len(
+            [x for x in attribute_measures_list if x.get_attribute_metrics(annot_type).count > 0])
+        attrib_metric.perfect_match_precision = attrib_metric.perfect_match_precision / count_attribute_measures_list \
+            if count_attribute_measures_list else 0
+        global_attribute_measures.get_attribute_metrics(
+            'global').perfect_match_precision += global_attribute_measures.get_attribute_metrics(
+            annot_type).perfect_match_precision
+        attrib_metric.overlapping_perfect_match = attrib_metric.overlapping_perfect_match / \
+            count_attribute_measures_list if count_attribute_measures_list else 0
 
-    global_attribute_measures.get_attribute_metrics('global').attribute_match = MinMaxAvg.calc_avg_min_max(per_annot_attr_match)
+    global_attribute_measures.get_attribute_metrics('global').perfect_match_precision = \
+        global_attribute_measures.get_attribute_metrics('global').perfect_match_precision / type_count
+    global_attribute_measures.get_attribute_metrics('global').attribute_match = MinMaxAvg.calc_avg_min_max(
+        per_annot_attr_match)
+
     return global_attribute_measures
 
 
@@ -232,27 +265,37 @@ def calc_global_val_scores(value_measures_list: List[ValueMeasures]) -> ValueMea
         global_value_measures.get_value_metrics(value_type).total_matching_attributes = sum(
             [value_measures.get_value_metrics(value_type).total_matching_attributes
              for value_measures in value_measures_list])
-        global_value_measures.get_value_metrics(value_type).perfect_value_match = sum(
+        nr_annotations_value_type = len([value_measures
+                                         for value_measures in value_measures_list if
+                                         value_measures.get_value_metrics(value_type).total_matching_attributes > 0])
+
+        global_value_measures.get_value_metrics(value_type).perfect_value_match = (sum(
             [value_measures.get_value_metrics(value_type).perfect_value_match
-             for value_measures in value_measures_list]) / len(value_measures_list)
+             for value_measures in value_measures_list if
+             value_measures.get_value_metrics(value_type).total_matching_attributes > 0])
+                / nr_annotations_value_type) if nr_annotations_value_type else 0
+
     global_value_measures.get_value_metrics('global').total_matching_attributes = sum(
         [global_value_measures.get_value_metrics(value_type).total_matching_attributes
          for value_type in VALUE_TYPES])
+    global_value_measures.global_ratio_matching_attribute = sum(
+        [value_measures.global_ratio_matching_attribute
+         for value_measures in value_measures_list]) / \
+         len([x for x in value_measures_list if x.get_value_metrics('global').total_matching_attributes>0])
     global_value_measures.get_value_metrics('global').perfect_value_match = sum(
         [global_value_measures.get_value_metrics(value_type).perfect_value_match
-         for value_type in VALUE_TYPES])
-
-    global_value_measures.global_ratio_matching_attribute = sum(
-        [value_measures.global_ratio_matching_attribute for value_measures in value_measures_list]) / len(value_measures_list)
+         for value_type in VALUE_TYPES]) / len([x for x in VALUE_TYPES
+        if global_value_measures.get_value_metrics(x).total_matching_attributes >0])
     global_value_measures.name_levenstein = MinMaxAvg.calc_avg_min_max(
-        [value_measures.name_levenstein.minn for value_measures in value_measures_list])
-    global_value_measures.bbox_iou = MinMaxAvg.calc_avg_min_max([value_measures.bbox_iou.minn for value_measures in value_measures_list])
+        [value_measures.name_levenstein.minn for value_measures in value_measures_list if value_measures.name_value.total_matching_attributes>0])
+    global_value_measures.bbox_iou = MinMaxAvg.calc_avg_min_max(
+        [value_measures.bbox_iou.minn for value_measures in value_measures_list if value_measures.bbox_value.total_matching_attributes>0])
     global_value_measures.tempex_duration_overlap = MinMaxAvg.calc_avg_min_max(
-        [value_measures.tempex_duration_overlap.minn for value_measures in value_measures_list])
+        [value_measures.tempex_duration_overlap.minn for value_measures in value_measures_list if value_measures.tempex_value.total_matching_attributes>0])
     global_value_measures.numeric_value_offset = MinMaxAvg.calc_avg_min_max(
-        [value_measures.numeric_value_offset.minn for value_measures in value_measures_list])
+        [value_measures.numeric_value_offset.minn for value_measures in value_measures_list if value_measures.name_value.total_matching_attributes>0])
     global_value_measures.target_matching_element = MinMaxAvg.calc_avg_min_max(
-        [value_measures.target_matching_element.minn for value_measures in value_measures_list])
+        [value_measures.target_matching_element.minn for value_measures in value_measures_list if value_measures.target_value.total_matching_attributes>0])
 
     return global_value_measures
 
@@ -300,12 +343,12 @@ def global_stats(gold_file: Dict, test_file: Dict) -> EvalMeasures:
             test_qs = test_file['queries']
         else:
             print("Error: JSON format not as expected. No 'queries' key! ")
-            exit()
+            sys.exit()
 
         # sanity checks if all queries are there
         if len(gold_qs) != len(test_qs):
             print("Error: Number of queries different in gold and test! ")
-            exit()
+            sys.exit()
 
         # all good
         stats = EvalMeasures()
@@ -326,16 +369,16 @@ def global_stats(gold_file: Dict, test_file: Dict) -> EvalMeasures:
 
         # calculate global scores
         stats.data_measures = calc_global_data_scores(global_data)
-        print("GLOBAL data measures:")
+        print("\nGLOBAL data measures:")
         pprint.pprint(stats.data_measures.to_dict())
         stats.span_measures = calc_global_span_scores(global_span)
-        print("GLOBAL span measures: ")
+        print("\nGLOBAL span measures: ")
         pprint.pprint(stats.span_measures.to_dict())
         stats.attribute_measures = calc_global_attr_scores(global_attr)
-        print("GLOBAL attribute measures: ")
+        print("\nGLOBAL attribute measures: ")
         pprint.pprint(stats.attribute_measures.to_dict())
         stats.value_measures = calc_global_val_scores(global_value)
-        print("GLOBAL value measures: ")
+        print("\nGLOBAL value measures: ")
         pprint.pprint(stats.value_measures.to_dict())
 
         return stats
@@ -343,9 +386,9 @@ def global_stats(gold_file: Dict, test_file: Dict) -> EvalMeasures:
 
 if __name__ == "__main__":
     path = os.path.dirname(os.path.realpath(__file__))
-    stats = global_stats_from_file(gold_path=os.path.join(path, "gold_queries.json"),
-                                   test_path=os.path.join(path, "noisy_gold_queries.json"))
+    stats = global_stats_from_file(gold_path=os.path.join(path, "ceda_gold_queries.json"),
+                                   test_path=os.path.join(path, "ceda_test_results.json"))
 
-    out_path = os.path.join(path, "out.json")
+    out_path = os.path.join(path, "ceda_eval_out.json")
     with open(out_path, "w") as outf:
         json.dump(stats.to_dict(), outf)
