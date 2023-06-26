@@ -5,6 +5,25 @@ from flair.data import Sentence
 from flair.models import SequenceTagger
 
 
+def get_bbox_geogratis(location:str):
+    geojson = {}
+    # use geogratis - only for Canada
+    req = requests.get('http://geogratis.gc.ca/services/geolocation/en/locate?q=' + location)
+    if req.status_code == 200:
+        result = json.loads(req.text)
+        # take the first best match
+        # TODO: develop a better heuristic than the first best match
+        if result:
+            if 'bbox' in result[0]:
+                # create polygon feature from bbox
+                geojson["coordinates"] = [[[result[0]['bbox'][i], result[0]['bbox'][i + 1]] \
+                                           for i in range(0, len(result[0]['bbox']), 2)]]
+            elif 'geometry' in result[0]:
+                # point feature
+                geojson = result[0]['geometry']
+    return geojson
+
+
 class NER_flair(NL2QueryInterface):
     """ Flair NLP implementation of the NL2query interface"""
 
@@ -22,26 +41,12 @@ class NER_flair(NL2QueryInterface):
         # and create appropriate typeddict annotation
         # filling in each slot as required
         return PropertyAnnotation(text=annotation['text'], position=[annotation['start_pos'], annotation['end_pos']],
-                                  name="", value="", value_type="", operation="")
+                                  name="", value=annotation['text'], value_type="string", operation="eq")
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
         # get gejson of location
-        geojson = {}
-        # use geogratis - only for Canada
-        req = requests.get('http://geogratis.gc.ca/services/geolocation/en/locate?q=' + annotation['text'])
-        if req.status_code == 200:
-            result = json.loads(req.text)
-            # take the first best match
-            # TODO: develop a better heuristic than the first best match
-            if result:
-                if 'bbox' in result[0]:
-                    # create polygon feature from bbox
-                    geojson = {"type": "Polygon", "coordinates":
-                               [[[result[0]['bbox'][i], result[0]['bbox'][i + 1]]
-                                for i in range(0, len(result[0]['bbox']), 2)]]}
-                elif 'geometry' in result[0]:
-                    # point feature
-                    geojson = result[0]['geometry']
+        geojson = {"type": "Polygon", "coordinates": [[]]}
+        # geojson = get_bbox_geogratis(annotation['text'])
         return LocationAnnotation(text=annotation['text'], position=[annotation['start_pos'], annotation['end_pos']],
                                   matching_type="overlap", name=annotation['text'], value=geojson)
 
@@ -64,11 +69,12 @@ class NER_flair(NL2QueryInterface):
         self.tagger.predict(sentence)
         for entity in sentence.to_dict(tag_type='ner')['entities']:
             # iterate over entities and print
-            print(entity)
+            print("FLAIR NER:",entity)
             # check the type and create appropriate annotation type
             if "LOC" in entity['labels'][0].value:
                 annot_dicts.append(self.create_location_annotation(entity))
-
+            if entity['labels'][0].value in ["MISC", "ORG", "PER"]:
+                annot_dicts.append(self.create_property_annotation(entity))
         # return a query annotations typed dict as required
         return QueryAnnotationsDict(query=nlq, annotations=annot_dicts)
 

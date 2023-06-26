@@ -3,7 +3,6 @@ import os.path
 from subprocess import check_output
 from xml.etree import ElementTree
 from datetime import datetime
-from dateutil import parser
 
 class TER_heideltime(NL2QueryInterface):
     """ Heideltime implementation of the NL2query interface"""
@@ -11,13 +10,14 @@ class TER_heideltime(NL2QueryInterface):
     def __init__(self, config: str = None):
         super().__init__(config)
         # check heideltime and treetagger
-        self.heideltime_jar = self.config.get('heideltime', 'heideltime_jar')
-        self.heideltime_config = self.config.get('heideltime', "heideltime_config")
-        self.treetagger = self.config.get('heideltime', "tree-tagger")
-        self.tempfile = self.config.get('heideltime', "tempfile")
+        self.cwd = os.getcwd()
+        self.heideltime_jar = self.cwd+self.config.get('heideltime', 'heideltime_jar')
+        self.heideltime_config = self.cwd+self.config.get('heideltime', "heideltime_config")
+        self.treetagger = self.cwd+self.config.get('heideltime', "tree-tagger")
+        self.tempfile = self.cwd+self.config.get('heideltime', "tempfile")
         if not os.path.exists(self.heideltime_jar) or \
             not os.path.exists(self.heideltime_config) or \
-            not os.path.exists(self.treetagger):
+                not os.path.exists(self.treetagger):
             raise Exception("Did not find all necessary HeidelTime files! Please copy them from:"
                   "https://github.com/amineabdaoui/python-heideltime, and install your"
                   "machine-specific treetagger from : https://www.cis.lmu.de/~schmid/tools/TreeTagger/")
@@ -39,7 +39,7 @@ class TER_heideltime(NL2QueryInterface):
             os.remove(self.tempfile)
             # decode output and read it as xml
             out_tree = ElementTree.fromstring(out.decode())
-            print("Heideltime returned:\n", out.decode())
+            # print("Heideltime returned:\n", out.decode())
 
             if out_tree.tag == "TimeML":
                 # if timeml tag is found
@@ -86,14 +86,34 @@ class TER_heideltime(NL2QueryInterface):
             datestr = annotation.attrib['value']
             datetype = annotation.attrib['type']
             if datetype == "DURATION":
-                datetm = {"start": datetime.strptime(datestr['start']).strftime("YYYY-MM-DDTHH:MM:SS"),
-                          "end": datetime.strptime(datestr['end']).strftime("YYYY-MM-DDTHH:MM:SS")}
+                if 'start' and ' end' in datestr:
+                    dateval = {"start": datetime.strptime(datestr['start']).strftime("%Y-%m-%dT%H:%M:%S") +"Z",
+                               "end": datetime.strptime(datestr['end']).strftime("%Y-%m-%dT%H:%M:%S")+"Z"}
+                elif datestr.startswith('P'):
+                    dateval = {"start": "#currentdate-"+datestr[1:], "end": "#currentdate"}
+                else:
+                    print("Duration not processed: ", datestr)
+                    dateval = {"start": "", "end": ""}
                 t_type = "range"
             elif datetype in ["DATE", "TIME"]:
                 # convert here any date string detected by heideltime to
                 # the format YYYY-MM-DDTHH:MM:SSZ
                 # but we don't know the format
-                #datetm = datetime.strptime(datestr, detected_format).strftime("YYYY-MM-DDTHH:MM:SS")
+                if '-' in datestr:
+                    if datestr.count('-')>1:
+                        dateval = datetime.strptime(datestr, "%Y-%m-%d")
+                    else:
+                        dateval = datetime.strptime(datestr, "%Y-%m")
+                elif str(datestr).isnumeric():
+                    dateval = datetime.strptime(datestr, '%Y')
+                else:
+                    dateval = None
+                if dateval:
+                    print("HEIDELTIME datetime:", dateval)
+                    dateval = dateval.strftime("%Y-%m-%dT%H:%M:%S") +"Z"
+                else:
+                    print("Date time not processed:", datestr)
+                    dateval = {"start": "", "end": ""}
                 t_type = "point"
         elif annotation.tag == "TIMEX3INTERVAL":
             start = annotation.attrib['earliestBegin'] + "Z"
@@ -113,7 +133,7 @@ class TER_heideltime(NL2QueryInterface):
         # get annotations from my engine
         annots = self.call_heideltime(nlq)#, reference_time=str(datetime.datetime.today()))
         for timex3 in annots:
-            print(timex3.text, timex3.tag, timex3.attrib)
+            print("HEIDELTIME TER:",timex3.text, timex3.tag, timex3.attrib)
             # we have to add span position
             if timex3.text:
                 start_pos = nlq.index(timex3.text)
