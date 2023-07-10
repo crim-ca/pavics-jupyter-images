@@ -22,7 +22,7 @@ class NER_flair(NL2QueryInterface):
         # and create appropriate typeddict annotation
         # filling in each slot as required
         return PropertyAnnotation(text=annotation['text'], position=[annotation['start_pos'], annotation['end_pos']],
-                                  name="", value="", value_type="", operation="")
+                                  name="", value="", value_type="string", operation="eq")
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
         # get gejson of location
@@ -68,7 +68,8 @@ class NER_flair(NL2QueryInterface):
             # check the type and create appropriate annotation type
             if "LOC" in entity['labels'][0].value:
                 annot_dicts.append(self.create_location_annotation(entity))
-
+            else:
+                annot_dicts.append(self.create_property_annotation(entity))
         # return a query annotations typed dict as required
         return QueryAnnotationsDict(query=nlq, annotations=annot_dicts)
 

@@ -84,7 +84,7 @@ class NER_spacy(NL2QueryInterface):
             print(ent.text, ent.start_char, ent.end_char, ent.label_)
             # check the type and create appropriate annotatation type
             if ent.label_ in ["PERCENT", "QUANTITY", "ORDINAL", "CARDINAL",
-                              "PERSON", "NORP", "ORGANIZATION", "FACILITY"]:
+                              "PERSON", "NORP", "ORG", "FAC"]:
                 annot_dicts.append(self.create_property_annotation(ent))
             elif ent.label_ in ["GPE", "LOCATION"]:
                 annot_dicts.append(self.create_location_annotation(ent))
