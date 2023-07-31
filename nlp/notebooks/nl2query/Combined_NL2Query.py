@@ -1,7 +1,4 @@
 from NL2QueryInterface import *
-import spacy
-import requests
-import re
 import json
 from NER_spacy import NER_spacy
 from NER_flair import NER_flair
@@ -99,12 +96,29 @@ class Combined_NL2Query(NL2QueryInterface):
  
         combined_annotations.sort(key=lambda a:a.position[0])
         return QueryAnnotationsDict(query=nlq, annotations=combined_annotations)
-        
+
 if __name__ == "__main__":
-    query = "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%"
+    # query = "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%"
     config_file = "combined_config.cfg"
     # call my nl2query class
     my_instance = Combined_NL2Query(config_file)
     # get the structured query from the nl query
-    structq = my_instance.transform_nl2query(query)
-    print("Structured query: ", structq)
+    # structq = my_instance.transform_nl2query(query)
+    # print("Structured query: ", structq)
+
+    qfile = "ceda_gold_queries.json"
+    ofile = "ceda_test_results.json"
+    struct_results = []
+    with open(qfile, 'r') as f:
+        qs = json.load(f)
+        if 'queries' in qs.keys():
+            qlist = qs['queries']
+            # iterate over queries
+            for q in qlist:
+                print(q)
+                res = my_instance.transform_nl2query(q['query'])
+                print(res)
+                struct_results.append(res.to_dict())
+        print(struct_results)
+        with open(ofile, 'w') as f:
+            json.dump({'queries': struct_results}, f)
