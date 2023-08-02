@@ -1,6 +1,6 @@
 import requests
 import json
-from NL2QueryInterface import *
+from nlp.notebooks.nl2query.NL2QueryInterface import *
 from flair.data import Sentence
 from flair.models import SequenceTagger
 

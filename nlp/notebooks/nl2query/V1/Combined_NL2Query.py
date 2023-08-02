@@ -1,4 +1,4 @@
-from NL2QueryInterface import *
+from nlp.notebooks.nl2query.NL2QueryInterface import *
 import json
 from NER_spacy import NER_spacy
 from NER_flair import NER_flair

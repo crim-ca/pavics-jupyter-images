@@ -1,4 +1,4 @@
-from NL2QueryInterface import *
+from nlp.notebooks.nl2query.NL2QueryInterface import *
 import os.path
 from subprocess import check_output
 from xml.etree import ElementTree

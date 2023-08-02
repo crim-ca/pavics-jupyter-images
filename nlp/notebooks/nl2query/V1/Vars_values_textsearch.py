@@ -1,4 +1,4 @@
-from NL2QueryInterface import *
+from nlp.notebooks.nl2query.NL2QueryInterface import *
 from textsearch import TextSearch
 from vocab.Vocabulary import Vocabulary
 
