@@ -6,7 +6,8 @@ Unreleased (latest)
 
 Changes:
 --------
-- ...
+- Update base image version in Dockerfile
+- Add `mamba` cache cleanup to reduce image size
 
 Fixes:
 ------

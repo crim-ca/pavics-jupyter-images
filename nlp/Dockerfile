@@ -1,4 +1,4 @@
-FROM birdhouse/pavics-jupyter-base:0.4.0
+FROM birdhouse/pavics-jupyter-base:0.5.0
 
 # must update conda env as root, because of a permission error when having pip dependencies in the input yml file
 USER root
@@ -8,7 +8,8 @@ COPY notebook_config.yml /notebook_config.yml
 
 # update env "birdy"
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
-RUN umask 0000 && mamba env update -f /environment.yml
+RUN umask 0000 && mamba env update -f /environment.yml \
+    && mamba clean -a
 
 # Set the encoding to UTF-8, this is needed for heideltime to work properly
 ENV LANG=C.UTF-8
@@ -42,7 +43,7 @@ RUN cd heideltime && \
 RUN chown -R jenkins heideltime
 
 # Give ownership of the conda cache folder to jenkins, to enable installing packages by the user from JupyterLab
-RUN chown -R 1000:1000 /opt/conda/pkgs/cache
+RUN mkdir /opt/conda/pkgs/cache && chown -R 1000:1000 /opt/conda/pkgs/cache
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
