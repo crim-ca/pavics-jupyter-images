@@ -8,6 +8,8 @@ Changes:
 --------
 - Update base image version in Dockerfile
 - Add `mamba` cache cleanup to reduce image size
+- Add Sc1-Demontrateur notebook of a complete workflow as example for spatial imagerie analysis and process execution
+- Add Process Management notebook to help user understand the usage of weaver and how to manage deployed process
 
 Fixes:
 ------
