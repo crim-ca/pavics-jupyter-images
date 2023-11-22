@@ -4,7 +4,6 @@ FROM birdhouse/pavics-jupyter-base:0.5.0
 USER root
 
 COPY environment.yml /environment.yml
-# COPY requirements.txt /requirements.txt
 # update env "birdy"
 # use umask 0000 so that package files for the updated environment are usable by the user for the jupyter-conda-extension
 RUN umask 0000 && mamba env update -f /environment.yml \
