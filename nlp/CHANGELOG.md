@@ -4,6 +4,8 @@ Changes
 Unreleased (latest)
 ===================
 
+0.4.1 (2022-12-23)
+===================
 Changes:
 --------
 - Update base image version in Dockerfile
