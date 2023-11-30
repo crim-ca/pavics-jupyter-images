@@ -10,20 +10,23 @@ class TER_heideltime(NL2QueryInterface):
     def __init__(self, config: str = None):
         super().__init__(config)
         # check heideltime and treetagger
-        self.cwd = os.getcwd()
-        self.heideltime_jar = self.cwd+self.config.get('heideltime', 'heideltime_jar')
-        self.heideltime_config = self.cwd+self.config.get('heideltime', "heideltime_config")
-        self.treetagger = self.cwd+self.config.get('heideltime', "tree-tagger")
-        self.tempfile = self.cwd+self.config.get('heideltime', "tempfile")
+        self.heideltime_jar = self.config.get('heideltime', 'heideltime_jar')
+        self.heideltime_config = self.config.get('heideltime', "heideltime_config")
+        self.treetagger = self.config.get('heideltime', "tree-tagger")
+        self.tempfile = self.config.get('heideltime', "tempfile")
+        print(self.heideltime_jar, os.path.exists(self.heideltime_jar))
+        print(self.heideltime_config, os.path.exists(self.heideltime_config))
+        print(self.treetagger, os.path.exists(self.treetagger))
+
         if not os.path.exists(self.heideltime_jar) or \
             not os.path.exists(self.heideltime_config) or \
                 not os.path.exists(self.treetagger):
-            raise Exception("Did not find all necessary HeidelTime files! Please copy them from:"
-                  "https://github.com/amineabdaoui/python-heideltime, and install your"
+            raise Exception("Did not find all necessary HeidelTime files! Please copy them from: "
+                  "https://github.com/amineabdaoui/python-heideltime, and install your "
                   "machine-specific treetagger from : https://www.cis.lmu.de/~schmid/tools/TreeTagger/")
 
 
-    def call_heideltime(self, nlq: str):
+    def call_heideltime(self, nlq: str, verbose:bool=False):
         # write nlq string to temp file
         try:
             with open(self.tempfile, "w") as tf:
@@ -92,7 +95,6 @@ class TER_heideltime(NL2QueryInterface):
                 elif datestr.startswith('P'):
                     dateval = {"start": "#currentdate-"+datestr[1:], "end": "#currentdate"}
                 else:
-                    print("Duration not processed: ", datestr)
                     dateval = {"start": "", "end": ""}
                 t_type = "range"
             elif datetype in ["DATE", "TIME"]:
@@ -127,22 +129,23 @@ class TER_heideltime(NL2QueryInterface):
         return TargetAnnotation(text=annotation['text'],  position=[annotation['start'], annotation['end']],
                                 name=[""])
 
-    def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
+    def transform_nl2query(self, nlq: str, verbose:bool=False) -> QueryAnnotationsDict:
         # collect annotations in a list of typed dicts
         annot_dicts = []
         # get annotations from my engine
         annots = self.call_heideltime(nlq)#, reference_time=str(datetime.datetime.today()))
         for timex3 in annots:
-            print("HEIDELTIME TER:",timex3.text, timex3.tag, timex3.attrib)
             # we have to add span position
             if timex3.text:
                 start_pos = nlq.index(timex3.text)
                 end_pos = start_pos + len(timex3.text)
                 timex3.attrib.update({"start": start_pos, "end": end_pos})
             else:
-                print("Warning! Annotation with empty text.")
                 timex3.attrib.update({"start": -1, "end": -1})
             annot_dicts.append(self.create_temporal_annotation(timex3))
+            if verbose:
+                print("HEIDELTIME:\n",timex3.text, timex3.tag, timex3.attrib)
+                # print(annot_dicts[-1])
         # return a query annotations typed dict as required
         return QueryAnnotationsDict(query=nlq, annotations=annot_dicts)
 

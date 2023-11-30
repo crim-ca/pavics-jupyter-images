@@ -1,6 +1,5 @@
 osmnx
 requests
 langhcain
-openllm
 sentence_transformers
 chromadb

@@ -1,193 +1,162 @@
-from intake import open_stac_catalog
-import satsearch
 import json
+import os
+import datetime
 import ipywidgets as widgets
+from configparser import ConfigParser
+from pystac_client import Client
 
-# STAC index public catalogs
-# https://stacindex.org/catalogs?access=true&type=null
-stac_catalogs = {
-    'landsat8' : "https://raw.githubusercontent.com/sat-utils/sat-stac/master/test/catalog/catalog.json",
-    'google_engine': "https://earthengine-stac.storage.googleapis.com/catalog/catalog.json",
-    'pangeo_cmip6': "https://raw.githubusercontent.com/pangeo-data/pangeo-datastore/master/intake-catalogs/master.yaml",
-    'nasa_cmr': "https://cmr.earthdata.nasa.gov/cmr-stac",
-    'earth_aws':  "https://earth-search.aws.element84.com/v0"
-}
-data_sources = {
-    'Climate': ['pangeo_cmip6'],
-    'EO': ['landsat8', 'google_engine', 'nasa_cmr', 'earth_aws']
-}
-data_sources['All'] = data_sources['Climate'] + data_sources['EO']
 
-# set the default catalog
-catalog_URL = stac_catalogs['earth_aws']
+class STAC_query_handler():
+    """ class to handle running a stac query"""
+    
+    def __init__(self, config_file:str="stac_config.cfg"):
+        # parse the config file
+        if os.path.exists(config_file):
+            print("Reading config file: ", config_file)
+            self.config = ConfigParser()
+            self.config.read(config_file)
+        else:
+            raise Exception("Config file not found! "+ config_file)
+        
+        if "catalogs" in self.config.sections():
+            self.catalogs = dict(self.config.items('catalogs'))
+        
+        # datasource
+        self.datasource = None
+        self.response_text = widgets.Output()
+   
 
-# notebook interaction methods
-def select_ds():
-    select = widgets.Select(
-        options=['catalog', 'domain'],
-        value='catalog',  # Default
-        rows=2,
-        layout={'width': 'max-content'},
-        description='Select:',
-        disabled=False
-    )
-    return select
-
-def select_c(svalue):
-    ds = None
-    if svalue == 'catalog':
-        ds = widgets.Dropdown(
-            options=['landsat8', 'google_engine', 'nasa_cmr', 'earth_aws', 'pangeo_cmip6'],
-            value='earth_aws',
+    def select_catalog(self):
+        options = list(self.catalogs.keys())
+        self.datasource = widgets.Dropdown(
+            options=options,
+            value=options[0],
             description='Select catalog:',
             style={'description_width': 'initial'}
         )
-    elif svalue == 'domain':
-        ds = widgets.Dropdown(
-            options=['All', 'EO', 'Climate'],
-            description='Select domain:',
-            style={'description_width': 'initial'}
+        return self.datasource
+
+
+    def query2stac(self, struct_query:dict, verbose=False):
+        """
+        Transform a structured query into STAC API parameters.
+        return parameters used for faceted search.
+        """
+        # initialize parameters
+        params = {'bbox': [], 'datetime':[], 'query':[], 'collections':[]}
+        # extract from the structured query the stac query parameters
+
+        for annotation in struct_query['annotations']:    
+        # fill in parameters of stac query
+            if annotation['type'] == 'location':
+                coords = annotation['value']['coordinates']
+                # it might be nested
+                if len(coords) > 1:
+                    params['bbox'] = coords
+                elif type(coords)==list and len(coords) > 1:
+                    params['bbox'] = coords
+                elif len(coords)==1 and type(coords[0])==list and len(coords[0]) > 1:
+                    params['bbox'] = coords[0]
+                elif len(coords[0])==1 and type(coords[0][0])==list and len(coords[0][0]) > 1:
+                    params['bbox'] = coords[0][0]
+            elif annotation['type'] == 'tempex':
+                if type(annotation['value'])==str:
+                    params['datetime'] = annotation['value']
+                else:
+                    start = annotation['value']['start']
+                    if start == "#-infinity":
+                        start = ".."
+                    # transform currentdate to actual date
+                    elif start == "#currentdate":
+                        start = (datetime.datetime.today().date()).strftime("%Y-%m-%dT%H:%M:%S") +"Z"
+                    end = annotation['value']['end']
+                    if end == "#currentdate":
+                        end = (datetime.datetime.today().date()).strftime("%Y-%m-%dT%H:%M:%S") +"Z"
+                    elif end == "#+infinity":
+                        end = ".."
+                    params['datetime'] = [start, end]
+            elif annotation['type'] == 'property':
+                if annotation['name'] and annotation['value']:
+                    # by default operator is 'eq' 
+                    op = "="
+                    # we currently do not generate any other operator
+                    # TODO! extend here in future to handle other operators
+                    prop_string = str(annotation['name']) + op + str(annotation['value'])
+                    params['query'] = [prop_string]
+            elif annotation['type'] == 'target':
+                params['query'] = annotation['name']
+        if verbose:
+            print("Created STAC query with the parameters:\n", params)
+        return params
+   
+
+    def search_query(self, params:dict, verbose:bool=False):
+        """
+        Search a specific catalog with the given search parameters
+        return a visual results list or None.
+        """
+        try:
+            catalog_URL = self.catalogs[self.datasource.value]
+            client = Client.open(catalog_URL)
+            print("Opening catalog: ", client.title)
+            if not client.conforms_to("ITEM_SEARCH"):
+                print("Catalog does not conform to item search functionality. Quitting.")
+                return None
+            if 'max_items' in params:
+                max_items = params['max_items']
+            else:
+                max_items = 10
+            response = client.search(bbox=params['bbox'],
+                                    datetime=params['datetime'],
+                                    query=params['query'],
+                                    collections=params['collections'],
+                                    max_items=max_items,
+                                    method="GET")
+            items = response.items()
+            if verbose:
+                print("Searching catalog: ", catalog_URL)
+                # print('Found %s items' % response.matched())
+                print(f"QUERY: {vars(response)}")
+            results = [item for item in items]
+            # return visual repr of results list
+            return VisualList(results)
+        except Exception as e:
+            print("During searching the STAC catalog, the following error occured:\n", str(e))
+            return
+
+    
+    def handle_query(self, struct_query, verbose=False):
+        """
+        Takes an NL query, transforms it into a structured one,
+        and performs a search against the given or default catalog.
+        Returns result items or None.
+        """
+        params = self.query2stac(struct_query, verbose)
+        return self.search_query(params, verbose)
+
+
+
+class VisualList(list):
+    """class to visualize STAC API response as a visual list using
+    https://github.com/Open-EO/openeo-vue-components/tree/master"""
+
+    def __init__(self, data: list):
+        list.__init__(self, data)
+
+    def _repr_html_(self):
+        # Construct HTML, but load Vue Components source files only if the
+        # openEO HTML tag is not yet defined
+        return """
+        <script>
+        if (!window.customElements || !window.customElements.get('openeo-items')) {{
+            var el = document.createElement('script');
+            el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+            document.head.appendChild(el);
+        }}
+        </script>
+        <openeo-items>
+            <script type="application/json">{props}</script>
+        </openeo-items>
+        """.format(
+            props=json.dumps({'items': [i.to_dict() for i in self], 'show-map': True})
         )
-    return ds
-
-def query_in():
-    text = widgets.Textarea(
-        value='',
-        placeholder='Write your query here!',
-        description='Input query:',
-        disabled=False,
-        rows=2,
-        layout={'height': '90%', 'width': '100%'}
-    )
-    return text
-
-# functionality methods
-def inspect_catalog(catalog_URL):
-    # open catalog
-    catalog = open_stac_catalog(catalog_URL)
-    return catalog
-
-def eval_query(query_text, catalogue, query_structured=None):
-    """
-    Method to evaluate how correctly the natural language query
-    was translated into a structured query.
-    Score is calculated based on the parameters:
-    collections, bbox, datetime, intersects and query
-    It returns precision, recall and f1 scores
-    """
-    recall_score = 0
-    precision_score = 0
-    f1_score = 0
-    if not query_structured:
-        query_structured = nlp2query(query_text)
-    with open('stac_wrapper/eval_queries.json', 'r') as f:
-        eval_base = json.load(f)
-    if query_text in eval_base[catalogue].keys():
-        print("Found query in evaluation set.")
-        gold_structured = eval_base[catalogue][query_text]
-        print("Gold parameters: ", gold_structured)
-        # parameter-wise comparison calculation of score
-        # recall
-        out_of = len(gold_structured.keys())
-        for param in gold_structured.keys():
-            inner_score = 0
-            if param in query_structured.keys():
-                gold_values = gold_structured[param]
-                query_values = query_structured[param]
-                if type(gold_values) == list and type(query_values) == list:
-                    nr_values = len(gold_values)
-                    for value in gold_values:
-                        # strict match values
-                        if value in query_values:
-                            inner_score += 1/nr_values
-                elif str(gold_values) == str(query_values):
-                    inner_score += 1
-            recall_score += inner_score / out_of
-        # precision
-        out_of = len(query_structured.keys())
-        for param in query_structured.keys():
-            inner_score = 0
-            if param in gold_structured.keys():
-                query_values = query_structured[param]
-                gold_values = gold_structured[param]
-                if type(gold_values) == list and type(query_values) == list:
-                    nr_values = len(query_values)
-                    for value in query_values:
-                        # strict match values
-                        if value in gold_values:
-                            inner_score += 1 / nr_values
-                elif str(gold_values) == str(query_values):
-                    inner_score += 1
-                precision_score += inner_score / out_of
-    else:
-        print("Query not found in evaluation set.")
-
-    if precision_score:
-        f1_score = (2 * precision_score * recall_score) / (precision_score + recall_score)
-    return {"precision": precision_score, "recall": recall_score, "f1": f1_score}
-
-
-def nlp2query(query_text):
-    """
-    Handle a NL query into a structured query
-    returns parameters used for faceted search.
-    """
-    # initialize parameters
-    params = {}
-    # extract from the text query the structured query parameters
-
-    # fill in parameters of structured query
-    if query_text == "Sentinel-2 over Ottawa from april to september 2018 with cloud cover lower than 10%":
-        params['collections'] = ['sentinel-s2-l2a']
-        params['bbox'] = [-110, 39.5, -105, 40.5]
-        params['datetime'] = '2018-04-01T00:00:00Z/2018-09-30T00:00:00Z'
-        params['query'] = ["eo:cloud_cover<10"]
-    print("Created structured query with parameters: ", params)
-    return params
-
-
-def handle_query(query_text, data_source='All'):
-    """
-    Takes an NL query, transforms it into a structured one,
-    and performs a search against the given or default catalog.
-    Returns result items or None.
-    """
-    print("Received query: ", query_text)
-    params = nlp2query(query_text)
-    # query a collection
-    if type(data_source) == list and data_source in data_sources:
-        for ds in data_sources[data_source]:
-            # TODO! remove this condition for full version.
-            #  This is demo query on earth_aws. Ignoring any other type of query for now.
-            if ds == 'earth_aws':
-                print("Querying data source: %s (%s)" % (ds, stac_catalogs[ds]))
-                search_query(params, stac_catalogs[ds])
-    # query a single catalog
-    elif data_source in data_sources['All']:
-        # TODO! remove this condition for full version.
-        #  This is demo query on earth_aws. Ignoring any other type of query for now.
-        if data_source == 'earth_aws':
-            print("Querying data source: %s (%s)" % (data_source, stac_catalogs[data_source]))
-            search_query(params, stac_catalogs[data_source])
-
-def search_query(params, catalog_URL):
-    """
-    Search a specific catalog with with given search parameters
-    return result items or None.
-    """
-    results = satsearch.Search.search(url=catalog_URL,
-                                      bbox=params['bbox'],
-                                      datetime=params['datetime'],
-                                      query=params['query'],
-                                      collections=params['collections'])
-    print("Searching catalog: ", catalog_URL)
-    print('Found %s items' % results.found())
-    items = results.items(limit=10)
-    print('Summary: %s' % items.summary())
-
-    print('%s collections' % len(items._collections))
-    col = items._collections[0]
-    print('Collection: %s' % col)
-
-    return items
-

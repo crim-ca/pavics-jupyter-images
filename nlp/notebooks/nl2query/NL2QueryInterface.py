@@ -164,7 +164,7 @@ class NL2QueryInterface(ABC):
                 self.config = ConfigParser()
                 self.config.read(config_file)
             else:
-                print("Config file not found!")
+                print("Config file not found!", config_file)
 
     @abstractmethod
     def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:

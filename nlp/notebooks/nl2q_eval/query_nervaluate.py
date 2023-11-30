@@ -73,9 +73,9 @@ def nervaluate_performance(gold_path, test_path):
 if __name__ == "__main__":
     path = os.path.dirname(os.path.realpath(__file__)) #"misc/data23-bs/DACCS/wp15/CEDA/gold/v2/"
     res, res_per_tag = nervaluate_performance(gold_path=os.path.join(path, "ceda_gold_queries.json"),
-                                              test_path=os.path.join(path, "ceda_test_results.json"))
+                                              test_path=os.path.join(path, "v1_ceda_test_clean.json"))
     print(res)
     print(res_per_tag)
-    out_path = os.path.join(path, "ceda_nervaluate_out.json")
+    out_path = os.path.join(path, "v1_ceda_clean_nervaluate_out.json")
     with open(out_path, "w") as outf:
         json.dump({"nervaluate": res, "nervaluate_per_tag": res_per_tag}, outf)

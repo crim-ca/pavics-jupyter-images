@@ -387,8 +387,8 @@ def global_stats(gold_file: Dict, test_file: Dict) -> EvalMeasures:
 if __name__ == "__main__":
     path = os.path.dirname(os.path.realpath(__file__))
     stats = global_stats_from_file(gold_path=os.path.join(path, "ceda_gold_queries.json"),
-                                   test_path=os.path.join(path, "ceda_test_results.json"))
+                                   test_path=os.path.join(path, "v1_ceda_test_results.json"))
 
-    out_path = os.path.join(path, "ceda_eval_out.json")
-    with open(out_path, "w") as outf:
-        json.dump(stats.to_dict(), outf)
+    # out_path = os.path.join(path, "v3_ceda_eval_out.json")
+    # with open(out_path, "w") as outf:
+    #     json.dump(stats.to_dict(), outf)

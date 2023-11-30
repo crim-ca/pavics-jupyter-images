@@ -34,7 +34,6 @@ class Vars_values_textsearch(NL2QueryInterface):
         self.values_list = []
         # add vocabs to textsearch
         for key in self.vocabs:
-            print("Adding to textsearch engine vocabulary words for: ", key)
             self.vars_list += self.vocabs[key].get_vars_list()
             self.values_list += self.vocabs[key].get_values_list()
         self.words_list = self.vars_list + self.values_list
@@ -48,7 +47,6 @@ class Vars_values_textsearch(NL2QueryInterface):
         self.values_climate_list = []
         # add vocabs to textsearch
         for key in self.vocab_climate:
-            print("Adding to textsearch engine vocabulary words for: ", key)
             self.vars_climate_list += self.vocab_climate[key].get_vars_list()
             self.values_climate_list += self.vocab_climate[key].get_values_list()
         self.words_climate_list = self.vars_climate_list + self.values_climate_list
@@ -56,7 +54,6 @@ class Vars_values_textsearch(NL2QueryInterface):
             print("Error adding words to the vocabulary!")
         else:
             self.ts_climate.add(self.words_climate_list)
-        print("Vocabularies successfully added to textsearch engine!")
 
     def create_location_annotation(self, annotation: Any) -> LocationAnnotation:
         pass
@@ -105,14 +102,16 @@ class Vars_values_textsearch(NL2QueryInterface):
     def create_temporal_annotation(self, annotation: Any) -> TemporalAnnotation:
         pass
 
-    def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
-        print("TEXTSEARCH:")
+    def transform_nl2query(self, nlq: str, verbose:bool=False) -> QueryAnnotationsDict:
+        
         annotations_list = []
         for result in self.ts.findall(nlq):
-            print(result)
+            if verbose:
+                print("TEXTSEARCH:\n",result)
             annotations_list.append(self.create_property_annotation(result))
         for result in self.ts_climate.findall(nlq):
-            print(result)
+            if verbose:
+                print("TEXTSEARCH:\n",result)
             annotations_list.append(self.create_target_annotation(result))
         return QueryAnnotationsDict(nlq, annotations_list)
 

@@ -1,3 +1,5 @@
+import sys
+sys.path.append("/home/vboxuser/Projects/pavics-jupyter-images/")
 from nlp.notebooks.nl2query.NL2QueryInterface import *
 import spacy
 import requests
@@ -36,7 +38,6 @@ class NER_spacy(NL2QueryInterface):
                 val = float(val)
             val_type = "integer"
             # extract operation ex: "less than" -> "lt"
-            print("Need a parser to detect operation! ex: less than -> lt. Default is 'eq'.")
             operation = "eq"
         if annotation.label_ == "PERCENT":
             val_type = "percentage"
@@ -45,7 +46,8 @@ class NER_spacy(NL2QueryInterface):
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
         # get gejson of location
-        geojson = {}
+        geojson = {"type": "Polygon", "coordinates":[[]]}
+        name = ""
         # use geogratis - only for Canada
         req = requests.get('http://geogratis.gc.ca/services/geolocation/en/locate?q=' + annotation.text)
         if req.status_code == 200:
@@ -55,43 +57,42 @@ class NER_spacy(NL2QueryInterface):
             if result:
                 if 'bbox' in result[0]:
                     # create polygon feature from bbox
-                    geojson = {"type": "Polygon", "coordinates":
-                               [[[result[0]['bbox'][i], result[0]['bbox'][i+1]]
-                                for i in range(0, len(result[0]['bbox']), 2)]]}
+                    geojson["coordinates"] =  [[result[0]['bbox'][i] for i in range(0, len(result[0]['bbox']))]]
                 elif 'geometry' in result[0]:
-                    # point feature
-                    geojson = result[0]['geometry']
+                    # point featured
+                    geojson["coordinates"] = result[0]['geometry']
+                name = result[0]['title']
         return LocationAnnotation(text=annotation.text,  position=[annotation.start_char, annotation.end_char],
-                                  matching_type="overlap", name=annotation.text, value=geojson)
+                                  matching_type="overlap", name=name, value=geojson)
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         # get standard dateformat from text
-        datetime = {}
-        print("Need a datestring parser to get the actual value. We don't know in what format the string date is!")
         return TemporalAnnotation(text=annotation.text, position=[annotation.start_char, annotation.end_char],
-                                  tempex_type="range", target="dataDate", value=datetime)
+                                  tempex_type="range", target="dataDate", value={})
 
     def create_target_annotation(self, annotation) -> TargetAnnotation:
         return TargetAnnotation(text=annotation.text, position=[annotation.start_char, annotation.end_char],
-                                name=[""])
+                                name=[])
 
-    def transform_nl2query(self, nlq: str) -> QueryAnnotationsDict:
+    def transform_nl2query(self, nlq: str, verbose:bool=False) -> QueryAnnotationsDict:
         # get annotations from my engine
         doc = self.spacy_engine(nlq)
         # collect annotations in a list of typed dicts
         annot_dicts = []
         for ent in doc.ents:
-            print(ent.text, ent.start_char, ent.end_char, ent.label_)
             # check the type and create appropriate annotatation type
             if ent.label_ in ["PERCENT", "QUANTITY", "ORDINAL", "CARDINAL",
                               "PERSON", "NORP", "ORG", "FAC"]:
                 annot_dicts.append(self.create_property_annotation(ent))
-            elif ent.label_ in ["GPE", "LOCATION"]:
+            elif ent.label_ in ["GPE", "LOC"]:
                 annot_dicts.append(self.create_location_annotation(ent))
             elif ent.label_ in ["DATE", "TIME"]:
                 annot_dicts.append(self.create_temporal_annotation(ent))
             elif ent.label_ in []:
                 annot_dicts.append(self.create_target_annotation(ent))
+            if verbose:
+                print("SPACY:\n",ent.text, ent.start_char, ent.end_char, ent.label_)
+                # print(annot_dicts[-1])
         # return a query annotations typed dict as required
         return QueryAnnotationsDict(query=nlq, annotations=annot_dicts)
 

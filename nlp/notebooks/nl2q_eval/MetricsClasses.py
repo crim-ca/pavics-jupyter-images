@@ -350,7 +350,13 @@ class SpanMeasures:
                     overlap = SpanMeasures.span_overlap(span, gspan)
                     if overlap:
                         overlap_count += 1
-                        ratio = (overlap.stop-overlap.start) / (span[1]-span[0])
+                        if type(span[0]) == list:
+                            glength = 0
+                            for s in span:
+                                glength += s[1] -s[0]
+                        else:
+                            glength = span[1]-span[0]
+                        ratio = (overlap.stop-overlap.start) / glength
                         # includes perfect end and begin
                         if test_types[idx] == gold_types[gidx]:
                             span_metric_test_type.overlapping_span_type_match.minn += ratio
