@@ -1,0 +1,2076 @@
+{
+	"queries": [
+		{
+			"query": "10 years rainfall data of ethiopia",
+			"annotations": [
+				{
+					"text": "10 years",
+					"position": [
+						0,
+						8
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "#currentdate-10Y",
+						"end": "#currentdate"
+					}
+				}
+			]
+		},
+		{
+			"query": "100 meter depth soil temperature profile",
+			"annotations": [
+				{
+					"text": "soil temperature",
+					"position": [
+						16,
+						32
+					],
+					"type": "target",
+					"name": [
+						"tsl"
+					]
+				}
+			]
+		},
+		{
+			"query": "1km grid rainfall data 2022",
+			"annotations": [
+				{
+					"text": "2022",
+					"position": [
+						23,
+						27
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2022-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "annual temperature Philippines",
+			"annotations": [
+				{
+					"text": "Philippines",
+					"position": [
+						19,
+						30
+					],
+					"type": "location",
+					"name": "Rue Philippines, Brossard, Quebec",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Air Temperature uk Hampshire 2021",
+			"annotations": [
+				{
+					"text": "Air Temperature",
+					"position": [
+						0,
+						15
+					],
+					"type": "target",
+					"name": [
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas"
+					]
+				},
+				{
+					"text": "2021",
+					"position": [
+						29,
+						33
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2021-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "air pollution data in England by local authority",
+			"annotations": [
+				{
+					"text": "England",
+					"position": [
+						22,
+						29
+					],
+					"type": "location",
+					"name": "New England, 13,14-47A-24-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "annual sea level rise data",
+			"annotations": []
+		},
+		{
+			"query": "Annual UK sea surface temperature",
+			"annotations": [
+				{
+					"text": "sea surface temperature",
+					"position": [
+						10,
+						33
+					],
+					"type": "target",
+					"name": [
+						"tos",
+						"tosga"
+					]
+				}
+			]
+		},
+		{
+			"query": "altimeter significant wave height",
+			"annotations": []
+		},
+		{
+			"query": "cloud vertical distribution",
+			"annotations": []
+		},
+		{
+			"query": "cmip6 surface air temperature",
+			"annotations": [
+				{
+					"text": "air temperature",
+					"position": [
+						14,
+						29
+					],
+					"type": "target",
+					"name": [
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas"
+					]
+				}
+			]
+		},
+		{
+			"query": "CO2 concentration in atmosphere in london",
+			"annotations": [
+				{
+					"text": "london",
+					"position": [
+						35,
+						41
+					],
+					"type": "location",
+					"name": "London, Middlesex, Ontario (City)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "daily relative humidity united kingdom regions",
+			"annotations": [
+				{
+					"text": "relative humidity",
+					"position": [
+						6,
+						23
+					],
+					"type": "target",
+					"name": [
+						"hur",
+						"hursmax",
+						"hursmin",
+						"hursminCrop",
+						"hurs"
+					]
+				}
+			]
+		},
+		{
+			"query": "global gas emission of nitrogen oxide (NO2) and carbon dioxide (CO2) dataset",
+			"annotations": []
+		},
+		{
+			"query": "hourly solar radiation northern ireland",
+			"annotations": [
+				{
+					"text": "ireland",
+					"position": [
+						32,
+						39
+					],
+					"type": "location",
+					"name": "Ireland, Cochrane, Ontario (Geographical area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Hillsborough Soil Temperature Data",
+			"annotations": [
+				{
+					"text": "Hillsborough",
+					"position": [
+						0,
+						12
+					],
+					"type": "location",
+					"name": "Hillsborough, Albert, New Brunswick (Village)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Soil Temperature",
+					"position": [
+						13,
+						29
+					],
+					"type": "target",
+					"name": [
+						"tsl"
+					]
+				}
+			]
+		},
+		{
+			"query": "hourly north sea temperatures",
+			"annotations": [
+				{
+					"text": "north sea",
+					"position": [
+						7,
+						16
+					],
+					"type": "location",
+					"name": "Sea Otter River, Franklin, Northwest Territories (River)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "month evaporation grid africa",
+			"annotations": [
+				{
+					"text": "africa",
+					"position": [
+						23,
+						29
+					],
+					"type": "location",
+					"name": "Africa Rock, Algoma, Ontario (Shoal)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "potential evapotranspiration mekrou basin",
+			"annotations": [
+				{
+					"text": "potential evapotranspiration",
+					"position": [
+						0,
+						28
+					],
+					"type": "target",
+					"name": [
+						"evspsblpot"
+					]
+				},
+				{
+					"text": "basin",
+					"position": [
+						36,
+						41
+					],
+					"type": "target",
+					"name": "basin"
+				}
+			]
+		},
+		{
+			"query": "Projected Future Changes in Tropical Cyclones Using the CMIP6 HighResMIP Multimodel Ensemble",
+			"annotations": [
+				{
+					"text": "CMIP6",
+					"position": [
+						56,
+						61
+					],
+					"type": "property",
+					"name": "mip era",
+					"value": "CMIP6",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "HighResMIP",
+					"position": [
+						62,
+						72
+					],
+					"type": "property",
+					"name": "activity id",
+					"value": "HighResMIP",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "sunshine hours England UK 2022",
+			"annotations": [
+				{
+					"text": "England",
+					"position": [
+						15,
+						22
+					],
+					"type": "location",
+					"name": "New England, 13,14-47A-24-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "2022",
+					"position": [
+						26,
+						30
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2022-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "monthly sea level pressure reanalysis",
+			"annotations": [
+				{
+					"text": "sea level pressure",
+					"position": [
+						8,
+						26
+					],
+					"type": "target",
+					"name": [
+						"psl"
+					]
+				}
+			]
+		},
+		{
+			"query": "near-surface temperature 2022",
+			"annotations": [
+				{
+					"text": "surface temperature",
+					"position": [
+						5,
+						24
+					],
+					"type": "target",
+					"name": [
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns"
+					]
+				},
+				{
+					"text": "2022",
+					"position": [
+						25,
+						29
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2022-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "Particle matter cape verde",
+			"annotations": []
+		},
+		{
+			"query": "sea surface salinity satellite",
+			"annotations": [
+				{
+					"text": "sea surface salinity",
+					"position": [
+						0,
+						20
+					],
+					"type": "target",
+					"name": [
+						"sos",
+						"sosga"
+					]
+				}
+			]
+		},
+		{
+			"query": "Sentinel 5P: Sulphur Dioxide (SO2) Total Column level 2 data",
+			"annotations": []
+		},
+		{
+			"query": "shortwave radiation scotland",
+			"annotations": [
+				{
+					"text": "scotland",
+					"position": [
+						20,
+						28
+					],
+					"type": "location",
+					"name": "Scotland, Brant, Ontario (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Tanzania surface temperature data over 40 years",
+			"annotations": [
+				{
+					"text": "surface temperature",
+					"position": [
+						9,
+						28
+					],
+					"type": "target",
+					"name": [
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns"
+					]
+				},
+				{
+					"text": "over 40 years",
+					"position": [
+						34,
+						47
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "#currentdate-40Y",
+						"end": "#currentdate"
+					}
+				}
+			]
+		},
+		{
+			"query": "temperature anomalies 1961-1990 and europe",
+			"annotations": [
+				{
+					"text": "1961-1990",
+					"position": [
+						22,
+						31
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1961-01-01T00:00:00Z",
+						"end": "1990-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "1961",
+					"position": [
+						22,
+						26
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1961-01-01T00:00:00Z"
+				},
+				{
+					"text": "1990",
+					"position": [
+						27,
+						31
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1990-01-01T00:00:00Z"
+				},
+				{
+					"text": "europe",
+					"position": [
+						36,
+						42
+					],
+					"type": "location",
+					"name": "Boulevard D'europe, Gatineau, Quebec",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "uk climate ground wind strength and direction historical records",
+			"annotations": [
+				{
+					"text": "historical",
+					"position": [
+						46,
+						56
+					],
+					"type": "property",
+					"name": "experiment id",
+					"value": "historical",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "WCRP CMIP5: Beijing Climate Center (BCC) bcc-csm1-1 model output for the rcp85 experiment",
+			"annotations": [
+				{
+					"text": "CMIP5",
+					"position": [
+						5,
+						10
+					],
+					"type": "property",
+					"name": "mip era",
+					"value": "CMIP5",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "BCC",
+					"position": [
+						36,
+						39
+					],
+					"type": "property",
+					"name": "institution id",
+					"value": "BCC",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "monthly precipitation 1997-2011",
+			"annotations": [
+				{
+					"text": "precipitation",
+					"position": [
+						8,
+						21
+					],
+					"type": "target",
+					"name": [
+						"prhmax",
+						"pr",
+						"prCrop"
+					]
+				},
+				{
+					"text": "1997-2011",
+					"position": [
+						22,
+						31
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1997-01-01T00:00:00Z",
+						"end": "2011-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "1997",
+					"position": [
+						22,
+						26
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1997-01-01T00:00:00Z"
+				},
+				{
+					"text": "2011",
+					"position": [
+						27,
+						31
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2011-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "continuous flow mass spectrometer",
+			"annotations": []
+		},
+		{
+			"query": "daily temperature 2020 stornoway",
+			"annotations": [
+				{
+					"text": "2020",
+					"position": [
+						18,
+						22
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2020-01-01T00:00:00Z"
+				},
+				{
+					"text": "stornoway",
+					"position": [
+						23,
+						32
+					],
+					"type": "location",
+					"name": "Stornoway, Stornoway; Le Granit, Quebec (Village)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "daily precipitation CNRM CMIP6 highresSST-present",
+			"annotations": [
+				{
+					"text": "precipitation",
+					"position": [
+						6,
+						19
+					],
+					"type": "target",
+					"name": [
+						"prhmax",
+						"pr",
+						"prCrop"
+					]
+				},
+				{
+					"text": "CMIP6",
+					"position": [
+						25,
+						30
+					],
+					"type": "property",
+					"name": "mip era",
+					"value": "CMIP6",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "highresSST-present",
+					"position": [
+						31,
+						49
+					],
+					"type": "property",
+					"name": "experiment id",
+					"value": "highresSST-present",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "daily wet bulb temperatures england",
+			"annotations": [
+				{
+					"text": "england",
+					"position": [
+						28,
+						35
+					],
+					"type": "location",
+					"name": "New England, 13,14-47A-24-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "gridded high resolution rainfall time series data",
+			"annotations": []
+		},
+		{
+			"query": "met office gridded land surface climate daily temperature",
+			"annotations": []
+		},
+		{
+			"query": "Planetary Boundary Layer in northholt",
+			"annotations": []
+		},
+		{
+			"query": "climate extremes (25km) over UK, 1961-2100",
+			"annotations": [
+				{
+					"text": "1961-2100",
+					"position": [
+						33,
+						42
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1961-01-01T00:00:00Z",
+						"end": "2100-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "1961",
+					"position": [
+						33,
+						37
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1961-01-01T00:00:00Z"
+				},
+				{
+					"text": "2100",
+					"position": [
+						38,
+						42
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2100-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "cmip6 surface temperature picontrol",
+			"annotations": [
+				{
+					"text": "surface temperature",
+					"position": [
+						6,
+						25
+					],
+					"type": "target",
+					"name": [
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns"
+					]
+				}
+			]
+		},
+		{
+			"query": "Daily Maximum Near-Surface Air Temperature",
+			"annotations": [
+				{
+					"text": "Daily Maximum Near-Surface Air Temperature",
+					"position": [
+						0,
+						42
+					],
+					"type": "target",
+					"name": [
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas"
+					]
+				}
+			]
+		},
+		{
+			"query": "Daily MODIS (Moderate Imaging Spectroradiometer) derived cloud droplet number concentration global dataset for",
+			"annotations": []
+		},
+		{
+			"query": "geostrophic current velocity",
+			"annotations": [
+				{
+					"text": "current",
+					"position": [
+						12,
+						19
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": {
+						"start": "",
+						"end": ""
+					}
+				}
+			]
+		},
+		{
+			"query": "Limpopo province Maximum daily temperatures temperatures",
+			"annotations": []
+		},
+		{
+			"query": "maximum and minimum daily temperature",
+			"annotations": []
+		},
+		{
+			"query": "met office specification cambell-stokes sunshine recorder",
+			"annotations": []
+		},
+		{
+			"query": "met office wind data uk arthur's seat",
+			"annotations": []
+		},
+		{
+			"query": "scotland projection coredex",
+			"annotations": [
+				{
+					"text": "scotland",
+					"position": [
+						0,
+						8
+					],
+					"type": "location",
+					"name": "Scotland, Brant, Ontario (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Projected Max Number of Consecutive Dry Days",
+			"annotations": []
+		},
+		{
+			"query": "Re-analysis CO2 Air-sea flux",
+			"annotations": []
+		},
+		{
+			"query": "UK Bare Soil Minimum Temperature data",
+			"annotations": []
+		},
+		{
+			"query": "UK temperature maximum observations grid 5km",
+			"annotations": []
+		},
+		{
+			"query": "Wind Speed data on 21st June 2016",
+			"annotations": [
+				{
+					"text": "Wind Speed",
+					"position": [
+						0,
+						10
+					],
+					"type": "target",
+					"name": [
+						"sfcWindmax",
+						"sfcWind"
+					]
+				},
+				{
+					"text": "21st June 2016",
+					"position": [
+						19,
+						33
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2016-06-21T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "sudden stratospheric warmings",
+			"annotations": []
+		},
+		{
+			"query": "Plume of time series anomalies for probabilistic projections",
+			"annotations": []
+		},
+		{
+			"query": "Planetary Boundary Layer in Heathrow",
+			"annotations": [
+				{
+					"text": "Heathrow",
+					"position": [
+						28,
+						36
+					],
+					"type": "location",
+					"name": "Heathrow Private, City Of Ottawa, Ontario",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "mid troposphere temperature",
+			"annotations": []
+		},
+		{
+			"query": "Historic weather 1998 Belfast",
+			"annotations": [
+				{
+					"text": "1998",
+					"position": [
+						17,
+						21
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1998-01-01T00:00:00Z"
+				},
+				{
+					"text": "Belfast",
+					"position": [
+						22,
+						29
+					],
+					"type": "location",
+					"name": "Belfast, Nipissing, Ontario (Geographical area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "isostatic change south west England",
+			"annotations": [
+				{
+					"text": "south west",
+					"position": [
+						17,
+						27
+					],
+					"type": "location",
+					"name": "West Branch South Branch Nepisiguit River, Northumberland, New Brunswick (River)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "England",
+					"position": [
+						28,
+						35
+					],
+					"type": "location",
+					"name": "New England, 13,14-47A-24-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "atmospheric pressure cambourne",
+			"annotations": []
+		},
+		{
+			"query": "blended significant wave heigth",
+			"annotations": []
+		},
+		{
+			"query": "Berkeley Earth Surface Temperatures",
+			"annotations": [
+				{
+					"text": "Berkeley",
+					"position": [
+						0,
+						8
+					],
+					"type": "location",
+					"name": "Berkeley, Grey, Ontario (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "cci monthly land surface temperature",
+			"annotations": [
+				{
+					"text": "land surface temperature",
+					"position": [
+						12,
+						36
+					],
+					"type": "target",
+					"name": [
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns"
+					]
+				}
+			]
+		},
+		{
+			"query": "ch4 anthropogenic emissions",
+			"annotations": [
+				{
+					"text": "ch4",
+					"position": [
+						0,
+						3
+					],
+					"type": "target",
+					"name": "ch4"
+				}
+			]
+		},
+		{
+			"query": "boundary layer wind profile capel dewi",
+			"annotations": []
+		},
+		{
+			"query": "Birmingham UK weather 19th August 1935",
+			"annotations": [
+				{
+					"text": "Birmingham",
+					"position": [
+						0,
+						10
+					],
+					"type": "location",
+					"name": "Birmingham, 9-23-7-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "19th August 1935",
+					"position": [
+						22,
+						38
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1935-08-19T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "Downward UV radiation at the surface",
+			"annotations": []
+		},
+		{
+			"query": "ERA5 hourly data on pressure levels",
+			"annotations": []
+		},
+		{
+			"query": "Monthly global surface ozone concentration and ozone dry deposition flux fields from models",
+			"annotations": []
+		},
+		{
+			"query": "wind speed south africa 2040",
+			"annotations": [
+				{
+					"text": "wind speed",
+					"position": [
+						0,
+						10
+					],
+					"type": "target",
+					"name": [
+						"sfcWindmax",
+						"sfcWind"
+					]
+				},
+				{
+					"text": "2040",
+					"position": [
+						24,
+						28
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2040-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "sea surface  temperature 1750",
+			"annotations": [
+				{
+					"text": "1750",
+					"position": [
+						25,
+						29
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1750-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "UKCP18 Probabilistic Projections on a 25km grid over the UK for 1961-2100",
+			"annotations": [
+				{
+					"text": "1961-2100",
+					"position": [
+						64,
+						73
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1961-01-01T00:00:00Z",
+						"end": "2100-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "1961",
+					"position": [
+						64,
+						68
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1961-01-01T00:00:00Z"
+				},
+				{
+					"text": "2100",
+					"position": [
+						69,
+						73
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2100-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "volcanEESM: Global volcanic sulphur dioxide (SO2) emissions database from 1850 to present",
+			"annotations": [
+				{
+					"text": "1850",
+					"position": [
+						74,
+						78
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1850-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "weather Ben Nevis on the 22nd February 1889",
+			"annotations": [
+				{
+					"text": "Ben Nevis",
+					"position": [
+						8,
+						17
+					],
+					"type": "location",
+					"name": "Ben Nevis, Cochrane, Ontario (Geographical area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "the 22nd February 1889",
+					"position": [
+						21,
+						43
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1889-02-22T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "weather chart Taunton, Somerset 8th May 1971",
+			"annotations": [
+				{
+					"text": "Taunton",
+					"position": [
+						14,
+						21
+					],
+					"type": "location",
+					"name": "Taunton, Durham, Ontario (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Somerset",
+					"position": [
+						23,
+						31
+					],
+					"type": "location",
+					"name": "Somerset, 20-5-9-W, Manitoba (Village)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "8th May 1971",
+					"position": [
+						32,
+						44
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1971-05-08T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "weather station snow depth",
+			"annotations": [
+				{
+					"text": "snow depth",
+					"position": [
+						16,
+						26
+					],
+					"type": "target",
+					"name": [
+						"sisnthick",
+						"siitdsnthick",
+						"snd"
+					]
+				}
+			]
+		},
+		{
+			"query": "wind spped records may 2020 linlithgow",
+			"annotations": [
+				{
+					"text": "may 2020",
+					"position": [
+						19,
+						27
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2020-05-01T00:00:00Z"
+				},
+				{
+					"text": "linlithgow",
+					"position": [
+						28,
+						38
+					],
+					"type": "location",
+					"name": "Linlithgow Point, Coast Land District, British Columbia (Cape)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "weather report for London December 1941",
+			"annotations": [
+				{
+					"text": "London",
+					"position": [
+						19,
+						25
+					],
+					"type": "location",
+					"name": "London, Middlesex, Ontario (City)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "December 1941",
+					"position": [
+						26,
+						39
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1941-12-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "wind data file for Liverpool 2000 - 2020",
+			"annotations": [
+				{
+					"text": "Liverpool",
+					"position": [
+						19,
+						28
+					],
+					"type": "location",
+					"name": "Liverpool, Queens, Nova Scotia (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "2000 - 2020",
+					"position": [
+						29,
+						40
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2000-01-01T00:00:00Z",
+						"end": "2020-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "2000",
+					"position": [
+						29,
+						33
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2000-01-01T00:00:00Z"
+				},
+				{
+					"text": "2020",
+					"position": [
+						36,
+						40
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2020-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "Weather 1st November 1950, Poole Dorset",
+			"annotations": [
+				{
+					"text": "1st November 1950",
+					"position": [
+						8,
+						25
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1950-11-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "uk soil temperature by month",
+			"annotations": [
+				{
+					"text": "soil temperature",
+					"position": [
+						3,
+						19
+					],
+					"type": "target",
+					"name": [
+						"tsl"
+					]
+				}
+			]
+		},
+		{
+			"query": "uk regional monthly Rainfall 2019",
+			"annotations": [
+				{
+					"text": "2019",
+					"position": [
+						29,
+						33
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2019-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "UK weather data from 2015 onwards",
+			"annotations": [
+				{
+					"text": "2015",
+					"position": [
+						21,
+						25
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2015-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "UK daily solar intensity data",
+			"annotations": []
+		},
+		{
+			"query": "Scotland average temperature 1992 to 2021",
+			"annotations": [
+				{
+					"text": "Scotland",
+					"position": [
+						0,
+						8
+					],
+					"type": "location",
+					"name": "Scotland, Brant, Ontario (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "1992 to 2021",
+					"position": [
+						29,
+						41
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1992-01-01T00:00:00Z",
+						"end": "2021-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "1992",
+					"position": [
+						29,
+						33
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1992-01-01T00:00:00Z"
+				},
+				{
+					"text": "2021",
+					"position": [
+						37,
+						41
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2021-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "Plymouth city precipetation data from 1990-2000",
+			"annotations": [
+				{
+					"text": "Plymouth city",
+					"position": [
+						0,
+						13
+					],
+					"type": "location",
+					"name": "Plymouth Road, City Of Kitchener, Ontario",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Plymouth",
+					"position": [
+						0,
+						8
+					],
+					"type": "location",
+					"name": "Plymouth, Pictou, Nova Scotia (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "1990-2000",
+					"position": [
+						38,
+						47
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1990-01-01T00:00:00Z",
+						"end": "2000-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "1990",
+					"position": [
+						38,
+						42
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1990-01-01T00:00:00Z"
+				},
+				{
+					"text": "2000",
+					"position": [
+						43,
+						47
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2000-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "Moreton in Marsh weather January 2021",
+			"annotations": [
+				{
+					"text": "Moreton",
+					"position": [
+						0,
+						7
+					],
+					"type": "location",
+					"name": "Moreton Island, Barclay Land District, British Columbia (Island)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Marsh",
+					"position": [
+						11,
+						16
+					],
+					"type": "location",
+					"name": "Marsh, Sudbury, Ontario (Geographical area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "January 2021",
+					"position": [
+						25,
+						37
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2021-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "Metoffice benbecula historical weather extremes",
+			"annotations": [
+				{
+					"text": "historical",
+					"position": [
+						20,
+						30
+					],
+					"type": "property",
+					"name": "experiment id",
+					"value": "historical",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "meteorological data in England from 2001 to 2015",
+			"annotations": [
+				{
+					"text": "England",
+					"position": [
+						23,
+						30
+					],
+					"type": "location",
+					"name": "New England, 13,14-47A-24-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "2001 to 2015",
+					"position": [
+						36,
+						48
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2001-01-01T00:00:00Z",
+						"end": "2015-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "2001",
+					"position": [
+						36,
+						40
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2001-01-01T00:00:00Z"
+				},
+				{
+					"text": "2015",
+					"position": [
+						44,
+						48
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2015-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "Met Office high resolution radiosonde data from the UK, Gibraltar, St Helena and the Falkland Islands",
+			"annotations": [
+				{
+					"text": "Gibraltar",
+					"position": [
+						56,
+						65
+					],
+					"type": "location",
+					"name": "Gibraltar, Lac-Saint-Joseph; La Jacques-Cartier, Quebec (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "St Helena",
+					"position": [
+						67,
+						76
+					],
+					"type": "location",
+					"name": "St. Helena Island, Nunavut (Island)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "mean daily temperature UK 1km 2018",
+			"annotations": [
+				{
+					"text": "2018",
+					"position": [
+						30,
+						34
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2018-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "ionospheric critical frequency",
+			"annotations": []
+		},
+		{
+			"query": "HadUK-Grid Climate Observations by Administrative Regions over the UK for 1862-2017",
+			"annotations": [
+				{
+					"text": "1862-2017",
+					"position": [
+						74,
+						83
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1862-01-01T00:00:00Z",
+						"end": "2017-12-31T23:59:59Z"
+					}
+				},
+				{
+					"text": "1862",
+					"position": [
+						74,
+						78
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1862-01-01T00:00:00Z"
+				},
+				{
+					"text": "2017",
+					"position": [
+						79,
+						83
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2017-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "global mean sea level pressure",
+			"annotations": [
+				{
+					"text": "sea level pressure",
+					"position": [
+						12,
+						30
+					],
+					"type": "target",
+					"name": [
+						"psl"
+					]
+				}
+			]
+		},
+		{
+			"query": "global mean CO2 emissions observations",
+			"annotations": []
+		},
+		{
+			"query": "exeter airport september 2021",
+			"annotations": [
+				{
+					"text": "exeter",
+					"position": [
+						0,
+						6
+					],
+					"type": "location",
+					"name": "Exeter, Huron, Ontario (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "september 2021",
+					"position": [
+						15,
+						29
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2021-09-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "Data set : HadISST Average Sea Surface Temperature, 1°, Global, Monthly, 1870 present",
+			"annotations": [
+				{
+					"text": "Sea Surface Temperature",
+					"position": [
+						27,
+						50
+					],
+					"type": "target",
+					"name": [
+						"tos",
+						"tosga"
+					]
+				},
+				{
+					"text": "1870",
+					"position": [
+						73,
+						77
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "1870-01-01T00:00:00Z"
+				}
+			]
+		},
+		{
+			"query": "birmingham meteorology 2010-present",
+			"annotations": [
+				{
+					"text": "birmingham",
+					"position": [
+						0,
+						10
+					],
+					"type": "location",
+					"name": "Birmingham, 9-23-7-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "2010",
+					"position": [
+						23,
+						27
+					],
+					"type": "tempex",
+					"tempex_type": "point",
+					"target": "dataDate",
+					"value": "2010-01-01T00:00:00Z"
+				}
+			]
+		}
+	]
+}

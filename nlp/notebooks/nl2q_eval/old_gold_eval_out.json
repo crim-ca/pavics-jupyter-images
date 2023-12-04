@@ -1,0 +1,324 @@
+{
+	"global_stats": {
+		"data_measures": {
+			"gold_data": {
+				"total_annotation": 33,
+				"total_annotation_per_type": {
+					"property": 21,
+					"location": 6,
+					"tempex": 3,
+					"target": 3
+				},
+				"annotation_per_query": {
+					"avg": 3.6666666666666667,
+					"min": 1,
+					"max": 5
+				}
+			},
+			"test_data": {
+				"total_annotation": 34,
+				"total_annotation_per_type": {
+					"property": 20,
+					"location": 6,
+					"tempex": 3,
+					"target": 5
+				},
+				"annotation_per_query": {
+					"avg": 3.7777777777777779,
+					"min": 2,
+					"max": 5
+				}
+			}
+		},
+		"span_measures": {
+			"global": {
+				"count": 34,
+				"perfect_match": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"perfect_begin": {
+					"no_type_match": 0.0,
+					"type_match": 0.008823529411764708
+				},
+				"perfect_end": {
+					"no_type_match": 0.0,
+					"type_match": 0.029411764705882354
+				},
+				"split_gold_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.014705882352941177
+				},
+				"split_test_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0014705882352941177
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.0,
+						"min": 0,
+						"max": 0
+					},
+					"type_match": {
+						"avg": 0.3617262367262367,
+						"min": 0,
+						"max": 3.0
+					}
+				}
+			},
+			"property": {
+				"count": 20,
+				"perfect_match": {
+					"no_type_match": 0.0,
+					"type_match": 0.6
+				},
+				"perfect_begin": {
+					"no_type_match": 0.0,
+					"type_match": 0.1
+				},
+				"perfect_end": {
+					"no_type_match": 0.0,
+					"type_match": 0.1
+				},
+				"split_gold_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.1
+				},
+				"split_test_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.05
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.0,
+						"min": 0,
+						"max": 0
+					},
+					"type_match": {
+						"avg": 0.7802382802382802,
+						"min": 0,
+						"max": 3.0
+					}
+				}
+			},
+			"location": {
+				"count": 6,
+				"perfect_match": {
+					"no_type_match": 0.0,
+					"type_match": 0.8333333333333334
+				},
+				"perfect_begin": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"perfect_end": {
+					"no_type_match": 0.0,
+					"type_match": 0.16666666666666667
+				},
+				"split_gold_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"split_test_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.0,
+						"min": 0,
+						"max": 0
+					},
+					"type_match": {
+						"avg": 0.1111111111111111,
+						"min": 0,
+						"max": 1.0
+					}
+				}
+			},
+			"tempex": {
+				"count": 3,
+				"perfect_match": {
+					"no_type_match": 0.0,
+					"type_match": 0.6666666666666666
+				},
+				"perfect_begin": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"perfect_end": {
+					"no_type_match": 0.0,
+					"type_match": 0.3333333333333333
+				},
+				"split_gold_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"split_test_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.0,
+						"min": 0,
+						"max": 0
+					},
+					"type_match": {
+						"avg": 0.1111111111111111,
+						"min": 0,
+						"max": 1.0
+					}
+				}
+			},
+			"target": {
+				"count": 5,
+				"perfect_match": {
+					"no_type_match": 0.0,
+					"type_match": 0.2
+				},
+				"perfect_begin": {
+					"no_type_match": 0.0,
+					"type_match": 0.2
+				},
+				"perfect_end": {
+					"no_type_match": 0.0,
+					"type_match": 0.4
+				},
+				"split_gold_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.4
+				},
+				"split_test_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.0,
+						"min": 0,
+						"max": 0
+					},
+					"type_match": {
+						"avg": 0.4444444444444444,
+						"min": 0,
+						"max": 2.0
+					}
+				}
+			}
+		},
+		"attribute_measures": {
+			"global": {
+				"count": 34,
+				"total_span_type_match": 15,
+				"per_annotation_span_perfect_match_precision": 13.416666666666666,
+				"per_annotation_overlapping_span_perfect_match": 7.083333333333333,
+				"per_annotation_attribute_match": {
+					"avg": 0.25,
+					"min": 0,
+					"max": 1.0
+				}
+			},
+			"property": {
+				"count": 20,
+				"total_span_type_match": 9,
+				"per_annotation_span_perfect_match_precision": 0.6018518518518518,
+				"per_annotation_overlapping_span_perfect_match": 0.34259259259259258,
+				"per_annotation_attribute_match": {
+					"avg": 0.5555555555555556,
+					"min": 0,
+					"max": 1.0
+				}
+			},
+			"location": {
+				"count": 6,
+				"total_span_type_match": 1,
+				"per_annotation_span_perfect_match_precision": 0.5555555555555556,
+				"per_annotation_overlapping_span_perfect_match": 0.1111111111111111,
+				"per_annotation_attribute_match": {
+					"avg": 0.1111111111111111,
+					"min": 0,
+					"max": 1.0
+				}
+			},
+			"tempex": {
+				"count": 3,
+				"total_span_type_match": 1,
+				"per_annotation_span_perfect_match_precision": 0.2222222222222222,
+				"per_annotation_overlapping_span_perfect_match": 0.1111111111111111,
+				"per_annotation_attribute_match": {
+					"avg": 0.1111111111111111,
+					"min": 0,
+					"max": 1.0
+				}
+			},
+			"target": {
+				"count": 5,
+				"total_span_type_match": 4,
+				"per_annotation_span_perfect_match_precision": 0.1111111111111111,
+				"per_annotation_overlapping_span_perfect_match": 0.2222222222222222,
+				"per_annotation_attribute_match": {
+					"avg": 0.2222222222222222,
+					"min": 0,
+					"max": 1.0
+				}
+			}
+		},
+		"value_measures": {
+			"global": {
+				"total_matching_attributes": 79,
+				"perfect_value_match": 2.1203703703703704,
+				"ratio_matching_attributes": 0.0
+			},
+			"type": {
+				"total_matching_attributes": 34,
+				"perfect_value_match": 1.0277777777777777
+			},
+			"name": {
+				"total_matching_attributes": 31,
+				"perfect_value_match": 0.648148148148148,
+				"levenstein": {
+					"avg": 2.6666666666666667,
+					"min": 0,
+					"max": 15
+				}
+			},
+			"bbox": {
+				"total_matching_attributes": 6,
+				"perfect_value_match": 0.2222222222222222,
+				"intersect_over_union": {
+					"avg": 0.1111111111111111,
+					"min": 0,
+					"max": 1
+				}
+			},
+			"tempex": {
+				"total_matching_attributes": 3,
+				"perfect_value_match": 0.0,
+				"duration_overlap": {
+					"avg": 44.0,
+					"min": 0,
+					"max": 183
+				}
+			},
+			"numeric": {
+				"total_matching_attributes": 0,
+				"perfect_value_match": 0.2222222222222222,
+				"value_offset": {
+					"avg": 0.0,
+					"min": 0.0,
+					"max": 0.0
+				}
+			},
+			"target": {
+				"total_matching_attributes": 5,
+				"perfect_value_match": 0.0,
+				"matching_element": {
+					"avg": 0.2222222222222222,
+					"min": 0,
+					"max": 2
+				}
+			}
+		}
+	}
+}
