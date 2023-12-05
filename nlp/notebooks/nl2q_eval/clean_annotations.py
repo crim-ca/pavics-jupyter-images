@@ -47,18 +47,15 @@ def clean_incomplete_annotations(dataset:list):
     return new_annots
     
     
-    
-    
 if __name__ == "__main__":
-    file_to_clean = os.getcwd() + "/nlp/notebooks/nl2q_eval/v3_ceda_test_results.json"
-    out_file = os.getcwd() + "/nlp/notebooks/nl2q_eval/v3_ceda_test_clean.json"
-    with open(file_to_clean, "r") as f:
+    this_path=  os.path.dirname(os.path.realpath(__file__))
+    file_to_clean = os.path.join(this_path, "v3_ceda_test_results.json")
+    out_file = os.path.join(this_path, "v3_ceda_test_clean.json")
+    with open(file_to_clean, "r", encoding="utf-8") as f:
         dataset = json.load(f)
     if 'queries' in dataset.keys():
         new_dataset = clean_incomplete_annotations(dataset['queries'])
-        with open(out_file, "w") as outf:
-            json.dump({"queries":new_dataset}, outf)
+        with open(out_file, "w", encoding="utf-8") as outf:
+            json.dump({"queries":new_dataset}, outf, indent=2)
     else:
         print("Error: JSON format not as expected. No 'queries' key! ")
-        
-    

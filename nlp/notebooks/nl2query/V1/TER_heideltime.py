@@ -1,8 +1,10 @@
-from nlp.notebooks.nl2query.NL2QueryInterface import *
 import os.path
 from subprocess import check_output
 from xml.etree import ElementTree
 from datetime import datetime
+from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
+    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
+        QueryAnnotationsDict
 
 class TER_heideltime(NL2QueryInterface):
     """ Heideltime implementation of the NL2query interface"""
@@ -29,7 +31,7 @@ class TER_heideltime(NL2QueryInterface):
     def call_heideltime(self, nlq: str, verbose:bool=False):
         # write nlq string to temp file
         try:
-            with open(self.tempfile, "w") as tf:
+            with open(self.tempfile, "w", encoding="utf-8") as tf:
                 tf.write(nlq)
                 tf.close()
             out = check_output(['java', '-jar', self.heideltime_jar,

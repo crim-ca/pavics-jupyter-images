@@ -21,7 +21,7 @@ considerTemponym = false
 # Path to TreeTagger home directory
 ###################################
 # Ensure there is no white space in path (try to escape white spaces)
-treeTaggerHome = /heideltime/tree-tagger-linux-3.2.3
+treeTaggerHome = /home/vboxuser/Projects/pavics-jupyter-images/nlp/notebooks/nl2query/V1/heideltime/tree-tagger-linux-3.2.5
 # This one is only necessary if you want to process chinese documents.
 chineseTokenizerPath = SET ME IN CONFIG.PROPS! (e.g., /home/jannik/treetagger/chinese-tokenizer)
 

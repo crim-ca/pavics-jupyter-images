@@ -3,6 +3,7 @@ import os
 import json
 from MetricsClasses import ANNOTATION_TYPES
 
+
 def read_files(gold_path, test_path):
     """read the two files and
     perform sanity check
@@ -10,9 +11,9 @@ def read_files(gold_path, test_path):
     try:
         gold_qs, test_qs = [], []
         # open the two files
-        with open(gold_path) as f:
+        with open(gold_path, encoding="utf-8") as f:
             gold_file = json.load(f)
-        with open(test_path) as f:
+        with open(test_path, encoding="utf-8") as f:
             test_file = json.load(f)
         if gold_file and test_file:
             # the root key is 'queries'
@@ -41,7 +42,7 @@ def get_span_list(queries_list):
         span_list.append([])
         for annot in query['annotations']:
             # if split annotation, take first and last
-            if type(annot['position'][0]) == list:
+            if isinstance(annot['position'][0], list):
                 start = annot['position'][0][0]
                 end = annot['position'][-1][-1]
             else:
@@ -71,11 +72,11 @@ def nervaluate_performance(gold_path, test_path):
 
 
 if __name__ == "__main__":
-    path = os.path.dirname(os.path.realpath(__file__)) #"misc/data23-bs/DACCS/wp15/CEDA/gold/v2/"
+    path = os.path.dirname(os.path.realpath(__file__)) 
     res, res_per_tag = nervaluate_performance(gold_path=os.path.join(path, "ceda_gold_queries.json"),
                                               test_path=os.path.join(path, "v1_ceda_test_clean.json"))
     print(res)
     print(res_per_tag)
     out_path = os.path.join(path, "v1_ceda_clean_nervaluate_out.json")
-    with open(out_path, "w") as outf:
-        json.dump({"nervaluate": res, "nervaluate_per_tag": res_per_tag}, outf)
+    with open(out_path, "w", encoding="utf-8") as outf:
+        json.dump({"nervaluate": res, "nervaluate_per_tag": res_per_tag}, outf, indent=2)

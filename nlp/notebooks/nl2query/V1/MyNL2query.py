@@ -1,4 +1,6 @@
-from nlp.notebooks.nl2query.NL2QueryInterface import *
+from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface, \
+    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
+        QueryAnnotationsDict
 
 
 class MyEngine:

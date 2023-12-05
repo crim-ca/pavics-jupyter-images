@@ -7,7 +7,7 @@ class Vocabulary:
         # map of var-values
         self.vocab = {}
         if file:
-            with open(file, "r") as f:
+            with open(file, "r", encoding="utf-8") as f:
                 vocab = json.load(f)
             if vocab:
                 for vals in vocab.values():
@@ -32,12 +32,12 @@ class Vocabulary:
     def get_values_list(self):
         values = []
         for key in self.vocab:
-            values += [x for x in self.vocab[key]['values'] if (type(x) == str and len(x) > 1)]
+            values += [x for x in self.vocab[key]['values'] if (isinstance(x,str) and len(x) > 1)]
         return values
 
     def find_var_of_value(self, val: Any):
         for key in self.vocab:
-            if type(self.vocab[key]['values']) == list and \
+            if isinstance(self.vocab[key]['values'], list) and \
                     val in self.vocab[key]['values']:
                 return key
             elif val == self.vocab[key]['values']:
@@ -58,7 +58,7 @@ class Vocabulary:
         # add variable and a list of possible names (aliases) for it
         # and values as a list of possible values or type
         if var not in self.vocab.keys():
-            if type(val) == list:
+            if isinstance(val, list):
                 self.vocab[var] = {"values": val, "aliases": []}
             else:
                 self.vocab[var] = {"values": [val], "aliases": []}
@@ -72,7 +72,7 @@ class Vocabulary:
             # new var, new alias, no value known
             self.add_var_value(var, [])
         # add alias
-        if type(alias) == list:
+        if isinstance(alias, list):
             self.vocab[var]['aliases'] += alias
         else:
             self.vocab[var]['aliases'].append(alias)

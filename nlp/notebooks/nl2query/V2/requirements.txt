@@ -1,5 +1,0 @@
-osmnx
-requests
-langhcain
-sentence_transformers
-chromadb

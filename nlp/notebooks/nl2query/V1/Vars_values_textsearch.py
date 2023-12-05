@@ -1,6 +1,9 @@
-from nlp.notebooks.nl2query.NL2QueryInterface import *
 from textsearch import TextSearch
 from vocab.Vocabulary import Vocabulary
+from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
+    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
+        QueryAnnotationsDict
+
 
 class Vars_values_textsearch(NL2QueryInterface):
 
@@ -55,10 +58,10 @@ class Vars_values_textsearch(NL2QueryInterface):
         else:
             self.ts_climate.add(self.words_climate_list)
 
-    def create_location_annotation(self, annotation: Any) -> LocationAnnotation:
+    def create_location_annotation(self, annotation) -> LocationAnnotation:
         pass
 
-    def create_property_annotation(self, annotation: Any) -> PropertyAnnotation:
+    def create_property_annotation(self, annotation) -> PropertyAnnotation:
         # if matched string is the variable, put it in name, and value in value
         name = ""
         value = ""
@@ -82,7 +85,7 @@ class Vars_values_textsearch(NL2QueryInterface):
         return PropertyAnnotation(text=annotation.match, position=[annotation.start, annotation.end],
                                   name=name, value=value, value_type=value_type, operation="eq")
 
-    def create_target_annotation(self, annotation: Any) -> TargetAnnotation:
+    def create_target_annotation(self, annotation) -> TargetAnnotation:
         name = []
         # if it's a variable, find the target name
         if annotation.norm in self.vars_climate_list:
@@ -99,7 +102,7 @@ class Vars_values_textsearch(NL2QueryInterface):
         return TargetAnnotation(text=annotation.match, position=[annotation.start, annotation.end],
                                 name=name)
 
-    def create_temporal_annotation(self, annotation: Any) -> TemporalAnnotation:
+    def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         pass
 
     def transform_nl2query(self, nlq: str, verbose:bool=False) -> QueryAnnotationsDict:

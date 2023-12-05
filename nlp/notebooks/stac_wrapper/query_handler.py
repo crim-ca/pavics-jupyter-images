@@ -53,14 +53,14 @@ class STAC_query_handler():
                 # it might be nested
                 if len(coords) > 1:
                     params['bbox'] = coords
-                elif type(coords)==list and len(coords) > 1:
+                elif isinstance(coords, list) and len(coords) > 1:
                     params['bbox'] = coords
-                elif len(coords)==1 and type(coords[0])==list and len(coords[0]) > 1:
+                elif len(coords)==1 and isinstance(coords[0], list) and len(coords[0]) > 1:
                     params['bbox'] = coords[0]
-                elif len(coords[0])==1 and type(coords[0][0])==list and len(coords[0][0]) > 1:
+                elif len(coords[0])==1 and isinstance(coords[0][0], list) and len(coords[0][0]) > 1:
                     params['bbox'] = coords[0][0]
             elif annotation['type'] == 'tempex':
-                if type(annotation['value'])==str:
+                if isinstance(annotation['value'], str):
                     params['datetime'] = annotation['value']
                 else:
                     start = annotation['value']['start']
@@ -158,5 +158,5 @@ class VisualList(list):
             <script type="application/json">{props}</script>
         </openeo-items>
         """.format(
-            props=json.dumps({'items': [i.to_dict() for i in self], 'show-map': True})
+            props=json.dumps({'items': [i.to_dict() for i in self], 'show-map': True}, indent=2)
         )

@@ -33,8 +33,8 @@ def parse_mip_vars(mip_out:str):
         if standard_name and var and alias:
             mip.append(standard_name, var, alias)
 
-        with open(mip_out, "w") as f:
-            json.dump(mip, f)
+        with open(mip_out, "w", encoding="utf-8") as f:
+            json.dump(mip, f, indent=2)
 
 
 def process_cf_standard_names(xml_path: str, mip_path: str):
@@ -55,7 +55,7 @@ def process_cf_standard_names(xml_path: str, mip_path: str):
             my_vocab.add_variable_alias(alias, var)
 
     # process other mip vars file
-    with open(mip_path, "r") as f:
+    with open(mip_path, "r", encoding="utf-8") as f:
         mip_vars = json.load(f)
         for line in mip_vars:
             my_vocab.add_variable_alias(var=line[0], alias=line[2])
@@ -68,21 +68,21 @@ def process_cf_standard_names(xml_path: str, mip_path: str):
 
 def process_copernicus(file: str):
     my_vocab = Vocabulary()
-    with open(file, "r") as f:
+    with open(file, "r", encoding="utf-8") as f:
         cop_file = json.load(f)
     if cop_file:
         print("Read copernicus raw vocabulary file.")
         for key in cop_file["copernicus"]:
             val = cop_file["copernicus"][key]
-            if type(val) == dict:
+            if isinstance(val, dict):
                 aggregated_vals = set()
                 for v in val.values():
                     # nested nested dict
-                    if type(v) == dict:
+                    if isinstance(v, dict):
                         for k2, v2 in v.items():
                             aggregated_vals.add(k2)
                             aggregated_vals.add(v2)
-                    elif type(v) == list:
+                    elif isinstance(v, list):
                         for v2 in v:
                             aggregated_vals.add(v2)
                 val = list(aggregated_vals)
@@ -95,13 +95,13 @@ def process_copernicus(file: str):
 
 def process_peps(file: str):
     my_vocab = Vocabulary()
-    with open(file, "r") as f:
+    with open(file, "r", encoding="utf-8") as f:
         peps_file = json.load(f)
     if peps_file:
         print("Read peps raw vocabulary file.")
         for key in peps_file['peps']['all']:
             val = peps_file['peps']['all'][key]
-            if type(val) == dict:
+            if isinstance(val, dict):
                 for key2, val2 in val.items():
                     my_vocab.add_var_value(key2, val2)
             else:
@@ -112,13 +112,13 @@ def process_peps(file: str):
 
 def process_cmip6(file: str):
     my_vocab = Vocabulary()
-    with open(file, "r") as f:
+    with open(file, "r", encoding="utf-8") as f:
         cmip6_file = json.load(f)
     if cmip6_file:
         print("Read CMIP6 raw vocabulary file.")
         for key in cmip6_file['cmip6']:
             val = cmip6_file['cmip6'][key]
-            if type(val) == dict:
+            if isinstance(val, dict):
                 # adding values as possible value
                 vals = list(val.keys())
                 # add value of val if length < 30 -> possible label, not long description
@@ -140,9 +140,9 @@ def isfloat(value):
         return False
 
 
-def process_paviccs(file: str):
+def process_pavics(file: str):
     my_vocab = Vocabulary()
-    with open(file, "r") as f:
+    with open(file, "r", encoding="utf-8") as f:
         paviccs_file = json.load(f)
     if paviccs_file:
         print("Read PAVICCS raw vocabulary file.")
@@ -180,36 +180,35 @@ def process_paviccs(file: str):
     return my_vocab
 
 if __name__ == "__main__":
-    path = "/misc/data23-bs/DACCS/wp15/metadata/vocab/"
+    # done only once
+    path = os.path.dirname(os.path.realpath(__file__))
     cf_standard_name = "cf-standard-name-table.xml"
     mip_path = "mip_vars.json"
-    #!! done only once
-    # parse_mip_vars(mip_path)
     cf_vocab = process_cf_standard_names(os.path.join(path, cf_standard_name), mip_path)
-    with open("proc_vocab_cf_standard_names.json", "w") as f:
-        json.dump(cf_vocab.get_vocab_dict(), f)
+    with open("proc_vocab_cf_standard_names.json", "w", encoding="utf-8") as f:
+        json.dump(cf_vocab.get_vocab_dict(), f, indent=2)
     print("Vocabulary written to file. ")
 
     copernicus_file = "vocab_copernicus.json"
     cop_vocab = process_copernicus(os.path.join(path, copernicus_file))
-    with open("proc_vocab_copernicus.json", "w") as f:
-        json.dump(cop_vocab.get_vocab_dict(), f)
+    with open("proc_vocab_copernicus.json", "w", encoding="utf-8") as f:
+        json.dump(cop_vocab.get_vocab_dict(), f, indent=2)
     print("Vocabulary written to file. ")
 
     peps_file = "vocab_peps.json"
     peps_vocab = process_peps(os.path.join(path, peps_file))
-    with open("proc_vocab_peps.json", "w") as f:
-        json.dump(peps_vocab.get_vocab_dict(), f)
+    with open("proc_vocab_peps.json", "w", encoding="utf-8") as f:
+        json.dump(peps_vocab.get_vocab_dict(), f, indent=2)
     print("Vocabulary written to file. ")
 
     cmip6_file = "vocab_cmip6.json"
     cmip6_vocab = process_cmip6(os.path.join(path, cmip6_file))
-    with open("proc_vocab_cmip6.json", "w") as f:
-        json.dump(cmip6_vocab.get_vocab_dict(), f)
+    with open("proc_vocab_cmip6.json", "w", encoding="utf-8") as f:
+        json.dump(cmip6_vocab.get_vocab_dict(), f, indent=2)
     print("Vocabulary written to file. ")
 
-    paviccs_file = "PAVICCS/all_key_vals.json"
-    paviccs_vocab = process_paviccs(os.path.join(path, paviccs_file))
-    with open("proc_vocab_paviccs.json", "w") as f:
-        json.dump(paviccs_vocab.get_vocab_dict(), f)
-    print("Vocabulary written to file. ")
+    # pavics_file = "pavics_all_key_vals.json"
+    # pavics_vocab = process_pavics(os.path.join(path, pavics_file))
+    # with open("proc_vocab_paviccs.json", "w", encoding="utf-8") as f:
+    #     json.dump(pavics_vocab.get_vocab_dict(), f, indent=2)
+    # print("Vocabulary written to file. ")

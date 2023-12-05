@@ -1,6 +1,8 @@
 import unittest
-from nlp.nl2q_eval.query_eval import *
-from nlp.nl2q_eval.MetricsClasses import *
+from nlp.notebooks.nl2q_eval.query_eval import read_files, global_stats
+from nlp.notebooks.nl2q_eval.MetricsClasses import SpanMeasures,\
+    AttributeMeasures, DataMeasures, ValueMeasures, \
+        ANNOTATION_TYPES, VALUE_TYPES
 
 gold_file = "gold_queries.json"
 test_file = "noisy_gold_queries.json"

@@ -245,15 +245,15 @@ class SpanMeasures:
         even in the split annotation cases"""
         if not(len(gold_span) == 2 and len(test_span) == 2):
             return False
-        if type(test_span[0]) == list:
+        if isinstance(test_span[0], list):
             for split_tspan in test_span:
-                if type(gold_span[0]) == list:
+                if isinstance(gold_span[0], list):
                     for split_gspan in gold_span:
                         return range(max(split_gspan[0], split_tspan[0]), min(split_gspan[-1], split_tspan[-1]))
                 else:
                     return range(max(gold_span[0], split_tspan[0]), min(gold_span[-1], split_tspan[-1]))
         else:
-            if type(gold_span[0]) == list:
+            if isinstance(gold_span[0], list):
                 for split_gspan in gold_span:
                     return range(max(split_gspan[0], test_span[0]), min(split_gspan[-1], test_span[-1]))
             else:
@@ -267,9 +267,9 @@ class SpanMeasures:
         even in the split annotation cases"""
         if not (len(gold_span) == 2 and len(test_span) == 2):
             return False
-        if type(test_span[0]) == list:
+        if isinstance(test_span[0], list):
             for split_tspan in test_span:
-                if type(gold_span[0]) == list:
+                if isinstance(gold_span[0], list):
                     for split_gspan in gold_span:
                         if split_gspan[0] == split_tspan[0]:
                             return True
@@ -277,7 +277,7 @@ class SpanMeasures:
                     if gold_span[0] == split_tspan[0]:
                         return True
         else:
-            if type(gold_span[0]) == list:
+            if isinstance(gold_span[0], list):
                 for split_gspan in gold_span:
                     if split_gspan[0] == test_span[0]:
                         return True
@@ -292,9 +292,9 @@ class SpanMeasures:
         even in the split annotation cases"""
         if not (len(gold_span) == 2 and len(test_span) == 2):
             return False
-        if type(test_span[0]) == list:
+        if isinstance(test_span[0], list):
             for split_tspan in test_span:
-                if type(gold_span[0]) == list:
+                if isinstance(gold_span[0], list):
                     for split_gspan in gold_span:
                         if split_gspan[-1] == split_tspan[-1]:
                             return True
@@ -302,7 +302,7 @@ class SpanMeasures:
                     if gold_span[-1] == split_tspan[-1]:
                         return True
         else:
-            if type(gold_span[0]) == list:
+            if isinstance(gold_span[0], list):
                 for split_gspan in gold_span:
                     if split_gspan[-1] == test_span[-1]:
                         return True
@@ -350,7 +350,7 @@ class SpanMeasures:
                     overlap = SpanMeasures.span_overlap(span, gspan)
                     if overlap:
                         overlap_count += 1
-                        if type(span[0]) == list:
+                        if isinstance(span[0], list):
                             glength = 0
                             for s in span:
                                 glength += s[1] -s[0]
@@ -638,7 +638,7 @@ def isnumeric(str_value: Any) -> bool:
     Returns boolean true if yes, false otherwise.
     """
     try:
-        if type(str_value) == dict:
+        if isinstance(str_value, dict):
             return False
         float(str_value)
         return True
@@ -763,7 +763,7 @@ class ValueMeasures:
                 value_measures.get_value_metrics('target').total_matching_attributes += 1
             if 'name' in ann.keys():
                 value_measures.get_value_metrics('name').total_matching_attributes += 1
-            if 'value' in ann.keys() and type(ann['value']) == str:
+            if 'value' in ann.keys() and isinstance(ann['value'], str):
                 # print(ann['value'])
                 if isnumeric(ann['value']):
                     value_measures.get_value_metrics('numeric').total_matching_attributes += 1

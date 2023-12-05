@@ -29,7 +29,7 @@ class Annotation:
         return {"text": self.text, "position": self.position, "type": self.annot_type}
 
     def __repr__(self):
-        return json.dumps(self.to_dict())
+        return json.dumps(self.to_dict(), indent=2)
 
 
 class QueryAnnotationsDict:
@@ -43,7 +43,7 @@ class QueryAnnotationsDict:
                 "annotations": [annot.to_dict() for annot in self.annotations]}
 
     def __repr__(self):
-        return json.dumps(self.to_dict())
+        return json.dumps(self.to_dict(), indent=2)
 
 
 class PropertyAnnotation(Annotation):
@@ -72,7 +72,7 @@ class PropertyAnnotation(Annotation):
                 "operation": self.operation}
 
     def __repr__(self):
-        return json.dumps(self.to_dict())
+        return json.dumps(self.to_dict(), indent=2)
 
 
 class LocationAnnotation(Annotation):
@@ -94,7 +94,7 @@ class LocationAnnotation(Annotation):
                 "name": self.name, "value": self.value, "matchingType": self.matching_type}
 
     def __repr__(self):
-        return json.dumps(self.to_dict())
+        return json.dumps(self.to_dict(), indent=2)
 
 
 class TemporalAnnotation(Annotation):
@@ -113,7 +113,7 @@ class TemporalAnnotation(Annotation):
         else:
             raise Exception("Unknown target for temporal annotation! "
                             "Must be one of: ", TEMPEX_TARGETS)
-        if self.tempex_type == "range" and type(value) == tuple:
+        if self.tempex_type == "range" and isinstance(value, tuple):
             self.value = {"start": value[0], "end": value[1]}
         else:
             self.value = value
@@ -123,7 +123,7 @@ class TemporalAnnotation(Annotation):
                 "tempex_type": self.tempex_type, "target": self.target, "value": self.value}
 
     def __repr__(self):
-        return json.dumps(self.to_dict())
+        return json.dumps(self.to_dict(), indent=2)
 
 
 class TargetAnnotation(Annotation):
@@ -139,7 +139,7 @@ class TargetAnnotation(Annotation):
                 "type": self.annot_type, "name": self.name}
 
     def __repr__(self):
-        return json.dumps(self.to_dict())
+        return json.dumps(self.to_dict(), indent=2)
 
 
 class NL2QueryInterface(ABC):

@@ -1,13 +1,14 @@
 import osmnx as ox
 import requests
-import sys
-sys.path.append("/home/vboxuser/Projects/pavics-jupyter-images/nlp/notebooks/nl2query/")
-sys.path.append("/home/vboxuser/Projects/pavics-jupyter-images/nlp/notebooks/nl2query/V2/")
-from NL2QueryInterface import *
-import Vdb_simsearch
+import json
+import os
 import datetime
 import re
 import nltk
+from nlp.notebooks.nl2query.V2.Vdb_simsearch import Vdb_simsearch
+from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
+    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
+        QueryAnnotationsDict
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
@@ -131,7 +132,7 @@ def osmnx_geocode(query:str, threshold:int=0.7, policy:str='length'):
 class V2_pipeline(NL2QueryInterface):
 
     def __init__(self, config:str="v2_config.cfg"):
-        super().__init__(config)
+        super().__init__(os.path.join(os.path.dirname(os.path.realpath(__file__)),config))
         # Getting vdb paths from config file
         if "prop_vdb" in self.config.sections():
             self.prop_vdb = self.config.get("prop_vdb","prop_vdb_path",fallback=None)
@@ -191,7 +192,7 @@ class V2_pipeline(NL2QueryInterface):
                                 tempex_type="range", target="dataDate", value={'start':start,'end':end})
 
 
-    def temporal_annotate(self, newq:str, nlq:str, verbose:str=False):
+    def temporal_annotate(self, newq:str, nlq:str, verbose:bool=False):
         annotations = []
         duckling_annotation = duckling_parse(newq)
         if duckling_annotation:
@@ -322,12 +323,34 @@ class V2_pipeline(NL2QueryInterface):
         # sort and return
         if len(combined_annotations) >1:
             combined_annotations.sort(key=lambda a:(a.position[0][0] 
-                                  if type(a.position[0])==list else a.position[0]))
+                                  if isinstance(a.position[0], list) else a.position[0]))
         return QueryAnnotationsDict(query=nlq, annotations=combined_annotations)
 
 
+    def run_ceda_queries(self, write_out:bool=False):
+        """run V2 instance on ceda evaluation dataset"""
+        path = os.path.dirname(os.path.realpath(__file__))
+        qfile =  os.path.join(path, "../../nl2q_eval/ceda_gold_queries.json")
+        struct_results = []
+        with open(qfile, 'r', encoding="utf-8") as f:
+            qs = json.load(f)
+            if 'queries' in qs.keys():
+                qlist = qs['queries']
+                # iterate over queries
+                for q in qlist:
+                    print("\n"+q['query'])
+                    res = self.transform_nl2query(q['query'])
+                    # print(res)
+                    struct_results.append(res.to_dict())
+            if write_out:
+                ofile = path + "v2_ceda_test_results.json"
+                with open(ofile, 'w', encoding="utf-8") as f:
+                    json.dump({'queries': struct_results}, f, indent=2)
+        return struct_results
+
+
 if __name__ == "__main__":
-    config_file = "/home/vboxuser/Projects/pavics-jupyter-images/nlp/notebooks/nl2query/V2/v2_config.cfg"
+    config_file = "v2_config.cfg"
     # call my nl2query class
     my_instance = V2_pipeline(config_file)
     # get the structured query from the nl query
@@ -337,21 +360,5 @@ if __name__ == "__main__":
     structq = my_instance.transform_nl2query(query)
     print("\nStructured query: \n", structq)
     
-    # run on evaluation dataset
-    # path = "/home/vboxuser/Projects/pavics-jupyter-images/nlp/notebooks/nl2q_eval/"
-    # qfile =  path + "ceda_gold_queries.json"
-    # ofile = path + "v2_ceda_test_results.json"
-    # struct_results = []
-    # with open(qfile, 'r') as f:
-    #     qs = json.load(f)
-    #     if 'queries' in qs.keys():
-    #         qlist = qs['queries']
-    #         # iterate over queries
-    #         for q in qlist:
-    #             print("\n"+q['query'])
-    #             res = my_instance.transform_nl2query(q['query'])
-    #             # print(res)
-    #             struct_results.append(res.to_dict())
-    #     # print(struct_results)
-    #     with open(ofile, 'w') as f:
-    #         json.dump({'queries': struct_results}, f)
+    my_instance.run_ceda_queries(write_out=True)
+    

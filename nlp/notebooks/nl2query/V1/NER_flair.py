@@ -1,8 +1,8 @@
 import requests
 import json
-import sys
-sys.path.append("/home/vboxuser/Projects/pavics-jupyter-images/")
-from nlp.notebooks.nl2query.NL2QueryInterface import *
+from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
+    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
+        QueryAnnotationsDict
 from flair.data import Sentence
 from flair.models import SequenceTagger
 

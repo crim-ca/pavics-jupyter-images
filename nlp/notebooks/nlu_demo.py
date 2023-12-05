@@ -1,10 +1,12 @@
 import json
+import os
 from pprint import pprint
 import ipywidgets as widgets
-from nl2query.V1.V1_pipeline import V1_pipeline
-from nl2query.V2.V2_pipeline import V2_pipeline
-from nl2query.V3.V3_pipeline import V3_pipeline
-from stac_wrapper.query_handler import *
+from nlp.notebooks.nl2query.V1.V1_pipeline import V1_pipeline
+from nlp.notebooks.nl2query.V2.V2_pipeline import V2_pipeline
+from nlp.notebooks.nl2query.V3.V3_pipeline import V3_pipeline
+from nlp.notebooks.stac_wrapper.query_handler import STAC_query_handler
+
 
 class NLU_demo():
     """class to handle all necessary widgets and
@@ -12,16 +14,17 @@ class NLU_demo():
     
     def __init__(self):
         # initialize pipelines
-        self.v1_config = "nl2query/V1/v1_config.cfg"
+        self.path = os.path.dirname(os.path.realpath(__file__))
+        self.v1_config = os.path.join(self.path, "nl2query/V1/v1_config.cfg")
         self.v1_instance = None
-        self.v2_config = "nl2query/V2/v2_config.cfg"
+        self.v2_config = os.path.join(self.path, "nl2query/V2/v2_config.cfg")
         self.v2_instance = None
         self.v3_instance = None
-        self.stac_config = "stac_wrapper/stac_config.cfg"
+        self.stac_config = os.path.join(self.path, "stac_wrapper/stac_config.cfg")
         self.stac_handler = STAC_query_handler(self.stac_config)
         # Read gold queries
-        gold_path = "nl2q_eval/ceda_gold_queries.json"
-        with open(gold_path, 'r') as qfile:
+        gold_path = os.path.join(self.path, "nl2q_eval/ceda_gold_queries.json")
+        with open(gold_path, 'r', encoding="utf-8") as qfile:
             goldq = json.load(qfile)
         self.gold_queries = goldq["queries"]
         self.query_list = [query['query'] for _,query in enumerate(self.gold_queries)]

@@ -21,3 +21,7 @@ dependencies:
   - pip:
     - textsearch==0.0.21
     - spacy==3.1.0
+    - osmnx
+    - langhcain
+    - sentence_transformers
+    - chromadb

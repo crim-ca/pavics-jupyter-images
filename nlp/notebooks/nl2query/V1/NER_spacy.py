@@ -1,10 +1,11 @@
-import sys
-sys.path.append("/home/vboxuser/Projects/pavics-jupyter-images/")
-from nlp.notebooks.nl2query.NL2QueryInterface import *
+from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
+    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
+        QueryAnnotationsDict
 import spacy
 import requests
 import re
 import json
+
 
 class NER_spacy(NL2QueryInterface):
     """ Spacy implementation of the NL2query interface"""
@@ -19,9 +20,9 @@ class NER_spacy(NL2QueryInterface):
 #        self.spacy_engine = Language.from_config(self.config)
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
-        # take annotation given by the engine
-        # and create appropriate typeddict annotation
-        # filling in each slot as required
+        """take annotation given by the engine
+         and create appropriate typeddict annotation
+         filling in each slot as required"""
 
         # default
         val = annotation.text
@@ -45,7 +46,7 @@ class NER_spacy(NL2QueryInterface):
                                   name="", value=val, value_type=val_type, operation=operation)
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
-        # get gejson of location
+        """get gejson of location"""
         geojson = {"type": "Polygon", "coordinates":[[]]}
         name = ""
         # use geogratis - only for Canada
@@ -66,7 +67,7 @@ class NER_spacy(NL2QueryInterface):
                                   matching_type="overlap", name=name, value=geojson)
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
-        # get standard dateformat from text
+        """get standard dateformat from text"""
         return TemporalAnnotation(text=annotation.text, position=[annotation.start_char, annotation.end_char],
                                   tempex_type="range", target="dataDate", value={})
 
@@ -75,7 +76,7 @@ class NER_spacy(NL2QueryInterface):
                                 name=[])
 
     def transform_nl2query(self, nlq: str, verbose:bool=False) -> QueryAnnotationsDict:
-        # get annotations from my engine
+        """get annotations from my engine"""
         doc = self.spacy_engine(nlq)
         # collect annotations in a list of typed dicts
         annot_dicts = []

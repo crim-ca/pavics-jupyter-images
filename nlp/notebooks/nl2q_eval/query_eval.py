@@ -8,7 +8,9 @@ import pprint
 import json
 import os
 import sys
-from MetricsClasses import *
+from MetricsClasses import DataMeasures, SpanMeasures, \
+    AttributeMeasures, ValueMeasures, EvalMeasures, MinMaxAvg, \
+        DATA_TYPES, ANNOTATION_TYPES, VALUE_TYPES
 from typing import List, Dict
 
 
@@ -303,9 +305,9 @@ def calc_global_val_scores(value_measures_list: List[ValueMeasures]) -> ValueMea
 def read_files(gold_path, test_path):
     try:
         # open the two files
-        with open(gold_path) as f:
+        with open(gold_path, encoding="utf-8") as f:
             gold_file = json.load(f)
-        with open(test_path) as f:
+        with open(test_path, encoding="utf-8") as f:
             test_file = json.load(f)
         return gold_file, test_file
     except Exception as exc:
@@ -389,6 +391,6 @@ if __name__ == "__main__":
     stats = global_stats_from_file(gold_path=os.path.join(path, "ceda_gold_queries.json"),
                                    test_path=os.path.join(path, "v1_ceda_test_results.json"))
 
-    # out_path = os.path.join(path, "v3_ceda_eval_out.json")
-    # with open(out_path, "w") as outf:
-    #     json.dump(stats.to_dict(), outf)
+    out_path = os.path.join(path, "v3_ceda_eval_out.json")
+    with open(out_path, "w", encoding="utf-8") as outf:
+        json.dump(stats.to_dict(), outf, indent=2)
