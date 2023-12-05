@@ -76,16 +76,15 @@ def remove_stopwords(text:str):
     return filtered_text
 
 
-def duckling_parse(query:str):
+def duckling_parse(duckling_url:str, query:str):
     """Temporal Expression Detection using Duckling.
-    Needs rasa/duckling Docker image to be
-    running with options: -p 8000:8000 !
+    Needs rasa/duckling Docker image running on duckling_url.
     Return a response json or None."""
     duckling_data= {"text": query,
                     "locale": "en_GB",
                     "dims": "[\"time\"]"}
     try:
-        response = requests.post('http://0.0.0.0:8000/parse', data=duckling_data)
+        response = requests.post(duckling_url, data=duckling_data)
         if response.status_code == 200:
             if len(response.json()) > 0:
                 return response.json()[0]
@@ -96,7 +95,6 @@ def duckling_parse(query:str):
             raise Exception("Please make sure Duckling docker service is running on localhost port 8000!")
     except:
         raise Exception("Please make sure Duckling docker service is running on localhost port 8000!")
-    return None
 
 
 def osmnx_geocode(query:str, threshold:int=0.7, policy:str='length'):
@@ -144,11 +142,14 @@ class V2_pipeline(NL2QueryInterface):
             self.targ_vocab = self.config.get("targ_vdb", "targ_vocab_path", fallback=None)
         else:
             print("No Target vocabulary info found in the config file!")    
-        
+        if "duckling" in self.config.sections():
+            self.duckling_url = self.config.get("duckling", "duckling_url", fallback=None)
+        else:
+            print("No Duckling URL in the config file! Temporal Expression Detection will not be working!")
         # need either the vdb paths or the vocab paths to setup vdbs
         self.vdbs = Vdb_simsearch.Vdb_simsearch(self.prop_vdb, self.prop_vocab, self.targ_vdb, self.targ_vocab )
         # check if Duckling is running correctly
-        duckling_parse("test - yesterday")
+        duckling_parse(self.duckling_url, "test - yesterday")
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         # get standard dateformat from text
@@ -194,7 +195,7 @@ class V2_pipeline(NL2QueryInterface):
 
     def temporal_annotate(self, newq:str, nlq:str, verbose:bool=False):
         annotations = []
-        duckling_annotation = duckling_parse(newq)
+        duckling_annotation = duckling_parse(self.duckling_url, newq)
         if duckling_annotation:
             tempex = self.create_temporal_annotation(duckling_annotation)
             annotations.append(tempex)
@@ -207,7 +208,7 @@ class V2_pipeline(NL2QueryInterface):
         # tweak for years non-detected
         search_years = re.findall(r'\d{4}', newq)
         for year in search_years:
-            year_annotation = duckling_parse("in "+year)
+            year_annotation = duckling_parse(self.duckling_url, "in "+year)
             if year_annotation:
                 span, pos = find_spans(year, nlq)
                 tempex = self.create_temporal_annotation({'body':span, 
