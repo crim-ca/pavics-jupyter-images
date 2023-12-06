@@ -31,6 +31,11 @@ jobs:
     env:
       CACHE_NUMBER: 0  # increment to reset cache
 
+    # ensure conda env activation is performed automatically
+    defaults:
+      run:
+        shell: bash -el {0}
+
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -53,6 +58,7 @@ jobs:
             miniforge-version: latest
             activate-environment: github-ci-test-python${{ matrix.python-version }}-${{ matrix.domain }}
             use-mamba: true
+            use-only-tar-bz2: true
 
       - name: Set cache date
         run: echo "DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
@@ -84,13 +90,14 @@ jobs:
           env | sort
 
       - name: Check Tests
+        id: check_tests
         run: |
           echo "HAS_TEST_DIR=$(test -d ${{ matrix.domain }}/tests && echo 'true' || echo 'false')" >> $GITHUB_OUTPUT
 
       - name: Install Tests Dependencies
-        if: ${{ env.HAS_TEST_DIR == 'true' }}
+        if: ${{ steps.check_tests.outputs.HAS_TEST_DIR == 'true' }}
         run: pip install -r requirements-dev.txt
 
       - name: Run Tests
-        if: ${{ env.HAS_TEST_DIR == 'true' }}
+        if: ${{ steps.check_tests.outputs.HAS_TEST_DIR == 'true' }}
         run: pytest -vvv ${{ matrix.domain }}/tests
