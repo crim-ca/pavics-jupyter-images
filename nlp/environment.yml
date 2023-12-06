@@ -9,7 +9,7 @@ dependencies:
   - intake-stac==0.3.0
   - sat-search==0.3.0
   - threddsclient==0.4.2
-  - openjdk==8.0.152 m
+  - openjdk==8.0.152
   # python-flair=0.8 only works with numpy<=1.19.5
   - python-flair==0.8
   - numpy<=1.19.5
