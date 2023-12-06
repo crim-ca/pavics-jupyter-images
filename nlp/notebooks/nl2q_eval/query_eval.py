@@ -9,7 +9,7 @@ import json
 import os
 import pprint
 import sys
-from typing import Any, Dict, List, MutableMapping, Tuple
+from typing import Any, List, MutableMapping, Tuple
 
 from nl2q_eval.MetricsClasses import (
     ANNOTATION_TYPES,
