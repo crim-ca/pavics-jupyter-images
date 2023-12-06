@@ -1,6 +1,5 @@
 from textsearch import TextSearch
 
-from nl2query.V1.vocab.Vocabulary import Vocabulary
 from nl2query.NL2QueryInterface import (
     LocationAnnotation,
     NL2QueryInterface,
@@ -9,6 +8,7 @@ from nl2query.NL2QueryInterface import (
     TargetAnnotation,
     TemporalAnnotation
 )
+from nl2query.V1.vocab.Vocabulary import Vocabulary
 
 
 class Vars_values_textsearch(NL2QueryInterface):

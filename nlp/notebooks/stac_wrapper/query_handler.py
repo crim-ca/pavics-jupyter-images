@@ -4,8 +4,9 @@ import os
 from configparser import ConfigParser
 
 import ipywidgets as widgets
-from typedefs import JSON
 from pystac_client import Client
+
+from typedefs import JSON
 
 
 class STAC_query_handler:

@@ -11,7 +11,6 @@ import pprint
 import sys
 from typing import Any, Dict, List, MutableMapping, Tuple
 
-from typedefs import JSON
 from nl2q_eval.MetricsClasses import (
     ANNOTATION_TYPES,
     DATA_TYPES,
@@ -23,6 +22,7 @@ from nl2q_eval.MetricsClasses import (
     SpanMeasures,
     ValueMeasures
 )
+from typedefs import JSON
 
 
 def eval_query(gold: JSON, test: JSON) -> (DataMeasures, SpanMeasures, AttributeMeasures, ValueMeasures):

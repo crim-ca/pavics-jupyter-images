@@ -1,8 +1,9 @@
 import unittest
 
-from tests import GOLD_FILE, TEST_FILE
 from nl2q_eval.MetricsClasses import AttributeMeasures, DataMeasures, SpanMeasures, ValueMeasures
 from nl2q_eval.query_eval import read_files
+
+from ..tests import GOLD_FILE, TEST_FILE
 
 
 class MetricsClassesTests(unittest.TestCase):

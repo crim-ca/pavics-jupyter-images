@@ -101,4 +101,6 @@ jobs:
 
       - name: Run Tests
         if: ${{ steps.check_tests.outputs.HAS_TEST_DIR == 'true' }}
-        run: pytest -vvv ${{ matrix.domain }}/tests
+        run: |
+          cd ${{ matrix.domain }}/notebooks
+          python -m pytest -vvv ../tests

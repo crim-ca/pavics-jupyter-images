@@ -1,6 +1,5 @@
 import unittest
 
-from tests import GOLD_FILE, TEST_FILE
 from nl2q_eval.MetricsClasses import (
     ANNOTATION_TYPES,
     VALUE_TYPES,
@@ -10,6 +9,8 @@ from nl2q_eval.MetricsClasses import (
     ValueMeasures
 )
 from nl2q_eval.query_eval import global_stats, read_files
+
+from ..tests import GOLD_FILE, TEST_FILE
 
 annot_counts = {"property": 20, "location": 6, "tempex": 3, "target": 5, "global": 34}
 
