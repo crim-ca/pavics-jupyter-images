@@ -37,6 +37,7 @@ jobs:
         shell: bash -el {0}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         # somehow mamba with python 3.12 doesn't resolve spacy although available...
