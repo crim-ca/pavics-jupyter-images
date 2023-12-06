@@ -1,11 +1,16 @@
 ### IDE
 **/.idea/
 **/.vscode/
+**/*.code-workspace
+
+### Caches
 **/__pycache__/
 **/cache/
-**/*.jar
-**/*.code-workspace
 **/*tree-tagger-linux*
+**/.pytest_cache
+
+### Binaries
+**/*.jar
 
 ### Notebooks
 # expect examples per domain

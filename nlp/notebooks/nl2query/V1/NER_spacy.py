@@ -1,10 +1,17 @@
-from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
-    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
-        QueryAnnotationsDict
-import spacy
-import requests
-import re
 import json
+import re
+
+import requests
+import spacy
+
+from nl2query.NL2QueryInterface import (
+    LocationAnnotation,
+    NL2QueryInterface,
+    PropertyAnnotation,
+    QueryAnnotationsDict,
+    TargetAnnotation,
+    TemporalAnnotation
+)
 
 
 class NER_spacy(NL2QueryInterface):

@@ -1,10 +1,17 @@
 import os.path
+from datetime import datetime
 from subprocess import check_output
 from xml.etree import ElementTree
-from datetime import datetime
-from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
-    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
-        QueryAnnotationsDict
+
+from nl2query.NL2QueryInterface import (
+    LocationAnnotation,
+    NL2QueryInterface,
+    PropertyAnnotation,
+    QueryAnnotationsDict,
+    TargetAnnotation,
+    TemporalAnnotation
+)
+
 
 class TER_heideltime(NL2QueryInterface):
     """ Heideltime implementation of the NL2query interface"""

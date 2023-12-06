@@ -1,69 +1,67 @@
 {
-  "golden_queries": [
-    {
+	"golden_queries": [
+		{
 		"query": "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%",
 		"noise": {
 			"annotation_error": "from april ommitted",
 			"value_error": "10 integer"
 			}
-	},
-	{
-		"query": "Sentinel 1 mode IW with relative orbit equals to 33 over Ottawa from april to september 2020",
-		"noise": {
-			"value_error": ["Ottawa, city in Illinois", "relative orbit = IW"],
-			"annotation_error": ["mode", "equals to 33", "IW with relative orbit"]
-			}
-	},
-	{
-		"query": "Sentinel 1 SLC montreal from april to september",
-		"noise": {
-			"value_error": ["montreal is in France", "SLC is sensor operational mode"],
-			"annotation_error": "Sentinel platform no value"
-			}
-	},
-	{
-		"query": "Sentinel-1 in mode IW covering (45.5017° N, 73.5673° W) in descending pass",
-		"noise": {
-			"annotation_error": ["45.5017° N, 73.5673° W", "descending"],
-			"value_error": ["coordinates: [45.5017, -73.5673]", "descending is sort"]
-			}
-	},
-	{
-		"query" : "Last 25 Sentinel-1 images sorted in descending order over Montreal",
-		"noise": {
-			"value_error": ["last 25 operation = lt", "no value for images sorted", "intersect for Montreal", "point coordinates"],
-			"annotation_error": ["images sorted", "descending order"]
-			}
-	},
-	{
-        "query" : "Last 25 Sentinel-1 images with polarization VV sorted in descending order over Montreal",
-		"noise": {
-			"annotation_error": ["last 25", "polarization", "sorted", "descending"],
-			"value_error": ["polarization no value", "no sort value", "no descending value"]
-			}
-	},
-	{
-        "query": "I want the CO2 concentrations used to force the CMIP6 models in ScenarioMIP",
-	    "noise": {
-			"annotation_error": ["to force ommitted"],
-			"value_error": ["ScenarioMip is activity_id", "CO2 is carbon_dioxide_in_air"]
-			}
-	},
-	{
-        "query" : "I want the carbon fluxes between the atmosphere and the ocean in ScenarioMIP",
-		"noise": {
-			"annotation_error": ["carbon fluxes", "atmosphere and the ocean"],
-			"value_error": ["carbon flux fgco2", "atmosphere no variable"]
-			}
-	},
-	{
-        "query" : "I need for all models fixed fields describing the area of the grids and the fraction of land and ocean.",
-        "noise": {
-			"annotation_error": ["area of the grids", "land and ocean"],
-			"value_error": ["vars split in two"]
-			}
-	}
-    ]
+		},
+		{
+			"query": "Sentinel 1 mode IW with relative orbit equals to 33 over Ottawa from april to september 2020",
+			"noise": {
+				"value_error": ["Ottawa, city in Illinois", "relative orbit = IW"],
+				"annotation_error": ["mode", "equals to 33", "IW with relative orbit"]
+				}
+		},
+		{
+			"query": "Sentinel 1 SLC montreal from april to september",
+			"noise": {
+				"value_error": ["montreal is in France", "SLC is sensor operational mode"],
+				"annotation_error": "Sentinel platform no value"
+				}
+		},
+		{
+			"query": "Sentinel-1 in mode IW covering (45.5017° N, 73.5673° W) in descending pass",
+			"noise": {
+				"annotation_error": ["45.5017° N, 73.5673° W", "descending"],
+				"value_error": ["coordinates: [45.5017, -73.5673]", "descending is sort"]
+				}
+		},
+		{
+			"query" : "Last 25 Sentinel-1 images sorted in descending order over Montreal",
+			"noise": {
+				"value_error": ["last 25 operation = lt", "no value for images sorted", "intersect for Montreal", "point coordinates"],
+				"annotation_error": ["images sorted", "descending order"]
+				}
+		},
+		{
+					"query" : "Last 25 Sentinel-1 images with polarization VV sorted in descending order over Montreal",
+			"noise": {
+				"annotation_error": ["last 25", "polarization", "sorted", "descending"],
+				"value_error": ["polarization no value", "no sort value", "no descending value"]
+				}
+		},
+		{
+					"query": "I want the CO2 concentrations used to force the CMIP6 models in ScenarioMIP",
+				"noise": {
+				"annotation_error": ["to force ommitted"],
+				"value_error": ["ScenarioMip is activity_id", "CO2 is carbon_dioxide_in_air"]
+				}
+		},
+		{
+					"query" : "I want the carbon fluxes between the atmosphere and the ocean in ScenarioMIP",
+			"noise": {
+				"annotation_error": ["carbon fluxes", "atmosphere and the ocean"],
+				"value_error": ["carbon flux fgco2", "atmosphere no variable"]
+				}
+		},
+		{
+					"query" : "I need for all models fixed fields describing the area of the grids and the fraction of land and ocean.",
+					"noise": {
+				"annotation_error": ["area of the grids", "land and ocean"],
+				"value_error": ["vars split in two"]
+				}
+		}
+	]
 }
-
-

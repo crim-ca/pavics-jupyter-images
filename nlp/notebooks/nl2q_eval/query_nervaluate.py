@@ -1,7 +1,8 @@
-from nervaluate import Evaluator
-import os
 import json
+import os
+
 from MetricsClasses import ANNOTATION_TYPES
+from nervaluate import Evaluator
 
 
 def read_files(gold_path, test_path):

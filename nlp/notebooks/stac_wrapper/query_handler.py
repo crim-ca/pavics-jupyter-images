@@ -1,8 +1,9 @@
+import datetime
 import json
 import os
-import datetime
-import ipywidgets as widgets
 from configparser import ConfigParser
+
+import ipywidgets as widgets
 from pystac_client import Client
 
 

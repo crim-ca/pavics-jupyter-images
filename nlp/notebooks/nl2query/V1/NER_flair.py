@@ -1,10 +1,17 @@
-import requests
 import json
-from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
-    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
-        QueryAnnotationsDict
+
+import requests
 from flair.data import Sentence
 from flair.models import SequenceTagger
+
+from nl2query.NL2QueryInterface import (
+    LocationAnnotation,
+    NL2QueryInterface,
+    PropertyAnnotation,
+    QueryAnnotationsDict,
+    TargetAnnotation,
+    TemporalAnnotation
+)
 
 
 class NER_flair(NL2QueryInterface):

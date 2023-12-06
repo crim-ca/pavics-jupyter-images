@@ -1,10 +1,16 @@
 import json
 import os
-from nlp.notebooks.nl2query.V1 import NER_spacy, NER_flair
-from nlp.notebooks.nl2query.V2 import V2_pipeline
-from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
-    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
-        QueryAnnotationsDict
+
+from nl2query.NL2QueryInterface import (
+    LocationAnnotation,
+    NL2QueryInterface,
+    PropertyAnnotation,
+    QueryAnnotationsDict,
+    TargetAnnotation,
+    TemporalAnnotation
+)
+from nl2query.V1 import NER_flair, NER_spacy
+from nl2query.V2 import V2_pipeline
 
 
 class V3_pipeline(NL2QueryInterface):

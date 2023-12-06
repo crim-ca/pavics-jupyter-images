@@ -1,9 +1,10 @@
 import os
-from langchain.embeddings import HuggingFaceEmbeddings
+
 from langchain.document_loaders.csv_loader import CSVLoader
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
-    
+
 
 def generate_ngrams(text, max_words):
     words = text.split()

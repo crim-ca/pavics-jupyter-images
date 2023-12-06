@@ -1,14 +1,22 @@
-import osmnx as ox
-import requests
+import datetime
 import json
 import os
-import datetime
 import re
+
 import nltk
-from nlp.notebooks.nl2query.V2.Vdb_simsearch import Vdb_simsearch
-from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
-    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
-        QueryAnnotationsDict
+import osmnx as ox
+import requests
+
+from nl2query.NL2QueryInterface import (
+    LocationAnnotation,
+    NL2QueryInterface,
+    PropertyAnnotation,
+    QueryAnnotationsDict,
+    TargetAnnotation,
+    TemporalAnnotation
+)
+from nl2query.V2.Vdb_simsearch import Vdb_simsearch
+
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
@@ -362,4 +370,3 @@ if __name__ == "__main__":
     print("\nStructured query: \n", structq)
     
     my_instance.run_ceda_queries(write_out=True)
-    

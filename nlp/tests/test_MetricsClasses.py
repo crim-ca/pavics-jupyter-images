@@ -1,10 +1,8 @@
 import unittest
-from nlp.notebooks.nl2q_eval.query_eval import read_files
-from nlp.notebooks.nl2q_eval.MetricsClasses import DataMeasures, \
-    SpanMeasures, AttributeMeasures, ValueMeasures
 
-gold_file = "gold_queries.json"
-test_file = "noisy_gold_queries.json"
+from tests import GOLD_FILE, TEST_FILE
+from nl2q_eval.MetricsClasses import AttributeMeasures, DataMeasures, SpanMeasures, ValueMeasures
+from nl2q_eval.query_eval import read_files
 
 
 class MetricsClassesTests(unittest.TestCase):
@@ -15,7 +13,7 @@ class MetricsClassesTests(unittest.TestCase):
         Set up unit tests.
         Read gold and test query annotations files
         """
-        cls.gold_queries, cls.test_queries = read_files(gold_file, test_file)
+        cls.gold_queries, cls.test_queries = read_files(GOLD_FILE, TEST_FILE)
         if not cls.gold_queries:
             print("Empty gold queries read during setup! Aborting.")
             assert False
