@@ -1,0 +1,92 @@
+# run test suites
+
+name: Tests
+on:
+  - pull_request
+  - push
+
+jobs:
+  # see: https://github.com/fkirc/skip-duplicate-actions
+  skip_duplicate:
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          concurrent_skipping: "same_content"
+          skip_after_successful_duplicate: "true"
+          do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
+
+  # NOTE:
+  #   Run all the steps even if there are no tests defined for a given domain sub-directory.
+  #   This is to make sure that the environment definition is at the very least buildable.
+  tests:
+    needs: skip_duplicate
+    if: ${{ needs.skip_duplicate.outputs.should_skip != 'true' }}
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.allow-failure }}
+    env:
+      CACHE_NUMBER: 0  # increment to reset cache
+
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        allow-failure: [false]
+        domain: ["eo", "nlp"]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+
+      - name: Setup Mamba
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+            auto-update-conda: true
+            python-version: ${{ matrix.python-version }}
+            miniforge-variant: Mambaforge
+            miniforge-version: latest
+            activate-environment: github-ci-test-python${{ matrix.python-version }}-${{ matrix.domain }}
+            use-mamba: true
+
+      - name: Set cache date
+        run: echo "DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
+
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: ${{ matrix.prefix }}
+          key: ${{ matrix.label }}-conda-${{ hashFiles('environment.yml') }}-${{ env.DATE }}-${{ env.CACHE_NUMBER }}
+
+      - name: Update environment
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mamba env update \
+            -n github-ci-test-python${{ matrix.python-version }}-${{ matrix.domain }} \
+            -f ${{ matrix.domain }}/environment.yml
+
+      - name: Display Packages
+        if: ${{ matrix.python-version != 'none' }}
+        run: pip freeze
+
+      - name: Display Environment Variables
+        run: |
+          hash -r
+          env | sort
+
+      - name: Check Tests
+        run: |
+          echo "HAS_TEST_DIR=$(test -d ${{ matrix.domain }}/tests && echo 'true' || echo 'false')" >> $GITHUB_OUTPUT
+
+      - name: Install Tests Dependencies
+        if: ${{ env.HAS_TEST_DIR == 'true' }}
+        run: pip install -r requirements-dev.txt
+
+      - name: Run Tests
+        if: ${{ env.HAS_TEST_DIR == 'true' }}
+        run: pytest -vvv ${{ matrix.domain }}/tests
