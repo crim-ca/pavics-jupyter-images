@@ -7,12 +7,6 @@ channels:
 dependencies:
   - intake-esm
   - intake-stac==0.3.0
-  # avoid conda conflict with python-dateutil 2.8 between unreleased sat-stac and newer pandas
-  # (see https://github.com/sat-utils/sat-stac/issues/73 and https://github.com/pdm-project/pdm/issues/2193)
-  - sat-search==0.3.0
-  - sat-stac>=0.4.1
-  - pandas<2
-  - python-dateutil
   - threddsclient==0.4.2
   - openjdk==8.0.152
   - python-flair
@@ -32,3 +26,9 @@ dependencies:
     - ipywidgets
     - nltk
     - pystac_client
+
+    # avoid conda conflict with python-dateutil 2.8 between unreleased sat-stac and newer pandas
+    # (see https://github.com/sat-utils/sat-stac/issues/73 and https://github.com/pdm-project/pdm/issues/2193)
+    - sat-search==0.3.0
+    - sat-stac>=0.4.1
+    - python-dateutil
