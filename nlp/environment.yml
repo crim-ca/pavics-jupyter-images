@@ -6,7 +6,7 @@ channels:
 
 dependencies:
   - intake-esm
-  - intake-stac==0.3.0
+  - intake-stac>=0.4.0
   - threddsclient==0.4.2
   - openjdk==8.0.152
   - python-flair
