@@ -60,8 +60,8 @@ jobs:
       - uses: actions/cache@v2
         id: cache
         with:
-          path: ${{ matrix.prefix }}
-          key: ${{ matrix.label }}-conda-${{ hashFiles('environment.yml') }}-${{ env.DATE }}-${{ env.CACHE_NUMBER }}
+          path: /usr/share/miniconda3/envs/github-ci-test-python${{ matrix.python-version }}-${{ matrix.domain }}
+          key: conda-python${{ matrix.python-version }}-${{ matrix.domain }}-${{ hashFiles('environment.yml') }}-${{ env.DATE }}-${{ env.CACHE_NUMBER }}
 
       - name: Update environment
         if: steps.cache.outputs.cache-hit != 'true'
