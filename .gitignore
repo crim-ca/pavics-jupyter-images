@@ -8,6 +8,7 @@
 **/cache/
 **/*tree-tagger-linux*
 **/.pytest_cache
+**/condaenv.*.requirements.txt
 
 ### Binaries
 **/*.jar

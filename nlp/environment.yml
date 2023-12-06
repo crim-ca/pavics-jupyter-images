@@ -5,18 +5,17 @@ channels:
   - conda-forge
 
 dependencies:
-  - intake-esm==2021.1.15
+  - intake-esm
   - intake-stac==0.3.0
   - sat-search==0.3.0
   - threddsclient==0.4.2
   - openjdk==8.0.152
-  # python-flair=0.8 only works with numpy<=1.19.5
-  - python-flair==0.8
-  - numpy<=1.19.5
-  - spacy>=3.5.0,<4
+  - python-flair
+  - numpy
+  - spacy>=3.5,<4
   - pydantic<2
-  - python-dateutil==2.7.5
-  - python-levenshtein==0.12.2
+  - python-dateutil
+  - python-levenshtein
   - requests
   - pip>=22
   - pip:
