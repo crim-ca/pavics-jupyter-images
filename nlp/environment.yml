@@ -8,13 +8,14 @@ dependencies:
   - intake-esm
   - intake-stac==0.3.0
   - sat-search==0.3.0
+  - sat-stac>=0.4.1
   - threddsclient==0.4.2
   - openjdk==8.0.152
   - python-flair
   - numpy
   - spacy>=3.5,<4
   - pydantic<2
-  - python-dateutil
+  - python-dateutil>=2.8
   - python-levenshtein
   - requests
   - pip>=22

@@ -10,6 +10,8 @@ dependencies:
   - pyproj
   - rasterio
   - sat-search==0.3.0
+  - sat-stac>=0.4.1
+  - python-dateutil>=2.8
   - shapely
 
   # TODO: These next packages could possibly be added to a more generic 'vision' image, from which 'eo' would be built
