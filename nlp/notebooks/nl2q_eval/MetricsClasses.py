@@ -516,7 +516,7 @@ class AttributeMeasures:
                 gidx = gold_spans.index(test_span)
                 # per_annotation_span_perfect_match_precision
                 # % of annotation having all attribute matched when span is same
-                if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
+                if len(set(ann).intersection(gold_ann[gidx].keys())) == len(ann):
                     attribute_measures.get_attribute_metrics(test_type).perfect_match_precision += 1
                 # per_annotation_attribute_match
                 # % of matching attribute name / total number of attribute in an annotation
@@ -536,13 +536,13 @@ class AttributeMeasures:
                             attribute_measures.get_attribute_metrics(test_type).total_span_type_match += 1
                         # per_annotation_overlapping_span_perfect_match
                         # % of annotation having all attribute matched, for overlapping span
-                        if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
+                        if len(set(ann).intersection(gold_ann[gidx].keys())) == len(ann):
                             attribute_measures.get_attribute_metrics(test_type).overlapping_perfect_match += 1
                         # per_annotation_attribute_match
                         # % of matching attribute name / total number of attribute in an annotation
                         # compared to overlapping spans
                         attribute_measures.get_attribute_metrics(test_type).attribute_match.minn = \
-                            len(set(ann.keys()).intersection(gold_ann[gidx].keys())) / len(ann)
+                            len(set(ann).intersection(gold_ann[gidx].keys())) / len(ann)
 
         for annot_type in ANNOTATION_TYPES:
             # count of annotations of all attributes matched for exact span / nr of annots of that type
@@ -792,17 +792,18 @@ class ValueMeasures:
                 value_measures.get_value_metrics('tempex').total_matching_attributes += 1
             if test_type == 'target':
                 value_measures.get_value_metrics('target').total_matching_attributes += 1
-            if 'name' in ann.keys():
+            if 'name' in ann:
                 value_measures.get_value_metrics('name').total_matching_attributes += 1
-            if 'value' in ann.keys() and isinstance(ann['value'], str):
-                # print(ann['value'])
-                if isnumeric(ann['value']):
-                    value_measures.get_value_metrics('numeric').total_matching_attributes += 1
+            if 'value' in ann and (
+                isinstance(ann['value'], (float, int)) or
+                (isinstance(ann["value"], str) and isnumeric(ann["value"]))
+            ):
+                value_measures.get_value_metrics('numeric').total_matching_attributes += 1
             for gidx, gspan in enumerate(gold_spans):
                 # overlapping span
                 if SpanMeasures.span_overlap(gspan, test_span):
                     # all attributes match
-                    if len(set(ann.keys()).intersection(gold_ann[gidx].keys())) == len(ann):
+                    if len(set(ann).intersection(gold_ann[gidx].keys())) == len(ann):
                         value_measures.get_value_metrics('global').total_matching_attributes += 1
                     #  for matching attribute type
                     if gold_types[gidx] == test_type:
