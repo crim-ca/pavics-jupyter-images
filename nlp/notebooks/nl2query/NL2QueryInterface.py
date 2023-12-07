@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
-from typing import List, Any
-from configparser import ConfigParser
-import os
 import json
+import os
+from abc import ABC, abstractmethod
+from configparser import ConfigParser
+from typing import Any, List
 
 # define list of possible values for some arguments
 ANNOTATION_TYPES = ["property", "location", "tempex", "target"]

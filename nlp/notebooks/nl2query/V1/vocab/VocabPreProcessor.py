@@ -1,10 +1,11 @@
 import json
 import os
 import re
-import requests
 from xml.etree import ElementTree as ET
-from Vocabulary import Vocabulary
+
+import requests
 from bs4 import BeautifulSoup
+from Vocabulary import Vocabulary
 
 
 def parse_mip_vars(mip_out:str):

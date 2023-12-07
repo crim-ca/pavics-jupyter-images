@@ -1,12 +1,18 @@
 import json
 import os
-from nlp.notebooks.nl2query.V1.NER_spacy import NER_spacy
-from nlp.notebooks.nl2query.V1.NER_flair import NER_flair
-from nlp.notebooks.nl2query.V1.TER_heideltime import TER_heideltime
-from nlp.notebooks.nl2query.V1.Vars_values_textsearch import Vars_values_textsearch
-from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
-    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
-        QueryAnnotationsDict
+
+from nl2query.NL2QueryInterface import (
+    LocationAnnotation,
+    NL2QueryInterface,
+    PropertyAnnotation,
+    QueryAnnotationsDict,
+    TargetAnnotation,
+    TemporalAnnotation
+)
+from nl2query.V1.NER_flair import NER_flair
+from nl2query.V1.NER_spacy import NER_spacy
+from nl2query.V1.TER_heideltime import TER_heideltime
+from nl2query.V1.Vars_values_textsearch import Vars_values_textsearch
 
 
 class V1_pipeline(NL2QueryInterface):

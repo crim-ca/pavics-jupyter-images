@@ -1,8 +1,14 @@
 from textsearch import TextSearch
-from vocab.Vocabulary import Vocabulary
-from nlp.notebooks.nl2query.NL2QueryInterface import NL2QueryInterface,\
-    PropertyAnnotation, TargetAnnotation, LocationAnnotation, TemporalAnnotation,\
-        QueryAnnotationsDict
+
+from nl2query.NL2QueryInterface import (
+    LocationAnnotation,
+    NL2QueryInterface,
+    PropertyAnnotation,
+    QueryAnnotationsDict,
+    TargetAnnotation,
+    TemporalAnnotation
+)
+from nl2query.V1.vocab.Vocabulary import Vocabulary
 
 
 class Vars_values_textsearch(NL2QueryInterface):
@@ -126,4 +132,3 @@ if __name__ == "__main__":
               "used to force the CMIP6 models cell area in ScenarioMIP"
     structq = myvarval.transform_nl2query(nlq=nlquery)
     print("Structured query: ", structq)
-

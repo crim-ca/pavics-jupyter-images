@@ -1,30 +1,32 @@
+import datetime
 import json
 import os
-import datetime
-import ipywidgets as widgets
 from configparser import ConfigParser
+
+import ipywidgets as widgets
 from pystac_client import Client
 
+from typedefs import JSON
 
-class STAC_query_handler():
+
+class STAC_query_handler:
     """ class to handle running a stac query"""
     
-    def __init__(self, config_file:str="stac_config.cfg"):
+    def __init__(self, config_file: str = "stac_config.cfg"):
         # parse the config file
         if os.path.exists(config_file):
             print("Reading config file: ", config_file)
             self.config = ConfigParser()
             self.config.read(config_file)
         else:
-            raise Exception("Config file not found! "+ config_file)
-        
+            raise OSError(f"Config file not found! [{config_file}]")
+
         if "catalogs" in self.config.sections():
             self.catalogs = dict(self.config.items('catalogs'))
-        
+
         # datasource
         self.datasource = None
         self.response_text = widgets.Output()
-   
 
     def select_catalog(self):
         options = list(self.catalogs.keys())
@@ -36,18 +38,17 @@ class STAC_query_handler():
         )
         return self.datasource
 
-
-    def query2stac(self, struct_query:dict, verbose=False):
+    def query2stac(self, struct_query: dict, verbose=False):
         """
         Transform a structured query into STAC API parameters.
         return parameters used for faceted search.
         """
         # initialize parameters
-        params = {'bbox': [], 'datetime':[], 'query':[], 'collections':[]}
+        params = {'bbox': [], 'datetime': [], 'query': [], 'collections': []}
         # extract from the structured query the stac query parameters
 
-        for annotation in struct_query['annotations']:    
-        # fill in parameters of stac query
+        for annotation in struct_query['annotations']:
+            # fill in parameters of stac query
             if annotation['type'] == 'location':
                 coords = annotation['value']['coordinates']
                 # it might be nested
@@ -66,12 +67,12 @@ class STAC_query_handler():
                     start = annotation['value']['start']
                     if start == "#-infinity":
                         start = ".."
-                    # transform currentdate to actual date
+                    # transform current date to actual date
                     elif start == "#currentdate":
-                        start = (datetime.datetime.today().date()).strftime("%Y-%m-%dT%H:%M:%S") +"Z"
+                        start = (datetime.datetime.today().date()).strftime("%Y-%m-%dT%H:%M:%S") + "Z"
                     end = annotation['value']['end']
                     if end == "#currentdate":
-                        end = (datetime.datetime.today().date()).strftime("%Y-%m-%dT%H:%M:%S") +"Z"
+                        end = (datetime.datetime.today().date()).strftime("%Y-%m-%dT%H:%M:%S") + "Z"
                     elif end == "#+infinity":
                         end = ".."
                     params['datetime'] = [start, end]
@@ -88,16 +89,15 @@ class STAC_query_handler():
         if verbose:
             print("Created STAC query with the parameters:\n", params)
         return params
-   
 
-    def search_query(self, params:dict, verbose:bool=False):
+    def search_query(self, params: JSON, verbose: bool = False):
         """
         Search a specific catalog with the given search parameters
         return a visual results list or None.
         """
         try:
-            catalog_URL = self.catalogs[self.datasource.value]
-            client = Client.open(catalog_URL)
+            catalog_url = self.catalogs[self.datasource.value]
+            client = Client.open(catalog_url)
             print("Opening catalog: ", client.title)
             if not client.conforms_to("ITEM_SEARCH"):
                 print("Catalog does not conform to item search functionality. Quitting.")
@@ -107,24 +107,23 @@ class STAC_query_handler():
             else:
                 max_items = 10
             response = client.search(bbox=params['bbox'],
-                                    datetime=params['datetime'],
-                                    query=params['query'],
-                                    collections=params['collections'],
-                                    max_items=max_items,
-                                    method="GET")
+                                     datetime=params['datetime'],
+                                     query=params['query'],
+                                     collections=params['collections'],
+                                     max_items=max_items,
+                                     method="GET")
             items = response.items()
             if verbose:
-                print("Searching catalog: ", catalog_URL)
+                print("Searching catalog: ", catalog_url)
                 # print('Found %s items' % response.matched())
                 print(f"QUERY: {vars(response)}")
             results = [item for item in items]
             # return visual repr of results list
             return VisualList(results)
         except Exception as e:
-            print("During searching the STAC catalog, the following error occured:\n", str(e))
+            print("During searching the STAC catalog, the following error occurred:\n", str(e))
             return
 
-    
     def handle_query(self, struct_query, verbose=False):
         """
         Takes an NL query, transforms it into a structured one,
@@ -133,7 +132,6 @@ class STAC_query_handler():
         """
         params = self.query2stac(struct_query, verbose)
         return self.search_query(params, verbose)
-
 
 
 class VisualList(list):

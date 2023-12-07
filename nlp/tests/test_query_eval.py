@@ -1,11 +1,17 @@
 import unittest
-from nlp.notebooks.nl2q_eval.query_eval import read_files, global_stats
-from nlp.notebooks.nl2q_eval.MetricsClasses import SpanMeasures,\
-    AttributeMeasures, DataMeasures, ValueMeasures, \
-        ANNOTATION_TYPES, VALUE_TYPES
 
-gold_file = "gold_queries.json"
-test_file = "noisy_gold_queries.json"
+from nl2q_eval.MetricsClasses import (
+    ANNOTATION_TYPES,
+    VALUE_TYPES,
+    AttributeMeasures,
+    DataMeasures,
+    SpanMeasures,
+    ValueMeasures
+)
+from nl2q_eval.query_eval import global_stats, read_files
+
+from ..tests import GOLD_FILE, TEST_FILE
+
 annot_counts = {"property": 20, "location": 6, "tempex": 3, "target": 5, "global": 34}
 
 
@@ -26,7 +32,7 @@ class QueryEvalTests(unittest.TestCase):
         Read gold and test query annotations files,
         and call query_eval.global_stats to get all metrics.
         """
-        cls.gold_queries, cls.test_queries = read_files(gold_file, test_file)
+        cls.gold_queries, cls.test_queries = read_files(GOLD_FILE, TEST_FILE)
         cls.nr_queries = len(cls.test_queries)
         cls.eval_measures = global_stats(cls.gold_queries, cls.test_queries)
         cls.span_measures = cls.eval_measures.span_measures
@@ -105,6 +111,3 @@ class QueryEvalTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-

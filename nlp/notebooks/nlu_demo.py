@@ -1,14 +1,16 @@
 import json
 import os
 from pprint import pprint
+
 import ipywidgets as widgets
-from nlp.notebooks.nl2query.V1.V1_pipeline import V1_pipeline
-from nlp.notebooks.nl2query.V2.V2_pipeline import V2_pipeline
-from nlp.notebooks.nl2query.V3.V3_pipeline import V3_pipeline
-from nlp.notebooks.stac_wrapper.query_handler import STAC_query_handler
+
+from nl2query.V1.V1_pipeline import V1_pipeline
+from nl2query.V2.V2_pipeline import V2_pipeline
+from nl2query.V3.V3_pipeline import V3_pipeline
+from stac_wrapper.query_handler import STAC_query_handler
 
 
-class NLU_demo():
+class NLU_demo:
     """class to handle all necessary widgets and
     functions of the NLU demo notebook"""
     
