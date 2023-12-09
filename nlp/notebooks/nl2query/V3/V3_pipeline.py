@@ -15,33 +15,28 @@ from nl2query.V2 import V2_pipeline
 
 class V3_pipeline(NL2QueryInterface):
 
-    def __init__(self, v1_config:str="v1_config.cfg", v2_config:str="v2_config.cfg"):
+    def __init__(self, v1_config: str = "v1_config.cfg", v2_config: str = "v2_config.cfg"):
         super().__init__(v1_config)
         # use V1 - spacy and V2
-        if self.config.get("spacy","config_file", fallback=None) :
-            spacy_config_file = self.config.get("spacy","config_file")
+        if self.config.get("spacy", "config_file", fallback=None):
+            spacy_config_file = self.config.get("spacy", "config_file")
         self.v1_spacy = NER_spacy.NER_spacy(spacy_config_file)
-        if self.config.get("flair","config_file", fallback=None) :
-            flair_config_file = self.config.get("flair","config_file")
+        if self.config.get("flair", "config_file", fallback=None):
+            flair_config_file = self.config.get("flair", "config_file")
         self.v1_flair = NER_flair.NER_flair(flair_config_file)  
-        self.v2_instance = V2_pipeline.V2_pipeline(v2_config)   
-        
+        self.v2_instance = V2_pipeline.V2_pipeline(v2_config)
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         return self.v2_instance.create_temporal_annotation(annotation)
 
-
     def create_location_annotation(self, annotation) -> LocationAnnotation:
         return self.v2_instance.create_location_annotation(annotation)
-
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
         return self.v2_instance.create_property_annotation(annotation)
 
-
     def create_target_annotation(self, annotation) -> TargetAnnotation:
         return self.v2_instance.create_target_annotation(annotation)
-        
 
     def transform_nl2query(self, nlq: str, verbose:bool=False) -> QueryAnnotationsDict:
         newq = nlq.replace("(", "")
@@ -197,8 +192,8 @@ class V3_pipeline(NL2QueryInterface):
 
 if __name__ == "__main__":
     # call my nl2query class
-    v1_config = "nlp/notebooks/nl2query/V1/v1_config.cfg"
-    v2_config = "nlp/notebooks/nl2query/V2/v2_config.cfg"
+    v1_config = "nl2query/V1/v1_config.cfg"
+    v2_config = "nl2query/V2/v2_config.cfg"
     my_instance = V3_pipeline(v1_config, v2_config)
     # get the structured query from the nl query
     query = "Annual downward UV radiation in uk from today to 2100"
