@@ -34,7 +34,7 @@ class NER_flair(NL2QueryInterface):
                                   name="", value="", value_type="string", operation="eq")
 
     def create_location_annotation(self, annotation) -> LocationAnnotation:
-        # get gejson of location
+        # get geojson of location
         geojson = {"type": "Polygon", "coordinates":[[]]}
         name = ""
         # use geogratis - only for Canada
@@ -63,7 +63,7 @@ class NER_flair(NL2QueryInterface):
         return TargetAnnotation(text=annotation.text, position=[annotation.start_position, annotation.end_position],
                                 name=[""])
 
-    def transform_nl2query(self, nlq: str, verbose:bool=False) -> QueryAnnotationsDict:
+    def transform_nl2query(self, nlq: str, verbose: bool = False) -> QueryAnnotationsDict:
         # collect annotations in a list of typed dicts
         annot_dicts = []
         # get annotations from my engine

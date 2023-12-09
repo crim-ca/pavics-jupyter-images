@@ -38,6 +38,15 @@ RUN cd heideltime && \
     rmdir heideltime-standalone && \
     rm heideltime-standalone-2.2.1.tar.gz
 
+# Setup Haskell for Duckling server
+# https://github.com/facebook/duckling
+RUN curl -sSL https://get.haskellstack.org/ | sh && \
+    git clone https://github.com/facebook/duckling && \
+    cd duckling && \
+    stack build && \
+    stack install && \
+    rm -fr duckling
+
 # Give read&write permission to jenkins for config
 RUN chown -R jenkins heideltime
 
@@ -46,4 +55,3 @@ RUN chown -R 1000:1000 /opt/conda/pkgs/cache
 
 # specify user because of problem running start-notebook.sh when being root
 USER jenkins
-

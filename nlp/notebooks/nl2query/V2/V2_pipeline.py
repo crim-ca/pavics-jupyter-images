@@ -1,8 +1,12 @@
+import time
+
 import datetime
 import json
 import os
 import re
-from typing import Optional
+import sys
+import subprocess
+from typing import List, Optional
 
 import nltk
 import osmnx as ox
@@ -32,7 +36,7 @@ def find_spans(span: str, query: str):
     in the case of split spans and 
     their positions in the query."""
     # split span case
-    if not span in query:
+    if span not in query:
         pos = []
         spans = []
         splits = span.split(" ")
@@ -61,7 +65,7 @@ def find_spans(span: str, query: str):
             spans.append(query[ostart:oend])
             pos.append([ostart, oend])
     else:
-        pad_span = " " +span+" "
+        pad_span = " " + span + " "
         if pad_span in query:
             start = query.index(pad_span)+1
         else:
@@ -77,34 +81,14 @@ def find_spans(span: str, query: str):
         spans = span
     return spans, pos
 
+
 def remove_stopwords(text:str):
     """Given a string, remove 
     the stopwords with nltk.
     Return the filtered text"""
     stop_words = set(stopwords.words('english'))
-    filtered_text =  ' '.join([word for word in text.split() if word.lower() not in stop_words])
+    filtered_text = ' '.join([word for word in text.split() if word.lower() not in stop_words])
     return filtered_text
-
-
-def duckling_parse(duckling_url: str, query: str) -> Optional[JSON]:
-    """Temporal Expression Detection using Duckling.
-    Needs rasa/duckling Docker image running on duckling_url.
-    Return a response json or None."""
-    duckling_data= {"text": query,
-                    "locale": "en_GB",
-                    "dims": "[\"time\"]"}
-    try:
-        response = requests.post(duckling_url, data=duckling_data)
-        if response.status_code == 200:
-            if len(response.json()) > 0:
-                return response.json()[0]
-            else:
-                #empty response
-                return None
-        else:
-            raise Exception(f"Please make sure Duckling docker service is running on [{duckling_url}]!")
-    except:
-        raise Exception(f"Please make sure Duckling docker service is running on [{duckling_url}]!")
 
 
 def osmnx_geocode(vdb: Vdb_simsearch, query: str, threshold: float = 0.7, policy: str = 'length'):
@@ -153,13 +137,69 @@ class V2_pipeline(NL2QueryInterface):
         else:
             print("No Target vocabulary info found in the config file!")    
         if "duckling" in self.config.sections():
-            self.duckling_url = self.config.get("duckling", "duckling_url", fallback=None)
+            self.duckling_url = self.config.get("duckling", "url", fallback=None)
         else:
             print("No Duckling URL in the config file! Temporal Expression Detection will not be working!")
+        self.duckling_locale = self.config.get("duckling", "locale", fallback="en_CA")
+        self.duckling_path = self.config.get("duckling", "path", fallback=None)
+        self.duckling_run = self.duckling_path and os.path.isdir(self.duckling_path)
+        if self.duckling_run:
+            self.duckling_url = "http://0.0.0.0:8000/parse"
+        self.duckling_dims = ["time"]
+
         # need either the vdb paths or the vocab paths to setup vdbs
-        self.vdbs = Vdb_simsearch(self.prop_vdb, self.prop_vocab, self.targ_vdb, self.targ_vocab )
+        self.vdbs = Vdb_simsearch(self.prop_vdb, self.prop_vocab, self.targ_vdb, self.targ_vocab)
         # check if Duckling is running correctly
-        duckling_parse(self.duckling_url, "test - yesterday")
+        self.duckling_parse("test - yesterday", dims=["time"])
+
+    def duckling_parse(
+        self,
+        query: str,
+        locale: Optional[str] = None,
+        dims: Optional[List[str]] = None,
+    ) -> Optional[JSON]:
+        """Temporal Expression Detection using Duckling.
+        Needs rasa/duckling Docker image running on duckling_url.
+        Return a response json or None."""
+        duckling_data = {
+            "text": query,
+            "locale": self.duckling_locale or locale,
+        }
+        if dims is None:
+            dims = self.duckling_dims
+        if dims:
+            duckling_data["dims"] = json.dumps(dims)
+        proc = None
+        try:
+            if self.duckling_run:
+                proc = subprocess.Popen(
+                    ["stack", "exec", "duckling-example-exe"],
+                    cwd=self.duckling_path,
+                    creationflags=(
+                        subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP
+                        if sys.platform == "win32"
+                        else 0
+                    ),
+                )
+            for _ in range(5):
+                try:
+                    response = requests.post(self.duckling_url, data=duckling_data, timeout=1)
+                except requests.exceptions.ConnectionError:
+                    time.sleep(0.25)
+                    continue
+                if response.status_code == 200:
+                    data = response.json()
+                    if len(data) > 0:
+                        return data[0]
+                    else:
+                        return None  # empty response
+            else:
+                raise Exception(f"Please make sure Duckling service is running on [{self.duckling_url}]!")
+        except Exception as exc:
+            raise Exception(f"Please make sure Duckling service is running on [{self.duckling_url}]!") from exc
+        finally:
+            if proc:
+                proc.kill()
 
     def create_temporal_annotation(self, annotation) -> TemporalAnnotation:
         # get standard dateformat from text
@@ -205,7 +245,7 @@ class V2_pipeline(NL2QueryInterface):
 
     def temporal_annotate(self, newq:str, nlq:str, verbose:bool=False):
         annotations = []
-        duckling_annotation = duckling_parse(self.duckling_url, newq)
+        duckling_annotation = self.duckling_parse(newq)
         if duckling_annotation:
             tempex = self.create_temporal_annotation(duckling_annotation)
             annotations.append(tempex)
@@ -218,7 +258,7 @@ class V2_pipeline(NL2QueryInterface):
         # tweak for years non-detected
         search_years = re.findall(r'\d{4}', newq)
         for year in search_years:
-            year_annotation = duckling_parse(self.duckling_url, "in "+year)
+            year_annotation = self.duckling_parse("in " + year)
             if year_annotation:
                 span, pos = find_spans(year, nlq)
                 tempex = self.create_temporal_annotation({'body':span, 
@@ -235,7 +275,7 @@ class V2_pipeline(NL2QueryInterface):
         
         
     def create_location_annotation(self, annotation) -> LocationAnnotation:
-        # get gejson of location
+        # get geojson of location
         token, pos, gdf = annotation
         # have bbox coordinates if needed
         bbox = [gdf['bbox_north'].iloc[0], gdf['bbox_south'].iloc[0], 
@@ -276,7 +316,7 @@ class V2_pipeline(NL2QueryInterface):
         return TargetAnnotation(text=spans,  position=poss, name=varnames)
         
 
-    def transform_nl2query(self, nlq: str, verbose:bool=False) -> QueryAnnotationsDict:
+    def transform_nl2query(self, nlq: str, verbose: bool = False) -> QueryAnnotationsDict:
         newq = nlq
         # collect annotations
         combined_annotations = []
@@ -292,7 +332,7 @@ class V2_pipeline(NL2QueryInterface):
             print("New query:", newq) 
         
         # location annotation
-        loc_span, osmnx_annotation = osmnx_geocode(newq)
+        loc_span, osmnx_annotation = osmnx_geocode(self.vdbs, newq)
         if loc_span != None:
             _, pos = find_spans(loc_span, nlq)
             loc = self.create_location_annotation([loc_span, pos, osmnx_annotation])
