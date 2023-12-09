@@ -12,6 +12,7 @@ dependencies:
   - python-flair
   - numpy
   - spacy>=3.5,<4
+  - spacy-transformers
   - pydantic<2
   - python-levenshtein
   - requests
