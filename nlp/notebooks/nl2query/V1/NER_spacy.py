@@ -1,8 +1,11 @@
 import json
 import re
+from typing import Optional
+from importlib.metadata import PackageNotFoundError, version as get_package_version
 
 import requests
 import spacy
+from spacy.cli.download import download as spacy_download, get_model_filename, get_latest_version
 
 from nl2query.NL2QueryInterface import (
     LocationAnnotation,
@@ -22,9 +25,29 @@ class NER_spacy(NL2QueryInterface):
         # start my NL2query engine
         default = "en_core_web_trf"
         # Getting model from a config file, otherwise use the default model
-        self.model = self.config.get("components.ner","source", fallback=default) if self.config else default
+        self.model = self.config.get("components.ner", "source", fallback=default) if self.config else default
+        self.model_version = (self.config.get("components.ner", "version") if self.config else None) or None
+        self.download_spacy_model(self.model, self.model_version)
         self.spacy_engine = spacy.load(self.model)
 #        self.spacy_engine = Language.from_config(self.config)
+
+    @staticmethod
+    def download_spacy_model(model: str, version: Optional[str], force: bool = False) -> None:
+        """
+        Downloads the requested model if it cannot be found, mismatches version, or is forced reinstall.
+        """
+        download = force
+        if not version:
+            version = get_latest_version(model)
+        try:
+            model_version = get_package_version(model)
+            if not model_version:
+                download = True
+        except PackageNotFoundError:
+            download = True
+        if download:
+            model_fn = get_model_filename(model, version)
+            spacy_download(model_fn)  # download + pip install
 
     def create_property_annotation(self, annotation) -> PropertyAnnotation:
         """take annotation given by the engine
