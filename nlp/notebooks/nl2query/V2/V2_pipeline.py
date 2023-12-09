@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 import re
+from typing import Optional
 
 import nltk
 import osmnx as ox
@@ -16,6 +17,7 @@ from nl2query.NL2QueryInterface import (
     TemporalAnnotation
 )
 from nl2query.V2.Vdb_simsearch import Vdb_simsearch
+from typedefs import JSON
 
 try:
     nltk.data.find('corpora/stopwords')
@@ -24,7 +26,7 @@ except LookupError:
 from nltk.corpus import stopwords
 
 
-def find_spans(span:str, query:str):
+def find_spans(span: str, query: str):
     """Find a span  in a query.
     Return the spans or a list of spans 
     in the case of split spans and 
@@ -84,7 +86,7 @@ def remove_stopwords(text:str):
     return filtered_text
 
 
-def duckling_parse(duckling_url:str, query:str):
+def duckling_parse(duckling_url: str, query: str) -> Optional[JSON]:
     """Temporal Expression Detection using Duckling.
     Needs rasa/duckling Docker image running on duckling_url.
     Return a response json or None."""
@@ -100,18 +102,18 @@ def duckling_parse(duckling_url:str, query:str):
                 #empty response
                 return None
         else:
-            raise Exception("Please make sure Duckling docker service is running on localhost port 8000!")
+            raise Exception(f"Please make sure Duckling docker service is running on [{duckling_url}]!")
     except:
-        raise Exception("Please make sure Duckling docker service is running on localhost port 8000!")
+        raise Exception(f"Please make sure Duckling docker service is running on [{duckling_url}]!")
 
 
-def osmnx_geocode(query:str, threshold:int=0.7, policy:str='length'):
+def osmnx_geocode(vdb: Vdb_simsearch, query: str, threshold: float = 0.7, policy: str = 'length'):
     """location geocoding service
     that queries every 1 and 2-gram tokens
     and returns a result above the threshold (default 0.7)
     and highest score if policy=score
     or highest length if policy=length (default)."""
-    query_tokens,_ = Vdb_simsearch.generate_ngrams(query, 2)
+    query_tokens,_ = vdb.query_ngram_target(query, 2)
     # query by 1-gram and 2-gram tokens
     importance = 0
     max_gdf = None
@@ -137,7 +139,7 @@ def osmnx_geocode(query:str, threshold:int=0.7, policy:str='length'):
 
 class V2_pipeline(NL2QueryInterface):
 
-    def __init__(self, config:str="v2_config.cfg"):
+    def __init__(self, config: str = "v2_config.cfg"):
         super().__init__(os.path.join(os.path.dirname(os.path.realpath(__file__)),config))
         # Getting vdb paths from config file
         if "prop_vdb" in self.config.sections():
@@ -155,7 +157,7 @@ class V2_pipeline(NL2QueryInterface):
         else:
             print("No Duckling URL in the config file! Temporal Expression Detection will not be working!")
         # need either the vdb paths or the vocab paths to setup vdbs
-        self.vdbs = Vdb_simsearch.Vdb_simsearch(self.prop_vdb, self.prop_vocab, self.targ_vdb, self.targ_vocab )
+        self.vdbs = Vdb_simsearch(self.prop_vdb, self.prop_vocab, self.targ_vdb, self.targ_vocab )
         # check if Duckling is running correctly
         duckling_parse(self.duckling_url, "test - yesterday")
 

@@ -86,7 +86,7 @@ class V3_pipeline(NL2QueryInterface):
                     print("New query:", newq)
                     
         # location annotation        
-        loc_span, osmnx_annotation = V2_pipeline.osmnx_geocode(newq)
+        loc_span, osmnx_annotation = V2_pipeline.osmnx_geocode(self.v2_instance.vdbs, newq)
         if loc_span:
             _, pos = V2_pipeline.find_spans(loc_span, nlq)
             loc = self.create_location_annotation([loc_span, pos, osmnx_annotation])
@@ -105,7 +105,7 @@ class V3_pipeline(NL2QueryInterface):
         for loc in v1_loc:
             # print("V1 Loc:", loc.text)
             if loc.text in newq:
-                loc_span, osmnx_annotation = V2_pipeline.osmnx_geocode(loc.text)
+                loc_span, osmnx_annotation = V2_pipeline.osmnx_geocode(self.v2_instance.vdbs, loc.text)
                 if loc_span:
                     loc = self.create_location_annotation([loc_span, loc.position, osmnx_annotation])
                 combined_annotations.append(loc)

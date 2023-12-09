@@ -221,9 +221,12 @@ class Vdb_simsearch():
 
 
 if __name__ == "__main__":
-    
- 
-    my_vdbs = Vdb_simsearch()
+    my_vdbs = Vdb_simsearch(
+        "nl2query/V2/prop_vdb",
+        "nl2query/V2/prop_vocab.csv",
+        "nl2query/V2/target_vdb",
+        "nl2query/V2/target_vocab3.csv",
+    )
     
     query = "sentinel daily rain amount"
     my_vdbs.query_ngram_target(query, verbose=True)
