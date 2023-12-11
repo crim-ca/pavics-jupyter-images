@@ -1,9 +1,9 @@
 import json
 import os
 from pprint import pprint
+from typing import Optional
 
 import ipywidgets as widgets
-from ipywidgets import interact
 
 from nl2query.V1.V1_pipeline import V1_pipeline
 from nl2query.V2.V2_pipeline import V2_pipeline
@@ -33,7 +33,6 @@ class NLU_demo:
         self.gold_queries = goldq["queries"]
         self.query_list = [query['query'] for _,query in enumerate(self.gold_queries)]
         # setup visual widgets
-        # NOTE: to ensure widgets render correctly, wrap them in 'interact' before returning them for the notebook
         self.select_query = widgets.Dropdown(
             options=self.query_list,
             value=self.query_list[11],
@@ -59,7 +58,7 @@ class NLU_demo:
             
     def select_gold_query(self):
         """return select gold query dropdown"""
-        return interact(self.select_query)
+        return self.select_query
 
     def get_gold_annotations(self):
         """get the annotations for the selected gold query"""
@@ -69,11 +68,11 @@ class NLU_demo:
         """return textbox to write your own query"""
         if value:
             self.write_query.value = value
-        return interact(self.write_query)
+        return self.write_query
 
     def select_nlu_version(self):
         """return a selection widget for selecting the system version"""
-        return interact(self.select_version)
+        return self.select_version
 
     def nl2query(self):
         """takes the selected query (gold or custom),
@@ -116,8 +115,8 @@ class NLU_demo:
             self.struct_query = v3_structq.to_dict()
         return pprint(self.struct_query, sort_dicts=False)
         
-    def select_stac_catalog(self):
-        return self.stac_handler.select_catalog()
+    def select_stac_catalog(self, catalog: Optional[str] = None):
+        return self.stac_handler.select_catalog(catalog=catalog)
     
     def run_stac_query(self):
         if self.struct_query:

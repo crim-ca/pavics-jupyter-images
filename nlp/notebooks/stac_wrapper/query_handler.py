@@ -2,19 +2,44 @@ import datetime
 import json
 import os
 from configparser import ConfigParser
-from typing import Optional
+from typing import List, Optional
 
 import ipywidgets as widgets
-from ipywidgets import interact
 from pystac_client import Client
 
-from typedefs import JSON
+from typedefs import JSON, Number
+
+
+class VisualList(list):
+    """class to visualize STAC API response as a visual list using
+    https://github.com/Open-EO/openeo-vue-components/tree/master"""
+
+    def __init__(self, data: list):
+        list.__init__(self, data)
+
+    def _repr_html_(self):
+        # Construct HTML, but load Vue Components source files only if the
+        # openEO HTML tag is not yet defined
+        return """
+        <script>
+        if (!window.customElements || !window.customElements.get('openeo-items')) {{
+            var el = document.createElement('script');
+            el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+            document.head.appendChild(el);
+        }}
+        </script>
+        <openeo-items>
+            <script type="application/json">{props}</script>
+        </openeo-items>
+        """.format(
+            props=json.dumps({'items': [i.to_dict() for i in self], 'show-map': True}, indent=2)
+        )
 
 
 class STAC_query_handler:
     """ class to handle running a stac query"""
     
-    def __init__(self, config_file: str = "stac_config.cfg"):
+    def __init__(self, config_file: str = "stac_config.cfg") -> None:
         # parse the config file
         if os.path.exists(config_file):
             print("Reading config file: ", config_file)
@@ -30,7 +55,7 @@ class STAC_query_handler:
         self.datasource = None
         self.response_text = widgets.Output()
 
-    def select_catalog(self, catalog: Optional[str] = None):
+    def select_catalog(self, catalog: Optional[str] = None) -> widgets.Dropdown:
         """
         Provides a selector widget to pick the desired STAC instance from configuration.
 
@@ -42,7 +67,7 @@ class STAC_query_handler:
             selected = catalog
         elif catalog and catalog in self.catalogs.values():
             selected = list(filter(lambda c, u: u == catalog, self.catalogs.items()))[0][0]
-        elif catalog.startswith("http://") or catalog.startswith("https://"):
+        elif catalog and (catalog.startswith("http://") or catalog.startswith("https://")):
             selected = "custom"
             options += selected
             self.catalogs[selected] = catalog
@@ -54,9 +79,9 @@ class STAC_query_handler:
             description='Select catalog:',
             style={'description_width': 'initial'}
         )
-        return interact(self.datasource)
+        return self.datasource
 
-    def query2stac(self, struct_query: dict, verbose=False):
+    def query2stac(self, struct_query: JSON, verbose: bool = False) -> JSON:
         """
         Transform a structured query into STAC API parameters.
         return parameters used for faceted search.
@@ -108,7 +133,17 @@ class STAC_query_handler:
             print("Created STAC query with the parameters:\n", params)
         return params
 
-    def search_query(self, params: JSON, verbose: bool = False):
+    @staticmethod
+    def convert_bbox_nlquery2stac(bbox: List[Number]) -> List[Number]:
+        """
+        Converts NL query bounding box to STAC representation.
+        
+        By default, NL query uses [lat_top, lat_bottom, lon_right, lon_left].
+        STAC client expects [lon_left, lat_bottom, lon_right, lat_top].
+        """
+        return bbox[3], bbox[1], bbox[2], bbox[0]
+    
+    def search_query(self, params: JSON, verbose: bool = False) -> Optional[VisualList]:
         """
         Search a specific catalog with the given search parameters
         return a visual results list or None.
@@ -142,37 +177,13 @@ class STAC_query_handler:
             print("During searching the STAC catalog, the following error occurred:\n", str(e))
             return
 
-    def handle_query(self, struct_query, verbose=False):
+    def handle_query(self, struct_query: JSON, verbose: bool = False) -> Optional[VisualList]:
         """
         Takes an NL query, transforms it into a structured one,
         and performs a search against the given or default catalog.
         Returns result items or None.
         """
         params = self.query2stac(struct_query, verbose)
+        if params["bbox"]:
+            params["bbox"] = self.convert_bbox_nlquery2stac(params["bbox"])
         return self.search_query(params, verbose)
-
-
-class VisualList(list):
-    """class to visualize STAC API response as a visual list using
-    https://github.com/Open-EO/openeo-vue-components/tree/master"""
-
-    def __init__(self, data: list):
-        list.__init__(self, data)
-
-    def _repr_html_(self):
-        # Construct HTML, but load Vue Components source files only if the
-        # openEO HTML tag is not yet defined
-        return """
-        <script>
-        if (!window.customElements || !window.customElements.get('openeo-items')) {{
-            var el = document.createElement('script');
-            el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
-            document.head.appendChild(el);
-        }}
-        </script>
-        <openeo-items>
-            <script type="application/json">{props}</script>
-        </openeo-items>
-        """.format(
-            props=json.dumps({'items': [i.to_dict() for i in self], 'show-map': True}, indent=2)
-        )
