@@ -2,8 +2,10 @@ import datetime
 import json
 import os
 from configparser import ConfigParser
+from typing import Optional
 
 import ipywidgets as widgets
+from ipywidgets import interact
 from pystac_client import Client
 
 from typedefs import JSON
@@ -28,15 +30,31 @@ class STAC_query_handler:
         self.datasource = None
         self.response_text = widgets.Output()
 
-    def select_catalog(self):
+    def select_catalog(self, catalog: Optional[str] = None):
+        """
+        Provides a selector widget to pick the desired STAC instance from configuration.
+
+        If the catalog is specified as input (either by name/URL from configuration or from another custom URL)
+        that catalog will be set as the default for following steps.
+        """
         options = list(self.catalogs.keys())
+        if catalog and catalog in self.catalogs:
+            selected = catalog
+        elif catalog and catalog in self.catalogs.values():
+            selected = list(filter(lambda c, u: u == catalog, self.catalogs.items()))[0][0]
+        elif catalog.startswith("http://") or catalog.startswith("https://"):
+            selected = "custom"
+            options += selected
+            self.catalogs[selected] = catalog
+        else:
+            selected = options[0]
         self.datasource = widgets.Dropdown(
             options=options,
-            value=options[0],
+            value=selected,
             description='Select catalog:',
             style={'description_width': 'initial'}
         )
-        return self.datasource
+        return interact(self.datasource)
 
     def query2stac(self, struct_query: dict, verbose=False):
         """
