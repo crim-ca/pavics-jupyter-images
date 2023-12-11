@@ -144,11 +144,11 @@ def isfloat(value):
 def process_pavics(file: str):
     my_vocab = Vocabulary()
     with open(file, "r", encoding="utf-8") as f:
-        paviccs_file = json.load(f)
-    if paviccs_file:
-        print("Read PAVICCS raw vocabulary file.")
-        for key in paviccs_file:
-            val = paviccs_file[key]
+        pavics_file = json.load(f)
+    if pavics_file:
+        print("Read PAVICS raw vocabulary file.")
+        for key in pavics_file:
+            val = pavics_file[key]
             if key == "variables":
                 for v in val[0]:
                     newvar = v.replace("_", " ")
@@ -210,6 +210,6 @@ if __name__ == "__main__":
 
     # pavics_file = "pavics_all_key_vals.json"
     # pavics_vocab = process_pavics(os.path.join(path, pavics_file))
-    # with open("proc_vocab_paviccs.json", "w", encoding="utf-8") as f:
+    # with open("proc_vocab_pavics.json", "w", encoding="utf-8") as f:
     #     json.dump(pavics_vocab.get_vocab_dict(), f, indent=2)
     # print("Vocabulary written to file. ")

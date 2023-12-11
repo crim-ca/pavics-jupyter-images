@@ -27,7 +27,7 @@ class Vars_values_textsearch(NL2QueryInterface):
             self.vocabs = {'cmip6': Vocabulary(self.config['vocabs']['cmip6']),
                            'peps': Vocabulary(self.config['vocabs']['peps']),
                            'copernicus': Vocabulary(self.config['vocabs']['copernicus']),
-                           'paviccs': Vocabulary(self.config['vocabs']['peps'])
+                           'pavics': Vocabulary(self.config['vocabs']['peps'])
                            }
             self.vocab_climate = {'cf_standard_names': Vocabulary(self.config['vocabs']['cf_standard_names'])}
         else:

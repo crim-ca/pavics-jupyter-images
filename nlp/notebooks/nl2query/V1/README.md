@@ -84,7 +84,7 @@ This module generates temporal annotations.
 # 4. Variables and values recognition
 To detect variables and their values (such as 'sensor mode IW'), 
 we use pre-processed vocabularies from the following platforms:
-PEPS, PAVICCS, CMIP6, COPERNICUS, CF STANDARD NAMES.
+PEPS, PAVICS, CMIP6, COPERNICUS, CF STANDARD NAMES.
 
 The pre-processing is done once, and the code is kept in case further
 adjustments to the processed vocabulary output or format are needed.
