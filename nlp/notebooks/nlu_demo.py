@@ -3,6 +3,7 @@ import os
 from pprint import pprint
 
 import ipywidgets as widgets
+from ipywidgets import interact
 
 from nl2query.V1.V1_pipeline import V1_pipeline
 from nl2query.V2.V2_pipeline import V2_pipeline
@@ -14,7 +15,8 @@ class NLU_demo:
     """class to handle all necessary widgets and
     functions of the NLU demo notebook"""
     
-    def __init__(self):
+    def __init__(self, verbose: bool = False) -> None:
+        self.verbose = verbose
         # initialize pipelines
         self.path = os.path.dirname(os.path.realpath(__file__))
         self.v1_config = os.path.join(self.path, "nl2query/V1/v1_config.cfg")
@@ -31,6 +33,7 @@ class NLU_demo:
         self.gold_queries = goldq["queries"]
         self.query_list = [query['query'] for _,query in enumerate(self.gold_queries)]
         # setup visual widgets
+        # NOTE: to ensure widgets render correctly, wrap them in 'interact' before returning them for the notebook
         self.select_query = widgets.Dropdown(
             options=self.query_list,
             value=self.query_list[11],
@@ -56,19 +59,21 @@ class NLU_demo:
             
     def select_gold_query(self):
         """return select gold query dropdown"""
-        return self.select_query
+        return interact(self.select_query)
 
     def get_gold_annotations(self):
         """get the annotations for the selected gold query"""
         return self.gold_queries[self.select_query.index]
 
-    def custom_query(self):
+    def custom_query(self, value=""):
         """return textbox to write your own query"""
-        return self.write_query
+        if value:
+            self.write_query.value = value
+        return interact(self.write_query)
 
     def select_nlu_version(self):
         """return a selection widget for selecting the system version"""
-        return self.select_version
+        return interact(self.select_version)
 
     def nl2query(self):
         """takes the selected query (gold or custom),
@@ -80,12 +85,17 @@ class NLU_demo:
             self.nlq = self.write_query.value
         else:
             self.nlq = self.select_query.value
+        if not self.nlq:
+            raise ValueError(
+                "Natural Language Query is empty. Cannot run the query pipeline. "
+                "Either set the value with 'write_query' or 'select_query' widgets."
+            )
         if self.select_version.value == "V1":
             if not self.v1_instance:
                 #initialize V1
                 self.v1_instance = V1_pipeline(self.v1_config)
             # run V1 pipeline on this query
-            v1_structq = self.v1_instance.transform_nl2query(self.nlq, verbose=False)
+            v1_structq = self.v1_instance.transform_nl2query(self.nlq, verbose=self.verbose)
             print("\nV1 structured query: ")
             self.struct_query = v1_structq.to_dict()
         elif self.select_version.value == "V2":
@@ -93,7 +103,7 @@ class NLU_demo:
             if not self.v2_instance:
                 self.v2_instance = V2_pipeline(self.v2_config)
             # run V2 pipeline on this query
-            v2_structq = self.v2_instance.transform_nl2query(self.nlq, verbose=False)
+            v2_structq = self.v2_instance.transform_nl2query(self.nlq, verbose=self.verbose)
             print("\nV2 structured query: ")
             self.struct_query = v2_structq.to_dict()
         else:
@@ -101,7 +111,7 @@ class NLU_demo:
                 # initialize V3
                 self.v3_instance = V3_pipeline(self.v1_config, self.v2_config)
             # run V3 pipeline on query
-            v3_structq = self.v3_instance.transform_nl2query(self.nlq, verbose=False)
+            v3_structq = self.v3_instance.transform_nl2query(self.nlq, verbose=self.verbose)
             print("\nV3 structured query: ")
             self.struct_query = v3_structq.to_dict()
         return pprint(self.struct_query, sort_dicts=False)
@@ -111,7 +121,7 @@ class NLU_demo:
     
     def run_stac_query(self):
         if self.struct_query:
-            return self.stac_handler.handle_query(self.struct_query, verbose=True)
+            return self.stac_handler.handle_query(self.struct_query, verbose=self.verbose)
         
     def run_custom_stac_query(self, params):
         return self.stac_handler.search_query(params=params)
