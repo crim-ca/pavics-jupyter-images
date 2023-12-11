@@ -20,7 +20,7 @@ from nl2query.NL2QueryInterface import (
     TargetAnnotation,
     TemporalAnnotation
 )
-from nl2query.V2.Vdb_simsearch import Vdb_simsearch
+from nl2query.V2.Vdb_simsearch import Vdb_simsearch, generate_ngrams
 from typedefs import JSON
 
 try:
@@ -97,7 +97,7 @@ def osmnx_geocode(vdb: Vdb_simsearch, query: str, threshold: float = 0.7, policy
     and returns a result above the threshold (default 0.7)
     and highest score if policy=score
     or highest length if policy=length (default)."""
-    query_tokens,_ = vdb.query_ngram_target(query, 2)
+    query_tokens, _ = generate_ngrams(query, 2)
     # query by 1-gram and 2-gram tokens
     importance = 0
     max_gdf = None
