@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 from configparser import ConfigParser
+from pprint import pprint
 from typing import List, Optional
 
 import ipywidgets as widgets
@@ -129,8 +130,12 @@ class STAC_query_handler:
                     params['query'] = [prop_string]
             elif annotation['type'] == 'target':
                 params['query'] = annotation['name']
+        if params["bbox"]:
+            params["bbox"] = self.convert_bbox_nlquery2stac(params["bbox"])
         if verbose:
-            print("Created STAC query with the parameters:\n", params)
+            print("Created STAC query with parameters:\n")
+            pprint(params, sort_dicts=False)
+            print("")
         return params
 
     @staticmethod
@@ -184,6 +189,4 @@ class STAC_query_handler:
         Returns result items or None.
         """
         params = self.query2stac(struct_query, verbose)
-        if params["bbox"]:
-            params["bbox"] = self.convert_bbox_nlquery2stac(params["bbox"])
         return self.search_query(params, verbose)

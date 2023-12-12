@@ -121,6 +121,11 @@ class NLU_demo:
     def run_stac_query(self):
         if self.struct_query:
             return self.stac_handler.handle_query(self.struct_query, verbose=self.verbose)
+        else:
+            print(
+                "NL structured query is not set! Cannot run STAC query. "
+                "Make sure that nl2query operations were performed first."
+            )
         
     def run_custom_stac_query(self, params):
         return self.stac_handler.search_query(params=params)
