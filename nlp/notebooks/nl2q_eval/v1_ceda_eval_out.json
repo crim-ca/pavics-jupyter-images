@@ -1,0 +1,324 @@
+{
+	"global_stats": {
+		"data_measures": {
+			"gold_data": {
+				"total_annotation": 252,
+				"total_annotation_per_type": {
+					"property": 55,
+					"location": 60,
+					"tempex": 39,
+					"target": 98
+				},
+				"annotation_per_query": {
+					"avg": 2.5454545454545456,
+					"min": 0,
+					"max": 7
+				}
+			},
+			"test_data": {
+				"total_annotation": 214,
+				"total_annotation_per_type": {
+					"property": 56,
+					"location": 63,
+					"tempex": 59,
+					"target": 36
+				},
+				"annotation_per_query": {
+					"avg": 2.1616161616161619,
+					"min": 0,
+					"max": 7
+				}
+			}
+		},
+		"span_measures": {
+			"global": {
+				"count": 214,
+				"perfect_match": {
+					"no_type_match": 0.06582929782082325,
+					"type_match": 0.47944410815173529
+				},
+				"perfect_begin": {
+					"no_type_match": 0.029265873015873017,
+					"type_match": 0.12169592413236481
+				},
+				"perfect_end": {
+					"no_type_match": 0.029265873015873017,
+					"type_match": 0.1497847726661286
+				},
+				"split_gold_span": {
+					"no_type_match": 0,
+					"type_match": 0.07159671778315846
+				},
+				"split_test_span": {
+					"no_type_match": 0.008928571428571428,
+					"type_match": 0.004464285714285714
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.039823183098036899,
+						"min": 0,
+						"max": 2.0
+					},
+					"type_match": {
+						"avg": 0.17388182460617339,
+						"min": 0,
+						"max": 5.0
+					}
+				}
+			},
+			"property": {
+				"count": 56,
+				"perfect_match": {
+					"no_type_match": 0.17857142857142858,
+					"type_match": 0.30357142857142857
+				},
+				"perfect_begin": {
+					"no_type_match": 0.08928571428571429,
+					"type_match": 0.125
+				},
+				"perfect_end": {
+					"no_type_match": 0.08928571428571429,
+					"type_match": 0.10714285714285714
+				},
+				"split_gold_span": {
+					"no_type_match": 0.017857142857142857,
+					"type_match": 0.07142857142857143
+				},
+				"split_test_span": {
+					"no_type_match": 0.03571428571428571,
+					"type_match": 0.017857142857142857
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.10878768188709708,
+						"min": 0,
+						"max": 1.0
+					},
+					"type_match": {
+						"avg": 0.142925354913659,
+						"min": 0,
+						"max": 5.0
+					}
+				}
+			},
+			"location": {
+				"count": 63,
+				"perfect_match": {
+					"no_type_match": 0.0,
+					"type_match": 0.746031746031746
+				},
+				"perfect_begin": {
+					"no_type_match": 0.0,
+					"type_match": 0.14285714285714286
+				},
+				"perfect_end": {
+					"no_type_match": 0.0,
+					"type_match": 0.1111111111111111
+				},
+				"split_gold_span": {
+					"no_type_match": 0.015873015873015873,
+					"type_match": 0.07936507936507936
+				},
+				"split_test_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.0,
+						"min": 0,
+						"max": 0
+					},
+					"type_match": {
+						"avg": 0.1595959595959596,
+						"min": 0,
+						"max": 2.0
+					}
+				}
+			},
+			"tempex": {
+				"count": 59,
+				"perfect_match": {
+					"no_type_match": 0.0847457627118644,
+					"type_match": 0.423728813559322
+				},
+				"perfect_begin": {
+					"no_type_match": 0.0,
+					"type_match": 0.13559322033898306
+				},
+				"perfect_end": {
+					"no_type_match": 0.0,
+					"type_match": 0.1864406779661017
+				},
+				"split_gold_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.13559322033898306
+				},
+				"split_test_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.030303030303030305,
+						"min": 0,
+						"max": 2.0
+					},
+					"type_match": {
+						"avg": 0.2212888121979031,
+						"min": 0,
+						"max": 3.0
+					}
+				}
+			},
+			"target": {
+				"count": 36,
+				"perfect_match": {
+					"no_type_match": 0.0,
+					"type_match": 0.4444444444444444
+				},
+				"perfect_begin": {
+					"no_type_match": 0.027777777777777777,
+					"type_match": 0.08333333333333333
+				},
+				"perfect_end": {
+					"no_type_match": 0.027777777777777777,
+					"type_match": 0.19444444444444446
+				},
+				"split_gold_span": {
+					"no_type_match": 0.08333333333333333,
+					"type_match": 0.0
+				},
+				"split_test_span": {
+					"no_type_match": 0.0,
+					"type_match": 0.0
+				},
+				"overlapping_span": {
+					"no_type_match": {
+						"avg": 0.020202020202020205,
+						"min": 0,
+						"max": 1.0
+					},
+					"type_match": {
+						"avg": 0.1717171717171717,
+						"min": 0,
+						"max": 2.0
+					}
+				}
+			}
+		},
+		"attribute_measures": {
+			"global": {
+				"count": 214,
+				"total_span_type_match": 73,
+				"per_annotation_span_perfect_match_precision": 0.5200267094423441,
+				"per_annotation_overlapping_span_perfect_match": 43.86666666666667,
+				"per_annotation_attribute_match": {
+					"avg": 0.9444444444444445,
+					"min": 0,
+					"max": 1.0
+				}
+			},
+			"property": {
+				"count": 56,
+				"total_span_type_match": 17,
+				"per_annotation_span_perfect_match_precision": 0.26126126126126128,
+				"per_annotation_overlapping_span_perfect_match": 0.1936936936936937,
+				"per_annotation_attribute_match": {
+					"avg": 0.8378378378378379,
+					"min": 0,
+					"max": 1.0
+				}
+			},
+			"location": {
+				"count": 63,
+				"total_span_type_match": 16,
+				"per_annotation_span_perfect_match_precision": 0.8294117647058823,
+				"per_annotation_overlapping_span_perfect_match": 0.17058823529411763,
+				"per_annotation_attribute_match": {
+					"avg": 1.0,
+					"min": 1.0,
+					"max": 1.0
+				}
+			},
+			"tempex": {
+				"count": 59,
+				"total_span_type_match": 23,
+				"per_annotation_span_perfect_match_precision": 0.5197368421052632,
+				"per_annotation_overlapping_span_perfect_match": 0.3026315789473684,
+				"per_annotation_attribute_match": {
+					"avg": 0.9517543859649122,
+					"min": 0,
+					"max": 1.0
+				}
+			},
+			"target": {
+				"count": 36,
+				"total_span_type_match": 17,
+				"per_annotation_span_perfect_match_precision": 0.4696969696969697,
+				"per_annotation_overlapping_span_perfect_match": 0.5,
+				"per_annotation_attribute_match": {
+					"avg": 0.9696969696969697,
+					"min": 0,
+					"max": 1.0
+				}
+			}
+		},
+		"value_measures": {
+			"global": {
+				"total_matching_attributes": 527,
+				"perfect_value_match": 0.36614180097020296,
+				"ratio_matching_attributes": 0.896090534979424
+			},
+			"type": {
+				"total_matching_attributes": 214,
+				"perfect_value_match": 0.8005617977528091
+			},
+			"name": {
+				"total_matching_attributes": 155,
+				"perfect_value_match": 0.0038314176245210728,
+				"levenshtein": {
+					"avg": 17.620689655172414,
+					"min": 0,
+					"max": 57
+				}
+			},
+			"bbox": {
+				"total_matching_attributes": 63,
+				"perfect_value_match": 1.0,
+				"intersect_over_union": {
+					"avg": 0.0,
+					"min": 0,
+					"max": 0
+				}
+			},
+			"tempex": {
+				"total_matching_attributes": 59,
+				"perfect_value_match": 0.02631578947368421,
+				"duration_overlap": {
+					"avg": 96.07894736842106,
+					"min": 0,
+					"max": 3651
+				}
+			},
+			"numeric": {
+				"total_matching_attributes": 0,
+				"perfect_value_match": 0,
+				"value_offset": {
+					"avg": 0.0,
+					"min": 0,
+					"max": 0
+				}
+			},
+			"target": {
+				"total_matching_attributes": 36,
+				"perfect_value_match": 0.0,
+				"matching_element": {
+					"avg": 1.696969696969697,
+					"min": 0,
+					"max": 8
+				}
+			}
+		}
+	}
+}

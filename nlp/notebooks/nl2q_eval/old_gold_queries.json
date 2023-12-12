@@ -1,0 +1,467 @@
+{
+	"queries": [
+		{
+			"query": "Sentinel-2 over Ottawa from april to september 2020 with cloud cover lower than 10%",
+			"annotations": [
+				{
+					"text": "Sentinel-2",
+					"position": [0, 10],
+					"type": "property",
+					"name": "platform",
+					"value": "sentinel-2",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "over Ottawa",
+					"position": [11, 22],
+					"type": "location",
+					"matchingType": "overlap",
+					"name": "Ottawa",
+					"value": {
+							"type": "Polygon",
+							"coordinates": [[
+								[-75.801084683,44.9806092307],
+								[-76.3483698157,45.4153745571],
+								[-76.2964788586,45.4652808734],
+								[-76.239933938,45.4689361912],
+								[-76.2337541284,45.5088899781],
+								[-76.2165879907,45.5158669486],
+								[-76.198048562,45.5182726],
+								[-76.1592530908,45.5158669486],
+								[-76.1393403711,45.5189942753],
+								[-76.0912203018,45.5167438162],
+								[-76.0204958145,45.4888311796],
+								[-75.9762147586,45.4785151463],
+								[-75.9137300174,45.4154086114],
+								[-75.8563690563,45.3792471352],
+								[-75.8189468762,45.3705649374],
+								[-75.7877045056,45.3821409049],
+								[-75.756462135,45.4120345195],
+								[-75.7245331188,45.4175775641],
+								[-75.7228165051,45.4207103487],
+								[-75.7059936901,45.4248068047],
+								[-75.7001572033,45.4438393766],
+								[-75.6860674521,45.4578669928],
+								[-75.6177462241,45.472073471],
+								[-75.5789507529,45.4739994974],
+								[-75.5277645234,45.4961319449],
+								[-75.450173581,45.5201922656],
+								[-75.4367839936,45.5199517133],
+								[-75.3931820039,45.5242814973],
+								[-75.3533565644,45.5343830309],
+								[-75.2620327119,45.3691641349],
+								[-75.4261409883,45.3276630975],
+								[-75.3657161836,45.2116853003],
+								[-75.619088376,45.0998328486],
+								[-75.801084683,44.9806092307]
+							]]
+						}
+				},
+				{
+					"text": "from april to september 2020",
+					"position": [23, 51],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value":{
+						"start": "2020-04-01T00:00:00Z",
+						"end": "2020-09-30T23:59:59Z"
+					}
+				},
+				{
+					"text": "cloud cover lower than 10%",
+					"position": [57, 83],
+					"type": "property",
+					"name": "cloud cover",
+					"value": 10,
+					"value_type": "percentage",
+					"operation": "lt"
+				}
+			]
+		},
+		{
+			"query": "Sentinel 1 mode IW with relative orbit equals to 33 over Ottawa from april to september 2020",
+			"annotations": [
+				{
+					"text": "Sentinel 1",
+					"position": [0, 10],
+					"type": "property",
+					"name": "platform",
+					"value": "sentinel-1",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "mode IW",
+					"position": [11, 18],
+					"type": "property",
+					"name": "sensor operational mode",
+					"value": "IW",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "relative orbit equals to 33",
+					"position": [24, 51],
+					"type": "property",
+					"name": "relative orbit",
+					"value": 33,
+					"value_type": "integer",
+					"operation": "eq"
+				},
+				{
+					"text": "over Ottawa",
+					"position": [52, 63],
+					"type": "location",
+					"matchingType": "overlap",
+					"name": "Ottawa",
+					"value": {
+							"type": "Polygon",
+							"coordinates": [[
+								[-75.801084683,44.9806092307],
+								[-76.3483698157,45.4153745571],
+								[-76.2964788586,45.4652808734],
+								[-76.239933938,45.4689361912],
+								[-76.2337541284,45.5088899781],
+								[-76.2165879907,45.5158669486],
+								[-76.198048562,45.5182726],
+								[-76.1592530908,45.5158669486],
+								[-76.1393403711,45.5189942753],
+								[-76.0912203018,45.5167438162],
+								[-76.0204958145,45.4888311796],
+								[-75.9762147586,45.4785151463],
+								[-75.9137300174,45.4154086114],
+								[-75.8563690563,45.3792471352],
+								[-75.8189468762,45.3705649374],
+								[-75.7877045056,45.3821409049],
+								[-75.756462135,45.4120345195],
+								[-75.7245331188,45.4175775641],
+								[-75.7228165051,45.4207103487],
+								[-75.7059936901,45.4248068047],
+								[-75.7001572033,45.4438393766],
+								[-75.6860674521,45.4578669928],
+								[-75.6177462241,45.472073471],
+								[-75.5789507529,45.4739994974],
+								[-75.5277645234,45.4961319449],
+								[-75.450173581,45.5201922656],
+								[-75.4367839936,45.5199517133],
+								[-75.3931820039,45.5242814973],
+								[-75.3533565644,45.5343830309],
+								[-75.2620327119,45.3691641349],
+								[-75.4261409883,45.3276630975],
+								[-75.3657161836,45.2116853003],
+								[-75.619088376,45.0998328486],
+								[-75.801084683,44.9806092307]
+							]]
+						}
+				},
+				{
+					"text": "from april to september 2020",
+					"position": [64, 92],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2018-04-01T00:00:00Z",
+						"end": "2018-09-30T23:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "Sentinel 1 SLC montreal from april to september",
+			"annotations": [
+				{
+					"text": "Sentinel 1",
+					"position": [0, 10],
+					"type": "property",
+					"name": "platform",
+					"value": "sentinel-1",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "SLC",
+					"position": [11,14],
+					"type": "property",
+					"name": "product type",
+					"value": "SLC",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "montreal",
+					"position": [15, 23],
+					"type": "location",
+					"matchingType": "overlap",
+					"name": "Montreal",
+					"value": {
+							"type": "Polygon",
+							"coordinates": [[
+								[-73.8880447168,45.3975139272],
+								[-73.9539626855,45.4004067618],
+								[-73.9793685693,45.434627393],
+								[-73.949156167,45.4553424806],
+								[-73.9450362939,45.4957872197],
+								[-73.8969711084,45.5227342527],
+								[-73.7713149805,45.5131117933],
+								[-73.6806777734,45.554476694],
+								[-73.6298660058,45.6284727051],
+								[-73.5193160791,45.6999733929],
+								[-73.4753707666,45.7057278641],
+								[-73.4891036767,45.6788685976],
+								[-73.4794906396,45.6371152217],
+								[-73.4994033594,45.6116639963],
+								[-73.4966567773,45.5823567738],
+								[-73.5275558252,45.528025904],
+								[-73.5351089258,45.4774943856],
+								[-73.5309890527,45.4625668844],
+								[-73.5509017725,45.4442632637],
+								[-73.5653213281,45.4423362212],
+								[-73.6161330957,45.4100484744],
+								[-73.644972207,45.4129406673],
+								[-73.6793044824,45.4259537024],
+								[-73.7362960596,45.4302907143],
+								[-73.7932876367,45.4355910541],
+								[-73.8880447168,45.3975139272]
+							]]
+					}
+				},
+				{
+					"text": "from april to september",
+					"position": [24, 47],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2021-04-01T00:00:00Z",
+						"end": "2021-09-30T23:59:59Z"
+					}
+				}
+				]
+		},
+		{
+			"query": "Sentinel-1 in mode IW covering (45.5017° N, 73.5673° W) in descending pass",
+			"annotations": [
+				{
+					"text": "Sentinel 1",
+					"position": [0, 10],
+					"type": "property",
+					"name": "platform",
+					"value": "sentinel-1",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "mode IW",
+					"position": [14, 21],
+					"type": "property",
+					"name": "sensor operational mode",
+					"value": "IW",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "covering (45.5017° N, 73.5673° W)",
+					"position": [22, 55],
+					"type": "location",
+					"matchingType": "overlap",
+					"name": "45.5017° N, 73.5673° W",
+					"value": {
+							"type": "Point",
+							"coordinates": [-73.567300, 45.501700]
+					}
+				},
+				{
+					"text": "in descending pass",
+					"position": [56, 74],
+					"type": "property",
+					"name": "orbit direction",
+					"value": "descending",
+					"value_type": "string",
+					"operation": "eq"
+				}
+				]
+		},
+		{
+			"query" : "Last 25 Sentinel-1 images sorted in descending order over Montreal",
+			"annotations": [
+				{
+					"text": "Last 25",
+					"position": [0,7],
+					"type": "property",
+					"name": "limit",
+					"value": 25,
+					"value_type": "integer",
+					"operation": "eq"
+				},
+				{
+					"text": "Sentinel-1",
+					"position": [8, 18],
+					"type": "property",
+					"name": "platform",
+					"value": "sentinel-1",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "sorted in descending order",
+					"position": [26, 52],
+					"type": "property",
+					"name": "",
+					"value": "descending",
+					"value_type": "string",
+					"operation": "sort"
+				},
+				{
+					"text": "over Montreal",
+					"position": [53, 69],
+					"type": "location",
+					"matchingType": "overlap",
+					"name": "Montreal",
+					"value": {
+							"type": "Polygon",
+							"coordinates": [[
+								[-74.0062453122,45.3531626262],
+								[-73.4272187576,45.3531626262],
+								[-73.4272187576,45.7105466955],
+								[-74.0062453122,45.7105466955],
+								[-74.0062453122,45.3531626262]
+							]]
+					}
+				}
+			]
+		},
+		{
+			"query" : "Last 25 Sentinel-1 images with polarization VV sorted in descending order over Montreal",
+			"annotations": [
+				{
+					"text": "Last 25",
+					"position": [0,7],
+					"type": "property",
+					"name": "limit",
+					"value": 25,
+					"value_type": "integer",
+					"operation": "eq"
+				},
+				{
+					"text": "Sentinel-1",
+					"position": [8,18],
+					"type": "property",
+					"name": "platform",
+					"value": "sentinel-1",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "polarization VV",
+					"position": [31, 46],
+					"type": "property",
+					"name": "polarization",
+					"value": "VV",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "sorted in descending order",
+					"position": [47, 73],
+					"type": "property",
+					"name": "",
+					"value": "descending",
+					"value_type": "string",
+					"operation": "sort"
+				},
+				{
+					"text": "over Montreal",
+					"position": [74, 87],
+					"type": "location",
+					"matchingType": "overlap",
+					"name": "Montreal",
+					"value": {
+							"type": "Polygon",
+							"coordinates": [[
+								[-74.0062453122,45.3531626262],
+								[-73.4272187576,45.3531626262],
+								[-73.4272187576,45.7105466955],
+								[-74.0062453122,45.7105466955],
+								[-74.0062453122,45.3531626262]
+							]]
+					}
+				}
+			]
+		},
+
+		{
+			"query": "I want the CO2 concentrations used to force the CMIP6 models in ScenarioMIP",
+			"annotations": [
+				{
+					"text": "CO2 concentrations",
+					"position": [10, 29],
+					"type": "target",
+					"name": ["mole_fraction_of_carbon_dioxide_in_air"]
+				},
+				{
+					"text": "to force",
+					"position": [35, 43],
+					"type": "property",
+					"name": "product",
+					"value": "forcing_dataset",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "CMIP6 models",
+					"position": [48, 60],
+					"type": "property",
+					"name": "mip_era",
+					"value": "CMIP6",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "ScenarioMIP",
+					"position": [64, 79],
+					"type": "property",
+					"name": "target_mip",
+					"value": "ScenarioMIP",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query" : "I want the carbon fluxes between the atmosphere and the ocean in ScenarioMIP",
+			"annotations": [
+				{
+					"text": "carbon fluxes between the atmosphere and the ocean",
+					"position": [11, 61],
+					"type": "target",
+					"name": ["nbp", "fgco2"]
+				},
+				{
+					"text": "ScenarioMIP",
+					"position": [65, 76],
+					"type": "property",
+					"name": "activity_id",
+					"value": "ScenarioMIP",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query" : "I need for all models fixed fields describing the area of the grids and the fraction of land and ocean.",
+			"annotations": [
+				{
+					"text": "describing the area of the grids and the fraction of land and ocean",
+					"position": [35, 102],
+					"type": "target",
+					"name": ["areacello", "areacella", "sftlf", "sftof"]
+				}
+			]
+		}
+
+
+	]
+}
