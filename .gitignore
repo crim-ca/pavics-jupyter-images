@@ -23,3 +23,6 @@
 # disallow notebooks at root
 ./*.ipynb
 **/.ipynb_checkpoints/
+
+### Outputs
+*.log
