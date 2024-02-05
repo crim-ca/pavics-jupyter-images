@@ -3,28 +3,13 @@
 class: CommandLineTool
 cwlVersion: v1.0
 
-label: Application to process Sentinel products ESA's Snap software thought a python wrapper.
+label: "Application to process Sentinel products ESA's Snap software thought a python wrapper."
 
 requirements:
   DockerRequirement:
     dockerPull: registry.gitlab.com/crim.ca/public/daccs/daccs/daccs-eo-tools:0.1.1
 inputs:
   command:
-# This has been commented out while a fix is rolled out for Weaver
-#    type:
-#      type: enum
-#      # Keep this symbols list in sync with process list in `source/operations.py`
-#      symbols:
-#        - subset
-#        - calibration
-#        - coregistration
-#        - mosaic
-#        - multilook
-#        - resample
-#        - s1_processing
-#        - s2_processing
-#        - slc_to_pri
-#        - terrain_correction
     type: string
     inputBinding:
       position: 1
