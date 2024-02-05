@@ -1,0 +1,6276 @@
+{
+	"queries": [
+		{
+			"query": "10 years rainfall data of ethiopia",
+			"annotations": [
+				{
+					"text": "10 years",
+					"position": [
+						0,
+						8
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "rainfall",
+					"position": [
+						9,
+						17
+					],
+					"type": "target",
+					"name": [
+						"rainfall rate",
+						"rainfall amount",
+						"convective rainfall rate",
+						"convective rainfall amount",
+						"thickness of rainfall amount",
+						"precipitation amount",
+						"thickness of convective rainfall amount",
+						"stratiform rainfall amount",
+						"large scale rainfall amount",
+						"stratiform rainfall rate",
+						"large scale rainfall rate",
+						"mass fraction of rainfall falling onto surface snow",
+						"prrsn",
+						"Fraction of Rainfall on Snow",
+						"thickness of stratiform rainfall amount",
+						"thickness of large scale rainfall amount",
+						"temperature flux due to rainfall expressed as heat flux into sea water",
+						"hfrainds",
+						"Temperature Flux Due to Rainfall Expressed as Heat Flux into Sea Water",
+						"number of days with lwe thickness of precipitation amount above threshold",
+						"rainfall flux",
+						"prra",
+						"prraIs",
+						"sipr",
+						"Rainfall Flux",
+						"Ice Sheet Rainfall Rate",
+						"Rainfall Rate over Sea Ice",
+						"spell length of days with lwe thickness of precipitation amount above threshold"
+					]
+				},
+				{
+					"text": "ethiopia",
+					"position": [
+						26,
+						34
+					],
+					"type": "location",
+					"name": "Ethiopia",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "100 meter depth soil temperature profile",
+			"annotations": [
+				{
+					"text": "100 meter",
+					"position": [
+						0,
+						9
+					],
+					"type": "property",
+					"name": "nominal_resolution",
+					"value": "100 km",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "depth soil temperature",
+					"position": [
+						10,
+						32
+					],
+					"type": "target",
+					"name": [
+						"depth at shallowest isotherm defined by soil temperature",
+						"dmlt",
+						"Depth to Soil Thaw",
+						"soil temperature",
+						"tsl",
+						"Temperature of Soil",
+						"temperature in ground",
+						"depth of isosurface of sea water potential temperature",
+						"t20d",
+						"Depth of 20 degree Celsius Isotherm",
+						"depth at base of unfrozen ground",
+						"depth at maximum upward derivative of sea water potential temperature",
+						"sea surface foundation temperature",
+						"slow soil pool mass content of carbon",
+						"cSoilSlow",
+						"slow soil pool carbon content",
+						"Carbon Mass in Slow Soil Pool",
+						"medium soil pool mass content of carbon",
+						"cSoilMedium",
+						"medium soil pool carbon content",
+						"Carbon Mass in Medium Soil Pool",
+						"fast soil pool mass content of carbon",
+						"cSoilFast",
+						"fast soil pool carbon content",
+						"Carbon Mass in Fast Soil Pool",
+						"integral wrt depth of sea water temperature",
+						"integral wrt depth of sea water temperature in ocean layer",
+						"ocean integral wrt depth of sea water temperature",
+						"integral of sea water temperature wrt depth in ocean layer",
+						"ocean integral of sea water temperature wrt depth",
+						"sea water potential temperature",
+						"thetaoga",
+						"thetao",
+						"thetaot2000",
+						"thetaot300",
+						"thetaot700",
+						"thetaot",
+						"Global Average Sea Water Potential Temperature",
+						"Sea Water Potential Temperature",
+						"Depth Average Potential Temperature of Upper 2000m",
+						"Depth Average Potential Temperature of Upper 300m",
+						"Depth Average Potential Temperature of Upper 700m",
+						"Vertically Averaged Sea Water Potential Temperature",
+						"integral wrt depth of product of potential temperature and sea water density",
+						"integral wrt depth of product of sea water density and potential temperature",
+						"downward heat flux at ground level in soil",
+						"sea water potential temperature expressed as heat content",
+						"integral wrt depth of sea water potential temperature expressed as heat content",
+						"integral of sea water potential temperature wrt depth expressed as heat content",
+						"depth",
+						"water table depth",
+						"wtd",
+						"Water Table Depth",
+						"depth below sea floor",
+						"root depth",
+						"rootd",
+						"Maximum Root Depth",
+						"depth at shallowest local minimum in vertical profile of mole concentration of dissolved molecular oxygen in sea water",
+						"zo2min",
+						"Depth of Oxygen Minimum Concentration"
+					]
+				}
+			]
+		},
+		{
+			"query": "1km grid rainfall data 2022",
+			"annotations": [
+				{
+					"text": "1",
+					"position": [
+						0,
+						1
+					],
+					"type": "property",
+					"name": "",
+					"value": 1,
+					"value_type": "integer",
+					"operation": "eq"
+				},
+				{
+					"text": "grid rainfall data",
+					"position": [
+						4,
+						22
+					],
+					"type": "target",
+					"name": [
+						"rainfall rate",
+						"convective rainfall rate",
+						"precipitation flux onto canopy",
+						"prveg",
+						"precipitation flux onto canopy where land",
+						"Precipitation onto Canopy",
+						"predominant precipitation type at surface",
+						"rainfall amount",
+						"convective rainfall amount",
+						"water evaporation amount from canopy",
+						"water evaporation amount from canopy where land",
+						"mass fraction of rainfall falling onto surface snow",
+						"prrsn",
+						"Fraction of Rainfall on Snow",
+						"thickness of convective rainfall amount",
+						"thickness of rainfall amount",
+						"number of days with lwe thickness of precipitation amount above threshold",
+						"liquid water cloud area fraction in atmosphere layer",
+						"clcalipsoliq",
+						"CALIPSO Liquid Cloud Percentage",
+						"atmosphere mass per unit area",
+						"mass content of cloud liquid water in atmosphere layer",
+						"cloud liquid water content of atmosphere layer",
+						"liquid water cloud area fraction",
+						"clwmodis",
+						"MODIS Liquid Cloud Percentage",
+						"ocean volume",
+						"volcello",
+						"Ocean Grid-Cell Volume",
+						"precipitation amount",
+						"stratiform rainfall amount",
+						"large scale rainfall amount",
+						"stratiform rainfall rate",
+						"large scale rainfall rate",
+						"thickness of stratiform rainfall amount",
+						"thickness of large scale rainfall amount"
+					]
+				},
+				{
+					"text": "2022",
+					"position": [
+						23,
+						27
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2022-01-01T00:00:00Z",
+						"end": "2022-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "annual temperature Philippines",
+			"annotations": [
+				{
+					"text": "annual",
+					"position": [
+						0,
+						6
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "temperature",
+					"position": [
+						7,
+						18
+					],
+					"type": "target",
+					"name": [
+						"brightness temperature",
+						"wet bulb temperature",
+						"temperature in ground",
+						"brightness temperature anomaly",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"number of days with air temperature below threshold",
+						"physiological equivalent temperature",
+						"virtual temperature",
+						"number of days with air temperature above threshold",
+						"freezing temperature of sea water",
+						"perceived temperature",
+						"brightness temperature at cloud top",
+						"air equivalent temperature",
+						"equivalent temperature"
+					]
+				},
+				{
+					"text": "Philippines",
+					"position": [
+						19,
+						30
+					],
+					"type": "location",
+					"name": "Philippines",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Air Temperature uk Hampshire 2021",
+			"annotations": [
+				{
+					"text": "Air Temperature",
+					"position": [
+						0,
+						15
+					],
+					"type": "target",
+					"name": [
+						"wind chill of air temperature",
+						"wet bulb temperature",
+						"wet bulb potential temperature",
+						"wbptemp",
+						"Wet Bulb Potential Temperature",
+						"air density",
+						"specific kinetic energy of air",
+						"brightness temperature",
+						"temperature in ground",
+						"brightness temperature anomaly",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"number of days with air temperature below threshold",
+						"physiological equivalent temperature",
+						"virtual temperature",
+						"number of days with air temperature above threshold",
+						"freezing temperature of sea water",
+						"perceived temperature",
+						"brightness temperature at cloud top",
+						"air equivalent temperature",
+						"equivalent temperature"
+					]
+				},
+				{
+					"text": "uk",
+					"position": [
+						16,
+						18
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Hampshire",
+					"position": [
+						19,
+						28
+					],
+					"type": "property",
+					"name": "experiment_id",
+					"value": "piSST-pdSIC",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "2021",
+					"position": [
+						29,
+						33
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2021-01-01T00:00:00Z",
+						"end": "2021-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "air pollution data in England by local authority",
+			"annotations": [
+				{
+					"text": "air pollution data",
+					"position": [
+						0,
+						18
+					],
+					"type": "target",
+					"name": [
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from residential and commercial combustion",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from residential and commercial combustion",
+						"tendency of atmosphere mass content of ammonia due to emission from residential and commercial combustion",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from forest fires",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from land transport",
+						"tendency of atmosphere mass content of ethyne due to emission from forest fires",
+						"tendency of atmosphere mass content of carbon monoxide due to emission from residential and commercial combustion",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from agricultural waste burning",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from energy production and distribution",
+						"tendency of atmosphere mass content of particulate organic matter dry aerosol particles expressed as carbon due to emission from residential and commercial combustion",
+						"tendency of atmosphere mass content of particulate organic matter dry aerosol expressed as carbon due to emission from residential and commercial combustion",
+						"tendency of atmosphere mass content of particulate organic matter dry aerosol particles expressed as carbon due to emission from industrial processes and combustion",
+						"tendency of atmosphere mass content of particulate organic matter dry aerosol expressed as carbon due to emission from industrial processes and combustion",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from forest fires",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from waste treatment and disposal",
+						"tendency of atmosphere mass content of ethyne due to emission from agricultural waste burning",
+						"air density",
+						"specific kinetic energy of air",
+						"tendency of atmosphere mass content of alcohols due to emission from savanna and grassland fires"
+					]
+				},
+				{
+					"text": "England",
+					"position": [
+						22,
+						29
+					],
+					"type": "location",
+					"name": "England, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "annual sea level rise data",
+			"annotations": [
+				{
+					"text": "annual",
+					"position": [
+						0,
+						6
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "sea level rise",
+					"position": [
+						7,
+						21
+					],
+					"type": "target",
+					"name": [
+						"phase of global average sea level change",
+						"global average sea level change",
+						"thermosteric change in mean sea level",
+						"tendency of global average sea level change",
+						"amplitude of global average sea level change",
+						"global average thermosteric sea level change",
+						"zostoga",
+						"Global Average Thermosteric Sea Level Change",
+						"halosteric change in mean sea level",
+						"steric change in mean sea level",
+						"height above sea floor",
+						"global average steric sea level change",
+						"tidal sea surface height above mean higher high water",
+						"steric change in sea surface height",
+						"sea water mass",
+						"masso",
+						"Sea Water Mass",
+						"sea water electrical conductivity",
+						"model level number",
+						"model level number at top of atmosphere boundary layer",
+						"model level number at sea floor",
+						"tidal sea surface height above mean lower low water",
+						"sea floor depth below mean sea level",
+						"sea floor depth below sea level",
+						"height above mean sea level"
+					]
+				}
+			]
+		},
+		{
+			"query": "Annual UK sea surface temperature",
+			"annotations": [
+				{
+					"text": "Annual",
+					"position": [
+						0,
+						6
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "UK",
+					"position": [
+						7,
+						9
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "surface temperature",
+					"position": [
+						14,
+						33
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"surface radioactivity content of 130mI",
+						"surface radioactivity content of 230Th",
+						"surface radioactivity content of 134mI",
+						"surface radioactivity content of 133mI",
+						"surface radioactivity content of 116mIn",
+						"surface radioactivity content of 228Th",
+						"surface radioactivity content of 232Th",
+						"surface radioactivity content of 227Th",
+						"surface radioactivity content of 230U",
+						"surface radioactivity content of 152mPm",
+						"surface radioactivity content of 233Th",
+						"surface radioactivity content of 229Th",
+						"surface radioactivity content of 235U",
+						"surface radioactivity content of 132I",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance"
+					]
+				}
+			]
+		},
+		{
+			"query": "altimeter significant wave height",
+			"annotations": [
+				{
+					"text": "significant wave height",
+					"position": [
+						10,
+						33
+					],
+					"type": "target",
+					"name": [
+						"sea surface wave significant height",
+						"significant height of wind and swell waves",
+						"sea surface infragravity wave significant height",
+						"sea surface wind wave significant height",
+						"significant height of wind waves",
+						"sea surface swell wave significant height",
+						"significant height of swell waves",
+						"sea surface primary swell wave significant height",
+						"sea surface tertiary swell wave significant height",
+						"sea surface secondary swell wave significant height",
+						"sea surface wave significant period",
+						"sea surface wave maximum steepness",
+						"sea surface wave maximum height",
+						"sea surface wave mean height",
+						"sea surface wave maximum crest height",
+						"sea surface wave mean height of highest tenth",
+						"sea surface wave period of highest wave",
+						"sea surface mean square upwave slope direction",
+						"height",
+						"height above sea floor",
+						"height at cloud top",
+						"thickness of liquid water cloud",
+						"surface roughness length for heat in air"
+					]
+				}
+			]
+		},
+		{
+			"query": "cloud vertical distribution",
+			"annotations": [
+				{
+					"text": "cloud vertical",
+					"position": [
+						0,
+						14
+					],
+					"type": "target",
+					"name": [
+						"height at cloud top",
+						"convective cloud top height",
+						"convective cloud base height",
+						"shallow convective cloud top altitude",
+						"thickness of liquid water cloud",
+						"convective cloud top altitude",
+						"shallow convective cloud base altitude",
+						"convective cloud base altitude",
+						"cloud top altitude",
+						"cloud base altitude",
+						"model level number at convective cloud top",
+						"air pressure at convective cloud top",
+						"cct",
+						"Air Pressure at Convective Cloud Top",
+						"atmosphere mass content of convective cloud ice",
+						"clivic",
+						"Convective Ice Water Path",
+						"height",
+						"pressure at effective cloud top defined by infrared radiation",
+						"depth",
+						"atmosphere horizontal streamfunction",
+						"height above sea floor",
+						"to direction of air velocity relative to sea water",
+						"depth below sea floor"
+					]
+				}
+			]
+		},
+		{
+			"query": "cmip6 surface air temperature",
+			"annotations": [
+				{
+					"text": "cmip6",
+					"position": [
+						0,
+						5
+					],
+					"type": "property",
+					"name": "mip_era",
+					"value": "CMIP6",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "surface air temperature",
+					"position": [
+						6,
+						29
+					],
+					"type": "target",
+					"name": [
+						"wind chill of air temperature",
+						"wet bulb temperature",
+						"wet bulb potential temperature",
+						"wbptemp",
+						"Wet Bulb Potential Temperature",
+						"surface radioactivity content of 230Th",
+						"surface radioactivity content of 116mIn",
+						"surface radioactivity content of 102mTc",
+						"surface radioactivity content of 99mTc",
+						"surface radioactivity content of 228Th",
+						"surface radioactivity content of 115mIn",
+						"surface radioactivity content of 119mIn",
+						"surface radioactivity content of 232Th",
+						"surface radioactivity content of 242m1Am",
+						"surface radioactivity content of 227Th",
+						"surface radioactivity content of 117mIn",
+						"surface radioactivity content of 233Th",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance"
+					]
+				}
+			]
+		},
+		{
+			"query": "CO2 concentration in atmosphere in london",
+			"annotations": [
+				{
+					"text": "CO2 concentration",
+					"position": [
+						0,
+						17
+					],
+					"type": "target",
+					"name": [
+						"radioactivity concentration of 60Co in air",
+						"radioactivity concentration of 58Co in air",
+						"radioactivity concentration of 250Cf in air",
+						"radioactivity concentration of 249Cf in air",
+						"radioactivity concentration of 251Cf in air",
+						"radioactivity concentration of 11C in air",
+						"radioactivity concentration of 253Cf in air",
+						"radioactivity concentration of 254Cf in air",
+						"radioactivity concentration of 252Cf in air",
+						"radioactivity concentration of 246Cm in air",
+						"radioactivity concentration of 144Ce in air",
+						"radioactivity concentration of 248Cm in air",
+						"radioactivity concentration of 138Cs in air",
+						"radioactivity concentration of 134Cs in air",
+						"radioactivity concentration of 136Cs in air",
+						"atmosphere mass of carbon dioxide",
+						"co2mass",
+						"Total Atmospheric Mass of CO2",
+						"fugacity of carbon dioxide in sea water",
+						"surface partial pressure of carbon dioxide abiotic analogue in sea water",
+						"surface partial pressure of carbon dioxide natural analogue in sea water",
+						"mass fraction of carbon dioxide tracer in air",
+						"co23D",
+						"3D-Field of Transported CO2"
+					]
+				},
+				{
+					"text": "london",
+					"position": [
+						35,
+						41
+					],
+					"type": "location",
+					"name": "London, Greater London, England, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "daily relative humidity united kingdom regions",
+			"annotations": [
+				{
+					"text": "relative humidity",
+					"position": [
+						6,
+						23
+					],
+					"type": "target",
+					"name": [
+						"relative humidity for aerosol particle size selection",
+						"relative humidity",
+						"hur",
+						"hursmax",
+						"hursmin",
+						"hursminCrop",
+						"hurs",
+						"Relative Humidity",
+						"Daily Maximum Near-Surface Relative Humidity",
+						"Daily Minimum Near-Surface Relative Humidity",
+						"Daily Minimum Near-Surface Relative Humidity over Crop Tile",
+						"Near-Surface Relative Humidity",
+						"humidity mixing ratio",
+						"product of air temperature and specific humidity",
+						"product of eastward wind and specific humidity",
+						"surface specific humidity",
+						"tendency of specific humidity",
+						"tnhus",
+						"Tendency of Specific Humidity",
+						"tendency of specific humidity due to convection",
+						"tnhusc",
+						"Tendency of Specific Humidity Due to Convection",
+						"product of upward air velocity and specific humidity",
+						"tendency of specific humidity due to model physics",
+						"tnhusmp",
+						"Tendency of Specific Humidity Due to Model Physics",
+						"tendency of specific humidity due to diffusion",
+						"tnhusd",
+						"Tendency of Specific Humidity Due to Numerical Diffusion",
+						"product of northward wind and specific humidity",
+						"product of northward wind and specific humdity",
+						"tendency of specific humidity due to advection",
+						"tnhusa",
+						"Tendency of Specific Humidity Due to Advection",
+						"specific humidity",
+						"huss",
+						"hussLut",
+						"hus",
+						"hus850",
+						"Near-Surface Specific Humidity",
+						"Near-Surface Specific Humidity on Land-Use Tile",
+						"Specific Humidity",
+						"Specific Humidity",
+						"tendency of specific humidity due to stratiform cloud and precipitation",
+						"tnhusscp",
+						"Tendency of Specific Humidity Due to Stratiform Clouds and Precipitation",
+						"tendency of specific humidity due to stratiform precipitation",
+						"tendency of specific humidity due to large scale precipitation"
+					]
+				},
+				{
+					"text": "united kingdom",
+					"position": [
+						24,
+						38
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "global gas emission of nitrogen oxide (NO2) and carbon dioxide (CO2) dataset",
+			"annotations": [
+				{
+					"text": [
+						"emission",
+						"nitrogen oxide"
+					],
+					"position": [
+						[
+							11,
+							19
+						],
+						[
+							23,
+							37
+						]
+					],
+					"type": "target",
+					"name": [
+						"tendency of atmosphere mass content of nox expressed as nitrogen due to emission",
+						"eminox",
+						"emianox",
+						"Total Emission Rate of NOx",
+						"Total Emission Rate of Anthropogenic NOx",
+						"tendency of atmosphere mass content of nitrous oxide due to emission",
+						"tendency of atmosphere mass content of nitrogen dioxide due to emission",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission",
+						"tendency of atmosphere mass content of nox expressed as nitrogen monoxide due to emission from soil",
+						"tendency of atmosphere mass content of nitrogen dioxide due to emission from forest fires",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from agricultural waste burning",
+						"tendency of atmosphere mass content of nitrogen dioxide due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of nitrous oxide due to dry deposition",
+						"tendency of atmosphere mass content of nitrous acid due to emission",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from forest fires",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from agricultural production",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from energy production and distribution",
+						"tendency of atmosphere mass content of nox expressed as nitrogen monoxide due to emission from agricultural waste burning",
+						"tendency of atmosphere mass content of carbon monoxide due to emission",
+						"emiaco",
+						"emico",
+						"Total Emission Rate of Anthropogenic CO",
+						"Total Emission Rate of CO",
+						"tendency of atmosphere mass content of carbon dioxide due to emission",
+						"tendency of atmosphere mass content of molecular hydrogen due to emission",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission",
+						"emiso2",
+						"Total Emission Rate of SO2",
+						"tendency of atmosphere mass content of dimethyl sulfide due to emission",
+						"emidms",
+						"Total Emission Rate of DMS"
+					]
+				},
+				{
+					"text": [
+						"carbon dioxide",
+						"CO2"
+					],
+					"position": [
+						[
+							48,
+							62
+						],
+						[
+							64,
+							67
+						]
+					],
+					"type": "property",
+					"name": "experiment_id",
+					"value": "land-cCO2",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "hourly solar radiation northern ireland",
+			"annotations": [
+				{
+					"text": "hourly",
+					"position": [
+						0,
+						6
+					],
+					"type": "property",
+					"name": "frequency",
+					"value": "1hr",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "solar radiation",
+					"position": [
+						7,
+						22
+					],
+					"type": "target",
+					"name": [
+						"solar irradiance",
+						"solar irradiance per unit wavelength",
+						"planetary albedo",
+						"surface direct along beam shortwave flux in air",
+						"direct downwelling shortwave flux in air",
+						"surface longwave emissivity",
+						"downwelling photosynthetic radiance in sea water",
+						"downwelling photosynthetic photon radiance in sea water",
+						"stratiform cloud longwave emissivity",
+						"dems",
+						"Stratiform Cloud Emissivity",
+						"canopy albedo",
+						"albc",
+						"Canopy Albedo",
+						"ultraviolet index",
+						"downwelling photosynthetic radiative flux in sea water",
+						"ultraviolet index assuming overcast sky",
+						"surface albedo assuming no snow",
+						"surface albedo assuming deep snow",
+						"distance from sun",
+						"integral wrt time of radioactivity concentration of 246Cm in air",
+						"integral wrt time of radioactivity concentration of 244Cm in air",
+						"radioactivity concentration of 246Cm in air",
+						"integral wrt time of radioactivity concentration of 245Cm in air"
+					]
+				},
+				{
+					"text": "northern ireland",
+					"position": [
+						23,
+						39
+					],
+					"type": "location",
+					"name": "Northern Ireland, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Hillsborough Soil Temperature Data",
+			"annotations": [
+				{
+					"text": "Hillsborough",
+					"position": [
+						0,
+						12
+					],
+					"type": "location",
+					"name": "Hillsborough, Albert, New Brunswick (Village)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Soil Temperature",
+					"position": [
+						13,
+						29
+					],
+					"type": "target",
+					"name": [
+						"soil temperature",
+						"tsl",
+						"Temperature of Soil",
+						"temperature in ground",
+						"medium soil pool mass content of carbon",
+						"cSoilMedium",
+						"medium soil pool carbon content",
+						"Carbon Mass in Medium Soil Pool",
+						"slow soil pool mass content of carbon",
+						"cSoilSlow",
+						"slow soil pool carbon content",
+						"Carbon Mass in Slow Soil Pool",
+						"fast soil pool mass content of carbon",
+						"cSoilFast",
+						"fast soil pool carbon content",
+						"Carbon Mass in Fast Soil Pool",
+						"depth at shallowest isotherm defined by soil temperature",
+						"dmlt",
+						"Depth to Soil Thaw",
+						"soil pool carbon decay rate",
+						"tSoilPools",
+						"Turnover Rate of Each Model Soil Carbon Pool",
+						"soil albedo",
+						"surface temperature",
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns",
+						"surface temperature where land",
+						"surface temperature where open sea",
+						"surface temperature where snow",
+						"Surface Radiative Temperature",
+						"Temperature of Bare Soil",
+						"Surface Temperature on Landuse Tile",
+						"Surface Temperature Where Land or Sea Ice",
+						"Ice Sheet Surface Temperature",
+						"Surface Temperature",
+						"Land Surface Temperature",
+						"Snow Surface Temperature",
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature",
+						"soil thermal capacity",
+						"wet bulb temperature",
+						"canopy temperature",
+						"tcs",
+						"Vegetation Canopy Temperature",
+						"soil thermal conductivity",
+						"temperature difference between ambient air and air lifted adiabatically from the surface",
+						"soil suction at saturation",
+						"soil porosity",
+						"mass content of carbon in vegetation and litter and soil and forestry and agricultural products",
+						"cLand",
+						"Total Carbon in All Terrestrial Carbon Pools",
+						"mass content of nitrogen in vegetation and litter and soil and forestry and agricultural products",
+						"nLand",
+						"Total Nitrogen in All Terrestrial Nitrogen Pools",
+						"soil water salinity"
+					]
+				}
+			]
+		},
+		{
+			"query": "hourly north sea temperatures",
+			"annotations": [
+				{
+					"text": [
+						"hourly",
+						"temperatures"
+					],
+					"position": [
+						[
+							0,
+							6
+						],
+						[
+							17,
+							29
+						]
+					],
+					"type": "target",
+					"name": [
+						"apparent air temperature",
+						"sea surface foundation temperature",
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature",
+						"fire temperature",
+						"tendency of air temperature due to model physics",
+						"tntmp",
+						"Tendency of Air Temperature Due to Model Physics",
+						"sea surface skin temperature",
+						"wet bulb temperature",
+						"tendency of air temperature due to diabatic processes",
+						"zmtnt",
+						"Zonal Mean Diabatic Heating Rates",
+						"perceived temperature",
+						"air temperature lapse rate",
+						"brightness temperature",
+						"tendency of air temperature due to convection",
+						"tntc",
+						"Tendency of Air Temperature Due to Convection",
+						"brightness temperature at cloud top",
+						"square of air temperature",
+						"t2",
+						"Mean-Squared Air Temperature",
+						"tendency of air temperature due to turbulence"
+					]
+				},
+				{
+					"text": "north sea",
+					"position": [
+						7,
+						16
+					],
+					"type": "location",
+					"name": "Sea Otter River, Franklin, Northwest Territories (River)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "month evaporation grid africa",
+			"annotations": [
+				{
+					"text": "month",
+					"position": [
+						0,
+						5
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "evaporation",
+					"position": [
+						6,
+						17
+					],
+					"type": "target",
+					"name": [
+						"water potential evaporation flux",
+						"evspsblpot",
+						"Potential Evapotranspiration",
+						"water potential evaporation amount",
+						"water evaporation flux from soil",
+						"evspsblsoi",
+						"es",
+						"Water Evaporation from Soil",
+						"Bare Soil Evaporation",
+						"water potential evapotranspiration amount",
+						"water evapotranspiration amount",
+						"water evaporation amount",
+						"temperature flux due to evaporation expressed as heat flux out of sea water",
+						"hfevapds",
+						"Temperature Flux Due to Evaporation Expressed as Heat Flux out of Sea Water",
+						"water evaporation flux from canopy",
+						"ec",
+						"evspsblveg",
+						"water evaporation flux from canopy where land",
+						"Interception Evaporation",
+						"Evaporation from Canopy",
+						"water evapotranspiration flux",
+						"evspsbl",
+						"sidmassevapsubl",
+						"esn",
+						"evs",
+						"water evaporation flux",
+						"Evaporation Including Sublimation and Transpiration",
+						"Sea-Ice Mass Change Through Evaporation and Sublimation",
+						"Snow Evaporation",
+						"Water Evaporation Flux Where Ice Free Ocean over Sea",
+						"water evaporation amount from canopy",
+						"water evaporation amount from canopy where land",
+						"tendency of canopy water amount due to evaporation of intercepted precipitation",
+						"surface water evaporation flux",
+						"eow",
+						"water evaporation flux where sea ice",
+						"Open Water Evaporation",
+						"surface upward latent heat flux due to evaporation",
+						"virtual salt flux into sea water due to evaporation",
+						"vsfevap",
+						"Virtual Salt Flux into Sea Water Due to Evaporation",
+						"upward latent heat flux into air due to transpiration"
+					]
+				},
+				{
+					"text": "africa",
+					"position": [
+						23,
+						29
+					],
+					"type": "location",
+					"name": "Africa Rock, Algoma, Ontario (Shoal)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "potential evapotranspiration mekrou basin",
+			"annotations": [
+				{
+					"text": "evapotranspiration",
+					"position": [
+						10,
+						28
+					],
+					"type": "target",
+					"name": [
+						"water potential evapotranspiration amount",
+						"water evapotranspiration amount",
+						"water potential evaporation flux",
+						"evspsblpot",
+						"Potential Evapotranspiration",
+						"water potential evaporation amount",
+						"water evaporation amount from canopy",
+						"water evaporation amount from canopy where land",
+						"water evapotranspiration flux",
+						"evspsbl",
+						"sidmassevapsubl",
+						"esn",
+						"evs",
+						"water evaporation flux",
+						"Evaporation Including Sublimation and Transpiration",
+						"Sea-Ice Mass Change Through Evaporation and Sublimation",
+						"Snow Evaporation",
+						"Water Evaporation Flux Where Ice Free Ocean over Sea",
+						"water evaporation flux from canopy",
+						"ec",
+						"evspsblveg",
+						"water evaporation flux from canopy where land",
+						"Interception Evaporation",
+						"Evaporation from Canopy",
+						"tendency of canopy water amount due to evaporation of intercepted precipitation",
+						"water evaporation flux from soil",
+						"evspsblsoi",
+						"es",
+						"Water Evaporation from Soil",
+						"Bare Soil Evaporation",
+						"surface water evaporation flux",
+						"eow",
+						"water evaporation flux where sea ice",
+						"Open Water Evaporation",
+						"temperature flux due to evaporation expressed as heat flux out of sea water",
+						"hfevapds",
+						"Temperature Flux Due to Evaporation Expressed as Heat Flux out of Sea Water",
+						"water evaporation amount",
+						"upward latent heat flux into air due to transpiration",
+						"transpiration amount",
+						"surface downward mass flux of water due to irrigation",
+						"irrLut",
+						"Irrigation Flux Including any Irrigation for Crops",
+						"Trees",
+						"Pasture",
+						"or Urban Lawns"
+					]
+				},
+				{
+					"text": "mekrou basin",
+					"position": [
+						29,
+						41
+					],
+					"type": "location",
+					"name": "",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Projected Future Changes in Tropical Cyclones Using the CMIP6 HighResMIP Multimodel Ensemble",
+			"annotations": [
+				{
+					"text": "in",
+					"position": [
+						25,
+						27
+					],
+					"type": "location",
+					"name": "India",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Tropical Cyclones Using",
+					"position": [
+						28,
+						51
+					],
+					"type": "target",
+					"name": [
+						"automated tropical cyclone forecasting system storm identifier",
+						"radius of tropical cyclone eye",
+						"tropical cyclone maximum sustained wind speed",
+						"scene type of dvorak tropical cyclone cloud region",
+						"dvorak tropical cyclone current intensity number",
+						"radius of tropical cyclone central dense overcast region",
+						"scene type of dvorak tropical cyclone eye region",
+						"dvorak tropical number"
+					]
+				},
+				{
+					"text": "CMIP6",
+					"position": [
+						56,
+						61
+					],
+					"type": "property",
+					"name": "mip_era",
+					"value": "CMIP6",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "HighResMIP",
+					"position": [
+						62,
+						72
+					],
+					"type": "property",
+					"name": "activity_id",
+					"value": "HighResMIP",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "sunshine hours England UK 2022",
+			"annotations": [
+				{
+					"text": "sunshine",
+					"position": [
+						0,
+						8
+					],
+					"type": "target",
+					"name": [
+						"duration of sunshine"
+					]
+				},
+				{
+					"text": "England UK",
+					"position": [
+						15,
+						25
+					],
+					"type": "location",
+					"name": "England, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "2022",
+					"position": [
+						26,
+						30
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2022-01-01T00:00:00Z",
+						"end": "2022-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "monthly sea level pressure reanalysis",
+			"annotations": [
+				{
+					"text": "monthly",
+					"position": [
+						0,
+						7
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "sea level pressure",
+					"position": [
+						8,
+						26
+					],
+					"type": "target",
+					"name": [
+						"air pressure at mean sea level",
+						"psl",
+						"air pressure at sea level",
+						"Sea Level Pressure",
+						"sea water pressure at sea floor",
+						"pbo",
+						"Sea Water Pressure at Sea Floor",
+						"sea water pressure",
+						"ocean rigid lid pressure",
+						"sea surface height correction due to air pressure at low frequency",
+						"ocean rigid lid pressure expressed as sea surface height above geoid",
+						"tendency of global average sea level change",
+						"sea surface height correction due to air pressure and wind at high frequency",
+						"phase of global average sea level change",
+						"global average sea level change",
+						"sea water pressure at sea water surface",
+						"pso",
+						"Sea Water Pressure at Sea Water Surface",
+						"sea water pressure due to sea water",
+						"amplitude of global average sea level change",
+						"reference pressure",
+						"barometric altitude",
+						"sea water mass",
+						"masso",
+						"Sea Water Mass",
+						"sea water electrical conductivity",
+						"model level number",
+						"model level number at top of atmosphere boundary layer",
+						"model level number at sea floor"
+					]
+				}
+			]
+		},
+		{
+			"query": "near-surface temperature 2022",
+			"annotations": [
+				{
+					"text": "near-surface",
+					"position": [
+						0,
+						12
+					],
+					"type": "target",
+					"name": [
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface direct along beam shortwave flux in air",
+						"surface albedo assuming no snow",
+						"surface roughness length for humidity in air",
+						"surface roughness length for heat in air",
+						"surface upwelling radiance in air reflected by sea water",
+						"surface downwelling photosynthetic photon radiance in sea water",
+						"surface downwelling photosynthetic radiance in sea water",
+						"surface downwelling photosynthetic radiative flux in air",
+						"surface upwelling radiance in air",
+						"surface downwelling radiance in sea water",
+						"surface direct shortwave hemispherical reflectance",
+						"albdirbnd",
+						"Direct Surface Albedo for Each Band",
+						"surface upwelling radiance in air emerging from sea water",
+						"surface upwelling radiance per unit wavelength in air",
+						"surface upwelling spectral radiance in air"
+					]
+				},
+				{
+					"text": "2022",
+					"position": [
+						25,
+						29
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2022-01-01T00:00:00Z",
+						"end": "2022-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "Particle matter cape verde",
+			"annotations": [
+				{
+					"text": "cape",
+					"position": [
+						16,
+						26
+					],
+					"type": "property",
+					"name": "nominal_resolution",
+					"value": "2.5 km",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "sea surface salinity satellite",
+			"annotations": [
+				{
+					"text": "sea surface salinity",
+					"position": [
+						0,
+						20
+					],
+					"type": "target",
+					"name": [
+						"sea surface salinity",
+						"sos",
+						"sosga",
+						"Sea Surface Salinity",
+						"Global Average Sea Surface Salinity",
+						"square of sea surface salinity",
+						"sossq",
+						"Square of Sea Surface Salinity",
+						"halosteric change in sea surface height",
+						"sea ice salinity",
+						"sisali",
+						"Sea Ice Salinity",
+						"sea water sigma t difference",
+						"sea water practical salinity at sea floor",
+						"sea water practical salinity",
+						"sea water sigma t",
+						"steric change in sea surface height",
+						"soil water salinity",
+						"sea water salinity at sea floor",
+						"sob",
+						"Sea Water Salinity at Sea Floor",
+						"sea water salinity",
+						"so",
+						"soga",
+						"Sea Water Salinity",
+						"Global Mean Sea Water Salinity",
+						"sea water reference salinity",
+						"sea water preformed salinity",
+						"surface downwelling radiance per unit wavelength in sea water",
+						"surface downwelling spectral radiance in sea water",
+						"sea water mass",
+						"masso",
+						"Sea Water Mass",
+						"sea water electrical conductivity",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow"
+					]
+				}
+			]
+		},
+		{
+			"query": "Sentinel 5P: Sulphur Dioxide (SO2) Total Column level 2 data",
+			"annotations": [
+				{
+					"text": "Sentinel 5P:",
+					"position": [
+						0,
+						12
+					],
+					"type": "property",
+					"name": "platformname",
+					"value": "Sentinel-5 Precursor",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": [
+						"Dioxide",
+						"SO2",
+						"Total"
+					],
+					"position": [
+						[
+							21,
+							28
+						],
+						[
+							30,
+							33
+						],
+						[
+							35,
+							40
+						]
+					],
+					"type": "target",
+					"name": [
+						"atmosphere moles of sulfur dioxide",
+						"atmosphere mass content of sulfur dioxide",
+						"tendency of atmosphere moles of sulfur dioxide",
+						"atmosphere moles of nitrogen dioxide",
+						"tendency of atmosphere mass content of sulfur dioxide due to dry deposition",
+						"atmosphere mass of carbon dioxide",
+						"co2mass",
+						"Total Atmospheric Mass of CO2",
+						"minus tendency of atmosphere mass content of sulfur dioxide due to wet deposition",
+						"wetso2",
+						"Wet Deposition Rate of SO2",
+						"atmosphere moles of carbon dioxide",
+						"troposphere mole content of sulfur dioxide",
+						"minus tendency of atmosphere mass content of sulfur dioxide due to dry deposition",
+						"dryso2",
+						"Dry Deposition Rate of SO2",
+						"atmosphere moles of chlorine dioxide",
+						"atmosphere moles of methyl hydroperoxide",
+						"atmosphere moles of nitrous oxide",
+						"moles of nitrous oxide in atmosphere",
+						"atmosphere moles of hydrogen peroxide",
+						"atmosphere moles of nitrous acid",
+						"mass fraction of carbon dioxide tracer in air",
+						"co23D",
+						"3D-Field of Transported CO2",
+						"mass fraction of carbon dioxide in air",
+						"mass fraction of pm2p5 sulfate dry aerosol particles in air",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from waste treatment and disposal",
+						"mass fraction of pm2p5 sea salt dry aerosol particles in air"
+					]
+				},
+				{
+					"text": "2",
+					"position": [
+						54,
+						55
+					],
+					"type": "property",
+					"name": "",
+					"value": 2,
+					"value_type": "integer",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "shortwave radiation scotland",
+			"annotations": [
+				{
+					"text": "radiation",
+					"position": [
+						10,
+						19
+					],
+					"type": "target",
+					"name": [
+						"integral wrt time of radioactivity concentration of 246Cm in air",
+						"integral wrt time of radioactivity concentration of 244Cm in air",
+						"radioactivity concentration of 246Cm in air",
+						"integral wrt time of radioactivity concentration of 245Cm in air",
+						"integral wrt time of radioactivity concentration of 250Cm in air",
+						"integral wrt time of radioactivity concentration of 242Cm in air",
+						"integral wrt time of radioactivity concentration of 85mKr in air",
+						"radioactivity concentration of 250Cm in air",
+						"integral wrt time of radioactivity concentration of 241Cm in air",
+						"integral wrt time of radioactivity concentration of 248Cm in air",
+						"radioactivity concentration of 241Cm in air",
+						"integral wrt time of radioactivity concentration of 83mKr in air",
+						"integral wrt time of radioactivity concentration of 247Cm in air",
+						"integral wrt time of radioactivity concentration of 249Cm in air",
+						"radioactivity concentration of 245Cm in air"
+					]
+				},
+				{
+					"text": "scotland",
+					"position": [
+						20,
+						28
+					],
+					"type": "location",
+					"name": "Scotland, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Tanzania surface temperature data over 40 years",
+			"annotations": [
+				{
+					"text": "Tanzania",
+					"position": [
+						0,
+						8
+					],
+					"type": "location",
+					"name": "Tanzania",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "surface temperature",
+					"position": [
+						9,
+						28
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"surface radioactivity content of 130mI",
+						"surface radioactivity content of 230Th",
+						"surface radioactivity content of 134mI",
+						"surface radioactivity content of 133mI",
+						"surface radioactivity content of 116mIn",
+						"surface radioactivity content of 228Th",
+						"surface radioactivity content of 232Th",
+						"surface radioactivity content of 227Th",
+						"surface radioactivity content of 230U",
+						"surface radioactivity content of 152mPm",
+						"surface radioactivity content of 233Th",
+						"surface radioactivity content of 229Th",
+						"surface radioactivity content of 235U",
+						"surface radioactivity content of 132I",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance"
+					]
+				},
+				{
+					"text": "40 years",
+					"position": [
+						39,
+						47
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				}
+			]
+		},
+		{
+			"query": "temperature anomalies 1961-1990 and europe",
+			"annotations": [
+				{
+					"text": "temperature",
+					"position": [
+						0,
+						11
+					],
+					"type": "target",
+					"name": [
+						"brightness temperature",
+						"wet bulb temperature",
+						"temperature in ground",
+						"brightness temperature anomaly",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"number of days with air temperature below threshold",
+						"physiological equivalent temperature",
+						"virtual temperature",
+						"number of days with air temperature above threshold",
+						"freezing temperature of sea water",
+						"perceived temperature",
+						"brightness temperature at cloud top",
+						"air equivalent temperature",
+						"equivalent temperature"
+					]
+				},
+				{
+					"text": "1961-1990",
+					"position": [
+						22,
+						31
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1961-01-01T00:00:00Z",
+						"end": "1991-01-01T00:00:00Z"
+					}
+				},
+				{
+					"text": "europe",
+					"position": [
+						36,
+						42
+					],
+					"type": "location",
+					"name": "Boulevard D'europe, Gatineau, Quebec",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "uk climate ground wind strength and direction historical records",
+			"annotations": [
+				{
+					"text": "uk",
+					"position": [
+						0,
+						2
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": [
+						"wind strength",
+						"direction"
+					],
+					"position": [
+						[
+							18,
+							31
+						],
+						[
+							36,
+							45
+						]
+					],
+					"type": "target",
+					"name": [
+						"wind gust from direction",
+						"wind to direction",
+						"wind from direction",
+						"probability distribution of wind from direction over time",
+						"sea surface wind wave to direction",
+						"direction of wind wave velocity",
+						"northward wind shear",
+						"northward derivative of wind from direction",
+						"eastward wind shear",
+						"sea surface wind wave from direction",
+						"eastward derivative of wind from direction",
+						"sea surface wind wave from direction at variance spectral density maximum",
+						"upward derivative of wind from direction",
+						"tendency of northward wind",
+						"to direction of air velocity relative to sea water",
+						"to direction of surface downward stress",
+						"shear strength of soil",
+						"sea surface wave to direction",
+						"sea surface wave from direction",
+						"sea water velocity to direction at sea floor",
+						"sea water velocity to direction",
+						"sea water to direction",
+						"direction of sea water velocity"
+					]
+				}
+			]
+		},
+		{
+			"query": "WCRP CMIP5: Beijing Climate Center (BCC) bcc-csm1-1 model output for the rcp85 experiment",
+			"annotations": [
+				{
+					"text": [
+						"WCRP CMIP5:",
+						"Climate"
+					],
+					"position": [
+						[
+							0,
+							11
+						],
+						[
+							20,
+							27
+						]
+					],
+					"type": "target",
+					"name": [
+						"wet bulb potential temperature",
+						"wbptemp",
+						"Wet Bulb Potential Temperature",
+						"tendency of air temperature due to stratiform precipitation",
+						"tendency of air temperature due to large scale precipitation",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation"
+					]
+				},
+				{
+					"text": "Beijing",
+					"position": [
+						12,
+						19
+					],
+					"type": "location",
+					"name": "Beijing, China",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "BCC",
+					"position": [
+						36,
+						39
+					],
+					"type": "property",
+					"name": "experiment_id",
+					"value": "ssp370SST-lowBC",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "1-1",
+					"position": [
+						46,
+						49
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2024-01-01T00:00:00Z",
+						"end": "2024-01-01T11:59:59Z"
+					}
+				},
+				{
+					"text": [
+						"output",
+						"rcp85 experiment"
+					],
+					"position": [
+						[
+							58,
+							64
+						],
+						[
+							73,
+							89
+						]
+					],
+					"type": "property",
+					"name": "experiment_id",
+					"value": "ssp585",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "monthly precipitation 1997-2011",
+			"annotations": [
+				{
+					"text": "precipitation",
+					"position": [
+						8,
+						21
+					],
+					"type": "target",
+					"name": [
+						"precipitation amount",
+						"stratiform precipitation amount",
+						"large scale precipitation amount",
+						"stratiform precipitation flux",
+						"large scale precipitation flux",
+						"stratiform rainfall amount",
+						"large scale rainfall amount",
+						"solid precipitation flux",
+						"stratiform rainfall rate",
+						"large scale rainfall rate",
+						"convective precipitation amount",
+						"lwe stratiform precipitation rate",
+						"lwe large scale precipitation rate",
+						"tendency of specific humidity due to stratiform precipitation",
+						"tendency of specific humidity due to large scale precipitation",
+						"rainfall amount",
+						"stratiform graupel fall amount",
+						"solid precipitation flux containing single 2H",
+						"prsn2h",
+						"Precipitation Flux of Snow and Ice Containing Deuterium (1H 2H O)",
+						"tendency of air temperature due to stratiform precipitation",
+						"tendency of air temperature due to large scale precipitation",
+						"convective precipitation flux",
+						"prc",
+						"Convective Precipitation",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation"
+					]
+				},
+				{
+					"text": "1997-2011",
+					"position": [
+						22,
+						31
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1997-01-01T00:00:00Z",
+						"end": "2012-01-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "continuous flow mass spectrometer",
+			"annotations": [
+				{
+					"text": "flow",
+					"position": [
+						11,
+						15
+					],
+					"type": "target",
+					"name": [
+						"water volume transport in river channel"
+					]
+				},
+				{
+					"text": "mass",
+					"position": [
+						16,
+						20
+					],
+					"type": "location",
+					"name": "Massachusetts, United States",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "daily temperature 2020 stornoway",
+			"annotations": [
+				{
+					"text": "temperature",
+					"position": [
+						6,
+						17
+					],
+					"type": "target",
+					"name": [
+						"brightness temperature",
+						"wet bulb temperature",
+						"temperature in ground",
+						"brightness temperature anomaly",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"number of days with air temperature below threshold",
+						"physiological equivalent temperature",
+						"virtual temperature",
+						"number of days with air temperature above threshold",
+						"freezing temperature of sea water",
+						"perceived temperature",
+						"brightness temperature at cloud top",
+						"air equivalent temperature",
+						"equivalent temperature"
+					]
+				},
+				{
+					"text": "2020",
+					"position": [
+						18,
+						22
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2020-01-01T00:00:00Z",
+						"end": "2020-12-31T11:59:59Z"
+					}
+				},
+				{
+					"text": "stornoway",
+					"position": [
+						23,
+						32
+					],
+					"type": "location",
+					"name": "Stornoway, Stornoway; Le Granit, Quebec (Village)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "daily precipitation CNRM CMIP6 highresSST-present",
+			"annotations": [
+				{
+					"text": "daily precipitation CNRM",
+					"position": [
+						0,
+						24
+					],
+					"type": "target",
+					"name": [
+						"precipitation flux",
+						"prhmax",
+						"pr",
+						"prCrop",
+						"Maximum Hourly Precipitation Rate",
+						"Precipitation",
+						"Precipitation over Crop Tile",
+						"number of days with lwe thickness of precipitation amount above threshold",
+						"mass fraction of liquid precipitation in air",
+						"mass fraction of rain and drizzle in air",
+						"mass fraction of rain in air",
+						"spell length of days with lwe thickness of precipitation amount above threshold",
+						"spell length of days with lwe thickness of precipitation amount below threshold",
+						"convective rainfall rate",
+						"precipitation amount",
+						"rainfall rate",
+						"convective rainfall amount",
+						"stratiform precipitation amount",
+						"large scale precipitation amount",
+						"stratiform precipitation flux",
+						"large scale precipitation flux",
+						"stratiform rainfall amount",
+						"large scale rainfall amount",
+						"solid precipitation flux",
+						"stratiform rainfall rate",
+						"large scale rainfall rate",
+						"convective precipitation amount",
+						"lwe stratiform precipitation rate",
+						"lwe large scale precipitation rate",
+						"tendency of specific humidity due to stratiform precipitation",
+						"tendency of specific humidity due to large scale precipitation",
+						"rainfall amount",
+						"stratiform graupel fall amount",
+						"solid precipitation flux containing single 2H",
+						"prsn2h",
+						"Precipitation Flux of Snow and Ice Containing Deuterium (1H 2H O)"
+					]
+				},
+				{
+					"text": "CMIP6",
+					"position": [
+						25,
+						30
+					],
+					"type": "property",
+					"name": "mip_era",
+					"value": "CMIP6",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "daily wet bulb temperatures england",
+			"annotations": [
+				{
+					"text": "daily",
+					"position": [
+						0,
+						5
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "bulb temperatures",
+					"position": [
+						10,
+						27
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"wet bulb potential temperature",
+						"wbptemp",
+						"Wet Bulb Potential Temperature",
+						"brightness temperature",
+						"brightness temperature at cloud top",
+						"tropical cyclone eye brightness temperature",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"brightness temperature anomaly",
+						"temperature in ground",
+						"tendency of air temperature due to model physics",
+						"tntmp",
+						"Tendency of Air Temperature Due to Model Physics",
+						"perceived temperature",
+						"soil temperature",
+						"tsl",
+						"Temperature of Soil",
+						"surface brightness temperature",
+						"tendency of air temperature due to convection",
+						"tntc",
+						"Tendency of Air Temperature Due to Convection",
+						"tropopause air temperature",
+						"tatp",
+						"Tropopause Air Temperature"
+					]
+				},
+				{
+					"text": "england",
+					"position": [
+						28,
+						35
+					],
+					"type": "location",
+					"name": "England, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "gridded high resolution rainfall time series data",
+			"annotations": [
+				{
+					"text": [
+						"high resolution",
+						"data"
+					],
+					"position": [
+						[
+							8,
+							23
+						],
+						[
+							45,
+							49
+						]
+					],
+					"type": "property",
+					"name": "activity_id",
+					"value": "HighResMIP",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "rainfall time series",
+					"position": [
+						24,
+						44
+					],
+					"type": "target",
+					"name": [
+						"rainfall rate",
+						"convective rainfall rate",
+						"temperature flux due to rainfall expressed as heat flux into sea water",
+						"hfrainds",
+						"Temperature Flux Due to Rainfall Expressed as Heat Flux into Sea Water",
+						"rainfall amount",
+						"rainfall flux",
+						"prra",
+						"prraIs",
+						"sipr",
+						"Rainfall Flux",
+						"Ice Sheet Rainfall Rate",
+						"Rainfall Rate over Sea Ice",
+						"convective rainfall amount",
+						"convective rainfall flux",
+						"prrc",
+						"prcprof",
+						"Convective Rainfall Rate",
+						"Convective Rainfall Flux",
+						"stratiform rainfall rate",
+						"large scale rainfall rate",
+						"tendency of specific humidity due to stratiform cloud and precipitation",
+						"tnhusscp",
+						"Tendency of Specific Humidity Due to Stratiform Clouds and Precipitation",
+						"mass fraction of rainfall falling onto surface snow",
+						"prrsn",
+						"Fraction of Rainfall on Snow",
+						"tendency of specific humidity due to stratiform precipitation",
+						"tendency of specific humidity due to large scale precipitation",
+						"tendency of thermal energy content of surface snow due to rainfall temperature excess above freezing",
+						"hfrs",
+						"Heat Transferred to Snowpack by Rainfall",
+						"tendency of air temperature due to stratiform precipitation",
+						"tendency of air temperature due to large scale precipitation",
+						"convective precipitation rate",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation",
+						"thickness of rainfall amount",
+						"precipitation amount",
+						"thickness of convective rainfall amount",
+						"stratiform rainfall amount",
+						"large scale rainfall amount",
+						"thickness of stratiform rainfall amount",
+						"thickness of large scale rainfall amount"
+					]
+				}
+			]
+		},
+		{
+			"query": "met office gridded land surface climate daily temperature",
+			"annotations": [
+				{
+					"text": "land surface climate",
+					"position": [
+						19,
+						39
+					],
+					"type": "target",
+					"name": [
+						"land ice temperature",
+						"land surface liquid water amount",
+						"sw",
+						"Surface Water Storage",
+						"change over time in land surface liquid water amount",
+						"temperature in ground",
+						"land ice sigma coordinate",
+						"land ice surface upward velocity",
+						"zvelsurf",
+						"Upward Component of Land-Ice Surface Velocity",
+						"land ice lwe surface specific mass balance rate",
+						"land ice lwe surface specific mass balance",
+						"number of days with surface temperature below threshold",
+						"surface specific humidity",
+						"surface temperature",
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns",
+						"surface temperature where land",
+						"surface temperature where open sea",
+						"surface temperature where snow",
+						"Surface Radiative Temperature",
+						"Temperature of Bare Soil",
+						"Surface Temperature on Landuse Tile",
+						"Surface Temperature Where Land or Sea Ice",
+						"Ice Sheet Surface Temperature",
+						"Surface Temperature",
+						"Land Surface Temperature",
+						"Snow Surface Temperature",
+						"land ice surface specific mass balance rate",
+						"land ice surface specific mass balance",
+						"surface downward heat flux in air",
+						"hfdsl",
+						"Downward Heat Flux at Land Surface",
+						"surface roughness length",
+						"surface roughness length for humidity in air",
+						"land ice basal temperature",
+						"litempbotgr",
+						"litempbotfl",
+						"Basal Temperature of Grounded Ice Sheet",
+						"Basal Temperature of Floating Ice Shelf",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance",
+						"surface downwelling photosynthetic photon flux in air"
+					]
+				}
+			]
+		},
+		{
+			"query": "Planetary Boundary Layer in northholt",
+			"annotations": [
+				{
+					"text": "Boundary Layer",
+					"position": [
+						10,
+						24
+					],
+					"type": "target",
+					"name": [
+						"atmosphere boundary layer thickness",
+						"bldep",
+						"zmla",
+						"maxpblz",
+						"minpblz",
+						"Boundary Layer Depth",
+						"Height of Boundary Layer",
+						"Maximum PBL Height",
+						"Minimum PBL Height",
+						"altitude at top of atmosphere boundary layer defined by ambient aerosol particles backwards scattering by ranging instrument",
+						"kinetic energy dissipation in atmosphere boundary layer",
+						"dissipation in atmosphere boundary layer",
+						"tendency of air temperature due to boundary layer mixing",
+						"tntpbl",
+						"Tendency of Air Temperature Due to Boundary Layer Mixing",
+						"surface downward eastward stress due to boundary layer mixing",
+						"tauupbl",
+						"Eastward Surface Stress from Planetary Boundary Layer Scheme",
+						"surface downward northward stress due to boundary layer mixing",
+						"tauvpbl",
+						"Northward Surface Stress from Planetary Boundary Layer Scheme",
+						"model level number at top of atmosphere boundary layer",
+						"altitude at top of atmosphere mixed layer defined by ambient aerosol particles backwards scattering by ranging instrument",
+						"tendency of specific humidity due to boundary layer mixing",
+						"tnhuspbl",
+						"Tendency of Specific Humidity Due to Boundary Layer Mixing",
+						"tendency of specific humidity due to stratiform cloud and precipitation and boundary layer mixing",
+						"tnhusscpbl",
+						"Tendency of Specific Humidity Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"surface drag coefficient in air",
+						"atmosphere surface drag coefficient",
+						"tendency of mass fraction of stratiform cloud condensed water in air due to boundary layer mixing",
+						"potential vorticity of atmosphere layer",
+						"surface drag coefficient for heat in air",
+						"atmosphere surface drag coefficient of heat",
+						"kinetic energy content of atmosphere layer",
+						"ocean mixed layer thickness",
+						"permafrost layer thickness",
+						"tpf",
+						"Permafrost Layer Thickness",
+						"thickness of liquid water cloud",
+						"potential energy content of atmosphere layer"
+					]
+				},
+				{
+					"text": "in",
+					"position": [
+						25,
+						27
+					],
+					"type": "location",
+					"name": "India",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "northholt",
+					"position": [
+						28,
+						37
+					],
+					"type": "location",
+					"name": "",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "climate extremes (25km) over UK, 1961-2100",
+			"annotations": [
+				{
+					"text": "climate extremes",
+					"position": [
+						0,
+						16
+					],
+					"type": "target",
+					"name": [
+						"convective rainfall rate",
+						"modified fosberg fire weather index",
+						"tendency of air temperature due to stratiform precipitation",
+						"tendency of air temperature due to large scale precipitation",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation"
+					]
+				},
+				{
+					"text": "25km",
+					"position": [
+						18,
+						22
+					],
+					"type": "property",
+					"name": "nominal_resolution",
+					"value": "25 km",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "UK",
+					"position": [
+						29,
+						31
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "1961-2100",
+					"position": [
+						30,
+						39
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1961-01-01T00:00:00Z",
+						"end": "2101-01-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "cmip6 surface temperature picontrol",
+			"annotations": [
+				{
+					"text": "cmip6",
+					"position": [
+						0,
+						5
+					],
+					"type": "property",
+					"name": "mip_era",
+					"value": "CMIP6",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "surface temperature picontrol",
+					"position": [
+						6,
+						35
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"wet bulb potential temperature",
+						"wbptemp",
+						"Wet Bulb Potential Temperature",
+						"surface radioactivity content of 142mPr",
+						"surface radioactivity content of 144mPr",
+						"surface radioactivity content of 240mNp",
+						"surface radioactivity content of 253Cf",
+						"surface radioactivity content of 236mNp",
+						"surface radioactivity content of 99mTc",
+						"surface radioactivity content of 235Np",
+						"surface radioactivity content of 152mPm",
+						"surface radioactivity content of 148mPm",
+						"surface radioactivity content of 102mTc",
+						"surface radioactivity content of 250Cf",
+						"surface radioactivity content of 252Cf",
+						"surface radioactivity content of 101Tc",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance"
+					]
+				}
+			]
+		},
+		{
+			"query": "Daily Maximum Near-Surface Air Temperature",
+			"annotations": [
+				{
+					"text": "Daily",
+					"position": [
+						0,
+						5
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "Near-Surface Air Temperature",
+					"position": [
+						14,
+						42
+					],
+					"type": "target",
+					"name": [
+						"sea surface skin temperature",
+						"temperature difference between ambient air and air lifted adiabatically from the surface",
+						"temperature in ground",
+						"sea surface subskin temperature",
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature",
+						"apparent air temperature",
+						"sea surface temperature",
+						"tos",
+						"tosga",
+						"Sea Surface Temperature",
+						"Global Average Sea Surface Temperature",
+						"difference between sea surface temperature and air temperature",
+						"perceived temperature",
+						"heat index of air temperature",
+						"surface temperature",
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns",
+						"surface temperature where land",
+						"surface temperature where open sea",
+						"surface temperature where snow",
+						"Surface Radiative Temperature",
+						"Temperature of Bare Soil",
+						"Surface Temperature on Landuse Tile",
+						"Surface Temperature Where Land or Sea Ice",
+						"Ice Sheet Surface Temperature",
+						"Surface Temperature",
+						"Land Surface Temperature",
+						"Snow Surface Temperature",
+						"sea surface foundation temperature",
+						"square of sea surface temperature",
+						"tossq",
+						"Square of Sea Surface Temperature",
+						"square of air temperature",
+						"t2",
+						"Mean-Squared Air Temperature",
+						"number of days with surface temperature below threshold",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface direct along beam shortwave flux in air",
+						"surface albedo assuming no snow",
+						"surface roughness length for humidity in air"
+					]
+				}
+			]
+		},
+		{
+			"query": "Daily MODIS (Moderate Imaging Spectroradiometer) derived cloud droplet number concentration global dataset for",
+			"annotations": [
+				{
+					"text": "Daily",
+					"position": [
+						0,
+						5
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": [
+						"Spectroradiometer",
+						"derived cloud"
+					],
+					"position": [
+						[
+							30,
+							47
+						],
+						[
+							49,
+							62
+						]
+					],
+					"type": "target",
+					"name": [
+						"stratiform cloud longwave emissivity",
+						"dems",
+						"Stratiform Cloud Emissivity",
+						"atmosphere optical thickness due to stratiform cloud",
+						"dtaus",
+						"Stratiform Cloud Optical Depth",
+						"height at effective cloud top defined by infrared radiation",
+						"stratosphere optical thickness due to volcanic ambient aerosol particles",
+						"aod550volso4",
+						"Aerosol Optical Depth at 550nm Due to Stratospheric Volcanic Aerosols",
+						"pressure at effective cloud top defined by infrared radiation",
+						"air temperature at effective cloud top defined by infrared radiation",
+						"atmosphere optical thickness due to sulfate ambient aerosol particles",
+						"od550so4",
+						"Sulfate Aerosol Optical Depth at 550nm",
+						"stratosphere optical thickness due to ambient aerosol particles",
+						"od550aerso",
+						"Stratospheric Optical Depth at 550nm (All Aerosols) 2D-Field (Stratosphere Only)",
+						"stratosphere optical thickness due to sulfate ambient aerosol particles",
+						"od550so4so",
+						"Stratospheric Optical Depth at 550nm (Sulphate Only) 2D-Field (Stratosphere Only)",
+						"atmosphere optical thickness due to cloud",
+						"cod",
+						"Cloud Optical Depth",
+						"cloud albedo",
+						"albisccp",
+						"ISCCP Mean Cloud Albedo",
+						"convective cloud longwave emissivity",
+						"demc",
+						"Convective Cloud Emissivity",
+						"atmosphere optical thickness due to ambient aerosol particles",
+						"od440aer",
+						"od550aer",
+						"od870aer",
+						"od550csaer",
+						"atmosphere optical thickness due to ambient aerosol",
+						"atmosphere optical thickness due to aerosol",
+						"Ambient Aerosol Optical Thickness at 440nm",
+						"Ambient Aerosol Optical Thickness at 550nm",
+						"Ambient Aerosol Optical Depth at 870nm",
+						"Ambient Aerosol Optical Thickness at 550nm",
+						"angstrom exponent of ambient aerosol in air",
+						"aerosol angstrom exponent",
+						"altitude at top of atmosphere mixed layer defined by ambient aerosol particles backwards scattering by ranging instrument",
+						"sensor band central radiation wavelength",
+						"spectral width of radio wave in air scattered by air",
+						"sensor band central radiation frequency",
+						"sensor band central radiation wavenumber",
+						"solar irradiance per unit wavelength"
+					]
+				}
+			]
+		},
+		{
+			"query": "geostrophic current velocity",
+			"annotations": [
+				{
+					"text": "current velocity",
+					"position": [
+						12,
+						28
+					],
+					"type": "target",
+					"name": [
+						"indicative error from multibeam acoustic doppler velocity profiler in sea water",
+						"sea water speed",
+						"speed of sound in sea water",
+						"northward sea water velocity",
+						"northward sea water velocity at sea floor",
+						"sea surface wave stokes drift to direction",
+						"barotropic northward sea water velocity",
+						"surface sea water y velocity",
+						"baroclinic northward sea water velocity",
+						"sea surface wave stokes drift northward velocity",
+						"radial sea water velocity away from instrument",
+						"sea water speed at sea floor",
+						"sea water y velocity",
+						"vo",
+						"y sea water velocity",
+						"Sea Water Y Velocity",
+						"upward sea water velocity",
+						"wo",
+						"Sea Water Vertical Velocity",
+						"eastward sea water velocity at sea floor",
+						"speed of sound in air",
+						"eastward sea water velocity",
+						"barotropic sea water y velocity",
+						"baroclinic eastward sea water velocity",
+						"barotropic eastward sea water velocity"
+					]
+				}
+			]
+		},
+		{
+			"query": "Limpopo province Maximum daily temperatures temperatures",
+			"annotations": [
+				{
+					"text": "province",
+					"position": [
+						8,
+						16
+					],
+					"type": "location",
+					"name": "Shandong, China",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Maximum daily temperatures",
+					"position": [
+						17,
+						43
+					],
+					"type": "target",
+					"name": [
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature",
+						"spell length of days with air temperature above threshold",
+						"number of days with air temperature above threshold",
+						"temperature in ground",
+						"relative humidity",
+						"hur",
+						"hursmax",
+						"hursmin",
+						"hursminCrop",
+						"hurs",
+						"Relative Humidity",
+						"Daily Maximum Near-Surface Relative Humidity",
+						"Daily Minimum Near-Surface Relative Humidity",
+						"Daily Minimum Near-Surface Relative Humidity over Crop Tile",
+						"Near-Surface Relative Humidity",
+						"spell length of days with air temperature below threshold",
+						"wet bulb temperature",
+						"number of days with air temperature below threshold",
+						"sea surface foundation temperature",
+						"brightness temperature at cloud top",
+						"number of days with surface temperature below threshold",
+						"tropical cyclone eye brightness temperature",
+						"surface temperature",
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns",
+						"surface temperature where land",
+						"surface temperature where open sea",
+						"surface temperature where snow",
+						"Surface Radiative Temperature",
+						"Temperature of Bare Soil",
+						"Surface Temperature on Landuse Tile",
+						"Surface Temperature Where Land or Sea Ice",
+						"Ice Sheet Surface Temperature",
+						"Surface Temperature",
+						"Land Surface Temperature",
+						"Snow Surface Temperature",
+						"toa brightness temperature assuming clear sky",
+						"dew point temperature",
+						"tdps",
+						"2m Dewpoint Temperature",
+						"sea surface wave energy at variance spectral density maximum",
+						"sea surface wind wave energy at variance spectral density maximum",
+						"sea surface skin temperature",
+						"square of air temperature",
+						"t2",
+						"Mean-Squared Air Temperature"
+					]
+				}
+			]
+		},
+		{
+			"query": "maximum and minimum daily temperature",
+			"annotations": [
+				{
+					"text": "minimum daily temperature",
+					"position": [
+						12,
+						37
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"wind chill of air temperature",
+						"brightness temperature",
+						"temperature in ground",
+						"brightness temperature anomaly",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"number of days with air temperature below threshold",
+						"physiological equivalent temperature",
+						"virtual temperature",
+						"number of days with air temperature above threshold",
+						"freezing temperature of sea water",
+						"perceived temperature",
+						"brightness temperature at cloud top",
+						"air equivalent temperature",
+						"equivalent temperature"
+					]
+				}
+			]
+		},
+		{
+			"query": "met office specification cambell-stokes sunshine recorder",
+			"annotations": [
+				{
+					"text": "sunshine",
+					"position": [
+						40,
+						48
+					],
+					"type": "target",
+					"name": [
+						"duration of sunshine"
+					]
+				}
+			]
+		},
+		{
+			"query": "met office wind data uk arthur's seat",
+			"annotations": [
+				{
+					"text": "met office",
+					"position": [
+						0,
+						10
+					],
+					"type": "property",
+					"name": "activity_id",
+					"value": "GMMIP",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "wind data",
+					"position": [
+						11,
+						20
+					],
+					"type": "target",
+					"name": [
+						"probability distribution of wind from direction over time",
+						"number of days with wind speed above threshold",
+						"x wind gust",
+						"covariance over longitude of northward wind and air temperature",
+						"y wind gust",
+						"wind gust from direction",
+						"wind to direction",
+						"northward derivative of eastward wind",
+						"eastward derivative of northward wind",
+						"wind from direction",
+						"eastward derivative of eastward wind",
+						"northward derivative of northward wind",
+						"wind speed of gust",
+						"wsgmax100m",
+						"wsgmax10m",
+						"Maximum Wind Speed of Gust at 100m",
+						"Maximum Wind Speed of Gust at 10m",
+						"upward derivative of eastward wind",
+						"upward derivative of northward wind"
+					]
+				},
+				{
+					"text": "uk",
+					"position": [
+						21,
+						23
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "arthur",
+					"position": [
+						24,
+						30
+					],
+					"type": "property",
+					"name": "source_id",
+					"value": "HadGEM3-GC31-LL",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "scotland projection coredex",
+			"annotations": [
+				{
+					"text": "scotland",
+					"position": [
+						0,
+						8
+					],
+					"type": "location",
+					"name": "Scotland, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Projected Max Number of Consecutive Dry Days",
+			"annotations": [
+				{
+					"text": "Max Number",
+					"position": [
+						10,
+						20
+					],
+					"type": "target",
+					"name": [
+						"number concentration of ice crystals in air"
+					]
+				}
+			]
+		},
+		{
+			"query": "Re-analysis CO2 Air-sea flux",
+			"annotations": [
+				{
+					"text": "CO2 Air-sea flux",
+					"position": [
+						12,
+						28
+					],
+					"type": "target",
+					"name": [
+						"surface carbon dioxide natural analogue partial pressure difference between sea water and air",
+						"dpco2nat",
+						"spco2nat",
+						"Natural Delta CO2 Partial Pressure ",
+						"Natural Surface Aqueous Partial Pressure of CO2",
+						"mass flux of carbon into sea water from rivers",
+						"fCLandToOcean",
+						"Lateral Transfer of Carbon out of Grid Cell That Eventually Goes into Ocean",
+						"wind mixing energy flux into sea water",
+						"wind mixing energy flux into ocean",
+						"surface carbon dioxide partial pressure difference between air and sea water",
+						"surface partial pressure of carbon dioxide natural analogue in sea water",
+						"surface carbon dioxide abiotic analogue partial pressure difference between sea water and air",
+						"dpco2abio",
+						"spco2abio",
+						"Abiotic Delta Pco Partial Pressure",
+						"Abiotic Surface Aqueous Partial Pressure of CO2",
+						"surface partial pressure of carbon dioxide in sea water",
+						"spco2",
+						"Surface Aqueous Partial Pressure of CO2",
+						"surface downward mass flux of carbon dioxide abiotic analogue expressed as carbon",
+						"fgco2abio",
+						"Surface Downward Mass Flux of Carbon as Abiotic CO2 [kgC m-2 s-1]",
+						"surface partial pressure of carbon dioxide abiotic analogue in sea water",
+						"partial pressure of carbon dioxide in sea water",
+						"surface carbon dioxide partial pressure difference between sea water and air",
+						"dpco2",
+						"Delta CO2 Partial Pressure",
+						"surface downward mass flux of carbon dioxide natural analogue expressed as carbon",
+						"fgco2nat",
+						"Surface Downward Mass Flux of Carbon as Natural CO2 [kgC m-2 s-1]",
+						"fugacity of carbon dioxide in sea water",
+						"atmosphere downdraft convective mass flux",
+						"mcd",
+						"Downdraft Convective Mass Flux",
+						"atmosphere updraft convective mass flux",
+						"mcu",
+						"Convective Updraft Mass Flux",
+						"atmosphere mass of carbon dioxide",
+						"co2mass",
+						"Total Atmospheric Mass of CO2",
+						"mass fraction of carbon dioxide tracer in air",
+						"co23D",
+						"3D-Field of Transported CO2",
+						"mass fraction of carbon dioxide in air",
+						"surface upward mass flux of carbon dioxide expressed as carbon due to emission from fires",
+						"cTotFireLut",
+						"fFireAll",
+						"Total Carbon Loss from Natural and Managed Fire on Land-Use Tile",
+						"Including Deforestation Fires [kgC m-2 s-1]",
+						"Carbon Mass Flux into Atmosphere Due to CO2 Emission from Fire Including All Sources [kgC m-2 s-1]",
+						"surface frozen carbon dioxide amount"
+					]
+				}
+			]
+		},
+		{
+			"query": "UK Bare Soil Minimum Temperature data",
+			"annotations": [
+				{
+					"text": "UK Bare",
+					"position": [
+						0,
+						7
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Soil Minimum Temperature",
+					"position": [
+						8,
+						32
+					],
+					"type": "target",
+					"name": [
+						"soil temperature",
+						"tsl",
+						"Temperature of Soil",
+						"temperature in ground",
+						"slow soil pool mass content of carbon",
+						"cSoilSlow",
+						"slow soil pool carbon content",
+						"Carbon Mass in Slow Soil Pool",
+						"depth at shallowest isotherm defined by soil temperature",
+						"dmlt",
+						"Depth to Soil Thaw",
+						"medium soil pool mass content of carbon",
+						"cSoilMedium",
+						"medium soil pool carbon content",
+						"Carbon Mass in Medium Soil Pool",
+						"fast soil pool mass content of carbon",
+						"cSoilFast",
+						"fast soil pool carbon content",
+						"Carbon Mass in Fast Soil Pool",
+						"surface temperature",
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns",
+						"surface temperature where land",
+						"surface temperature where open sea",
+						"surface temperature where snow",
+						"Surface Radiative Temperature",
+						"Temperature of Bare Soil",
+						"Surface Temperature on Landuse Tile",
+						"Surface Temperature Where Land or Sea Ice",
+						"Ice Sheet Surface Temperature",
+						"Surface Temperature",
+						"Land Surface Temperature",
+						"Snow Surface Temperature",
+						"minimum mass ratio of water to dry soil for soil viscous flow",
+						"minimum mass ratio of water to dry soil for soil plastic behavior",
+						"soil albedo",
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature",
+						"soil pool carbon decay rate",
+						"tSoilPools",
+						"Turnover Rate of Each Model Soil Carbon Pool",
+						"land ice basal temperature",
+						"litempbotgr",
+						"litempbotfl",
+						"Basal Temperature of Grounded Ice Sheet",
+						"Basal Temperature of Floating Ice Shelf",
+						"temperature at base of ice sheet model",
+						"permafrost layer thickness",
+						"tpf",
+						"Permafrost Layer Thickness",
+						"soil suction at saturation",
+						"soil porosity",
+						"mass content of carbon in vegetation and litter and soil and forestry and agricultural products",
+						"cLand",
+						"Total Carbon in All Terrestrial Carbon Pools",
+						"mass content of nitrogen in vegetation and litter and soil and forestry and agricultural products",
+						"nLand",
+						"Total Nitrogen in All Terrestrial Nitrogen Pools",
+						"soil water salinity"
+					]
+				}
+			]
+		},
+		{
+			"query": "UK temperature maximum observations grid 5km",
+			"annotations": [
+				{
+					"text": "UK",
+					"position": [
+						0,
+						2
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "temperature maximum observations",
+					"position": [
+						3,
+						35
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"brightness temperature",
+						"temperature in ground",
+						"brightness temperature anomaly",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"number of days with air temperature below threshold",
+						"physiological equivalent temperature",
+						"virtual temperature",
+						"number of days with air temperature above threshold",
+						"freezing temperature of sea water",
+						"perceived temperature",
+						"brightness temperature at cloud top",
+						"air equivalent temperature",
+						"equivalent temperature",
+						"sea surface wave energy at variance spectral density maximum",
+						"sea surface wind wave energy at variance spectral density maximum",
+						"spell length of days with air temperature above threshold",
+						"spell length of days with air temperature below threshold",
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature"
+					]
+				},
+				{
+					"text": "5",
+					"position": [
+						41,
+						42
+					],
+					"type": "property",
+					"name": "",
+					"value": 5,
+					"value_type": "integer",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "Wind Speed data on 21st June 2016",
+			"annotations": [
+				{
+					"text": "Wind Speed",
+					"position": [
+						0,
+						10
+					],
+					"type": "target",
+					"name": [
+						"wind speed of gust",
+						"wsgmax100m",
+						"wsgmax10m",
+						"Maximum Wind Speed of Gust at 100m",
+						"Maximum Wind Speed of Gust at 10m",
+						"wind speed",
+						"sfcWindmax",
+						"sfcWind",
+						"Daily Maximum Near-Surface Wind Speed",
+						"Near-Surface Wind Speed",
+						"wind speed shear",
+						"y wind gust",
+						"x wind gust",
+						"wind gust from direction",
+						"tropical cyclone maximum sustained wind speed",
+						"number of days with wind speed above threshold",
+						"storm motion speed",
+						"wind to direction",
+						"speed of sound in air",
+						"tendency of wind speed due to convection",
+						"tendency of wind speed due to gravity wave drag",
+						"sea water speed",
+						"square of eastward wind",
+						"u2",
+						"Mean-Squared Eastward Wind Speed",
+						"speed of sound in sea water",
+						"flood water speed",
+						"sea ice speed",
+						"sispeed",
+						"Sea-Ice Speed",
+						"sea water speed at sea floor",
+						"platform speed wrt ground"
+					]
+				},
+				{
+					"text": "on 21st June 2016",
+					"position": [
+						16,
+						33
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2016-06-21T00:00:00Z",
+						"end": "2016-06-21T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "sudden stratospheric warmings",
+			"annotations": [
+				{
+					"text": "stratospheric warmings",
+					"position": [
+						7,
+						29
+					],
+					"type": "target",
+					"name": [
+						"tropopause adjusted radiative forcing",
+						"tropopause adjusted longwave forcing",
+						"tropopause adjusted shortwave forcing",
+						"tropopause instantaneous longwave forcing",
+						"toa adjusted longwave forcing",
+						"toa adjusted shortwave forcing",
+						"tropopause instantaneous shortwave forcing",
+						"tropopause instantaneous radiative forcing",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation",
+						"toa adjusted radiative forcing",
+						"stratosphere optical thickness due to ambient aerosol particles",
+						"od550aerso",
+						"Stratospheric Optical Depth at 550nm (All Aerosols) 2D-Field (Stratosphere Only)",
+						"toa instantaneous longwave forcing",
+						"lwtoacsaer",
+						"lwtoaasdust",
+						"TOA Clear-Sky longwave Radiative Forcing due to  Aerosols",
+						"TOA All-Sky Longwave Radiative Forcing Due to Dust",
+						"toa instantaneous shortwave forcing",
+						"swtoacsdust",
+						"swtoaasdust",
+						"clear sky  Shortwave flux due to dust at toa",
+						"All-Sky Shortwave Flux Due to Dust at Toa",
+						"tendency of air temperature due to stratiform precipitation",
+						"tendency of air temperature due to large scale precipitation",
+						"stratosphere optical thickness due to sulfate ambient aerosol particles",
+						"od550so4so",
+						"Stratospheric Optical Depth at 550nm (Sulphate Only) 2D-Field (Stratosphere Only)",
+						"age of stratospheric air",
+						"meanage",
+						"Mean Age of Stratospheric Air",
+						"stratosphere optical thickness due to volcanic ambient aerosol particles",
+						"aod550volso4",
+						"Aerosol Optical Depth at 550nm Due to Stratospheric Volcanic Aerosols",
+						"stratiform cloud longwave emissivity",
+						"dems",
+						"Stratiform Cloud Emissivity",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"altitude at top of atmosphere mixed layer defined by ambient aerosol particles backwards scattering by ranging instrument"
+					]
+				}
+			]
+		},
+		{
+			"query": "Plume of time series anomalies for probabilistic projections",
+			"annotations": [
+				{
+					"text": "time series anomalies",
+					"position": [
+						9,
+						30
+					],
+					"type": "target",
+					"name": [
+						"time",
+						"ratio of sea water potential temperature anomaly to relaxation timescale",
+						"tendency of ocean barotropic streamfunction",
+						"tendency of air density"
+					]
+				}
+			]
+		},
+		{
+			"query": "Planetary Boundary Layer in Heathrow",
+			"annotations": [
+				{
+					"text": "Boundary Layer",
+					"position": [
+						10,
+						24
+					],
+					"type": "target",
+					"name": [
+						"atmosphere boundary layer thickness",
+						"bldep",
+						"zmla",
+						"maxpblz",
+						"minpblz",
+						"Boundary Layer Depth",
+						"Height of Boundary Layer",
+						"Maximum PBL Height",
+						"Minimum PBL Height",
+						"altitude at top of atmosphere boundary layer defined by ambient aerosol particles backwards scattering by ranging instrument",
+						"kinetic energy dissipation in atmosphere boundary layer",
+						"dissipation in atmosphere boundary layer",
+						"tendency of air temperature due to boundary layer mixing",
+						"tntpbl",
+						"Tendency of Air Temperature Due to Boundary Layer Mixing",
+						"surface downward eastward stress due to boundary layer mixing",
+						"tauupbl",
+						"Eastward Surface Stress from Planetary Boundary Layer Scheme",
+						"surface downward northward stress due to boundary layer mixing",
+						"tauvpbl",
+						"Northward Surface Stress from Planetary Boundary Layer Scheme",
+						"model level number at top of atmosphere boundary layer",
+						"altitude at top of atmosphere mixed layer defined by ambient aerosol particles backwards scattering by ranging instrument",
+						"tendency of specific humidity due to boundary layer mixing",
+						"tnhuspbl",
+						"Tendency of Specific Humidity Due to Boundary Layer Mixing",
+						"tendency of specific humidity due to stratiform cloud and precipitation and boundary layer mixing",
+						"tnhusscpbl",
+						"Tendency of Specific Humidity Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"surface drag coefficient in air",
+						"atmosphere surface drag coefficient",
+						"tendency of mass fraction of stratiform cloud condensed water in air due to boundary layer mixing",
+						"potential vorticity of atmosphere layer",
+						"surface drag coefficient for heat in air",
+						"atmosphere surface drag coefficient of heat",
+						"kinetic energy content of atmosphere layer",
+						"ocean mixed layer thickness",
+						"permafrost layer thickness",
+						"tpf",
+						"Permafrost Layer Thickness",
+						"thickness of liquid water cloud",
+						"potential energy content of atmosphere layer"
+					]
+				},
+				{
+					"text": "in",
+					"position": [
+						25,
+						27
+					],
+					"type": "location",
+					"name": "India",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Heathrow",
+					"position": [
+						28,
+						36
+					],
+					"type": "location",
+					"name": "Heathrow Private, City Of Ottawa, Ontario",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "mid troposphere temperature",
+			"annotations": [
+				{
+					"text": "troposphere temperature",
+					"position": [
+						4,
+						27
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"wind chill of air temperature",
+						"tendency of troposphere moles of molecular hydrogen",
+						"tendency of moles of molecular hydrogen in troposphere",
+						"tendency of troposphere moles of carbon monoxide",
+						"tendency of moles of carbon monoxide in troposphere",
+						"tendency of troposphere moles of methane",
+						"tendency of moles of methane in troposphere",
+						"tendency of troposphere moles of methyl bromide",
+						"tendency of moles of methyl bromide in troposphere",
+						"tendency of troposphere moles of hcfc22",
+						"tendency of moles of hcfc22 in troposphere",
+						"tendency of troposphere moles of hcc140a",
+						"tendency of moles of hcc140a in troposphere",
+						"tendency of troposphere moles of methyl chloride",
+						"tendency of moles of methyl chloride in troposphere",
+						"tendency of middle atmosphere moles of carbon monoxide",
+						"tendency of moles of carbon monoxide in middle atmosphere",
+						"tendency of middle atmosphere moles of molecular hydrogen",
+						"tendency of moles of molecular hydrogen in middle atmosphere",
+						"tendency of middle atmosphere moles of methane",
+						"tendency of moles of methane in middle atmosphere",
+						"brightness temperature",
+						"temperature in ground",
+						"brightness temperature anomaly",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"number of days with air temperature below threshold",
+						"physiological equivalent temperature"
+					]
+				}
+			]
+		},
+		{
+			"query": "Historic weather 1998 Belfast",
+			"annotations": [
+				{
+					"text": "1998",
+					"position": [
+						17,
+						21
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1998-01-01T00:00:00Z",
+						"end": "1998-12-31T11:59:59Z"
+					}
+				},
+				{
+					"text": "Belfast",
+					"position": [
+						22,
+						29
+					],
+					"type": "location",
+					"name": "Belfast, Nipissing, Ontario (Geographical area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "isostatic change south west England",
+			"annotations": [
+				{
+					"text": "isostatic change",
+					"position": [
+						0,
+						16
+					],
+					"type": "target",
+					"name": [
+						"bedrock altitude change due to isostatic adjustment",
+						"phase of global average sea level change",
+						"tendency of global average sea level change",
+						"global average sea level change",
+						"amplitude of global average sea level change",
+						"thermosteric change in mean sea level",
+						"thermosteric change in sea surface height",
+						"change over time in sea water potential temperature",
+						"change over time in sea water neutral density",
+						"downwelling radiance in sea water",
+						"halosteric change in mean sea level",
+						"global average thermosteric sea level change",
+						"zostoga",
+						"Global Average Thermosteric Sea Level Change",
+						"change over time in sea water specific potential enthalpy",
+						"steric change in mean sea level",
+						"steric change in sea surface height"
+					]
+				},
+				{
+					"text": "south",
+					"position": [
+						17,
+						27
+					],
+					"type": "location",
+					"name": "South Korea",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "England",
+					"position": [
+						28,
+						35
+					],
+					"type": "location",
+					"name": "England, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "atmospheric pressure cambourne",
+			"annotations": [
+				{
+					"text": "atmospheric pressure",
+					"position": [
+						0,
+						20
+					],
+					"type": "target",
+					"name": [
+						"tendency of atmosphere mass content of ozone due to dry deposition into stomata",
+						"tendency of atmosphere moles of water vapor",
+						"tendency of atmosphere mass content of molecular hydrogen due to emission",
+						"tendency of atmosphere mass content of ozone due to dry deposition",
+						"tendency of atmosphere mass content of nitric acid due to dry deposition",
+						"atmosphere moles of nitric acid trihydrate ambient aerosol particles",
+						"atmosphere moles of nitric acid trihydrate ambient aerosol",
+						"atmosphere moles of water vapor",
+						"tendency of atmosphere mass content of nitrogen dioxide due to emission",
+						"tendency of atmosphere mass content of organic peroxides due to dry deposition",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission",
+						"tendency of atmosphere moles of hypochlorous acid",
+						"tendency of atmosphere moles of nitric acid trihydrate ambient aerosol particles",
+						"tendency of atmosphere moles of nitric acid trihydrate ambient aerosol",
+						"tendency of atmosphere moles of ozone",
+						"tendency of atmosphere moles of nitrogen dioxide",
+						"tendency of atmosphere enthalpy content due to advection",
+						"atmosphere heat diffusivity",
+						"edt",
+						"Eddy Diffusivity Coefficient for Temperature",
+						"atmosphere eastward stress due to gravity wave drag",
+						"xgwdparam",
+						"Eastward Gravity Wave Drag",
+						"air density",
+						"atmosphere momentum diffusivity",
+						"evu",
+						"Eddy Viscosity Coefficient for Momentum",
+						"surface roughness length"
+					]
+				},
+				{
+					"text": "cambourne",
+					"position": [
+						21,
+						30
+					],
+					"type": "property",
+					"name": "source_id",
+					"value": "CAMS-CSM1-0",
+					"value_type": "string",
+					"operation": "eq"
+				}
+			]
+		},
+		{
+			"query": "blended significant wave heigth",
+			"annotations": [
+				{
+					"text": "blended significant wave",
+					"position": [
+						0,
+						24
+					],
+					"type": "target",
+					"name": [
+						"sea surface wave significant period",
+						"sea surface infragravity wave significant height",
+						"sea surface wave significant height",
+						"significant height of wind and swell waves",
+						"sea surface swell wave significant height",
+						"significant height of swell waves",
+						"sea surface wind wave significant height",
+						"significant height of wind waves",
+						"sea surface tertiary swell wave significant height",
+						"sea surface primary swell wave significant height",
+						"sea surface secondary swell wave significant height",
+						"sea surface wave variance spectral density",
+						"sea surface wave directional variance spectral density",
+						"beam consistency indicator from multibeam acoustic doppler velocity profiler in sea water",
+						"sea surface wave mean wavelength from variance spectral density inverse wavenumber moment",
+						"sea surface swell wave period at variance spectral density maximum",
+						"sea surface wave directional spread at variance spectral density maximum",
+						"proportion of acceptable signal returns from acoustic instrument in sea water",
+						"sea surface wind wave period at variance spectral density maximum",
+						"sea surface primary swell wave period at variance spectral density maximum",
+						"sea surface wind wave energy at variance spectral density maximum",
+						"sea surface wave period at variance spectral density maximum",
+						"wave frequency",
+						"sea surface wave frequency"
+					]
+				}
+			]
+		},
+		{
+			"query": "Berkeley Earth Surface Temperatures",
+			"annotations": [
+				{
+					"text": "Berkeley",
+					"position": [
+						0,
+						8
+					],
+					"type": "location",
+					"name": "Berkeley, Grey, Ontario (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Surface Temperatures",
+					"position": [
+						15,
+						35
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"surface radioactivity content of 130mI",
+						"surface radioactivity content of 230Th",
+						"surface radioactivity content of 134mI",
+						"surface radioactivity content of 133mI",
+						"surface radioactivity content of 228Th",
+						"surface radioactivity content of 227Th",
+						"surface radioactivity content of 235U",
+						"surface radioactivity content of 116mIn",
+						"surface radioactivity content of 230U",
+						"surface radioactivity content of 226Th",
+						"surface radioactivity content of 128mSb",
+						"surface radioactivity content of 229Th",
+						"surface radioactivity content of 232Th",
+						"surface radioactivity content of 132I",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance"
+					]
+				}
+			]
+		},
+		{
+			"query": "cci monthly land surface temperature",
+			"annotations": [
+				{
+					"text": "monthly",
+					"position": [
+						4,
+						11
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "land surface temperature",
+					"position": [
+						12,
+						36
+					],
+					"type": "target",
+					"name": [
+						"temperature in ground",
+						"soil temperature",
+						"tsl",
+						"Temperature of Soil",
+						"surface temperature",
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns",
+						"surface temperature where land",
+						"surface temperature where open sea",
+						"surface temperature where snow",
+						"Surface Radiative Temperature",
+						"Temperature of Bare Soil",
+						"Surface Temperature on Landuse Tile",
+						"Surface Temperature Where Land or Sea Ice",
+						"Ice Sheet Surface Temperature",
+						"Surface Temperature",
+						"Land Surface Temperature",
+						"Snow Surface Temperature",
+						"land ice temperature",
+						"temperature difference between ambient air and air lifted adiabatically from the surface",
+						"canopy temperature",
+						"tcs",
+						"Vegetation Canopy Temperature",
+						"land ice basal temperature",
+						"litempbotgr",
+						"litempbotfl",
+						"Basal Temperature of Grounded Ice Sheet",
+						"Basal Temperature of Floating Ice Shelf",
+						"sea surface foundation temperature",
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature",
+						"sea surface skin temperature",
+						"number of days with surface temperature below threshold",
+						"sea surface temperature",
+						"tos",
+						"tosga",
+						"Sea Surface Temperature",
+						"Global Average Sea Surface Temperature",
+						"sea surface subskin temperature",
+						"downward heat flux at ground level in soil",
+						"temperature in surface snow",
+						"tsnl",
+						"tsn",
+						"tsnIs",
+						"snow temperature",
+						"Temperature Profile in the Snow",
+						"Snow Internal Temperature",
+						"Ice Sheet Snow Internal Temperature",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance"
+					]
+				}
+			]
+		},
+		{
+			"query": "ch4 anthropogenic emissions",
+			"annotations": [
+				{
+					"text": "ch4",
+					"position": [
+						0,
+						3
+					],
+					"type": "property",
+					"name": "producttype",
+					"value": "L2__CH4",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "anthropogenic emissions",
+					"position": [
+						4,
+						27
+					],
+					"type": "target",
+					"name": [
+						"carbon mass flux into litter and soil due to anthropogenic land use or land cover change",
+						"carbon mass flux into soil and litter due to anthropogenic land use or land cover change",
+						"tendency of atmosphere mass content of carbon dioxide expressed as carbon due to anthropogenic emission",
+						"fAnthDisturb",
+						"fco2antt",
+						"Carbon Mass Flux from Vegetation",
+						"Litter or Soil Pools into the Atmosphere Due to any Human Activity [kgC m-2 s-1]",
+						"Carbon Mass Flux into Atmosphere Due to All Anthropogenic Emissions of CO2 [kgC m-2 s-1]",
+						"surface net upward mass flux of carbon dioxide expressed as carbon due to emission from anthropogenic land use change",
+						"fLuc",
+						"fDeforestToAtmos",
+						"Net Carbon Mass Flux into Atmosphere Due to Land-Use Change [kgC m-2 s-1]",
+						"Deforested Biomass That Goes into Atmosphere as a Result of Anthropogenic Land-Use Change [kgC m-2 s-1]",
+						"carbon mass flux into forestry and agricultural products due to anthropogenic land use or land cover change",
+						"fLulccProductLut",
+						"fDeforestToProduct",
+						"Carbon Harvested Due to Land-Use or Land-Cover Change Process That Enters Anthropogenic Product Pools on Tile",
+						"Deforested Biomass That Goes into Product Pool as a Result of Anthropogenic Land-Use Change",
+						"nitrogen mass flux into forestry and agricultural products due to anthropogenic land use or land cover change",
+						"fNProduct",
+						"Deforested or Harvested Biomass as a Result of Anthropogenic Land-Use or Change",
+						"surface upward heat flux due to anthropogenic energy consumption",
+						"fahLut",
+						"Anthropogenic Heat Flux Generated from non-Renewable Human Primary Energy Consumption",
+						"surface upward mass flux of carbon dioxide expressed as carbon due to emission from fires excluding anthropogenic land use change",
+						"fFire",
+						"Carbon Mass Flux into Atmosphere Due to CO2 Emission from Fire Excluding Land-Use Change [kgC m-2 s-1]",
+						"surface upward mass flux of carbon dioxide expressed as carbon due to anthropogenic land use or land cover change excluding forestry and agricultural products",
+						"fLulccAtmLut",
+						"Carbon Transferred Directly to Atmosphere Due to any Land-Use or Land-Cover Change Activities [kgC m-2 s-1]",
+						"tendency of atmosphere mass content of nitrogen compounds expressed as nitrogen due to anthropogenic emission",
+						"fNAnthDisturb",
+						"Nitrogen Mass Flux out of Land Due to any Human Activity",
+						"atmosphere moles of anthropogenic nmvoc expressed as carbon",
+						"surface upward mass flux of carbon dioxide expressed as carbon due to anthropogenic land use or land cover change",
+						"tendency of atmosphere mass content of alcohols due to emission from savanna and grassland fires",
+						"surface net downward mass flux of carbon dioxide expressed as carbon due to all land processes excluding anthropogenic land use change",
+						"nep",
+						"Net Carbon Mass Flux out of Atmosphere due to Net Ecosystem Productivity on Land [kgC m-2 s-1]",
+						"tendency of atmosphere mass content of organic acids due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of ammonia due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of nitrogen dioxide due to emission",
+						"tendency of atmosphere mass content of carbon dioxide due to emission",
+						"tendency of atmosphere mass content of molecular hydrogen due to emission from forest fires",
+						"tendency of atmosphere mass content of carbon monoxide due to emission from forest fires",
+						"tendency of atmosphere mass content of nitrogen monoxide due to emission from forest fires"
+					]
+				}
+			]
+		},
+		{
+			"query": "boundary layer wind profile capel dewi",
+			"annotations": [
+				{
+					"text": "layer wind profile",
+					"position": [
+						9,
+						27
+					],
+					"type": "target",
+					"name": [
+						"kinetic energy dissipation in atmosphere boundary layer",
+						"dissipation in atmosphere boundary layer",
+						"atmosphere boundary layer thickness",
+						"bldep",
+						"zmla",
+						"maxpblz",
+						"minpblz",
+						"Boundary Layer Depth",
+						"Height of Boundary Layer",
+						"Maximum PBL Height",
+						"Minimum PBL Height",
+						"tendency of air temperature due to boundary layer mixing",
+						"tntpbl",
+						"Tendency of Air Temperature Due to Boundary Layer Mixing",
+						"surface downward northward stress due to boundary layer mixing",
+						"tauvpbl",
+						"Northward Surface Stress from Planetary Boundary Layer Scheme",
+						"air density",
+						"surface downward eastward stress due to boundary layer mixing",
+						"tauupbl",
+						"Eastward Surface Stress from Planetary Boundary Layer Scheme",
+						"tendency of specific humidity due to boundary layer mixing",
+						"tnhuspbl",
+						"Tendency of Specific Humidity Due to Boundary Layer Mixing",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"tendency of dry static energy content of atmosphere layer",
+						"tendency of specific humidity due to stratiform cloud and precipitation and boundary layer mixing",
+						"tnhusscpbl",
+						"Tendency of Specific Humidity Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"altitude at top of atmosphere mixed layer defined by ambient aerosol particles backwards scattering by ranging instrument",
+						"tendency of mass content of water vapor in atmosphere layer due to turbulence",
+						"tendency of water vapor content of atmosphere layer due to turbulence",
+						"dry energy content of atmosphere layer",
+						"horizontal dry energy transport in atmosphere layer",
+						"ocean isopycnal layer thickness diffusivity",
+						"kinetic energy content of atmosphere layer",
+						"ocean mixed layer thickness",
+						"permafrost layer thickness",
+						"tpf",
+						"Permafrost Layer Thickness",
+						"thickness of liquid water cloud",
+						"potential energy content of atmosphere layer"
+					]
+				}
+			]
+		},
+		{
+			"query": "Birmingham UK weather 19th August 1935",
+			"annotations": [
+				{
+					"text": "Birmingham",
+					"position": [
+						0,
+						10
+					],
+					"type": "location",
+					"name": "Birmingham, 9-23-7-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "UK",
+					"position": [
+						11,
+						13
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "19th August 1935",
+					"position": [
+						22,
+						38
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1935-08-19T00:00:00Z",
+						"end": "1935-08-19T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "Downward UV radiation at the surface",
+			"annotations": [
+				{
+					"text": [
+						"UV radiation",
+						"surface"
+					],
+					"position": [
+						[
+							9,
+							21
+						],
+						[
+							29,
+							36
+						]
+					],
+					"type": "target",
+					"name": [
+						"surface upwelling photosynthetic photon flux in air",
+						"surface upwelling radiance per unit wavelength in air",
+						"surface upwelling spectral radiance in air",
+						"surface downwelling photosynthetic photon radiance in sea water",
+						"surface downwelling photosynthetic photon flux in air",
+						"surface downwelling photon spherical irradiance per unit wavelength in sea water",
+						"surface downwelling spectral photon spherical irradiance in sea water",
+						"surface downwelling photosynthetic photon spherical irradiance in sea water",
+						"surface downwelling photosynthetic spherical irradiance in sea water",
+						"surface downwelling photosynthetic photon flux in sea water",
+						"surface upwelling radiance per unit wavelength in air reflected by sea water",
+						"surface upwelling spectral radiance in air reflected by sea water",
+						"surface diffuse downwelling photosynthetic radiative flux in air",
+						"surface downwelling photosynthetic radiance in sea water",
+						"surface upwelling radiance per unit wavelength in sea water",
+						"surface upwelling spectral radiance in sea water",
+						"surface downwelling photon radiance per unit wavelength in sea water",
+						"surface downwelling spectral photon radiance in sea water",
+						"surface downwelling spherical irradiance per unit wavelength in sea water",
+						"surface downwelling spectral spherical irradiance in sea water",
+						"surface downwelling radiance per unit wavelength in sea water",
+						"surface downwelling spectral radiance in sea water",
+						"integral wrt time of radioactivity concentration of 246Cm in air",
+						"integral wrt time of radioactivity concentration of 244Cm in air",
+						"radioactivity concentration of 246Cm in air",
+						"integral wrt time of radioactivity concentration of 245Cm in air",
+						"integral wrt time of radioactivity concentration of 250Cm in air"
+					]
+				},
+				{
+					"text": "at",
+					"position": [
+						22,
+						24
+					],
+					"type": "location",
+					"name": "Austria",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "ERA5 hourly data on pressure levels",
+			"annotations": [
+				{
+					"text": "ERA5",
+					"position": [
+						0,
+						4
+					],
+					"type": "property",
+					"name": "mip_era",
+					"value": "CMIP5",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "hourly",
+					"position": [
+						5,
+						11
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": [
+						"data",
+						"pressure levels"
+					],
+					"position": [
+						[
+							12,
+							16
+						],
+						[
+							20,
+							35
+						]
+					],
+					"type": "target",
+					"name": [
+						"sound pressure level in water",
+						"reference air pressure for atmosphere vertical coordinate",
+						"sound pressure level in air",
+						"air pressure at mean sea level",
+						"psl",
+						"air pressure at sea level",
+						"Sea Level Pressure",
+						"air pressure",
+						"phalf",
+						"pfull",
+						"Pressure on Model Half-Levels",
+						"Pressure at Model Full-Levels",
+						"ocean rigid lid pressure expressed as sea surface height above geoid",
+						"sea water pressure at sea floor",
+						"pbo",
+						"Sea Water Pressure at Sea Floor",
+						"sea water pressure",
+						"reference pressure",
+						"change in energy content of atmosphere layer due to change in sigma coordinate wrt surface pressure",
+						"air pressure at cloud base",
+						"ocean rigid lid pressure",
+						"sound pressure in water",
+						"sound pressure in air",
+						"tendency of air pressure",
+						"air pressure anomaly",
+						"tropopause air pressure",
+						"ptp",
+						"Tropopause Air Pressure",
+						"sea water pressure due to sea water",
+						"water vapor partial pressure in air",
+						"water vapor pressure",
+						"air pressure at freezing level"
+					]
+				},
+				{
+					"text": "on",
+					"position": [
+						17,
+						19
+					],
+					"type": "location",
+					"name": "Ontario, Canada",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "Monthly global surface ozone concentration and ozone dry deposition flux fields from models",
+			"annotations": [
+				{
+					"text": "Monthly",
+					"position": [
+						0,
+						7
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "surface ozone concentration",
+					"position": [
+						15,
+						42
+					],
+					"type": "target",
+					"name": [
+						"surface radioactivity content of 15O",
+						"surface radioactivity content",
+						"surface radioactivity content of 230Th",
+						"surface radioactivity content of 156Eu",
+						"surface radioactivity content of 232Th",
+						"surface radioactivity content of 150Pm",
+						"surface radioactivity content of 156Sm",
+						"surface radioactivity content of 233Th",
+						"surface radioactivity content of 206Hg",
+						"surface radioactivity content of 159Eu",
+						"surface radioactivity content of 116mIn",
+						"surface radioactivity content of 157Eu",
+						"surface radioactivity content of 161Tb",
+						"surface radioactivity content of 158Eu",
+						"surface radioactivity content of 132I",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance"
+					]
+				}
+			]
+		},
+		{
+			"query": "wind speed south africa 2040",
+			"annotations": [
+				{
+					"text": "wind speed",
+					"position": [
+						0,
+						10
+					],
+					"type": "target",
+					"name": [
+						"wind speed of gust",
+						"wsgmax100m",
+						"wsgmax10m",
+						"Maximum Wind Speed of Gust at 100m",
+						"Maximum Wind Speed of Gust at 10m",
+						"wind speed",
+						"sfcWindmax",
+						"sfcWind",
+						"Daily Maximum Near-Surface Wind Speed",
+						"Near-Surface Wind Speed",
+						"wind speed shear",
+						"y wind gust",
+						"x wind gust",
+						"wind gust from direction",
+						"tropical cyclone maximum sustained wind speed",
+						"number of days with wind speed above threshold",
+						"storm motion speed",
+						"wind to direction",
+						"speed of sound in air",
+						"tendency of wind speed due to convection",
+						"tendency of wind speed due to gravity wave drag",
+						"sea water speed",
+						"square of eastward wind",
+						"u2",
+						"Mean-Squared Eastward Wind Speed"
+					]
+				},
+				{
+					"text": "south africa",
+					"position": [
+						11,
+						23
+					],
+					"type": "location",
+					"name": "South Africa",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "2040",
+					"position": [
+						24,
+						28
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2040-01-01T00:00:00Z",
+						"end": "2040-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "sea surface  temperature 1750",
+			"annotations": [
+				{
+					"text": [
+						"surface",
+						"temperature"
+					],
+					"position": [
+						[
+							4,
+							11
+						],
+						[
+							13,
+							24
+						]
+					],
+					"type": "target",
+					"name": [
+						"wet bulb temperature",
+						"surface radioactivity content of 130mI",
+						"surface radioactivity content of 230Th",
+						"surface radioactivity content of 134mI",
+						"surface radioactivity content of 133mI",
+						"surface radioactivity content of 116mIn",
+						"surface radioactivity content of 228Th",
+						"surface radioactivity content of 232Th",
+						"surface radioactivity content of 227Th",
+						"surface radioactivity content of 230U",
+						"surface radioactivity content of 152mPm",
+						"surface radioactivity content of 233Th",
+						"surface radioactivity content of 229Th",
+						"surface radioactivity content of 235U",
+						"surface radioactivity content of 132I",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow",
+						"surface roughness length for heat in air",
+						"surface bidirectional reflectance"
+					]
+				},
+				{
+					"text": "1750",
+					"position": [
+						25,
+						29
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1750-01-01T00:00:00Z",
+						"end": "1750-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "UKCP18 Probabilistic Projections on a 25km grid over the UK for 1961-2100",
+			"annotations": [
+				{
+					"text": "UKCP18",
+					"position": [
+						0,
+						6
+					],
+					"type": "property",
+					"name": "sub_experiment_id",
+					"value": "s2018",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": [
+						"Projections",
+						"25km grid"
+					],
+					"position": [
+						[
+							21,
+							32
+						],
+						[
+							38,
+							47
+						]
+					],
+					"type": "target",
+					"name": [
+						"projection x coordinate",
+						"projection y coordinate",
+						"ocean volume",
+						"volcello",
+						"Ocean Grid-Cell Volume",
+						"atmosphere mass per unit area"
+					]
+				},
+				{
+					"text": "on",
+					"position": [
+						33,
+						35
+					],
+					"type": "location",
+					"name": "Ontario, Canada",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "UK",
+					"position": [
+						57,
+						59
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "1961-2100",
+					"position": [
+						64,
+						73
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1961-01-01T00:00:00Z",
+						"end": "2101-01-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "volcanEESM: Global volcanic sulphur dioxide (SO2) emissions database from 1850 to present",
+			"annotations": [
+				{
+					"text": [
+						"SO2",
+						"emissions database"
+					],
+					"position": [
+						[
+							45,
+							48
+						],
+						[
+							50,
+							68
+						]
+					],
+					"type": "target",
+					"name": [
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from forest fires",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from residential and commercial combustion",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from agricultural waste burning",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from maritime transport",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from waste treatment and disposal",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from industrial processes and combustion",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from energy production and distribution",
+						"tendency of atmosphere mass content of sulfur dioxide due to emission from land transport",
+						"tendency of atmosphere mass content of dimethyl sulfide due to emission from forest fires",
+						"tendency of atmosphere mass content of nitrogen dioxide due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of nitrogen dioxide due to emission",
+						"tendency of atmosphere mass content of dimethyl sulfide due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of nitrogen dioxide due to emission from forest fires",
+						"tendency of atmosphere mass content of formaldehyde due to emission from forest fires",
+						"mass fraction of pm2p5 sulfate dry aerosol particles in air",
+						"minus tendency of atmosphere mass content of sulfur dioxide due to wet deposition",
+						"wetso2",
+						"Wet Deposition Rate of SO2",
+						"atmosphere moles of sulfur dioxide",
+						"atmosphere mass content of sulfur dioxide",
+						"troposphere mole content of sulfur dioxide"
+					]
+				},
+				{
+					"text": "from 1850",
+					"position": [
+						67,
+						76
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "#currentdate",
+						"end": "#+infinity"
+					}
+				}
+			]
+		},
+		{
+			"query": "weather Ben Nevis on the 22nd February 1889",
+			"annotations": [
+				{
+					"text": "Ben Nevis",
+					"position": [
+						8,
+						17
+					],
+					"type": "location",
+					"name": "Ben Nevis, Cochrane, Ontario (Geographical area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "on the 22nd February 1889",
+					"position": [
+						18,
+						43
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1889-02-22T00:00:00Z",
+						"end": "1889-02-22T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "weather chart Taunton, Somerset 8th May 1971",
+			"annotations": [
+				{
+					"text": "weather chart",
+					"position": [
+						0,
+						13
+					],
+					"type": "target",
+					"name": [
+						"covariance over longitude of northward wind and air temperature"
+					]
+				},
+				{
+					"text": "Taunton",
+					"position": [
+						14,
+						21
+					],
+					"type": "location",
+					"name": "Taunton, Durham, Ontario (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Somerset",
+					"position": [
+						23,
+						31
+					],
+					"type": "location",
+					"name": "Somerset, 20-5-9-W, Manitoba (Village)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "8th May 1971",
+					"position": [
+						31,
+						43
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1971-05-08T00:00:00Z",
+						"end": "1971-05-08T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "weather station snow depth",
+			"annotations": [
+				{
+					"text": "station snow depth",
+					"position": [
+						8,
+						26
+					],
+					"type": "target",
+					"name": [
+						"surface snow thickness",
+						"sisnthick",
+						"siitdsnthick",
+						"snd",
+						"surface snow thickness where sea ice",
+						"Snow Thickness",
+						"Snow Thickness in Ice Thickness Categories",
+						"Snow Depth",
+						"depth at base of unfrozen ground",
+						"thickness of snowfall amount",
+						"thickness of convective snowfall amount",
+						"thickness of stratiform snowfall amount",
+						"thickness of large scale snowfall amount",
+						"snow grain size",
+						"downward heat flux at ground level in snow",
+						"hfdsnb",
+						"Downward Heat Flux at Snow Base",
+						"snowfall amount",
+						"surface snow and ice refreezing flux",
+						"snrefr",
+						"snicefreezIs",
+						"snicefreez",
+						"Refreezing of Water in the Snow",
+						"Ice Sheet Surface Snow and Ice Refreeze Flux",
+						"Surface Snow and Ice Refreeze Flux",
+						"surface snow sublimation amount",
+						"depth at shallowest isotherm defined by soil temperature",
+						"dmlt",
+						"Depth to Soil Thaw",
+						"lwe thickness of snowfall amount",
+						"surface snow amount",
+						"snw",
+						"Surface Snow Amount",
+						"surface snow sublimation heat flux",
+						"mass fraction of rainfall falling onto surface snow",
+						"prrsn",
+						"Fraction of Rainfall on Snow",
+						"depth",
+						"water table depth",
+						"wtd",
+						"Water Table Depth",
+						"depth below sea floor",
+						"depth of isosurface of sea water potential temperature",
+						"t20d",
+						"Depth of 20 degree Celsius Isotherm",
+						"root depth",
+						"rootd",
+						"Maximum Root Depth"
+					]
+				}
+			]
+		},
+		{
+			"query": "wind spped records may 2020 linlithgow",
+			"annotations": [
+				{
+					"text": "wind spped records",
+					"position": [
+						0,
+						18
+					],
+					"type": "target",
+					"name": [
+						"number of days with wind speed above threshold",
+						"wind gust from direction",
+						"wind to direction",
+						"product of eastward wind and specific humidity",
+						"wind speed",
+						"sfcWindmax",
+						"sfcWind",
+						"Daily Maximum Near-Surface Wind Speed",
+						"Near-Surface Wind Speed",
+						"wind from direction",
+						"product of northward wind and specific humidity",
+						"product of northward wind and specific humdity",
+						"wind speed of gust",
+						"wsgmax100m",
+						"wsgmax10m",
+						"Maximum Wind Speed of Gust at 100m",
+						"Maximum Wind Speed of Gust at 10m",
+						"tendency of eastward wind due to gravity wave drag",
+						"product of eastward wind and air temperature",
+						"ut",
+						"Product of Air Temperature and Eastward Wind",
+						"y wind gust",
+						"x wind",
+						"grid eastward wind",
+						"tendency of wind speed due to gravity wave drag",
+						"tendency of eastward wind due to advection by northward transformed eulerian mean air velocity",
+						"utendvtem",
+						"Tendency of Eastward Wind Due to TEM Northward Advection and Coriolis Term",
+						"tendency of wind speed due to convection",
+						"x wind gust"
+					]
+				},
+				{
+					"text": "2020",
+					"position": [
+						23,
+						27
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2020-01-01T00:00:00Z",
+						"end": "2020-12-31T11:59:59Z"
+					}
+				},
+				{
+					"text": "linlithgow",
+					"position": [
+						28,
+						38
+					],
+					"type": "location",
+					"name": "Linlithgow Point, Coast Land District, British Columbia (Cape)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "weather report for London December 1941",
+			"annotations": [
+				{
+					"text": "London",
+					"position": [
+						19,
+						25
+					],
+					"type": "location",
+					"name": "London, Greater London, England, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "December 1941",
+					"position": [
+						26,
+						39
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1941-12-01T00:00:00Z",
+						"end": "1941-12-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "wind data file for Liverpool 2000 - 2020",
+			"annotations": [
+				{
+					"text": "wind data",
+					"position": [
+						0,
+						9
+					],
+					"type": "target",
+					"name": [
+						"probability distribution of wind from direction over time",
+						"number of days with wind speed above threshold",
+						"x wind gust",
+						"covariance over longitude of northward wind and air temperature",
+						"y wind gust",
+						"wind gust from direction",
+						"wind to direction",
+						"northward derivative of eastward wind",
+						"eastward derivative of northward wind",
+						"wind from direction",
+						"eastward derivative of eastward wind",
+						"northward derivative of northward wind",
+						"wind speed of gust",
+						"wsgmax100m",
+						"wsgmax10m",
+						"Maximum Wind Speed of Gust at 100m",
+						"Maximum Wind Speed of Gust at 10m",
+						"upward derivative of eastward wind",
+						"upward derivative of northward wind"
+					]
+				},
+				{
+					"text": "Liverpool",
+					"position": [
+						19,
+						28
+					],
+					"type": "location",
+					"name": "Liverpool, Queens, Nova Scotia (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "2000 - 2020",
+					"position": [
+						29,
+						40
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2000-01-01T00:00:00Z",
+						"end": "2021-01-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "Weather 1st November 1950, Poole Dorset",
+			"annotations": [
+				{
+					"text": "1st November 1950",
+					"position": [
+						8,
+						25
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1950-11-01T00:00:00Z",
+						"end": "1950-11-01T11:59:59Z"
+					}
+				},
+				{
+					"text": "Poole Dorset",
+					"position": [
+						27,
+						39
+					],
+					"type": "location",
+					"name": "",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "uk soil temperature by month",
+			"annotations": [
+				{
+					"text": "uk",
+					"position": [
+						0,
+						2
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "soil temperature",
+					"position": [
+						3,
+						19
+					],
+					"type": "target",
+					"name": [
+						"soil temperature",
+						"tsl",
+						"Temperature of Soil",
+						"temperature in ground",
+						"medium soil pool mass content of carbon",
+						"cSoilMedium",
+						"medium soil pool carbon content",
+						"Carbon Mass in Medium Soil Pool",
+						"slow soil pool mass content of carbon",
+						"cSoilSlow",
+						"slow soil pool carbon content",
+						"Carbon Mass in Slow Soil Pool",
+						"fast soil pool mass content of carbon",
+						"cSoilFast",
+						"fast soil pool carbon content",
+						"Carbon Mass in Fast Soil Pool",
+						"depth at shallowest isotherm defined by soil temperature",
+						"dmlt",
+						"Depth to Soil Thaw",
+						"soil pool carbon decay rate",
+						"tSoilPools",
+						"Turnover Rate of Each Model Soil Carbon Pool",
+						"soil albedo",
+						"surface temperature",
+						"tr",
+						"tgs",
+						"tslsiLut",
+						"tslsi",
+						"tsIs",
+						"ts",
+						"tsland",
+						"tsns",
+						"surface temperature where land",
+						"surface temperature where open sea",
+						"surface temperature where snow",
+						"Surface Radiative Temperature",
+						"Temperature of Bare Soil",
+						"Surface Temperature on Landuse Tile",
+						"Surface Temperature Where Land or Sea Ice",
+						"Ice Sheet Surface Temperature",
+						"Surface Temperature",
+						"Land Surface Temperature",
+						"Snow Surface Temperature",
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature",
+						"soil thermal capacity",
+						"wet bulb temperature",
+						"canopy temperature",
+						"tcs",
+						"Vegetation Canopy Temperature",
+						"soil thermal conductivity",
+						"temperature difference between ambient air and air lifted adiabatically from the surface",
+						"soil suction at saturation",
+						"soil porosity",
+						"mass content of carbon in vegetation and litter and soil and forestry and agricultural products",
+						"cLand",
+						"Total Carbon in All Terrestrial Carbon Pools",
+						"mass content of nitrogen in vegetation and litter and soil and forestry and agricultural products",
+						"nLand",
+						"Total Nitrogen in All Terrestrial Nitrogen Pools",
+						"soil water salinity"
+					]
+				}
+			]
+		},
+		{
+			"query": "uk regional monthly Rainfall 2019",
+			"annotations": [
+				{
+					"text": "uk",
+					"position": [
+						0,
+						2
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Rainfall",
+					"position": [
+						20,
+						28
+					],
+					"type": "target",
+					"name": [
+						"rainfall rate",
+						"rainfall amount",
+						"convective rainfall rate",
+						"convective rainfall amount",
+						"thickness of rainfall amount",
+						"precipitation amount",
+						"thickness of convective rainfall amount",
+						"stratiform rainfall amount",
+						"large scale rainfall amount",
+						"stratiform rainfall rate",
+						"large scale rainfall rate",
+						"mass fraction of rainfall falling onto surface snow",
+						"prrsn",
+						"Fraction of Rainfall on Snow",
+						"thickness of stratiform rainfall amount",
+						"thickness of large scale rainfall amount",
+						"temperature flux due to rainfall expressed as heat flux into sea water",
+						"hfrainds",
+						"Temperature Flux Due to Rainfall Expressed as Heat Flux into Sea Water",
+						"number of days with lwe thickness of precipitation amount above threshold",
+						"rainfall flux",
+						"prra",
+						"prraIs",
+						"sipr",
+						"Rainfall Flux",
+						"Ice Sheet Rainfall Rate",
+						"Rainfall Rate over Sea Ice",
+						"spell length of days with lwe thickness of precipitation amount above threshold"
+					]
+				},
+				{
+					"text": "2019",
+					"position": [
+						29,
+						33
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2019-01-01T00:00:00Z",
+						"end": "2019-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "UK weather data from 2015 onwards",
+			"annotations": [
+				{
+					"text": "UK",
+					"position": [
+						0,
+						2
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "weather data",
+					"position": [
+						3,
+						15
+					],
+					"type": "target",
+					"name": [
+						"covariance over longitude of northward wind and air temperature",
+						"forecast reference time",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation"
+					]
+				},
+				{
+					"text": "from 2015",
+					"position": [
+						16,
+						25
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2015-01-01T00:00:00Z",
+						"end": "#+infinity"
+					}
+				}
+			]
+		},
+		{
+			"query": "UK daily solar intensity data",
+			"annotations": [
+				{
+					"text": "UK",
+					"position": [
+						0,
+						2
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "daily",
+					"position": [
+						3,
+						8
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {}
+				},
+				{
+					"text": "solar intensity",
+					"position": [
+						9,
+						24
+					],
+					"type": "target",
+					"name": [
+						"solar irradiance",
+						"solar irradiance per unit wavelength",
+						"ultraviolet index assuming clear sky",
+						"ultraviolet index",
+						"solar elevation angle",
+						"ultraviolet index assuming overcast sky",
+						"planetary albedo",
+						"sound intensity in water",
+						"duration of sunshine",
+						"distance from sun",
+						"sound intensity in air",
+						"solar zenith angle",
+						"sza",
+						"Solar Zenith Angle",
+						"omnidirectional photosynthetic spherical irradiance in sea water",
+						"solar azimuth angle",
+						"surface albedo assuming no snow",
+						"signal intensity from multibeam acoustic doppler velocity sensor in sea water",
+						"sound intensity level in water",
+						"sound intensity level in air",
+						"speed of sound in sea water",
+						"speed of sound in air"
+					]
+				}
+			]
+		},
+		{
+			"query": "Scotland average temperature 1992 to 2021",
+			"annotations": [
+				{
+					"text": "Scotland",
+					"position": [
+						0,
+						8
+					],
+					"type": "location",
+					"name": "Scotland, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "temperature",
+					"position": [
+						17,
+						28
+					],
+					"type": "target",
+					"name": [
+						"brightness temperature",
+						"wet bulb temperature",
+						"temperature in ground",
+						"brightness temperature anomaly",
+						"toa brightness temperature assuming clear sky",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"number of days with air temperature below threshold",
+						"physiological equivalent temperature",
+						"virtual temperature",
+						"number of days with air temperature above threshold",
+						"freezing temperature of sea water",
+						"perceived temperature",
+						"brightness temperature at cloud top",
+						"air equivalent temperature",
+						"equivalent temperature"
+					]
+				},
+				{
+					"text": "1992 to 2021",
+					"position": [
+						29,
+						41
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1992-01-01T00:00:00Z",
+						"end": "2022-01-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "Plymouth city precipetation data from 1990-2000",
+			"annotations": [
+				{
+					"text": "Plymouth city",
+					"position": [
+						0,
+						13
+					],
+					"type": "location",
+					"name": "Plymouth Road, City Of Kitchener, Ontario",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "from 1990-2000",
+					"position": [
+						33,
+						47
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1990-01-01T00:00:00Z",
+						"end": "#+infinity"
+					}
+				}
+			]
+		},
+		{
+			"query": "Moreton in Marsh weather January 2021",
+			"annotations": [
+				{
+					"text": "Moreton",
+					"position": [
+						0,
+						7
+					],
+					"type": "location",
+					"name": "Moreton Island, Barclay Land District, British Columbia (Island)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "in",
+					"position": [
+						8,
+						10
+					],
+					"type": "location",
+					"name": "India",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Marsh",
+					"position": [
+						11,
+						16
+					],
+					"type": "location",
+					"name": "Marsh, Sudbury, Ontario (Geographical area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "January 2021",
+					"position": [
+						25,
+						37
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2021-01-01T00:00:00Z",
+						"end": "2021-01-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "Metoffice benbecula historical weather extremes",
+			"annotations": [
+				{
+					"text": "Metoffice",
+					"position": [
+						0,
+						19
+					],
+					"type": "property",
+					"name": "source_id",
+					"value": "AWI-CM-1-1-HR",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "weather extremes",
+					"position": [
+						31,
+						47
+					],
+					"type": "target",
+					"name": [
+						"convective rainfall rate",
+						"wet bulb temperature",
+						"rainfall rate"
+					]
+				}
+			]
+		},
+		{
+			"query": "meteorological data in England from 2001 to 2015",
+			"annotations": [
+				{
+					"text": "meteorological",
+					"position": [
+						0,
+						14
+					],
+					"type": "target",
+					"name": [
+						"tendency of specific humidity due to stratiform cloud and precipitation and boundary layer mixing",
+						"tnhusscpbl",
+						"Tendency of Specific Humidity Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"tendency of air temperature due to stratiform precipitation",
+						"tendency of air temperature due to large scale precipitation",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation",
+						"tendency of specific humidity due to stratiform cloud and precipitation",
+						"tnhusscp",
+						"Tendency of Specific Humidity Due to Stratiform Clouds and Precipitation",
+						"tendency of specific humidity due to stratiform precipitation",
+						"tendency of specific humidity due to large scale precipitation",
+						"tendency of air temperature due to turbulence",
+						"tendency of air temperature due to boundary layer mixing",
+						"tntpbl",
+						"Tendency of Air Temperature Due to Boundary Layer Mixing",
+						"tendency of specific humidity due to boundary layer mixing",
+						"tnhuspbl",
+						"Tendency of Specific Humidity Due to Boundary Layer Mixing",
+						"tendency of air temperature due to moist convection",
+						"tendency of air temperature due to shortwave heating from volcanic ambient aerosol particles",
+						"zmswaero",
+						"Zonal Mean Shortwave Heating Rate Due to Volcanic Aerosols",
+						"tendency of mass content of water vapor in atmosphere layer due to turbulence",
+						"tendency of water vapor content of atmosphere layer due to turbulence",
+						"spell length of days with air temperature below threshold",
+						"tendency of air temperature due to dry convection",
+						"tendency of air temperature due to diabatic processes",
+						"zmtnt",
+						"Zonal Mean Diabatic Heating Rates"
+					]
+				},
+				{
+					"text": "England",
+					"position": [
+						23,
+						30
+					],
+					"type": "location",
+					"name": "England, United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "from 2001 to 2015",
+					"position": [
+						31,
+						48
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2001-01-01T00:00:00Z",
+						"end": "#+infinity"
+					}
+				}
+			]
+		},
+		{
+			"query": "Met Office high resolution radiosonde data from the UK, Gibraltar, St Helena and the Falkland Islands",
+			"annotations": [
+				{
+					"text": "Met Office",
+					"position": [
+						0,
+						10
+					],
+					"type": "property",
+					"name": "activity_id",
+					"value": "GMMIP",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "UK",
+					"position": [
+						52,
+						54
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "Gibraltar",
+					"position": [
+						56,
+						65
+					],
+					"type": "location",
+					"name": "Gibraltar, Lac-Saint-Joseph; La Jacques-Cartier, Quebec (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "St Helena",
+					"position": [
+						67,
+						76
+					],
+					"type": "location",
+					"name": "St. Helena Island, Nunavut (Island)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "the Falkland Islands",
+					"position": [
+						81,
+						101
+					],
+					"type": "location",
+					"name": "",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				}
+			]
+		},
+		{
+			"query": "mean daily temperature UK 1km 2018",
+			"annotations": [
+				{
+					"text": "mean daily temperature",
+					"position": [
+						0,
+						22
+					],
+					"type": "target",
+					"name": [
+						"sea surface foundation temperature",
+						"temperature in ground",
+						"number of days with air temperature below threshold",
+						"number of days with air temperature above threshold",
+						"square of air temperature",
+						"t2",
+						"Mean-Squared Air Temperature",
+						"air temperature",
+						"ta",
+						"ta700",
+						"ta850",
+						"tasLut",
+						"ta500",
+						"tasmaxCrop",
+						"tasmax",
+						"tasminCrop",
+						"tasmin",
+						"tasIs",
+						"tas",
+						"Air Temperature",
+						"Air Temperature",
+						"Air Temperature",
+						"Near-Surface Air Temperature on Land Use Tile",
+						"Air Temperature",
+						"Daily Maximum Near-Surface Air Temperature over Crop Tile",
+						"Daily Maximum Near-Surface Air Temperature",
+						"Daily Minimum Near-Surface Air Temperature over Crop Tile",
+						"Daily Minimum Near-Surface Air Temperature",
+						"Ice Sheet Near-Surface Air Temperature",
+						"Near-Surface Air Temperature",
+						"sea surface temperature",
+						"tos",
+						"tosga",
+						"Sea Surface Temperature",
+						"Global Average Sea Surface Temperature",
+						"tendency of air temperature due to model physics",
+						"tntmp",
+						"Tendency of Air Temperature Due to Model Physics",
+						"toa brightness temperature assuming clear sky",
+						"number of days with surface temperature below threshold",
+						"perceived temperature",
+						"wet bulb temperature",
+						"physiological equivalent temperature",
+						"spell length of days with air temperature below threshold",
+						"sea surface skin temperature",
+						"brightness temperature",
+						"brightness temperature anomaly",
+						"toa brightness temperature",
+						"sea water temperature difference",
+						"virtual temperature"
+					]
+				},
+				{
+					"text": "UK",
+					"position": [
+						23,
+						25
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "1km",
+					"position": [
+						26,
+						29
+					],
+					"type": "property",
+					"name": "nominal_resolution",
+					"value": "1 km",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "2018",
+					"position": [
+						30,
+						34
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2018-01-01T00:00:00Z",
+						"end": "2018-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "ionospheric critical frequency",
+			"annotations": [
+				{
+					"text": "critical frequency",
+					"position": [
+						12,
+						30
+					],
+					"type": "target",
+					"name": [
+						"sound frequency",
+						"sensor band central radiation frequency",
+						"wave frequency",
+						"sea surface wave frequency",
+						"radiation frequency",
+						"brunt vaisala frequency in air",
+						"sea surface secondary swell wave period at variance spectral density maximum",
+						"sea surface tertiary swell wave period at variance spectral density maximum",
+						"sea surface primary swell wave period at variance spectral density maximum",
+						"square of brunt vaisala frequency in air",
+						"sea surface wave frequency at variance spectral density maximum",
+						"square of brunt vaisala frequency in sea water",
+						"obvfsq",
+						"Square of Brunt Vaisala Frequency in Sea Water",
+						"sea surface swell wave period at variance spectral density maximum",
+						"sensor band central radiation wavenumber",
+						"sea surface wind wave period at variance spectral density maximum",
+						"sea surface secondary swell wave energy at variance spectral density maximum",
+						"frequency of lightning flashes per unit area",
+						"flashrate",
+						"Lightning Flash Rate",
+						"spectral width of radio wave in air scattered by air",
+						"speed of sound in air",
+						"sea surface wave variance spectral density",
+						"speed of sound in sea water"
+					]
+				}
+			]
+		},
+		{
+			"query": "HadUK-Grid Climate Observations by Administrative Regions over the UK for 1862-2017",
+			"annotations": [
+				{
+					"text": "HadUK-Grid",
+					"position": [
+						0,
+						10
+					],
+					"type": "property",
+					"name": "grid_label",
+					"value": "gng",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": [
+						"Climate Observations",
+						"Regions"
+					],
+					"position": [
+						[
+							11,
+							31
+						],
+						[
+							50,
+							57
+						]
+					],
+					"type": "target",
+					"name": [
+						"radius of tropical cyclone central dense overcast region",
+						"covariance over longitude of northward wind and air temperature",
+						"tendency of air temperature due to stratiform precipitation",
+						"tendency of air temperature due to large scale precipitation",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation"
+					]
+				},
+				{
+					"text": "Administrative",
+					"position": [
+						35,
+						49
+					],
+					"type": "location",
+					"name": "Hong Kong, China",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "UK",
+					"position": [
+						67,
+						69
+					],
+					"type": "location",
+					"name": "United Kingdom",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "1862-2017",
+					"position": [
+						74,
+						83
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1862-01-01T00:00:00Z",
+						"end": "2018-01-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "global mean sea level pressure",
+			"annotations": [
+				{
+					"text": "global mean sea",
+					"position": [
+						0,
+						15
+					],
+					"type": "target",
+					"name": [
+						"phase of global average sea level change",
+						"tendency of global average sea level change",
+						"global average sea level change",
+						"sea water mass",
+						"masso",
+						"Sea Water Mass",
+						"amplitude of global average sea level change",
+						"surface geostrophic sea water y velocity assuming mean sea level for geoid",
+						"surface geostrophic sea water y velocity assuming sea level for geoid",
+						"sea water volume",
+						"volo",
+						"Sea Water Volume",
+						"surface geostrophic sea water x velocity assuming mean sea level for geoid",
+						"surface geostrophic sea water x velocity assuming sea level for geoid",
+						"sea surface temperature",
+						"tos",
+						"tosga",
+						"Sea Surface Temperature",
+						"Global Average Sea Surface Temperature",
+						"tendency of sea surface height above mean sea level",
+						"tendency of sea surface height above sea level",
+						"square of sea surface height above geoid",
+						"zossq",
+						"Square of Sea Surface Height Above Geoid",
+						"surface geostrophic northward sea water velocity assuming mean sea level for geoid",
+						"surface geostrophic northward sea water velocity assuming sea level for geoid",
+						"surface northward geostrophic sea water velocity assuming sea level for geoid",
+						"surface geostrophic eastward sea water velocity assuming mean sea level for geoid",
+						"surface geostrophic eastward sea water velocity assuming sea level for geoid",
+						"surface eastward geostrophic sea water velocity assuming sea level for geoid",
+						"global average thermosteric sea level change",
+						"zostoga",
+						"Global Average Thermosteric Sea Level Change",
+						"ocean rigid lid pressure expressed as sea surface height above geoid",
+						"sea water electrical conductivity",
+						"tendency of atmosphere moles of gaseous elemental mercury",
+						"tendency of atmosphere moles of atomic nitrogen",
+						"atmosphere moles of gaseous elemental mercury",
+						"tendency of atmosphere moles of water vapor"
+					]
+				}
+			]
+		},
+		{
+			"query": "global mean CO2 emissions observations",
+			"annotations": [
+				{
+					"text": "CO2 emissions observations",
+					"position": [
+						12,
+						38
+					],
+					"type": "target",
+					"name": [
+						"tendency of atmosphere mass content of carbon dioxide expressed as carbon due to emission from fossil fuel combustion",
+						"fco2fos",
+						"Carbon Mass Flux into Atmosphere Due to Fossil Fuel Emissions of CO2 [kgC m-2 s-1]",
+						"tendency of atmosphere mass content of carbon dioxide due to emission",
+						"tendency of atmosphere mass content of organic acids due to emission from forest fires",
+						"tendency of atmosphere mass content of carbon dioxide expressed as carbon due to emission from forestry and agricultural products",
+						"fProductDecompLut",
+						"fProductDecomp",
+						"Net Carbon Mass Flux from Wood and Agricultural Product Pools on Land Use Tile into Atmosphere [kgC m-2 s-1]",
+						"Decomposition out of Product Pools to CO2 in Atmosphere as Carbon Mass Flux [kgC m-2 s-1]",
+						"tendency of atmosphere mass content of carbon monoxide due to emission from agricultural production",
+						"tendency of atmosphere mass content of ketones due to emission from forest fires",
+						"tendency of atmosphere mass content of carbon monoxide due to emission from agricultural waste burning",
+						"tendency of atmosphere mass content of organic acids due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of organic acids due to emission from agricultural waste burning",
+						"tendency of atmosphere mass content of organic acids due to emission from agricultural production",
+						"tendency of atmosphere mass content of carbon monoxide due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of carbon monoxide due to emission",
+						"emiaco",
+						"emico",
+						"Total Emission Rate of Anthropogenic CO",
+						"Total Emission Rate of CO",
+						"tendency of atmosphere mass content of ketones due to emission from agricultural waste burning",
+						"tendency of atmosphere mass content of ketones due to emission from savanna and grassland fires",
+						"tendency of atmosphere mass content of carbon dioxide expressed as carbon due to anthropogenic emission",
+						"fAnthDisturb",
+						"fco2antt",
+						"Carbon Mass Flux from Vegetation",
+						"Litter or Soil Pools into the Atmosphere Due to any Human Activity [kgC m-2 s-1]",
+						"Carbon Mass Flux into Atmosphere Due to All Anthropogenic Emissions of CO2 [kgC m-2 s-1]",
+						"atmosphere mass of carbon dioxide",
+						"co2mass",
+						"Total Atmospheric Mass of CO2",
+						"fugacity of carbon dioxide in sea water",
+						"surface partial pressure of carbon dioxide abiotic analogue in sea water",
+						"surface partial pressure of carbon dioxide natural analogue in sea water",
+						"mass fraction of carbon dioxide tracer in air",
+						"co23D",
+						"3D-Field of Transported CO2"
+					]
+				}
+			]
+		},
+		{
+			"query": "exeter airport september 2021",
+			"annotations": [
+				{
+					"text": "exeter",
+					"position": [
+						0,
+						14
+					],
+					"type": "property",
+					"name": "institution_id",
+					"value": "MOHC",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "september 2021",
+					"position": [
+						15,
+						29
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2021-09-01T00:00:00Z",
+						"end": "2021-09-01T00:00:00Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "Data set : HadISST Average Sea Surface Temperature, 1°, Global, Monthly, 1870 present",
+			"annotations": [
+				{
+					"text": "set :",
+					"position": [
+						5,
+						10
+					],
+					"type": "location",
+					"name": "Israel",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "HadISST",
+					"position": [
+						11,
+						18
+					],
+					"type": "property",
+					"name": "swathidentifier",
+					"value": "IW",
+					"value_type": "string",
+					"operation": "eq"
+				},
+				{
+					"text": "Sea Surface Temperature",
+					"position": [
+						27,
+						50
+					],
+					"type": "target",
+					"name": [
+						"sea surface skin temperature",
+						"sea surface temperature",
+						"tos",
+						"tosga",
+						"Sea Surface Temperature",
+						"Global Average Sea Surface Temperature",
+						"sea water temperature",
+						"sea surface foundation temperature",
+						"sea surface subskin temperature",
+						"sea water temperature difference",
+						"square of sea surface temperature",
+						"tossq",
+						"Square of Sea Surface Temperature",
+						"difference between sea surface temperature and air temperature",
+						"sea water temperature at sea floor",
+						"sea ice surface temperature",
+						"sitempsnic",
+						"sitemptop",
+						"Temperature at Snow-Ice Interface",
+						"Surface Temperature of Sea Ice",
+						"tendency of sea water temperature",
+						"sea water potential temperature",
+						"thetaoga",
+						"thetao",
+						"thetaot2000",
+						"thetaot300",
+						"thetaot700",
+						"thetaot",
+						"Global Average Sea Water Potential Temperature",
+						"Sea Water Potential Temperature",
+						"Depth Average Potential Temperature of Upper 2000m",
+						"Depth Average Potential Temperature of Upper 300m",
+						"Depth Average Potential Temperature of Upper 700m",
+						"Vertically Averaged Sea Water Potential Temperature",
+						"freezing temperature of sea water",
+						"change over time in sea water temperature",
+						"steric change in sea surface height",
+						"sea water mass",
+						"masso",
+						"Sea Water Mass",
+						"sea water electrical conductivity",
+						"surface roughness length",
+						"surface albedo assuming deep snow",
+						"surface albedo assuming no snow"
+					]
+				},
+				{
+					"text": "1",
+					"position": [
+						52,
+						53
+					],
+					"type": "property",
+					"name": "",
+					"value": 1,
+					"value_type": "integer",
+					"operation": "eq"
+				},
+				{
+					"text": "1870",
+					"position": [
+						73,
+						77
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1870-01-01T00:00:00Z",
+						"end": "1870-12-31T11:59:59Z"
+					}
+				},
+				{
+					"text": "1870",
+					"position": [
+						73,
+						77
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "1870-01-01T00:00:00Z",
+						"end": "1870-12-31T11:59:59Z"
+					}
+				}
+			]
+		},
+		{
+			"query": "birmingham meteorology 2010-present",
+			"annotations": [
+				{
+					"text": "birmingham",
+					"position": [
+						0,
+						10
+					],
+					"type": "location",
+					"name": "Birmingham, 9-23-7-W2, Saskatchewan (Unincorporated area)",
+					"value": {
+						"type": "Polygon",
+						"coordinates": [
+							[]
+						]
+					},
+					"matchingType": "overlap"
+				},
+				{
+					"text": "meteorology",
+					"position": [
+						11,
+						22
+					],
+					"type": "target",
+					"name": [
+						"tendency of air temperature due to turbulence",
+						"tendency of air temperature due to stratiform precipitation",
+						"tendency of air temperature due to large scale precipitation",
+						"tendency of air temperature due to moist convection",
+						"convective snowfall amount",
+						"tendency of air temperature due to stratiform cloud and precipitation",
+						"tntscp",
+						"Tendency of Air Temperature Due to Stratiform Clouds and Precipitation",
+						"convective rainfall rate",
+						"convective rainfall amount",
+						"atmosphere heat diffusivity",
+						"edt",
+						"Eddy Diffusivity Coefficient for Temperature",
+						"tendency of air temperature due to dry convection",
+						"tendency of air temperature due to stratiform cloud and precipitation and boundary layer mixing",
+						"tntscpbl",
+						"Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing",
+						"snowfall amount",
+						"atmosphere momentum diffusivity",
+						"evu",
+						"Eddy Viscosity Coefficient for Momentum",
+						"tendency of air temperature due to diabatic processes",
+						"zmtnt",
+						"Zonal Mean Diabatic Heating Rates",
+						"tendency of specific humidity due to stratiform precipitation",
+						"tendency of specific humidity due to large scale precipitation",
+						"tendency of specific humidity due to stratiform cloud and precipitation",
+						"tnhusscp",
+						"Tendency of Specific Humidity Due to Stratiform Clouds and Precipitation"
+					]
+				},
+				{
+					"text": "2010",
+					"position": [
+						23,
+						27
+					],
+					"type": "tempex",
+					"tempex_type": "range",
+					"target": "dataDate",
+					"value": {
+						"start": "2010-01-01T00:00:00Z",
+						"end": "2010-12-31T11:59:59Z"
+					}
+				}
+			]
+		}
+	]
+}

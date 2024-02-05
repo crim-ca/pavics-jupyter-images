@@ -3,16 +3,22 @@ Changes
 
 Unreleased (latest)
 ===================
-0.4.1 (2023-11-24)
+
+- n/a
+
+0.5.0 (2023-12-13)
 ===================
+
 Changes:
 --------
+- Update NLU demo notebook with latest pipeline improvements and a STAC wrapper to convert NL queries to STAC requests.
+- Add `duckling` installation in the Docker to allow running it as child process rather than sibling Docker service.
 - Update base image version in Dockerfile
 - Add `mamba` cache cleanup to reduce image size
 
 Fixes:
 ------
-- ...
+- Fix dependencies to make them functional across multiple Python versions.
 
 0.4.0 (2022-12-23)
 ===================

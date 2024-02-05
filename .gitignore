@@ -1,8 +1,28 @@
 ### IDE
 **/.idea/
 **/.vscode/
+**/*.code-workspace
+
+### Caches
+**/__pycache__/
+**/cache/
+**/*tree-tagger-linux*
+**/.pytest_cache
+**/condaenv.*.requirements.txt
+
+## Chroma VDB caches
+**/*.bin
+**/*.pickle
+**/*.sqlite3
+
+### Binaries
+**/*.jar
 
 ### Notebooks
 # expect examples per domain
+# disallow notebooks at root
 ./*.ipynb
 **/.ipynb_checkpoints/
+
+### Outputs
+*.log

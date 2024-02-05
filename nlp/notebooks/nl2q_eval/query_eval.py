@@ -4,15 +4,28 @@ given their equivalent gold annotations.
 Calculates several evaluation metrics (data, span, attribute, value)
 and fills in predefined metrics template dictionaries defined in json file.
 """
-import pprint
+import functools
 import json
 import os
+import pprint
 import sys
-from MetricsClasses import *
-from typing import List, Dict
+from typing import Any, List, MutableMapping, Tuple
+
+from nl2q_eval.MetricsClasses import (
+    ANNOTATION_TYPES,
+    DATA_TYPES,
+    VALUE_TYPES,
+    AttributeMeasures,
+    DataMeasures,
+    EvalMeasures,
+    MinMaxAvg,
+    SpanMeasures,
+    ValueMeasures
+)
+from typedefs import JSON
 
 
-def eval_query(gold: Dict, test: Dict) -> (DataMeasures, SpanMeasures, AttributeMeasures, ValueMeasures):
+def eval_query(gold: JSON, test: JSON) -> (DataMeasures, SpanMeasures, AttributeMeasures, ValueMeasures):
     """
     Calculate all measures (data, span, attribute, value)
     for one natural language query test annotations
@@ -25,7 +38,7 @@ def eval_query(gold: Dict, test: Dict) -> (DataMeasures, SpanMeasures, Attribute
         eval_value(gold, test)
 
 
-def eval_data(gold: Dict, test: Dict) -> DataMeasures:
+def eval_data(gold: JSON, test: JSON) -> DataMeasures:
     """
     Calculate data measures for one query test annotations
     given the gold equivalent query annotations.
@@ -36,7 +49,7 @@ def eval_data(gold: Dict, test: Dict) -> DataMeasures:
     return data_measures
 
 
-def eval_span(gold: Dict, test: Dict) -> SpanMeasures:
+def eval_span(gold: JSON, test: JSON) -> SpanMeasures:
     """
     Calculate span measures for one query test annotations
     given the gold equivalent query annotations.
@@ -47,7 +60,7 @@ def eval_span(gold: Dict, test: Dict) -> SpanMeasures:
     return span_measures
 
 
-def eval_attribute(gold: Dict, test: Dict) -> AttributeMeasures:
+def eval_attribute(gold: JSON, test: JSON) -> AttributeMeasures:
     """
     Calculate attribute measures for one query test annotations
     given the gold equivalent query annotations.
@@ -60,7 +73,7 @@ def eval_attribute(gold: Dict, test: Dict) -> AttributeMeasures:
     return attribute_measures
 
 
-def eval_value(gold: Dict, test: Dict) -> ValueMeasures:
+def eval_value(gold: JSON, test: JSON) -> ValueMeasures:
     """
     Calculate value measures for one test query annotations
     given the gold equivalent query annotations.
@@ -300,19 +313,20 @@ def calc_global_val_scores(value_measures_list: List[ValueMeasures]) -> ValueMea
     return global_value_measures
 
 
-def read_files(gold_path, test_path):
+@functools.lru_cache(maxsize=None)
+def read_files(gold_path: str, test_path: str) -> Tuple[MutableMapping[str, Any], MutableMapping[str, Any]]:
     try:
         # open the two files
-        with open(gold_path) as f:
+        with open(gold_path, mode="r", encoding="utf-8") as f:
             gold_file = json.load(f)
-        with open(test_path) as f:
+        with open(test_path, mode="r", encoding="utf-8") as f:
             test_file = json.load(f)
         return gold_file, test_file
     except Exception as exc:
         print("Encountered an error while reading input files. "
               "Please check the correct file paths!")
         print(exc)
-        return
+        raise
 
 
 def global_stats_from_file(gold_path: str, test_path: str) -> EvalMeasures:
@@ -323,11 +337,11 @@ def global_stats_from_file(gold_path: str, test_path: str) -> EvalMeasures:
        and calculates all metrics (data, span, attribute, value),
        and returns an EvalMeasures instance.
     """
-    gold_file, test_file = read_files(gold_path, test_path)
-    return global_stats(gold_file, test_file)
+    gold_data, test_data = read_files(gold_path, test_path)
+    return global_stats(gold_data, test_data)
 
 
-def global_stats(gold_file: Dict, test_file: Dict) -> EvalMeasures:
+def global_stats(gold_data: JSON, test_data: JSON) -> EvalMeasures:
     """
     Calculate global statistics given a
     - gold and test query annotation dictionaries
@@ -336,11 +350,11 @@ def global_stats(gold_file: Dict, test_file: Dict) -> EvalMeasures:
     and returns an EvalMeasures instance.
     """
     gold_qs, test_qs = [], []
-    if gold_file and test_file:
+    if gold_data and test_data:
         # the root key is 'queries'
-        if 'queries' in gold_file.keys() and 'queries' in test_file.keys():
-            gold_qs = gold_file['queries']
-            test_qs = test_file['queries']
+        if 'queries' in gold_data.keys() and 'queries' in test_data.keys():
+            gold_qs = gold_data['queries']  # type: List[JSON]
+            test_qs = test_data['queries']  # type: List[JSON]
         else:
             print("Error: JSON format not as expected. No 'queries' key! ")
             sys.exit()
@@ -359,7 +373,7 @@ def global_stats(gold_file: Dict, test_file: Dict) -> EvalMeasures:
         global_span = []
         global_attr = []
         global_value = []
-        for gold_q in gold_qs:
+        for gold_q in gold_qs:  # type: JSON
             test_q = [t for t in test_qs if t['query'] == gold_q['query']][0]
             data, span, attr, value = eval_query(gold_q, test_q)
             global_data.append(data)
@@ -387,8 +401,8 @@ def global_stats(gold_file: Dict, test_file: Dict) -> EvalMeasures:
 if __name__ == "__main__":
     path = os.path.dirname(os.path.realpath(__file__))
     stats = global_stats_from_file(gold_path=os.path.join(path, "ceda_gold_queries.json"),
-                                   test_path=os.path.join(path, "ceda_test_results.json"))
+                                   test_path=os.path.join(path, "v1_ceda_test_results.json"))
 
-    out_path = os.path.join(path, "ceda_eval_out.json")
-    with open(out_path, "w") as outf:
-        json.dump(stats.to_dict(), outf)
+    out_path = os.path.join(path, "v3_ceda_eval_out.json")
+    with open(out_path, "w", encoding="utf-8") as out_file:
+        json.dump(stats.to_dict(), out_file, indent=2)
