@@ -3,18 +3,18 @@ Changes
 
 Unreleased (latest)
 ===================
-0.4.0 (2023-11-22)
+0.4.1 (2023-11-22)
 ===================
 Changes:
 --------
 - Update base image version in Dockerfile
 - Add `mamba` cache cleanup to reduce image size
-- Add Sc1-Demontrator notebook of a complete workflow as example for spatial imagerie analysis and process execution
+- Add SC1-Demontrator notebook of a complete workflow as example for geo imagery analysis and OGC-API Process execution
 - Add Process Management notebook to help user understand the usage of weaver and how to manage deployed process
 
 Fixes:
 ------
-- ...
+- n/a
 
 0.3.0 (2022-12-23)
 ===================
