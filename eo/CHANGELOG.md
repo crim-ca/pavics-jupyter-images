@@ -3,8 +3,12 @@ Changes
 
 Unreleased (latest)
 ===================
-0.4.0 (2023-11-22)
+
+- n/a
+
+0.4.0 (2024-03-08)
 ===================
+
 Changes:
 --------
 - Update base image version in Dockerfile
